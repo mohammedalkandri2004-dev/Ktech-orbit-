@@ -1,0 +1,245 @@
+FILE: index.html | total lines: 707 | review-only escaped HTML; do not execute
+000464| 
+000465|         const lastSubmit = localStorage.getItem('last_submit_time');
+000466|         const now = Date.now();
+000467|         if (lastSubmit &amp;&amp; (now - lastSubmit &lt; 20000)) {
+000468|             showStatus('🚨 Anti-Spam Alert: Please wait 20 seconds before submitting again.', 'error');
+000469|             return;
+000470|         }
+000471| 
+000472|         const formData = new FormData(this);
+000473|         const instructorRaw = formData.get('instructorNameInput');
+000474|         const courseCode = formData.get('courseCode');
+000475|         const opinion = formData.get('opinion');
+000476| 
+000477|         if (isGibberish(instructorRaw) || isGibberish(courseCode) || isGibberish(opinion)) {
+000478|             showStatus('❌ Submission rejected: Detected meaningless/gibberish text.', 'error');
+000479|             return;
+000480|         }
+000481| 
+000482|         const reviewData = {
+000483|             id: String(Date.now()) + "_" + Math.random().toString(36).slice(2),
+000484|             ownerId: getOwnerId(),
+000485|             instructor: cleanProfanity(instructorRaw.trim()),
+000486|             course: cleanProfanity(courseCode.trim()),
+000487|             date: formData.get('date'),
+000488|             quizDifficulty: formData.get('quiz'),
+000489|             teaching: formData.get('teaching'),
+000490|             understanding: formData.get('understanding'),
+000491|             bonusMarks: formData.get('bonus'),
+000492|             shortOpinion: cleanProfanity(opinion)
+000493|         };
+000494| 
+000495|         const currentReviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+000496|         currentReviews.push(reviewData);
+000497|         localStorage.setItem('orbit_reviews', JSON.stringify(currentReviews));
+000498|         localStorage.setItem('last_submit_time', now);
+000499| 
+000500|         showStatus(`🚀 Review for "${reviewData.instructor}" added to their file!`, 'success');
+000501|         resetForm(false);
+000502|         loadPublicReviews();
+000503|     });
+000504| 
+000505|     function showStatus(msg, type) {
+000506|         const el = document.getElementById('statusMsg');
+000507|         el.innerText = msg;
+000508|         el.className = `status-msg status-${type}`;
+000509|         el.style.display = 'block';
+000510|         window.scrollTo({ top: 0, behavior: 'smooth' });
+000511| 
+000512|         setTimeout(() =&gt; { el.style.display = 'none'; }, 6000);
+000513|     }
+000514| 
+000515|     function resetForm(confirmReq = true) {
+000516|         if (!confirmReq || confirm('Are you sure you want to clear this form?')) {
+000517|             document.getElementById('feedbackForm').reset();
+000518|             const today = new Date().toLocaleDateString('en-GB');
+000519|             document.getElementById('date').value = today;
+000520|         }
+000521|     }
+000522| 
+000523|     /* Admin Modal and Grouping Logic */
+000524|     function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
+000525|     function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+000526| 
+000527|     function loginAdmin() {
+000528|         const input = document.getElementById('adminPassword').value;
+000529|         if (input === ADMIN_PASSWORD) {
+000530|             document.getElementById('adminAuthSection').style.display = 'none';
+000531|             document.getElementById('adminDashboard').style.display = 'block';
+000532|             loadAdminData();
+000533|         } else {
+000534|             alert('Incorrect Admin Password');
+000535|         }
+000536|     }
+000537| 
+000538|     function loadAdminData(searchFilter = '') {
+000539|         const list = document.getElementById('adminDataList');
+000540|         const rawReviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+000541| 
+000542|         if (rawReviews.length === 0) {
+000543|             list.innerHTML = '&lt;p style="color: var(--olive-medium);"&gt;No reviews stored yet.&lt;/p&gt;';
+000544|             document.getElementById('submissionCount').innerText = '0';
+000545|             return;
+000546|         }
+000547| 
+000548|         // Group reviews by Instructor Name
+000549|         const stackedFiles = {};
+000550| 
+000551|         rawReviews.forEach(rev =&gt; {
+000552|             const key = rev.instructor.trim().toLowerCase();
+000553|             if (!stackedFiles[key]) {
+000554|                 stackedFiles[key] = {
+000555|                     displayName: rev.instructor,
+000556|                     reviews: []
+000557|                 };
+000558|             }
+000559|             stackedFiles[key].reviews.push(rev);
+000560|         });
+000561| 
+000562|         // Filter based on Search Query
+000563|         const filteredKeys = Object.keys(stackedFiles).filter(key =&gt; {
+000564|             return key.includes(searchFilter.trim().toLowerCase());
+000565|         });
+000566| 
+000567|         document.getElementById('submissionCount').innerText = filteredKeys.length;
+000568| 
+000569|         if (filteredKeys.length === 0) {
+000570|             list.innerHTML = '&lt;p style="color: var(--olive-medium);"&gt;No instructor files found matching your search.&lt;/p&gt;';
+000571|             return;
+000572|         }
+000573| 
+000574|         list.innerHTML = filteredKeys.map(key =&gt; {
+000575|             const file = stackedFiles[key];
+000576|             return `
+000577|                 &lt;div class="instructor-file-card"&gt;
+000578|                     &lt;div class="instructor-file-title"&gt;
+000579|                         &lt;span&gt;👨‍🏫 File: ${file.displayName}&lt;/span&gt;
+000580|                         &lt;span style="font-size: 0.85rem; background: var(--olive-dark); color: var(--yellow-main); padding: 4px 10px; border-radius: 20px;"&gt;
+000581|                             ${file.reviews.length} ${file.reviews.length === 1 ? 'Review' : 'Reviews Stacked'}
+000582|                         &lt;/span&gt;
+000583|                     &lt;/div&gt;
+000584| 
+000585|                     ${file.reviews.map(rev =&gt; `
+000586|                         &lt;div class="review-stacked-item"&gt;
+000587|                             &lt;div style="font-weight: 800; color: var(--olive-dark); margin-bottom: 6px;"&gt;
+000588|                                 📚 Course: ${rev.course} | 🗓️ Date: ${rev.date || 'N/A'}
+000589|                             &lt;/div&gt;
+000590|                             &lt;div style="font-size: 0.9rem; margin-bottom: 6px;"&gt;
+000591|                                 &lt;strong&gt;Quiz:&lt;/strong&gt; ${rev.quizDifficulty} | 
+000592|                                 &lt;strong&gt;Teaching:&lt;/strong&gt; ${rev.teaching} | 
+000593|                                 &lt;strong&gt;Understanding:&lt;/strong&gt; ${rev.understanding} | 
+000594|                                 &lt;strong&gt;Bonus/Pushes:&lt;/strong&gt; ${rev.bonusMarks}
+000595|                             &lt;/div&gt;
+000596|                             ${rev.shortOpinion ? `&lt;div style="font-size: 0.88rem; background: #faf4db; padding: 6px 10px; border-radius: 6px; border-left: 3px solid var(--olive-dark);"&gt;&lt;em&gt;"${rev.shortOpinion}"&lt;/em&gt;&lt;/div&gt;` : ''}
+000597|                             &lt;div style="margin-top: 8px; display: flex; gap: 6px;"&gt;
+000598|                                 &lt;button class="btn-edit" onclick="editReviewOpinion(${rev.id})"&gt;Edit Review&lt;/button&gt;
+000599|                                 &lt;button class="btn-danger" onclick="deleteReviewItem(${rev.id})"&gt;Delete&lt;/button&gt;
+000600|                             &lt;/div&gt;
+000601|                         &lt;/div&gt;
+000602|                     `).join('')}
+000603|                 &lt;/div&gt;
+000604|             `;
+000605|         }).join('');
+000606|     }
+000607| 
+000608|     function filterAdminData() {
+000609|         const query = document.getElementById('adminSearchInput').value;
+000610|         loadAdminData(query);
+000611|     }
+000612| 
+000613|     function deleteReviewItem(reviewId) {
+000614|         if (confirm('Delete this specific review from the instructor file?')) {
+000615|             let reviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+000616|             reviews = reviews.filter(r =&gt; r.id !== reviewId);
+000617|             localStorage.setItem('orbit_reviews', JSON.stringify(reviews));
+000618|             filterAdminData();
+000619|         }
+000620|     }
+000621| 
+000622|     function editReviewOpinion(reviewId) {
+000623|         let reviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+000624|         const targetIndex = reviews.findIndex(r =&gt; r.id === reviewId);
+000625|         if (targetIndex !== -1) {
+000626|             const newText = prompt("Edit review text:", reviews[targetIndex].shortOpinion);
+000627|             if (newText !== null) {
+000628|                 reviews[targetIndex].shortOpinion = newText;
+000629|                 localStorage.setItem('orbit_reviews', JSON.stringify(reviews));
+000630|                 filterAdminData();
+000631|             }
+000632|         }
+000633|     }
+000634| 
+000635|     function loadPublicReviews() {
+000636|         const list = document.getElementById("publicReviewsList");
+000637|         const search = String(document.getElementById("publicSearchInput").value || "").trim().toLowerCase();
+000638|         const ownerId = getOwnerId();
+000639|         const reviews = readReviews().filter(function(review) {
+000640|             return !search || String(review.instructor || "").toLowerCase().includes(search) || String(review.course || "").toLowerCase().includes(search);
+000641|         }).slice().reverse();
+000642|         if (!reviews.length) { list.innerHTML = '&lt;p style="color:var(--olive-medium);"&gt;' + escapeHtml(tr("noReviews")) + '&lt;/p&gt;'; return; }
+000643|         list.innerHTML = reviews.map(function(review) {
+000644|             const mine = review.ownerId &amp;&amp; review.ownerId === ownerId;
+000645|             return '&lt;div class="review-stacked-item"&gt;' +
+000646|                 '&lt;div style="font-weight:900;color:var(--olive-dark);"&gt;👨‍🏫 ' + escapeHtml(review.instructor || tr("notAvailable")) + (mine ? ' &lt;span style="font-size:.72rem;"&gt;(' + escapeHtml(tr("yourReview")) + ')&lt;/span&gt;' : '') + '&lt;/div&gt;' +
+000647|                 '&lt;div style="font-size:.88rem;margin:6px 0;"&gt;📚 ' + escapeHtml(review.course || tr("notAvailable")) + ' | 🗓️ ' + escapeHtml(review.date || tr("notAvailable")) + '&lt;/div&gt;' +
+000648|                 '&lt;div style="font-size:.88rem;"&gt;' + escapeHtml(tr("quiz")) + ': ' + escapeHtml(translateRating(review.quizDifficulty)) + ' | ' + escapeHtml(tr("teaching")) + ': ' + escapeHtml(translateRating(review.teaching)) + ' | ' + escapeHtml(tr("understanding")) + ': ' + escapeHtml(translateRating(review.understanding)) + '&lt;/div&gt;' +
+000649|                 (review.shortOpinion ? '&lt;div style="margin-top:7px;"&gt;&lt;em&gt;“' + escapeHtml(review.shortOpinion) + '”&lt;/em&gt;&lt;/div&gt;' : '') +
+000650|                 (mine ? '&lt;button type="button" class="btn-danger public-delete" data-review-id="' + escapeHtml(review.id) + '" style="margin-top:8px;"&gt;' + escapeHtml(tr("delete")) + '&lt;/button&gt;' : '') +
+000651|                 '&lt;/div&gt;';
+000652|         }).join("");
+000653|     }
+000654| 
+000655|     function deleteOwnReview(reviewId) {
+000656|         const ownerId = getOwnerId();
+000657|         const reviews = readReviews();
+000658|         const target = reviews.find(function(r) { return String(r.id) === String(reviewId); });
+000659|         if (!target || target.ownerId !== ownerId) return;
+000660|         if (!confirm(tr("confirmDelete"))) return;
+000661|         writeReviews(reviews.filter(function(r) { return String(r.id) !== String(reviewId); }));
+000662|         loadPublicReviews();
+000663|         if (document.getElementById("adminDashboard").style.display !== "none") filterAdminData();
+000664|     }
+000665| 
+000666|     function clearAllData() {
+000667|         if (confirm('Are you sure you want to delete ALL stored reviews permanently?')) {
+000668|             localStorage.removeItem('orbit_reviews');
+000669|             filterAdminData();
+000670|         }
+000671|     }
+000672| 
+000673|     document.addEventListener('DOMContentLoaded', () =&gt; {
+000674|         populateSuggestions();
+000675|         const today = new Date().toLocaleDateString('en-GB');
+000676|         document.getElementById('date').value = today;
+000677|     });
+000678| &lt;/script&gt;
+000679| 
+000680| &lt;script src="js/script-01.js"&gt;&lt;/script&gt;
+000681| 
+000682| 
+000683| 
+000684| &lt;link rel="stylesheet" href="css/style-09.css"&gt;
+000685| 
+000686| &lt;script id="orbit108ModerationScript" src="js/script-02.js"&gt;&lt;/script&gt;
+000687| 
+000688| 
+000689| &lt;script id="orbitGuidedChat110" src="js/script-03.js"&gt;&lt;/script&gt;
+000690| 
+000691| 
+000692| &lt;script id="orbitIndoorRouting116" src="js/script-04.js"&gt;&lt;/script&gt;
+000693| 
+000694| &lt;script src="js/script-05.js"&gt;&lt;/script&gt;
+000695| &lt;script id="orbitParkingPrototype" src="js/script-06.js"&gt;&lt;/script&gt;
+000696| 
+000697| 
+000698| &lt;link rel="stylesheet" href="css/style-10.css"&gt;
+000699| &lt;script id="orbitNavigationRecovery" src="js/script-07.js"&gt;&lt;/script&gt;&lt;script id="orbitDirectionsDockControl136" src="js/script-08.js"&gt;&lt;/script&gt;
+000700| 
+000701| &lt;script id="orbitEmergencyRestaurantDemoScript" src="js/script-09.js"&gt;&lt;/script&gt;
+000702| &lt;/body&gt;
+000703| &lt;/html&gt;
+000704| 
+000705| &lt;link rel="stylesheet" href="css/style-11.css"&gt;
+000706| 
+000707| &lt;link rel="stylesheet" href="css/style-12.css"&gt;

@@ -1,0 +1,208 @@
+FILE: js/script-04.js | total lines: 719 | review-only escaped HTML; do not execute
+000392|    'Food Hall':['FH_W','FH_ML','FH_MR','FH_E'],
+000393|    'Gaming Room':['GAM_D'],'Administration':['ADM_D'],'Auditorium':['AUD_D'],
+000394|    'Student Life':['STU_D'],'Registration Office':['REG_D'],'ATM':['ATM_D'],
+000395|    'Security Office':['SEC_D'],'Clinic':['CL_D'],'Advising':['ADV_D'],
+000396|    'eSports Room':['ES_D'],
+000397|    'Restaurants / Coffee Shops (Food Hall West)':['SHW_D'],
+000398|    'Restaurants / Coffee Shops (Food Hall Center)':['SHC_D'],
+000399|    'Restaurants / Coffee Shops (Food Hall East)':['SHE_D'],
+000400|    'Restaurants / Coffee Shops (Southwest)':['SWS_D'],
+000401|    'Restaurants / Coffee Shops (Southeast)':['SES_D'],
+000402|    "Men's Bathroom (West)":['MENW_D'],"Men's Bathroom (North)":['MENN_D'],
+000403|    "Women's Bathroom (North)":['WOMN_D'],"Women's Bathroom (South)":['WOM_S_D'],
+000404|    'Elevator (West)':['ACC_W_D'],'Elevator (Center)':['ELEV_C_D'],
+000405|    'Elevator (East North) Accessible':['ACC_EN_D'],'Elevator (East South) Accessible':['ACC_ES_D'],
+000406|    'Stairs (West North)':['NW_STAIR_D'],'Stairs (East North)':['NE_STAIR_D'],
+000407|    'Stairs (Southwest Inner)':['SWI_D'],'Stairs (Southwest Outer)':['SWO_D'],
+000408|    'Stairs (Southeast Inner)':['SEI_D'],'Stairs (Southeast Outer)':['SEO_D'],'Stairs (East South)':['EAST_S_D'],
+000409|    'Gate 1 — Open':['G1_D'],'Gate 2 — Open':['G2_D'],'Gate 4 — Open':['G4_D'],'Gate 5 — Open':['G5_D'],'Gate 6 — Open':['G6_D']
+000410|  };
+000411| 
+000412|  function groundShortest(start,end){
+000413|    if(!groundWaypoints[start]||!groundWaypoints[end])return null;
+000414|    const adj={};Object.keys(groundWaypoints).forEach(k=&gt;adj[k]=[]);
+000415|    for(const [u,v] of groundLinks){
+000416|      const a=groundWaypoints[u],b=groundWaypoints[v];if(!a||!b)continue;
+000417|      const d=Math.hypot(a[0]-b[0],a[1]-b[1]);adj[u].push([v,d]);adj[v].push([u,d]);
+000418|    }
+000419|    const dist={[start]:0},prev={},unseen=new Set(Object.keys(adj));
+000420|    while(unseen.size){
+000421|      let u=null;for(const n of unseen)if(dist[n]!==undefined&amp;&amp;(u===null||dist[n]&lt;dist[u]))u=n;
+000422|      if(u===null)break;unseen.delete(u);if(u===end)break;
+000423|      for(const [v,d] of adj[u])if(unseen.has(v)&amp;&amp;(dist[v]===undefined||dist[u]+d&lt;dist[v])){dist[v]=dist[u]+d;prev[v]=u;}
+000424|    }
+000425|    if(dist[end]===undefined)return null;
+000426|    const ids=[end];while(ids[0]!==start){const p=prev[ids[0]];if(!p)return null;ids.unshift(p);}
+000427|    const raw=ids.map(id=&gt;groundWaypoints[id]);
+000428|    // keep turns/endpoints only; this makes the yellow line clean instead of zig-zagging through every graph node
+000429|    const points=raw.filter((p,i)=&gt;{if(i===0||i===raw.length-1)return true;const a=raw[i-1],b=raw[i+1];return !((a[0]===p[0]&amp;&amp;p[0]===b[0])||(a[1]===p[1]&amp;&amp;p[1]===b[1]));});
+000430|    return {points,length:dist[end]};
+000431|  }
+000432|  function groundPlan(from,to,accessible){
+000433|    if(from.floor!=='ground'||to.floor!=='ground')return null;
+000434|    if(['closed','maintenance'].includes(from.kind)||['closed','maintenance'].includes(to.kind))return null;
+000435|    if(accessible&amp;&amp;(from.kind==='stairs'||to.kind==='stairs'||from.id==='Elevator (Center)'||to.id==='Elevator (Center)'))return null;
+000436|    const starts=groundAccess[from.id]||[],ends=groundAccess[to.id]||[];
+000437|    if(!starts.length||!ends.length)return null;
+000438|    let best=null;
+000439|    for(const a of starts)for(const b of ends){const p=groundShortest(a,b);if(p&amp;&amp;(!best||p.length&lt;best.length))best={...p,a,b};}
+000440|    if(!best)return null;
+000441|    return {from,to,accessible,legs:[{floor:'ground',path:best.points}],portal:null,length:best.length,
+000442|      fromDoor:groundWaypoints[best.a],toDoor:groundWaypoints[best.b],preview:false};
+000443|  }
+000444|  function plan(fromId,toId,accessible){
+000445|   const from=roomById.get(fromId),to=roomById.get(toId);if(!from||!to)return null;
+000446|   if(from.floor==='ground'||to.floor==='ground'){
+000447|     if(from.floor===to.floor)return groundPlan(from,to,accessible);
+000448|     // Cross-floor preview: only connect portals explicitly paired between floors.
+000449|     // Avoid inventing a path if either segment is disconnected.
+000450|     const gFrom=from.floor==='ground',gRoom=gFrom?from:to,upper=gFrom?to:from;
+000451|     const groundPortalCandidates=[
+000452|       // Edge stairs
+000453|       {id:'GNW',name:'northwest',type:'stairs',ground:'NW_STAIR_D',one:[174,232],two:[140,358]},
+000454|       {id:'GNE',name:'northeast',type:'stairs',ground:'NE_STAIR_D',one:[1018,232],two:[962,358]},
+000455|       {id:'GSE',name:'southeast',type:'stairs',ground:'EAST_S_D',one:[1018,592],two:[962,705]},
+000456|       // Central stair blocks visible on the Ground Floor reference. Two physical doors can feed the same
+000457|       // central upper-floor stair corridor; keeping both lets the router choose the nearest real door.
+000458|       {id:'GMIDL_IN',name:'middle-left',type:'stairs',ground:'SWI_D',one:[488,482],two:[446,616]},
+000459|       {id:'GMIDL_OUT',name:'middle-left',type:'stairs',ground:'SWO_D',one:[488,482],two:[446,616]},
+000460|       {id:'GMIDR_IN',name:'middle-right',type:'stairs',ground:'SEI_D',one:[724,482],two:[695,616]},
+000461|       {id:'GMIDR_OUT',name:'middle-right',type:'stairs',ground:'SEO_D',one:[724,482],two:[695,616]},
+000462|       // Wheelchair-accessible lifts. Accessible mode filters to these only.
+000463|       {id:'GAW',name:'northwest',type:'accessible',ground:'ACC_W_D',one:[174,247],two:[140,380]},
+000464|       {id:'GAE',name:'northeast',type:'accessible',ground:'ACC_EN_D',one:[1018,247],two:[962,380]},
+000465|       {id:'GAS',name:'southeast',type:'accessible',ground:'ACC_ES_D',one:[1018,550],two:[962,680]}
+000466|     ];
+000467|     let bestCross=null;
+000468|     for(const portal of groundPortalCandidates){
+000469|       if(accessible&amp;&amp;portal.type!=='accessible')continue;
+000470|       const fake={id:'__portal_'+portal.id,floor:'ground',kind:'portal',door:groundWaypoints[portal.ground]};
+000471|       const oldNode=groundAccess[fake.id];groundAccess[fake.id]=[portal.ground];
+000472|       const groundRoute=gFrom?groundPlan(gRoom,fake,accessible):groundPlan(fake,gRoom,accessible);
+000473|       if(oldNode===undefined)delete groundAccess[fake.id];else groundAccess[fake.id]=oldNode;
+000474|       if(!groundRoute)continue;
+000475|       for(const ent of entrances(upper)){
+000476|         const upperPath=gFrom?graphPath(upper.floor,portal[upper.floor],ent.approach):graphPath(upper.floor,ent.approach,portal[upper.floor]);
+000477|         if(!upperPath)continue;
+000478|         const upperPoints=gFrom?extendToDoors(upperPath.points,null,{door:ent.door,approach:ent.approach}):extendToDoors(upperPath.points,{door:ent.door,approach:ent.approach},null);
+000479|         const groundLeg=groundRoute.legs[0];
+000480|         const throughOne=upper.floor==='two'?[{floor:'one',path:[portal.one]}]:[];
+000481|         const length=groundRoute.length+upperPath.length;
+000482|         const tied=bestCross&amp;&amp;Math.abs(length-bestCross.length)&lt;=1;
+000483|         const preferStairsOnTie=tied&amp;&amp;portal.type==='stairs'&amp;&amp;bestCross.portal?.type==='accessible';
+000484|         if(!bestCross||length&lt;bestCross.length-1||preferStairsOnTie)bestCross={from,to,accessible,
+000485|          legs:gFrom?[groundLeg,...throughOne,{floor:upper.floor,path:upperPoints}]:[{floor:upper.floor,path:upperPoints},...throughOne,groundLeg],
+000486|          portal,fromDoor:gFrom?groundRoute.fromDoor:ent.door,toDoor:gFrom?ent.door:groundRoute.toDoor,length,preview:true};
+000487|       }
+000488|     }
+000489|     return bestCross;
+000490|    }
+000491|   let best=null;
+000492|   for(const a of entrances(from))for(const b of entrances(to)){
+000493|    const fromDoor={...from,...a},toDoor={...to,...b};
+000494|    const entryCost=Math.hypot(a.door[0]-a.approach[0],a.door[1]-a.approach[1]);
+000495|    const exitCost=Math.hypot(b.door[0]-b.approach[0],b.door[1]-b.approach[1]);
+000496|    if(from.floor===to.floor){
+000497|     const path=graphPath(from.floor,a.approach,b.approach);
+000498|     if(path){const length=path.length+entryCost+exitCost;
+000499|      if(!best||length&lt;best.length)best={from,to,accessible,legs:[{floor:from.floor,path:extendToDoors(path.points,fromDoor,toDoor)}],portal:null,length,fromDoor:a.door,toDoor:b.door};}
+000500|    }else{
+000501|     for(const [id,p] of Object.entries(portals)){
+000502|      if(accessible ? p.type!=='accessible' : !['stairs','accessible'].includes(p.type))continue;
+000503|      if(!p[from.floor]||!p[to.floor])continue;
+000504|      const first=graphPath(from.floor,a.approach,p[from.floor]),last=graphPath(to.floor,p[to.floor],b.approach);
+000505|      if(!first||!last)continue;
+000506|      const length=first.length+last.length+entryCost+exitCost;
+000507|      const tied=best&amp;&amp;Math.abs(length-best.length)&lt;=1;
+000508|      const preferStairsOnTie=tied&amp;&amp;p.type==='stairs'&amp;&amp;best.portal?.type==='accessible';
+000509|      if(!best||length&lt;best.length-1||preferStairsOnTie)best={from,to,accessible,legs:[{floor:from.floor,path:extendToDoors(first.points,fromDoor,null)},{floor:to.floor,path:extendToDoors(last.points,null,toDoor)}],portal:{id,...p},length,fromDoor:a.door,toDoor:b.door};
+000510|     }
+000511|    }
+000512|   }
+000513|   return best;
+000514|  }
+000515| 
+000516|  function draw(){
+000517|   refs.lines.replaceChildren();refs.overlay.replaceChildren();const floor=state.floor;
+000518|   if(floor!=='one'&amp;&amp;floor!=='two'&amp;&amp;floor!=='ground')return;
+000519|   if(floor==='ground'){
+000520|     const fhClass='orbit-nav-hit food-hall-hit'+(state.from==='Food Hall'?' selected':'')+(state.to==='Food Hall'?' end':'');
+000521|     const fh=svgEl('path',{class:fhClass,d:foodHallPathD,'fill-rule':'evenodd','clip-rule':'evenodd','data-room':'Food Hall',role:'button',tabindex:0,'aria-label':'Select Food Hall'},refs.overlay);
+000522|     fh.addEventListener('click',()=&gt;selectMapRoom(roomById.get('Food Hall')));
+000523|     fh.addEventListener('keydown',e=&gt;{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectMapRoom(roomById.get('Food Hall'));}});
+000524|     // One clean external outline, so selecting Food Hall looks like one area rather than many mini-boxes.
+000525|     if(state.from==='Food Hall'||state.to==='Food Hall'){
+000526|       const c=state.to==='Food Hall'?'#ee2f50':'#ffdb22';
+000527|       svgEl('polygon',{class:'food-hall-outline',points:foodHallShape.outer.map(p=&gt;p.join(',')).join(' '),fill:'none',stroke:c,'stroke-width':5,'stroke-linejoin':'round','pointer-events':'none'},refs.overlay);
+000528|     }
+000529|     const maintClass='orbit-nav-hit'+(state.from==='Under Maintenance'?' selected':'')+(state.to==='Under Maintenance'?' end':'');
+000530|     const mh=svgEl('path',{class:maintClass,d:maintenancePathD,'data-room':'Under Maintenance',role:'button',tabindex:0,'aria-label':'Under Maintenance — closed'},refs.overlay);
+000531|     mh.addEventListener('click',()=&gt;selectMapRoom(roomById.get('Under Maintenance')));
+000532|     mh.addEventListener('keydown',e=&gt;{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectMapRoom(roomById.get('Under Maintenance'));}});
+000533|   }
+000534|   for(const r of rooms.filter(r=&gt;r.floor===floor&amp;&amp;!(floor==='ground'&amp;&amp;(r.id==='Food Hall'||r.id==='Under Maintenance')))){
+000535|     const stateClass='orbit-nav-hit'+(state.from===r.id?' selected':'')+(state.to===r.id?' end':'');
+000536|     let hit;
+000537|     if(Array.isArray(r.poly)&amp;&amp;r.poly.length&gt;=3){
+000538|       const points=r.poly.map(p=&gt;fromOriginal(floor,p).map(v=&gt;Math.round(v*10)/10).join(',')).join(' ');
+000539|       hit=svgEl('polygon',{class:stateClass,points,tabindex:0,role:'button','aria-label':mt('select')+' '+placeLabel(r.id)+' · '+floorLabel(floor),'data-room':r.id},refs.overlay);
+000540|     }else{
+000541|       const [x1,y1,x2,y2]=r.rect,xy=fromOriginal(floor,[x1,y1]);
+000542|       hit=svgEl('rect',{class:stateClass,x:xy[0],y:xy[1],width:x2-x1,height:y2-y1,tabindex:0,role:'button','aria-label':mt('select')+' '+placeLabel(r.id)+' · '+floorLabel(floor),'data-room':r.id},refs.overlay);
+000543|     }
+000544|     svgEl('title',{},hit).textContent=mt('select')+' '+placeLabel(r.id);
+000545|     hit.addEventListener('click',()=&gt;selectMapRoom(r));
+000546|     hit.addEventListener('keydown',e=&gt;{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectMapRoom(r);}});
+000547|   }
+000548|   // Ground Floor uses the yellow entrance dots already present in the user's map image.
+000549|   // Do not draw duplicate or misplaced dots over the image.
+000550|   // Visible door pins: yellow dots mark confirmed door locations. Some spaces, like the Floor 2 library,
+000551|   // have more than one confirmed doorway, so each doorway gets its own selectable dot.
+000552|   for(const r of rooms.filter(r=&gt;r.floor===floor&amp;&amp;floor!=='ground')){
+000553|     const dots=(Array.isArray(r.doorDots)&amp;&amp;r.doorDots.length)
+000554|       ? r.doorDots
+000555|       : ((r.kind==='class'||r.kind==='lab') ? [r.door] : []);
+000556|     if(!dots.length)continue;
+000557|     const selected=state.from===r.id||state.to===r.id;
+000558|     dots.forEach((doorPoint,index)=&gt;{
+000559|       const [x,y]=fromOriginal(floor,doorPoint);
+000560|       const dot=svgEl('circle',{class:'orbit-classroom-door'+(selected?' active':''),cx:x,cy:y,r:selected?6.5:4.6,
+000561|         'data-door':r.id+':'+index,role:'button',tabindex:0,'aria-label':mt('door')+' '+placeLabel(r.id)},refs.overlay);
+000562|       svgEl('title',{},dot).textContent=mt('door')+': '+placeLabel(r.id);
+000563|       dot.addEventListener('click',()=&gt;selectMapRoom(r));
+000564|       dot.addEventListener('keydown',e=&gt;{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectMapRoom(r);}});
+000565|     });
+000566|   }
+000567|   if(!state.route)return;
+000568|   for(const leg of state.route.legs.filter(l=&gt;l.floor===floor &amp;&amp; floor===createSteps(state.route)[state.step].floor)){
+000569|     const points=leg.path.map(p=&gt;fromOriginal(floor,p).map(v=&gt;Math.round(v*10)/10).join(',')).join(' ');
+000570|     const routeOutlineWidth=floor==='ground'?8:12;
+000571|     const routeInnerWidth=floor==='ground'?4.5:7;
+000572|     svgEl('polyline',{points,fill:'none',stroke:'#111c35','stroke-width':routeOutlineWidth,'stroke-linejoin':'round','stroke-linecap':'round',opacity:.82});
+000573|     svgEl('polyline',{points,fill:'none',stroke:'#ffdc36','stroke-width':routeInnerWidth,'stroke-linejoin':'round','stroke-linecap':'round'});
+000574|     if(state.route.portal){const portalPoint=leg.floor===state.route.from.floor?leg.path[leg.path.length-1]:leg.path[0];const [x,y]=fromOriginal(floor,portalPoint);svgEl('circle',{cx:x,cy:y,r:11,stroke:'#fff', 'stroke-width':3,fill:state.route.accessible?'#1677d0':'#e32e38'});}
+000575|   }
+000576|   for(const [type,which,color] of [['A','from','#1976e9'],['B','to','#f03d5a']]){
+000577|     const r=roomById.get(state[which]);if(r?.floor!==floor)continue;const [x,y]=fromOriginal(floor,(state.route?.[which+'Door'])||r.door);
+000578|     svgEl('circle',{cx:x,cy:y,r:14,fill:color,stroke:'#fff','stroke-width':4});
+000579|     const t=svgEl('text',{x,y:y+5,'text-anchor':'middle',fill:'#fff','font-size':14,'font-weight':900});t.textContent=type;
+000580|   }
+000581|  }
+000582|  function fillOptions(){for(const key of ['from','to']){const select=refs[key],value=select.value;select.replaceChildren();select.add(new Option(key==='from'?mt('fromPlaceholder'):mt('toPlaceholder'),''));
+000583|   for(const f of ['ground','one','two']){const group=document.createElement('optgroup');group.label=floorLabel(f);rooms.filter(r=&gt;r.floor===f).sort((a,b)=&gt;a.id.localeCompare(b.id,undefined,{numeric:true})).forEach(r=&gt;group.appendChild(new Option(placeLabel(r.id)+(r.kind==='lab'?mt('labSuffix'):''),r.id)));select.appendChild(group);}select.value=value;}}
+000584| 
+000585|  const legend={ground:[['#f5b9ed','🍽️','Food Hall'],['#6a9d36','🎮','Gaming Room'],['#9aa9a0','☕','Restaurants / Coffee Shops / Supermarket'],['#df5b30','🚧','Under Maintenance'],['#987f6e','🎭','Auditorium'],['#b0812c','👥','Student Life'],['#ffff00','🧑‍💼','Student Services'],['#b5ffff','📝','Registration'],['#9fbee0','🛡️','Security Office'],['#8eff31','🏧','ATM'],['#3940ff','♂','Men’s bathroom'],['#fa0098','♀','Women’s bathroom'],['#ff0000','↗','Stairs'],['#6b6b6b','↕','Elevator'],['#175ddc','♿','Accessible elevator']],one:[['#52c7df','🎓','Labs (CLxxx)'],['#194e9d','🎓','Classrooms (Cxxx)'],['#ec3096','♀','Women’s bathroom'],['#174bef','♂','Men’s bathroom'],['#ffdb22','•','Classroom doors (yellow dots)'],['#ec101c','↗','Stairs'],['#595959','↕','Elevator'],['#474747','♿','Accessible elevator'],['#78bc47','⌨','IT / Finance departments']],two:[['#f9d933','📖','Library'],['#087d25','▣','Faculty offices'],['#52c7df','🎓','Labs (CLxxx)'],['#194e9d','🎓','Classrooms (Cxxx)'],['#ec3096','♀','Women’s bathroom'],['#174bef','♂','Men’s bathroom'],['#ffdb22','•','Classroom doors (yellow dots)'],['#ec101c','↗','Stairs'],['#595959','↕','Elevator'],['#474747','♿','Accessible elevator']]};
+000586|  const legendNameMap={'Labs (CLxxx)':'labs','Classrooms (Cxxx)':'classrooms','Women’s bathroom':'women','Men’s bathroom':'men','Classroom doors (yellow dots)':'doors','Stairs':'stairs','Elevator':'elevator','Accessible elevator':'accessibleElevator','IT / Finance departments':'services','Library':'library','Faculty offices':'offices','Campus map view':'campusMap'};
+000587| 
+000588|  function openKeyPicker(ids,title){
+000589|   const pop=$('orbitKeyPicker');pop.hidden=false;
+000590|   $('orbitKeyPickerTitle').textContent=title;
+000591|   const options=$('orbitKeyPickerOptions');options.replaceChildren();
+000592|   ids.forEach(id=&gt;{const b=document.createElement('button');b.type='button';b.textContent=placeLabel(id);b.addEventListener('click',()=&gt;{pop.hidden=true;setRoomToDestination(id);});options.appendChild(b);});
+000593|  }
+000594|  function showFloor(f,resetZoom=true){if(!floors[f])return;state.floor=f;
+000595|    document.querySelectorAll('.orbit-floor-btn').forEach(b=&gt;{const v=b.dataset.floor===f;b.classList.toggle('selected',v);b.setAttribute('aria-pressed',String(v));});
+000596|    const v=floors[f];refs.map.src=f==='campus'?window.orbitCampusCleanImage:(f==='ground'?v.image:((ar()&amp;&amp;assetsAR[f])||v.image));refs.svg.setAttribute('viewBox',`0 0 ${v.width} ${v.height}`);
+000597|    refs.map.alt=mt('mapAlt',{floor:floorLabel(f)});$('orbitFloorCurrentLabel').textContent=floorLabel(f);
+000598|    $('orbitMapHint').textContent=f==='campus'?mt('mapOnly'):mt('tap');

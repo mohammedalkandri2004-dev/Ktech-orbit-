@@ -1,0 +1,252 @@
+FILE: index.html | total lines: 707 | review-only escaped HTML; do not execute
+000213|             &lt;div class="input-group"&gt;
+000214|                 &lt;label for="date" id="dateLabel"&gt;Date&lt;/label&gt;
+000215|                 &lt;input type="text" id="date" name="date" placeholder="DD/MM/YYYY"&gt;
+000216|             &lt;/div&gt;
+000217|         &lt;/div&gt;
+000218| 
+000219|         &lt;div class="table-responsive"&gt;
+000220|             &lt;table&gt;
+000221|                 &lt;thead&gt;
+000222|                     &lt;tr&gt;
+000223|                         &lt;th id="quizHeader"&gt;Quiz Difficulty&lt;/th&gt;
+000224|                         &lt;th id="teachingHeader"&gt;Teaching Quality&lt;/th&gt;
+000225|                         &lt;th id="understandingHeader"&gt;Understanding&lt;/th&gt;
+000226|                         &lt;th id="bonusHeader"&gt;Bonus Marks / Pushes&lt;/th&gt;
+000227|                         &lt;th id="opinionHeader"&gt;Short Opinion &amp; Suggestions&lt;/th&gt;
+000228|                     &lt;/tr&gt;
+000229|                 &lt;/thead&gt;
+000230|                 &lt;tbody&gt;
+000231|                     &lt;tr&gt;
+000232|                         &lt;td&gt;
+000233|                             &lt;div class="radio-group"&gt;
+000234|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="quiz" value="Easy" required&gt;&lt;span data-option-key="easy"&gt;Easy&lt;/span&gt;&lt;/label&gt;
+000235|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="quiz" value="Medium"&gt;&lt;span data-option-key="medium"&gt;Medium&lt;/span&gt;&lt;/label&gt;
+000236|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="quiz" value="Hard"&gt;&lt;span data-option-key="hard"&gt;Hard&lt;/span&gt;&lt;/label&gt;
+000237|                             &lt;/div&gt;
+000238|                         &lt;/td&gt;
+000239|                         &lt;td&gt;
+000240|                             &lt;div class="radio-group"&gt;
+000241|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="teaching" value="Needs work" required&gt;&lt;span data-option-key="needsWork"&gt;Needs work&lt;/span&gt;&lt;/label&gt;
+000242|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="teaching" value="Good"&gt;&lt;span data-option-key="good"&gt;Good&lt;/span&gt;&lt;/label&gt;
+000243|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="teaching" value="Excellent"&gt;&lt;span data-option-key="excellent"&gt;Excellent&lt;/span&gt;&lt;/label&gt;
+000244|                             &lt;/div&gt;
+000245|                         &lt;/td&gt;
+000246|                         &lt;td&gt;
+000247|                             &lt;div class="radio-group"&gt;
+000248|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="understanding" value="Hard to follow" required&gt;&lt;span data-option-key="hardToFollow"&gt;Hard to follow&lt;/span&gt;&lt;/label&gt;
+000249|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="understanding" value="Mostly clear"&gt;&lt;span data-option-key="mostlyClear"&gt;Mostly clear&lt;/span&gt;&lt;/label&gt;
+000250|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="understanding" value="Very clear"&gt;&lt;span data-option-key="veryClear"&gt;Very clear&lt;/span&gt;&lt;/label&gt;
+000251|                             &lt;/div&gt;
+000252|                         &lt;/td&gt;
+000253|                         &lt;td&gt;
+000254|                             &lt;div class="radio-group"&gt;
+000255|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="bonus" value="Never" required&gt;&lt;span data-option-key="never"&gt;Never&lt;/span&gt;&lt;/label&gt;
+000256|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="bonus" value="Sometimes"&gt;&lt;span data-option-key="sometimes"&gt;Sometimes&lt;/span&gt;&lt;/label&gt;
+000257|                                 &lt;label class="radio-label"&gt;&lt;input type="radio" name="bonus" value="Often"&gt;&lt;span data-option-key="often"&gt;Often&lt;/span&gt;&lt;/label&gt;
+000258|                             &lt;/div&gt;
+000259|                         &lt;/td&gt;
+000260|                         &lt;td&gt;
+000261|                             &lt;textarea id="opinionInput" name="opinion" placeholder="Does he/she give pushes, bonuses? Are quizzes hard? Write suggestions..."&gt;&lt;/textarea&gt;
+000262|                         &lt;/td&gt;
+000263|                     &lt;/tr&gt;
+000264|                 &lt;/tbody&gt;
+000265|             &lt;/table&gt;
+000266|         &lt;/div&gt;
+000267| 
+000268|         &lt;div class="actions"&gt;
+000269|             &lt;div style="display: flex; gap: 10px;"&gt;
+000270|                 &lt;button type="button" class="btn-reset" id="clearButton" onclick="resetForm()"&gt;Clear All&lt;/button&gt;
+000271|                 &lt;button type="submit" class="btn-submit" id="submitButton"&gt;Submit Feedback 🚀&lt;/button&gt;
+000272|             &lt;/div&gt;
+000273|         &lt;/div&gt;
+000274|     &lt;/form&gt;
+000275| 
+000276|     &lt;/section&gt;
+000277| 
+000278|     &lt;section id="reviewsView" class="orbit-view"&gt;
+000279|     &lt;section class="contact-section" aria-labelledby="publicReviewsTitle" style="text-align:left;"&gt;
+000280|         &lt;h2 id="publicReviewsTitle"&gt;Student Reviews&lt;/h2&gt;
+000281|         &lt;p id="publicReviewsText"&gt;Everyone can view reviews  You can permanently delete reviews submitted from this browser, but regular users cannot edit reviews&lt;/p&gt;
+000282|         &lt;input type="text" id="publicSearchInput" class="search-box" placeholder="Search instructor reviews..." autocomplete="off"&gt;
+000283|         &lt;div id="publicReviewsList"&gt;&lt;/div&gt;
+000284|     &lt;/section&gt;
+000285| 
+000286| 
+000287| 
+000288|     &lt;/section&gt;
+000289| 
+000290|     &lt;div id="orbitChatDrawer" class="orbit-chat-drawer" aria-hidden="false"&gt;
+000291|         &lt;div class="orbit-chat-drawer-head"&gt;&lt;button type="button" class="orbit-chat-close" id="orbitChatClose" aria-label="Close chat"&gt;&amp;times;&lt;/button&gt;&lt;/div&gt;
+000292|     &lt;section class="orbit-ai-section" aria-labelledby="orbitAiTitle"&gt;
+000293|         &lt;div class="orbit-ai-header"&gt;
+000294|             &lt;h2 class="orbit-ai-title" id="orbitAiTitle"&gt;🪐 Ask KTECH Orbit&lt;/h2&gt;
+000295|             &lt;span class="orbit-ai-badge" id="orbitAiBadge"&gt;KTECH-only assistant&lt;/span&gt;
+000296|         &lt;/div&gt;
+000297|         &lt;p class="orbit-ai-disclaimer" id="orbitAiDisclaimer"&gt;KTECH Orbit is an independent student project. Tap a question for a direct answer and useful KTECH links.&lt;/p&gt;
+000298|         &lt;div class="orbit-chat-log" id="orbitChatLog" aria-live="polite"&gt;
+000299|             &lt;div class="orbit-chat-message system" id="orbitAiWelcome"&gt;Welcome! Tap an option below to ask a question — no typing needed.&lt;/div&gt;
+000300|         &lt;/div&gt;
+000301|         &lt;div class="orbit-guide" id="orbitGuide" aria-label="Tap-only KTECH assistant"&gt;
+000302|             &lt;div class="orbit-guide-label" id="orbitGuideLabel"&gt;Choose a topic&lt;/div&gt;
+000303|             &lt;div class="orbit-guide-options" id="orbitGuideOptions"&gt;&lt;/div&gt;
+000304|         &lt;/div&gt;
+000305|     &lt;/section&gt;
+000306| 
+000307|     &lt;/div&gt;
+000308| 
+000309| &lt;section id="restaurantsView" class="orbit-view"&gt;
+000310|   &lt;div class="orbit-restaurants-page"&gt;
+000311|     &lt;div class="orbit-restaurants-head"&gt;
+000312|       &lt;div&gt;&lt;span class="orbit-map-eyebrow"&gt;KTECH ORBIT · DEMO ORDERING&lt;/span&gt;&lt;h2&gt;🍽️ Restaurants &amp; Pickup&lt;/h2&gt;&lt;p class="orbit-map-subtitle"&gt;Choose a restaurant location, place a demo order, pay, and track it until pickup.&lt;/p&gt;&lt;/div&gt;
+000313|       &lt;span class="orbit-map-v2-chip"&gt;PAYMENT-GATED DEMO&lt;/span&gt;
+000314|     &lt;/div&gt;
+000315|     &lt;div id="orbitStudentSession"&gt;&lt;/div&gt;
+000316|     &lt;div class="orbit-demo-note"&gt;Demo only — no real money is charged and the restaurant names/menus are placeholders. An order is sent to the restaurant dashboard only after the demo payment is completed.&lt;/div&gt;
+000317|     &lt;div class="orbit-restaurants-layout"&gt;
+000318|       &lt;div&gt;
+000319|         &lt;div id="orbitRestaurantSelect" class="orbit-restaurant-select"&gt;&lt;/div&gt;
+000320|         &lt;div id="orbitMenuGrid" class="orbit-menu-grid"&gt;&lt;/div&gt;
+000321|       &lt;/div&gt;
+000322|       &lt;aside class="orbit-cart"&gt;
+000323|         &lt;h3&gt;🛒 Your Order&lt;/h3&gt;
+000324|         &lt;div id="orbitCartRestaurant" class="orbit-mini-meta"&gt;Choose a restaurant&lt;/div&gt;
+000325|         &lt;div id="orbitCartList" class="orbit-cart-list"&gt;&lt;/div&gt;
+000326|         &lt;div class="orbit-cart-total"&gt;&lt;span&gt;Total&lt;/span&gt;&lt;span id="orbitCartTotal"&gt;KD 0.000&lt;/span&gt;&lt;/div&gt;
+000327|         &lt;div class="orbit-btn-row"&gt;&lt;button type="button" id="orbitCheckoutBtn" class="orbit-btn primary"&gt;Proceed to Demo Payment&lt;/button&gt;&lt;button type="button" id="orbitClearCart" class="orbit-btn secondary"&gt;Clear&lt;/button&gt;&lt;/div&gt;
+000328|       &lt;/aside&gt;
+000329|     &lt;/div&gt;
+000330|   &lt;/div&gt;
+000331| &lt;/section&gt;
+000332| 
+000333| &lt;section id="staffView" class="orbit-view"&gt;
+000334|   &lt;div class="orbit-staff-page"&gt;
+000335|     &lt;div class="orbit-restaurants-head"&gt;
+000336|       &lt;div&gt;&lt;span class="orbit-map-eyebrow"&gt;KTECH ORBIT · STAFF DEMO&lt;/span&gt;&lt;h2&gt;🔐 Staff Portals&lt;/h2&gt;&lt;p class="orbit-map-subtitle"&gt;Separate demo logins for Clinic and Restaurant staff.&lt;/p&gt;&lt;/div&gt;
+000337|       &lt;span class="orbit-map-v2-chip"&gt;LOCAL DEMO&lt;/span&gt;
+000338|     &lt;/div&gt;
+000339|     &lt;div class="orbit-staff-grid"&gt;
+000340|       &lt;section class="orbit-staff-panel"&gt;&lt;h3&gt;🏥 Clinic Staff&lt;/h3&gt;&lt;p class="orbit-mini-meta"&gt;Receive emergency alerts and live location updates.&lt;/p&gt;&lt;div id="orbitClinicPortal"&gt;&lt;/div&gt;&lt;/section&gt;
+000341|       &lt;section class="orbit-staff-panel"&gt;&lt;h3&gt;🍴 Restaurant Staff&lt;/h3&gt;&lt;p class="orbit-mini-meta"&gt;Only paid/verified demo orders appear here.&lt;/p&gt;&lt;div id="orbitRestaurantPortal"&gt;&lt;/div&gt;&lt;/section&gt;
+000342|     &lt;/div&gt;
+000343|   &lt;/div&gt;
+000344| &lt;/section&gt;
+000345| 
+000346| &lt;button type="button" id="orbitEmergencyFab" class="orbit-emergency-fab" aria-label="Emergency help" title="Emergency"&gt;🚨&lt;/button&gt;
+000347| &lt;button type="button" id="orbitOrderSideTab" class="orbit-order-side-tab" aria-label="Open order tracking"&gt;🍔 Orders&lt;/button&gt;
+000348| 
+000349| &lt;div id="orbitEmergencyModal" class="orbit-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="orbitEmergencyTitle"&gt;
+000350|   &lt;div class="orbit-feature-modal emergency"&gt;
+000351|     &lt;div class="orbit-feature-modal-head"&gt;&lt;div&gt;&lt;h2 id="orbitEmergencyTitle"&gt;🚨 Emergency Help&lt;/h2&gt;&lt;p class="orbit-mini-meta"&gt;Send an alert to the Clinic demo dashboard with your current location.&lt;/p&gt;&lt;/div&gt;&lt;button type="button" class="orbit-x" data-close="orbitEmergencyModal"&gt;×&lt;/button&gt;&lt;/div&gt;
+000352|     &lt;div class="orbit-danger-note"&gt;&lt;strong&gt;For the real system:&lt;/strong&gt; this feature needs a secure backend, authenticated users, clinic devices, and an approved indoor-location system. Browser GPS alone cannot reliably identify a room inside a building.&lt;/div&gt;
+000353|     &lt;div id="orbitEmergencyStudent"&gt;&lt;/div&gt;
+000354|     &lt;div id="orbitEmergencyForm"&gt;&lt;/div&gt;
+000355|     &lt;div id="orbitEmergencyActive"&gt;&lt;/div&gt;
+000356|   &lt;/div&gt;
+000357| &lt;/div&gt;
+000358| 
+000359| &lt;div id="orbitPaymentModal" class="orbit-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="orbitPaymentTitle"&gt;
+000360|   &lt;div class="orbit-feature-modal"&gt;
+000361|     &lt;div class="orbit-feature-modal-head"&gt;&lt;div&gt;&lt;h2 id="orbitPaymentTitle"&gt;💳 Demo Payment&lt;/h2&gt;&lt;p class="orbit-mini-meta"&gt;No real payment information is collected.&lt;/p&gt;&lt;/div&gt;&lt;button type="button" class="orbit-x" data-close="orbitPaymentModal"&gt;×&lt;/button&gt;&lt;/div&gt;
+000362|     &lt;div class="orbit-demo-note"&gt;This simulates the payment verification step. The restaurant will not receive the order until you press &lt;strong&gt;Confirm Demo Payment&lt;/strong&gt;.&lt;/div&gt;
+000363|     &lt;div id="orbitPaymentSummary"&gt;&lt;/div&gt;
+000364|     &lt;div class="orbit-btn-row"&gt;&lt;button type="button" id="orbitConfirmPayment" class="orbit-btn good"&gt;Confirm Demo Payment&lt;/button&gt;&lt;button type="button" class="orbit-btn secondary" data-close="orbitPaymentModal"&gt;Cancel&lt;/button&gt;&lt;/div&gt;
+000365|   &lt;/div&gt;
+000366| &lt;/div&gt;
+000367| 
+000368| &lt;aside id="orbitOrderDrawer" class="orbit-order-drawer" aria-label="Order tracking"&gt;
+000369|   &lt;div class="orbit-order-drawer-head"&gt;&lt;div&gt;&lt;h2&gt;🍔 My Orders&lt;/h2&gt;&lt;p class="orbit-mini-meta"&gt;Live demo order status&lt;/p&gt;&lt;/div&gt;&lt;button type="button" class="orbit-x" id="orbitOrderDrawerClose"&gt;×&lt;/button&gt;&lt;/div&gt;
+000370|   &lt;div id="orbitOrderTracker"&gt;&lt;/div&gt;
+000371| &lt;/aside&gt;
+000372| 
+000373| 
+000374|     &lt;section id="contactView" class="orbit-view" style="display:none"&gt;
+000375|     &lt;section class="contact-section" aria-labelledby="contactTitle"&gt;
+000376|         &lt;h2 id="contactTitle"&gt;Feedback &amp;amp; Contact&lt;/h2&gt;
+000377|         &lt;p id="contactText"&gt;Have feedback or need help with KTECH Orbit? Email us directly.&lt;/p&gt;
+000378|         &lt;a class="contact-email" id="contactEmail" href="mailto:ktechorbit@gmail.com"&gt;✉️ ktechorbit@gmail.com&lt;/a&gt;
+000379|     &lt;/section&gt;
+000380|     &lt;/section&gt;
+000381| &lt;/div&gt;
+000382| 
+000383| &lt;button type="button" id="orbitChatFab" class="orbit-chat-fab" aria-label="Open Orbit Chat" title="Orbit Chat"&gt;💬&lt;/button&gt;
+000384| 
+000385| &lt;div id="adminModal" class="admin-modal"&gt;
+000386|     &lt;div class="modal-content"&gt;
+000387|         &lt;div class="modal-header"&gt;
+000388|             &lt;h2 id="adminTitle" style="color: var(--olive-dark);"&gt;🔑 KTECH Orbit Admin Panel&lt;/h2&gt;
+000389|             &lt;button type="button" class="close-btn" id="closeAdminButton" onclick="closeAdminModal()" aria-label="Close"&gt;&amp;times;&lt;/button&gt;
+000390|         &lt;/div&gt;
+000391| 
+000392|         &lt;div id="adminAuthSection"&gt;
+000393|             &lt;p id="adminPrompt" style="margin-bottom: 15px; color: var(--olive-medium); font-weight: 600;"&gt;Enter master password to view feedback:&lt;/p&gt;
+000394|             &lt;div class="input-group" style="margin-bottom: 15px;"&gt;
+000395|                 &lt;input type="password" id="adminPassword" placeholder="Master Password"&gt;
+000396|             &lt;/div&gt;
+000397|             &lt;button type="button" class="btn-submit" id="authenticateButton" onclick="loginAdmin()"&gt;Authenticate&lt;/button&gt;
+000398|         &lt;/div&gt;
+000399| 
+000400|         &lt;div id="adminDashboard" style="display: none;"&gt;
+000401|             &lt;!-- Search Bar for Stacks --&gt;
+000402|             &lt;input type="text" id="adminSearchInput" class="search-box" placeholder="🔍 Type instructor name to view stacked reviews..." oninput="filterAdminData()"&gt;
+000403| 
+000404|             &lt;div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;"&gt;
+000405|                 &lt;h3&gt;&lt;span id="instructorFilesLabel"&gt;Instructor Files&lt;/span&gt; (&lt;span id="submissionCount"&gt;0&lt;/span&gt;)&lt;/h3&gt;
+000406|                 &lt;button type="button" class="btn-reset" id="deleteAllButton" style="color: var(--error); border-color: var(--error);" onclick="clearAllData()"&gt;Delete All Data&lt;/button&gt;
+000407|             &lt;/div&gt;
+000408| 
+000409|             &lt;div id="adminDataList"&gt;
+000410|                 &lt;!-- Stacked reviews per instructor render here --&gt;
+000411|             &lt;/div&gt;
+000412|         &lt;/div&gt;
+000413|     &lt;/div&gt;
+000414| &lt;/div&gt;
+000415| 
+000416| &lt;script type="text/plain" id="legacyScript"&gt;
+000417|     const knownInstructors = [
+000418|         "Alaa Zayed", "Adnan Oudah", "Prof. Issam Moghrabi", "Dr Reem M. Al Qenai",
+000419|         "Riham Hakkani", "Abdelrahman Enayah", "Ebtehal Al Ayoub", "Batoul Salman",
+000420|         "Dr. Remie Nasr", "Ali El Khatib", "Annet Noel", "Fatma Rezk",
+000421|         "Mary Nelson", "Ahlam Mousa", "Tina Daniel", "Yousef Saeam",
+000422|         "Dhai Aljeeran", "Mohammad Alqallaf", "Nada Farah"
+000423|     ];
+000424| 
+000425|     const badWords = ["badword", "stupid", "idiot", "dumb", "hate", "scam", "fool", "crap", "trash", "worst", "suck"];
+000426|     const ADMIN_PASSWORD = "ktech2004"; 
+000427| 
+000428|     function populateSuggestions() {
+000429|         const datalist = document.getElementById('instructorSuggestions');
+000430|         datalist.innerHTML = '';
+000431|         knownInstructors.forEach(inst =&gt; {
+000432|             const opt = document.createElement('option');
+000433|             opt.value = inst;
+000434|             datalist.appendChild(opt);
+000435|         });
+000436|     }
+000437| 
+000438|     function isGibberish(text) {
+000439|         if (!text || text.trim().length === 0) return false;
+000440|         const cleanText = text.trim();
+000441|         if (cleanText.length &gt; 15 &amp;&amp; !cleanText.includes(" ")) return true;
+000442|         if (/(.)\1{3,}/i.test(cleanText)) return true;
+000443|         const lettersOnly = cleanText.replace(/[^a-zA-Z]/g, '');
+000444|         if (lettersOnly.length &gt; 8) {
+000445|             const vowels = lettersOnly.match(/[aeiouy]/gi);
+000446|             const ratio = (vowels ? vowels.length : 0) / lettersOnly.length;
+000447|             if (ratio &lt; 0.10) return true;
+000448|         }
+000449|         return false;
+000450|     }
+000451| 
+000452|     function cleanProfanity(text) {
+000453|         if (!text) return "";
+000454|         let cleanedText = text;
+000455|         badWords.forEach(word =&gt; {
+000456|             const regex = new RegExp(`\\b${word}\\b`, "gi");
+000457|             cleanedText = cleanedText.replace(regex, "***");
+000458|         });
+000459|         return cleanedText;
+000460|     }
+000461| 
+000462|     document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+000463|         e.preventDefault();

@@ -1,0 +1,122 @@
+FILE: js/script-04.js | total lines: 719 | review-only escaped HTML; do not execute
+000599|    if(resetZoom){refs.canvas.style.width='100%';state.zoom=1;refs.stage.scrollLeft=0;refs.stage.scrollTop=0;}
+000600|    refs.key.replaceChildren();const keyAside=document.querySelector('.orbit-map-v2-key');if(keyAside)keyAside.hidden=(f==='ground');refs.key.style.display=f==='ground'?'none':'';refs.key.hidden=(f==='ground');for(const [color,ico,name] of legend[f]||[['#174bef','🏫','Campus map view']]){
+000601|       const item=document.createElement('div');item.className='orbit-map-v2-key-row';const sw=document.createElement('span');sw.className='orbit-map-v2-key-swatch';sw.style.background=color;sw.textContent=ico;const t=document.createElement('span');t.textContent=mt(legendNameMap[name]||name);item.append(sw,t);
+000602|       const groundCategory={'Food Hall':['Food Hall'],'Gaming Room':['Gaming Room'],'Restaurants / Coffee Shops / Supermarket':rooms.filter(r=&gt;r.floor==='ground'&amp;&amp;r.kind==='shops').map(r=&gt;r.id),'Under Maintenance':['Under Maintenance'],'Auditorium':['Auditorium'],'Student Life':['Student Life'],'Advising':['Advising'],'Registration Office':['Registration Office'],'Security Office':['Security Office'],'ATM':['ATM']};
+000603|       const categoryTargets={...groundCategory,'Library':['Library'],'IT / Finance departments':['IT Department','Finance Department'], 'Stairs':[], 'Elevator':[], 'Accessible elevator':[], 'Classrooms (Cxxx)':rooms.filter(r=&gt;r.floor===f&amp;&amp;r.kind==='class').map(r=&gt;r.id), 'Labs (CLxxx)':rooms.filter(r=&gt;r.floor===f&amp;&amp;r.kind==='lab').map(r=&gt;r.id), 'Men’s bathroom':rooms.filter(r=&gt;r.floor===f&amp;&amp;r.kind==='bathmen').map(r=&gt;r.id), 'Women’s bathroom':rooms.filter(r=&gt;r.floor===f&amp;&amp;r.kind==='bathwomen').map(r=&gt;r.id)};
+000604|       const targets=categoryTargets[name];
+000605|       if(targets&amp;&amp;targets.length){item.classList.add('orbit-key-action');item.setAttribute('role','button');item.tabIndex=0;
+000606|        const act=()=&gt;{if(targets.length===1){setRoomToDestination(targets[0]);return;}openKeyPicker(targets,name);};
+000607|        item.addEventListener('click',act);item.addEventListener('keydown',e=&gt;{if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
+000608|       }
+000609|       refs.key.append(item);}
+000610|    // Campus entrance labels follow the user's purple/yellow/orange annotations.
+000611|    // Never label or renumber the separate Ground Floor building entrances.
+000612|    let gateLayer=refs.canvas.querySelector('#orbitCampusEntranceLabels');
+000613|    if(!gateLayer){gateLayer=document.createElement('div');gateLayer.id='orbitCampusEntranceLabels';gateLayer.setAttribute('aria-label','Campus entrances');refs.canvas.appendChild(gateLayer);}
+000614|    gateLayer.replaceChildren();gateLayer.hidden=f!=='campus';
+000615|    if(f==='campus'){
+000616|      for(const g of [{name:'Gate 1',x:6.1,y:44.5},{name:'Gate 2',x:92.8,y:6.0},{name:'Gate 3',x:94.0,y:75.2}]){
+000617|        const label=document.createElement('span');label.className='orbit-campus-entrance';label.textContent=g.name;
+000618|        label.style.left=g.x+'%';label.style.top=g.y+'%';gateLayer.appendChild(label);
+000619|      }
+000620|    }
+000621|    draw();
+000622|    if(window.orbitParkingDemo)window.orbitParkingDemo.sync(f);
+000623|  }
+000624| 
+000625|  function selectMapRoom(r){if(!state.from||state.to){state.from=r.id;state.to='';}else if(state.from!==r.id){state.to=r.id;}refs.from.value=state.from;refs.to.value=state.to;state.route=null;refs.sheet.hidden=true;if(state.to)statusText('selectionBoth',{from:placeLabel(state.from),to:placeLabel(state.to)});else statusText('selectionStart',{room:placeLabel(r.id)});draw();}
+000626|  function setRoomToDestination(id){state.to=id;state.route=null;refs.sheet.hidden=true;refs.to.value=id;const r=roomById.get(id);if(r)showFloor(r.floor);statusText('selectionTo',{room:placeLabel(id)});}
+000627|  function updateOptions(){state.from=refs.from.value;state.to=refs.to.value;state.route=null;refs.sheet.hidden=true;statusText('chooseToDraw');draw();}
+000628|   function createSteps(p){
+000629|    if(!p.portal)return [
+000630|      {floor:p.from.floor,label:mt('sameFloorFirst',{floor:floorLabel(p.from.floor),from:placeLabel(p.from.id),to:placeLabel(p.to.id)})},
+000631|      {floor:p.to.floor,label:mt('sameFloorLast',{to:placeLabel(p.to.id)})}
+000632|    ];
+000633|    const floorsOrder=['ground','one','two'];
+000634|    const move=mt(floorsOrder.indexOf(p.to.floor)&gt;floorsOrder.indexOf(p.from.floor)?'up':'down');
+000635|    const device=mt(p.portal.type==='accessible'?'accessibleDevice':'stairsDevice');
+000636|    const portal=portalLabel(p.portal.name);
+000637|    return [
+000638|      {floor:p.from.floor,label:mt('multiFirst',{floor:floorLabel(p.from.floor),portal,device})},
+000639|      ...p.legs.slice(1).map(leg=&gt;({floor:leg.floor,label:mt('multiChange',{floor:floorLabel(leg.floor),device,move})})),
+000640|      {floor:p.to.floor,label:mt('multiLast',{to:placeLabel(p.to.id)})}
+000641|    ];
+000642|   }
+000643| 
+000644|  function renderSteps(){const p=state.route;if(!p)return;const steps=createSteps(p);
+000645|   $('orbitRouteSteps').replaceChildren();steps.forEach((step,index)=&gt;{const li=document.createElement('li');li.className=index===state.step?'current':'';const badge=document.createElement('span');badge.className='num';badge.textContent=index+1;const tx=document.createElement('span');tx.textContent=step.label;li.append(badge,tx);$('orbitRouteSteps').append(li);});
+000646|   $('orbitRouteProgress').textContent=mt('stepProgress',{n:state.step+1,total:steps.length});
+000647|   $('orbitStepBack').disabled=state.step===0;$('orbitStepNext').disabled=state.step===steps.length-1;
+000648|   $('orbitStepNext').textContent=mt(state.step===steps.length-1?'finished':'next');
+000649|   const selectedFloor=steps[state.step].floor;showFloor(selectedFloor,false);
+000650|   $('orbitRouteDescriptor').textContent=p.portal?mt(p.accessible?'descriptorAccessible':(p.portal.type==='stairs'?'descriptorStairs':'descriptorElevator'),{portal:portalLabel(p.portal.name)}):mt('descriptorSame');
+000651|   statusText('statusRoute',{from:placeLabel(p.from.id),to:placeLabel(p.to.id),floor:floorLabel(selectedFloor)});
+000652|  }
+000653|  function runRoute(){
+000654|   state.from=refs.from.value;state.to=refs.to.value;state.accessible=refs.accessible.checked;
+000655|   if(!state.from||!state.to){state.route=null;statusText('chooseBoth');refs.sheet.hidden=true;draw();return;}
+000656|   if(state.from===state.to){state.route=null;statusText('alreadyHere');refs.sheet.hidden=true;showFloor(roomById.get(state.from).floor);return;}
+000657|   state.route=plan(state.from,state.to,state.accessible);
+000658|   if(!state.route){statusText('routeFail');refs.sheet.hidden=true;draw();return;}
+000659|   state.step=0;refs.sheet.hidden=false;
+000660|   $('orbitRouteSummary').textContent=`${placeLabel(state.from)} → ${placeLabel(state.to)}`;
+000661|   renderSteps();draw();
+000662| 
+000663|  }
+000664|  function clearRoute(){state.route=null;state.step=0;refs.sheet.hidden=true;statusText('routeCleared');draw();}
+000665|  document.querySelectorAll('.orbit-floor-btn').forEach(b=&gt;b.addEventListener('click',()=&gt;{const f=b.dataset.floor; if(state.route){const index=createSteps(state.route).findIndex(step=&gt;step.floor===f); if(index&gt;=0){state.step=index;renderSteps();return;} clearRoute();}showFloor(f);}));
+000666|  refs.from.addEventListener('change',updateOptions);refs.to.addEventListener('change',updateOptions);
+000667|  refs.accessible.addEventListener('change',()=&gt;{state.accessible=refs.accessible.checked;if(state.route&amp;&amp;state.from&amp;&amp;state.to)runRoute();});
+000668|  $('orbitSwapRoute').addEventListener('click',()=&gt;{const a=refs.from.value;refs.from.value=refs.to.value;refs.to.value=a;updateOptions();if(refs.from.value&amp;&amp;refs.to.value)runRoute();});
+000669|  $('orbitFindRoute').addEventListener('click',runRoute);
+000670|  $('orbitStepNext').addEventListener('click',()=&gt;{if(!state.route)return;state.step=Math.min(createSteps(state.route).length-1,state.step+1);renderSteps();});
+000671|  $('orbitStepBack').addEventListener('click',()=&gt;{if(!state.route)return;state.step=Math.max(0,state.step-1);renderSteps();});
+000672|  $('orbitStopNavigation').addEventListener('click',clearRoute);
+000673|  $('orbitCloseKeyPicker').addEventListener('click',()=&gt;{$('orbitKeyPicker').hidden=true;});
+000674|  $('orbitMinimizeNavigation').addEventListener('click',()=&gt;{refs.sheet.classList.toggle('minimized');$('orbitMinimizeNavigation').textContent=refs.sheet.classList.contains('minimized')?'+':'−';});
+000675|  $('orbitZoomIn').addEventListener('click',()=&gt;zoom(.3));$('orbitZoomOut').addEventListener('click',()=&gt;zoom(-.3));
+000676|  function zoom(diff){const target=Math.min(2.5,Math.max(1,state.zoom+diff));state.zoom=target;refs.canvas.style.width=(100*target)+'%';}
+000677|  document.querySelectorAll('#orbitMapQuickLinks [data-locate]').forEach(button=&gt;button.addEventListener('click',()=&gt;{const [floor,id]=button.dataset.locate.split('|');setRoomToDestination(id);showFloor(floor);}));
+000678|  $('orbitActionDirections').addEventListener('click',()=&gt;{if(refs.from.value&amp;&amp;refs.to.value)runRoute();else{$('orbitNavForm').scrollIntoView({behavior:'smooth',block:'center'});refs.from.focus();}});
+000679|  $('orbitActionFind').addEventListener('click',()=&gt;{$('orbitNavTo').scrollIntoView({behavior:'smooth',block:'center'});refs.to.focus();});
+000680|  $('orbitActionFloor').addEventListener('click',()=&gt;{const first=document.querySelector('.orbit-floor-btn.selected');if(first){first.scrollIntoView({behavior:'smooth',block:'center'});first.focus();}});
+000681|  $('orbitActionList').addEventListener('click',()=&gt;{ $('orbitShowRooms').click();if(!$('orbitRoomList').hidden)$('orbitRoomList').scrollIntoView({behavior:'smooth',block:'nearest'}); });
+000682|  $('orbitActionInfo').addEventListener('click',()=&gt;{const p=$('orbitMapInfoPanel');p.hidden=!p.hidden;if(!p.hidden)p.scrollIntoView({behavior:'smooth',block:'nearest'});});
+000683|  function fillRoomList(){const list=$('orbitRoomList');list.replaceChildren();for(const r of rooms.filter(r=&gt;r.floor===state.floor)){const b=document.createElement('button');b.type='button';b.textContent=placeLabel(r.id);b.addEventListener('click',()=&gt;selectMapRoom(r));list.append(b);}}
+000684|  $('orbitShowRooms').addEventListener('click',()=&gt;{const list=$('orbitRoomList');list.hidden=!list.hidden;if(!list.hidden)fillRoomList();});
+000685| 
+000686|  // Tap-only Orbit Chat can launch the accessibility-aware map without changing chat behavior.
+000687|  const quick=document.createElement('button');quick.type='button';quick.className='orbit-guide-btn info-link';quick.textContent=mt('campusDirections');quick.id='orbitChatMapShortcut';
+000688|  const guideQuick=quick;const guide=$('orbitGuide');if(guide){guide.append(quick);quick.addEventListener('click',()=&gt;{
+000689|    refs.accessible.checked=true;state.accessible=true;
+000690|    const tab=document.querySelector('[data-view="mapView"]');if(tab)tab.click();
+000691|    showFloor('one');statusText('accessibleSelected');
+000692|    $('orbitNavForm').scrollIntoView({behavior:'smooth',block:'center'});
+000693|   });}
+000694|  // Structured test hook exposes only route coordinates, no personal information.
+000695|  window.orbitNavigationTest={
+000696|   route:(a,b,accessible=false)=&gt;plan(a,b,accessible),
+000697|   door:(id)=&gt;roomById.get(id)?.door||null,
+000698|   rooms:()=&gt;rooms.map(r=&gt;({id:r.id,floor:r.floor,kind:r.kind,door:r.door,approach:r.approach})),
+000699|   getState:()=&gt;({floor:state.floor,from:state.from,to:state.to,accessible:state.accessible,steps:state.route?createSteps(state.route):[],route:state.route}),
+000700|   choose:(from,to,accessible=false)=&gt;{refs.from.value=from;refs.to.value=to;refs.accessible.checked=accessible;runRoute();}
+000701|  };
+000702| 
+000703|  // Fallback tab switching: the map must also open when the HTML is previewed locally
+000704|  // and another legacy section cannot access browser storage.
+000705|  document.querySelectorAll('.orbit-nav [data-view]').forEach(button=&gt;button.addEventListener('click',()=&gt;{
+000706|    const target=button.dataset.view;
+000707|    document.querySelectorAll('.orbit-view').forEach(view=&gt;{
+000708|       const selected=view.id===target;
+000709|       view.classList.toggle('active',selected);
+000710|       view.style.display=selected?'block':'none';
+000711|    });
+000712|    document.querySelectorAll('.orbit-nav [data-view]').forEach(b=&gt;{
+000713|       const selected=b.dataset.view===target;
+000714|       b.classList.toggle('active',selected);
+000715|       b.setAttribute('aria-selected',String(selected));
+000716|    });
+000717|  }));
+000718|  fillOptions();showFloor('one');updateMapLanguage();document.querySelectorAll('#langEn,#langAr').forEach(b=&gt;b.addEventListener('click',updateMapLanguage));
+000719| })();
