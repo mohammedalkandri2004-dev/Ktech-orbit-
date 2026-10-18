@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTECH Orbit | Smart Parking Demo</title>
+    <link rel="stylesheet" href="css/style-01.css">
+<link rel="stylesheet" href="css/style-02.css"><link rel="stylesheet" href="css/style-03.css">
+<link rel="stylesheet" href="css/style-04.css">
+<link rel="stylesheet" href="css/style-05.css">
+
+<link rel="stylesheet" href="css/style-06.css">
+<link rel="stylesheet" href="css/style-07.css">
+
+<link rel="stylesheet" href="css/style-08.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo-title">
+            <!-- Clickable Duck Logo triggers Admin Panel -->
+            <div class="duck-circle-avatar" id="duckAvatarBtn" role="button" tabindex="0" aria-label="Open Admin Panel" title="Click for Admin Access">
+                <img src="assets/image-01-595b162249.jpg" alt="KTECH Orbit duck mascot">
+            </div>
+            <div>
+                <h1>KTECH Orbit</h1>
+                <p id="subtitleText">Course & Instructor Feedback Hub</p>
+                <div class="header-contact-strip" aria-label="Feedback and contact">
+                    <span class="header-contact-text" id="headerContactText">Have feedback or a suggestion?</span>
+                    <a class="header-contact-email" href="mailto:ktechorbit@gmail.com">✉️ ktechorbit@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-controls">
+            <div class="language-switcher" aria-label="Language">
+                <button type="button" class="lang-btn active" id="langEn" data-lang="en">EN</button>
+                <button type="button" class="lang-btn" id="langAr" data-lang="ar">AR</button>
+            </div>
+            <div class="anon-badge" id="anonBadge">🔒 100% Anonymous</div>
+        </div>
+    </header>
+
+
+
+
+    <div class="orbit-help-banner" role="region" aria-labelledby="orbitHelpBannerTitle">
+      <div>
+        <strong id="orbitHelpBannerTitle">🛟 Not sure who can help you at KTECH?</strong>
+        <p id="orbitHelpBannerText">Try the Student Help Guide. Pick a problem, follow simple steps, and contact the right department.</p>
+      </div>
+      <button type="button" id="orbitHelpShortcut">Try the Help Guide ›</button>
+    </div>
+
+    <nav class="orbit-nav" aria-label="KTECH Orbit sections">
+        <button type="button" class="orbit-tab-btn active" data-view="reviewView">
+            <span class="tab-icon">📝</span>
+            <span class="orbit-tab-title" id="navReview">Instructor Review</span>
+            <span class="orbit-tab-bio" id="navReviewBio">Open the review app and submit instructor feedback.</span>
+        </button>
+        <button type="button" class="orbit-tab-btn" data-view="reviewsView">
+            <span class="tab-icon">⭐</span>
+            <span class="orbit-tab-title" id="navReviews">Student Reviews</span>
+            <span class="orbit-tab-bio" id="navReviewsBio">Browse feedback and experiences shared by KTECH students.</span>
+        </button>
+        <button type="button" class="orbit-tab-btn" data-view="mapView">
+            <span class="tab-icon">🗺️</span>
+            <span class="orbit-tab-title" id="navMap">KTECH Map</span>
+            <span class="orbit-tab-bio" id="navMapBio">Explore rooms and campus maps.</span>
+        </button>
+    </nav>
+
+<section id="mapView" class="orbit-view" aria-labelledby="orbitMapTitle">
+  <div class="orbit-map-panel orbit-navigation-v2">
+    <div class="orbit-nav-v2-heading">
+      <div><span class="orbit-map-eyebrow">KTECH ORBIT · INDOOR WAYFINDING</span>
+      <h2 id="orbitMapTitle">🗺️ KTECH Campus Map</h2>
+      <p class="orbit-map-subtitle">Find classrooms and services, with routes that follow the corridors.</p></div>
+      <span class="orbit-map-v2-chip">INTERACTIVE 2D MAP</span>
+    </div>
+    <div class="orbit-floor-tabs orbit-floors-v2" role="group" aria-label="Choose a floor">
+      <button type="button" class="orbit-floor-btn" data-floor="ground">Ground Floor</button>
+      <button type="button" class="orbit-floor-btn selected" data-floor="one">Floor 1</button>
+      <button type="button" class="orbit-floor-btn" data-floor="two">Floor 2</button>
+      <button type="button" class="orbit-floor-btn" data-floor="campus">Campus</button>
+    </div>
+    <section id="orbitParkingPanel" class="orbit-parking-panel" aria-labelledby="orbitParkingTitle" hidden>
+      <div class="orbit-parking-heading">
+        <div><h3 id="orbitParkingTitle">🚗 Smart Parking</h3><p id="orbitParkingSub">See which spaces are free on the KTECH campus map.</p></div>
+        <span id="orbitParkingBadge" class="orbit-parking-badge">REFERENCE MAP · PARKING STATUS NOT LIVE</span>
+      </div>
+      <div class="orbit-parking-stats" aria-live="polite">
+        <div class="orbit-parking-stat free"><strong id="orbitParkingFree">0</strong><small id="orbitParkingFreeLabel">Available</small></div>
+        <div class="orbit-parking-stat busy"><strong id="orbitParkingBusy">0</strong><small id="orbitParkingBusyLabel">Occupied</small></div>
+        <div class="orbit-parking-stat access"><strong id="orbitParkingAccess">0</strong><small id="orbitParkingAccessLabel">Accessible available ♿</small></div>
+      </div>
+      <div class="orbit-parking-meter" aria-hidden="true"><span id="orbitParkingMeter"></span></div>
+      <div class="orbit-parking-legend" aria-label="Parking status legend">
+        <span><i class="orbit-parking-dot free"></i><b id="orbitParkingGreen">Green = available</b></span>
+        <span><i class="orbit-parking-dot busy"></i><b id="orbitParkingRed">Red = occupied</b></span>
+        <span><i class="orbit-parking-dot access"></i><b id="orbitParkingBlue">♿ = accessible space</b></span>
+      </div>
+      <p id="orbitParkingInstruction" class="orbit-parking-instruction">Tap a colored space to change its status. The buttons demonstrate a car arriving or leaving.</p>
+      <div id="orbitParkingGates" class="orbit-parking-gates" aria-label="Accessible spaces by gate"></div>
+      <div class="orbit-parking-actions" hidden><button id="orbitParkingFind" hidden type="button"></button><button id="orbitParkingFindAccess" hidden type="button"></button><button id="orbitParkingArrive" hidden type="button"></button><button id="orbitParkingLeave" hidden type="button"></button><button id="orbitParkingReset" hidden type="button"></button>
+        
+        
+        
+        
+        
+      </div>
+      <p id="orbitParkingNote" class="orbit-parking-instruction" style="margin:10px 0 0;font-size:.7rem">Concept demo: the colored spaces and occupancy are simulated. Real-time availability would require sensors and a connected service; accessible-space positions must be confirmed with KTECH.</p>
+      <div id="orbitParkingSelection" class="orbit-parking-selection" role="status" aria-live="polite" hidden>
+        <div><strong id="orbitParkingSpotName"></strong><br><span id="orbitParkingSpotStatus"></span></div>
+        <button type="button" id="orbitParkingToggle">Change status</button>
+      </div>
+    </section>
+    <div class="orbit-nav-v2-form" id="orbitNavForm">
+      <div class="orbit-nav-v2-location"><label for="orbitNavFrom"><span class="orbit-nav-dot start"></span> Starting location</label>
+        <select id="orbitNavFrom" aria-label="Choose your starting location"></select></div>
+      <button id="orbitSwapRoute" class="orbit-nav-swap" type="button" aria-label="Swap start and destination">⇅</button>
+      <div class="orbit-nav-v2-location"><label for="orbitNavTo"><span class="orbit-nav-dot end"></span> Destination</label>
+        <select id="orbitNavTo" aria-label="Choose your destination"></select></div>
+    </div>
+    <div class="orbit-nav-v2-settings">
+      <label class="orbit-access-toggle" for="orbitAccessible"><input id="orbitAccessible" type="checkbox" /> <span>♿ Accessible route — use wheelchair-accessible elevators, not stairs</span></label>
+      <button type="button" id="orbitFindRoute">Get Directions →</button>
+    </div>
+    <div class="orbit-nav-v2-layout">
+      <div class="orbit-nav-v2-map-wrap">
+        <div class="orbit-nav-v2-map-head"><span id="orbitFloorCurrentLabel">Floor 1</span><span id="orbitMapHint">Tap a room or choose it above</span>
+        <div class="orbit-nav-v2-zoom"><button type="button" id="orbitZoomOut" aria-label="Zoom out">−</button><button type="button" id="orbitZoomIn" aria-label="Zoom in">+</button></div></div>
+        <div class="orbit-directions-dock" id="orbitDirectionsDock" aria-label="Route directions">
+          <button type="button" class="orbit-directions-tab" id="orbitDirectionsTab" aria-expanded="false" aria-controls="orbitDirectionsSheet"><span>➤ Directions</span><span id="orbitDirectionsTabState">▾</span></button>
+    <div class="orbit-nav-v2-instructions" id="orbitDirectionsSheet" hidden aria-live="polite">
+      <div class="orbit-nav-v2-route-top"><strong id="orbitRouteSummary">Route</strong><div class="orbit-route-top-actions"><button type="button" id="orbitMinimizeNavigation" aria-label="Minimize directions">−</button><button type="button" id="orbitStopNavigation">✕</button></div></div>
+      <div id="orbitRouteDescriptor"></div>
+      <ol id="orbitRouteSteps" class="orbit-nav-v2-steps"></ol>
+      <div class="orbit-nav-v2-step-actions"><button type="button" id="orbitStepBack">← Previous</button><span id="orbitRouteProgress"></span><button type="button" id="orbitStepNext">Next step →</button></div>
+    </div>
+        </div>
+        <div class="orbit-map-stage" id="orbitMapStage" role="region" aria-label="Interactive map with selectable rooms" tabindex="0">
+          <div class="orbit-map-canvas" id="orbitMapCanvas">
+            <img id="orbitFloorImage" alt="KTECH floor plan" draggable="false" />
+            <svg id="orbitFloorOverlay" class="orbit-map-overlay" viewBox="0 0 1060 620" preserveAspectRatio="none" aria-label="Room selection and directions">
+              <g id="orbitRouteGraphics"></g><g id="orbitRoomLayer"></g><g id="orbitParkingLayer"></g>
+            </svg>
+          </div>
+        </div>
+    <div id="orbitKeyPicker" class="orbit-key-picker" hidden><div class="orbit-key-picker-head"><strong id="orbitKeyPickerTitle">Locations</strong><button type="button" id="orbitCloseKeyPicker" aria-label="Close">✕</button></div><div id="orbitKeyPickerOptions" class="orbit-key-picker-options"></div></div>
+        <p id="orbitMapSelection" role="status" aria-live="polite" class="orbit-map-selection">Choose two locations; the yellow dots indicate classroom doors.</p>
+        <p class="orbit-map-v2-caution">Map-based route preview, not live GPS. Door targets are shown as yellow dots; confirm precise doorway positions and accessibility onsite.</p>
+      </div>
+      <aside class="orbit-map-v2-key" aria-label="Map Key">
+        <details open><summary>Map Key</summary>
+          <div class="orbit-map-v2-key-rows" id="orbitMapKeyRows"></div>
+        </details>
+      </aside>
+    </div>
+
+    <div class="orbit-map-v2-actionbar" role="group" aria-label="Map tools" hidden>
+       <button type="button" id="orbitActionDirections">➤ <span>Get Directions</span></button>
+       <button type="button" id="orbitActionFind">📍 <span>Find Location</span></button>
+       <button type="button" id="orbitActionFloor">▤ <span>Change Floor</span></button>
+       <button type="button" id="orbitActionList">☷ <span>Location List</span></button>
+       <button type="button" id="orbitActionInfo">ⓘ <span>Map Info</span></button>
+    </div>
+    <div id="orbitMapInfoPanel" class="orbit-map-v2-info" hidden>
+       This is a manually selected starting-point route preview, not real-time GPS tracking. The yellow dots represent classroom doors. Routes follow white corridors to these entrances; confirm exact entrances and accessibility onsite.
+    </div>
+    <div id="orbitMapQuickLinks" class="orbit-nav-v2-quicklinks" hidden>
+      <button type="button" data-locate="one|IT Department">IT Department</button>
+      <button type="button" data-locate="one|Finance Department">Finance Department</button>
+      <button type="button" data-locate="two|Library">Library (Floor 2)</button>
+      <button type="button" id="orbitShowRooms">Room list</button>
+    </div>
+    <div id="orbitRoomList" class="orbit-nav-v2-roomlist" hidden></div>
+  </div>
+</section>
+
+
+    <section id="homeView" class="orbit-view" style="display:none">
+        <div class="orbit-home-hero">
+            <h2 id="homeTitle">Everything around one student platform.</h2>
+            <p id="homeText">Choose a section below. Each KTECH Orbit service has its own space, while Orbit Chat stays available wherever you are.</p>
+        </div>
+        <div class="orbit-feature-grid">
+            <button type="button" class="orbit-feature-card" data-open-view="reviewView"><span class="feature-icon">📝</span><h3 id="cardReviewTitle">Instructor Review</h3><p id="cardReviewText">Open the review app and submit instructor feedback.</p></button>
+            <button type="button" class="orbit-feature-card" data-open-view="reviewsView"><span class="feature-icon">⭐</span><h3 id="cardReviewsTitle">Student Reviews</h3><p id="cardReviewsText">Browse feedback shared by students.</p></button>
+            <button type="button" class="orbit-feature-card" data-open-chat="true"><span class="feature-icon">💬</span><h3 id="cardChatTitle">Orbit Chat</h3><p id="cardChatText">Ask KTECH questions without leaving your current page.</p></button>
+            <button type="button" class="orbit-feature-card" data-open-view="contactView"><span class="feature-icon">✉️</span><h3 id="cardContactTitle">Contact</h3><p id="cardContactText">Send feedback or get help with KTECH Orbit.</p></button>
+        </div>
+    </section>
+
+    <section id="reviewView" class="orbit-view active">
+    <div class="privacy-notice">
+        <span id="privacyText">🛡️ <strong>Student Shield:</strong> Submit your honest review! Spam, gibberish, and profanity filters are enabled.</span>
+    </div>
+
+    <div id="statusMsg" class="status-msg"></div>
+
+    <form id="feedbackForm">
+        <div class="student-info">
+            <div class="input-group">
+                <label for="instructorNameInput" id="instructorLabel">Instructor Name</label>
+                <input type="text" id="instructorNameInput" name="instructorNameInput" placeholder="Type Instructor Name..." list="instructorSuggestions" required>
+                <datalist id="instructorSuggestions"></datalist>
+            </div>
+            <div class="input-group">
+                <label for="courseCode" id="courseLabel">Course Name / Code</label>
+                <input type="text" id="courseCode" name="courseCode" placeholder="e.g. CS101 / Java Programming" required>
+            </div>
+            <div class="input-group">
+                <label for="date" id="dateLabel">Date</label>
+                <input type="text" id="date" name="date" placeholder="DD/MM/YYYY">
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th id="quizHeader">Quiz Difficulty</th>
+                        <th id="teachingHeader">Teaching Quality</th>
+                        <th id="understandingHeader">Understanding</th>
+                        <th id="bonusHeader">Bonus Marks / Pushes</th>
+                        <th id="opinionHeader">Short Opinion & Suggestions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="radio-group">
+                                <label class="radio-label"><input type="radio" name="quiz" value="Easy" required><span data-option-key="easy">Easy</span></label>
+                                <label class="radio-label"><input type="radio" name="quiz" value="Medium"><span data-option-key="medium">Medium</span></label>
+                                <label class="radio-label"><input type="radio" name="quiz" value="Hard"><span data-option-key="hard">Hard</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="radio-group">
+                                <label class="radio-label"><input type="radio" name="teaching" value="Needs work" required><span data-option-key="needsWork">Needs work</span></label>
+                                <label class="radio-label"><input type="radio" name="teaching" value="Good"><span data-option-key="good">Good</span></label>
+                                <label class="radio-label"><input type="radio" name="teaching" value="Excellent"><span data-option-key="excellent">Excellent</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="radio-group">
+                                <label class="radio-label"><input type="radio" name="understanding" value="Hard to follow" required><span data-option-key="hardToFollow">Hard to follow</span></label>
+                                <label class="radio-label"><input type="radio" name="understanding" value="Mostly clear"><span data-option-key="mostlyClear">Mostly clear</span></label>
+                                <label class="radio-label"><input type="radio" name="understanding" value="Very clear"><span data-option-key="veryClear">Very clear</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="radio-group">
+                                <label class="radio-label"><input type="radio" name="bonus" value="Never" required><span data-option-key="never">Never</span></label>
+                                <label class="radio-label"><input type="radio" name="bonus" value="Sometimes"><span data-option-key="sometimes">Sometimes</span></label>
+                                <label class="radio-label"><input type="radio" name="bonus" value="Often"><span data-option-key="often">Often</span></label>
+                            </div>
+                        </td>
+                        <td>
+                            <textarea id="opinionInput" name="opinion" placeholder="Does he/she give pushes, bonuses? Are quizzes hard? Write suggestions..."></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions">
+            <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn-reset" id="clearButton" onclick="resetForm()">Clear All</button>
+                <button type="submit" class="btn-submit" id="submitButton">Submit Feedback 🚀</button>
+            </div>
+        </div>
+    </form>
+
+    </section>
+
+    <section id="reviewsView" class="orbit-view">
+    <section class="contact-section" aria-labelledby="publicReviewsTitle" style="text-align:left;">
+        <h2 id="publicReviewsTitle">Student Reviews</h2>
+        <p id="publicReviewsText">Everyone can view reviews  You can permanently delete reviews submitted from this browser, but regular users cannot edit reviews</p>
+        <input type="text" id="publicSearchInput" class="search-box" placeholder="Search instructor reviews..." autocomplete="off">
+        <div id="publicReviewsList"></div>
+    </section>
+
+
+
+    </section>
+
+    <div id="orbitChatDrawer" class="orbit-chat-drawer" aria-hidden="false">
+        <div class="orbit-chat-drawer-head"><button type="button" class="orbit-chat-close" id="orbitChatClose" aria-label="Close chat">&times;</button></div>
+    <section class="orbit-ai-section" aria-labelledby="orbitAiTitle">
+        <div class="orbit-ai-header">
+            <h2 class="orbit-ai-title" id="orbitAiTitle">🪐 Ask KTECH Orbit</h2>
+            <span class="orbit-ai-badge" id="orbitAiBadge">KTECH-only assistant</span>
+        </div>
+        <p class="orbit-ai-disclaimer" id="orbitAiDisclaimer">KTECH Orbit is an independent student project. Tap a question for a direct answer and useful KTECH links.</p>
+        <div class="orbit-chat-log" id="orbitChatLog" aria-live="polite">
+            <div class="orbit-chat-message system" id="orbitAiWelcome">Welcome! Tap an option below to ask a question — no typing needed.</div>
+        </div>
+        <div class="orbit-guide" id="orbitGuide" aria-label="Tap-only KTECH assistant">
+            <div class="orbit-guide-label" id="orbitGuideLabel">Choose a topic</div>
+            <div class="orbit-guide-options" id="orbitGuideOptions"></div>
+        </div>
+    </section>
+
+    </div>
+
+<section id="restaurantsView" class="orbit-view">
+  <div class="orbit-restaurants-page">
+    <div class="orbit-restaurants-head">
+      <div><span class="orbit-map-eyebrow">KTECH ORBIT · DEMO ORDERING</span><h2>🍽️ Restaurants & Pickup</h2><p class="orbit-map-subtitle">Choose a restaurant location, place a demo order, pay, and track it until pickup.</p></div>
+      <span class="orbit-map-v2-chip">PAYMENT-GATED DEMO</span>
+    </div>
+    <div id="orbitStudentSession"></div>
+    <div class="orbit-demo-note">Demo only — no real money is charged and the restaurant names/menus are placeholders. An order is sent to the restaurant dashboard only after the demo payment is completed.</div>
+    <div class="orbit-restaurants-layout">
+      <div>
+        <div id="orbitRestaurantSelect" class="orbit-restaurant-select"></div>
+        <div id="orbitMenuGrid" class="orbit-menu-grid"></div>
+      </div>
+      <aside class="orbit-cart">
+        <h3>🛒 Your Order</h3>
+        <div id="orbitCartRestaurant" class="orbit-mini-meta">Choose a restaurant</div>
+        <div id="orbitCartList" class="orbit-cart-list"></div>
+        <div class="orbit-cart-total"><span>Total</span><span id="orbitCartTotal">KD 0.000</span></div>
+        <div class="orbit-btn-row"><button type="button" id="orbitCheckoutBtn" class="orbit-btn primary">Proceed to Demo Payment</button><button type="button" id="orbitClearCart" class="orbit-btn secondary">Clear</button></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="staffView" class="orbit-view">
+  <div class="orbit-staff-page">
+    <div class="orbit-restaurants-head">
+      <div><span class="orbit-map-eyebrow">KTECH ORBIT · STAFF DEMO</span><h2>🔐 Staff Portals</h2><p class="orbit-map-subtitle">Separate demo logins for Clinic and Restaurant staff.</p></div>
+      <span class="orbit-map-v2-chip">LOCAL DEMO</span>
+    </div>
+    <div class="orbit-staff-grid">
+      <section class="orbit-staff-panel"><h3>🏥 Clinic Staff</h3><p class="orbit-mini-meta">Receive emergency alerts and live location updates.</p><div id="orbitClinicPortal"></div></section>
+      <section class="orbit-staff-panel"><h3>🍴 Restaurant Staff</h3><p class="orbit-mini-meta">Only paid/verified demo orders appear here.</p><div id="orbitRestaurantPortal"></div></section>
+    </div>
+  </div>
+</section>
+
+<button type="button" id="orbitEmergencyFab" class="orbit-emergency-fab" aria-label="Emergency help" title="Emergency">🚨</button>
+<button type="button" id="orbitOrderSideTab" class="orbit-order-side-tab" aria-label="Open order tracking">🍔 Orders</button>
+
+<div id="orbitEmergencyModal" class="orbit-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="orbitEmergencyTitle">
+  <div class="orbit-feature-modal emergency">
+    <div class="orbit-feature-modal-head"><div><h2 id="orbitEmergencyTitle">🚨 Emergency Help</h2><p class="orbit-mini-meta">Send an alert to the Clinic demo dashboard with your current location.</p></div><button type="button" class="orbit-x" data-close="orbitEmergencyModal">×</button></div>
+    <div class="orbit-danger-note"><strong>For the real system:</strong> this feature needs a secure backend, authenticated users, clinic devices, and an approved indoor-location system. Browser GPS alone cannot reliably identify a room inside a building.</div>
+    <div id="orbitEmergencyStudent"></div>
+    <div id="orbitEmergencyForm"></div>
+    <div id="orbitEmergencyActive"></div>
+  </div>
+</div>
+
+<div id="orbitPaymentModal" class="orbit-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="orbitPaymentTitle">
+  <div class="orbit-feature-modal">
+    <div class="orbit-feature-modal-head"><div><h2 id="orbitPaymentTitle">💳 Demo Payment</h2><p class="orbit-mini-meta">No real payment information is collected.</p></div><button type="button" class="orbit-x" data-close="orbitPaymentModal">×</button></div>
+    <div class="orbit-demo-note">This simulates the payment verification step. The restaurant will not receive the order until you press <strong>Confirm Demo Payment</strong>.</div>
+    <div id="orbitPaymentSummary"></div>
+    <div class="orbit-btn-row"><button type="button" id="orbitConfirmPayment" class="orbit-btn good">Confirm Demo Payment</button><button type="button" class="orbit-btn secondary" data-close="orbitPaymentModal">Cancel</button></div>
+  </div>
+</div>
+
+<aside id="orbitOrderDrawer" class="orbit-order-drawer" aria-label="Order tracking">
+  <div class="orbit-order-drawer-head"><div><h2>🍔 My Orders</h2><p class="orbit-mini-meta">Live demo order status</p></div><button type="button" class="orbit-x" id="orbitOrderDrawerClose">×</button></div>
+  <div id="orbitOrderTracker"></div>
+</aside>
+
+
+    <section id="contactView" class="orbit-view" style="display:none">
+    <section class="contact-section" aria-labelledby="contactTitle">
+        <h2 id="contactTitle">Feedback &amp; Contact</h2>
+        <p id="contactText">Have feedback or need help with KTECH Orbit? Email us directly.</p>
+        <a class="contact-email" id="contactEmail" href="mailto:ktechorbit@gmail.com">✉️ ktechorbit@gmail.com</a>
+    </section>
+    </section>
+</div>
+
+<button type="button" id="orbitChatFab" class="orbit-chat-fab" aria-label="Open Orbit Chat" title="Orbit Chat">💬</button>
+
+<div id="adminModal" class="admin-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="adminTitle" style="color: var(--olive-dark);">🔑 KTECH Orbit Admin Panel</h2>
+            <button type="button" class="close-btn" id="closeAdminButton" onclick="closeAdminModal()" aria-label="Close">&times;</button>
+        </div>
+
+        <div id="adminAuthSection">
+            <p id="adminPrompt" style="margin-bottom: 15px; color: var(--olive-medium); font-weight: 600;">Enter master password to view feedback:</p>
+            <div class="input-group" style="margin-bottom: 15px;">
+                <input type="password" id="adminPassword" placeholder="Master Password">
+            </div>
+            <button type="button" class="btn-submit" id="authenticateButton" onclick="loginAdmin()">Authenticate</button>
+        </div>
+
+        <div id="adminDashboard" style="display: none;">
+            <!-- Search Bar for Stacks -->
+            <input type="text" id="adminSearchInput" class="search-box" placeholder="🔍 Type instructor name to view stacked reviews..." oninput="filterAdminData()">
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3><span id="instructorFilesLabel">Instructor Files</span> (<span id="submissionCount">0</span>)</h3>
+                <button type="button" class="btn-reset" id="deleteAllButton" style="color: var(--error); border-color: var(--error);" onclick="clearAllData()">Delete All Data</button>
+            </div>
+
+            <div id="adminDataList">
+                <!-- Stacked reviews per instructor render here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/plain" id="legacyScript">
+    const knownInstructors = [
+        "Alaa Zayed", "Adnan Oudah", "Prof. Issam Moghrabi", "Dr Reem M. Al Qenai",
+        "Riham Hakkani", "Abdelrahman Enayah", "Ebtehal Al Ayoub", "Batoul Salman",
+        "Dr. Remie Nasr", "Ali El Khatib", "Annet Noel", "Fatma Rezk",
+        "Mary Nelson", "Ahlam Mousa", "Tina Daniel", "Yousef Saeam",
+        "Dhai Aljeeran", "Mohammad Alqallaf", "Nada Farah"
+    ];
+
+    const badWords = ["badword", "stupid", "idiot", "dumb", "hate", "scam", "fool", "crap", "trash", "worst", "suck"];
+    const ADMIN_PASSWORD = "ktech2004"; 
+
+    function populateSuggestions() {
+        const datalist = document.getElementById('instructorSuggestions');
+        datalist.innerHTML = '';
+        knownInstructors.forEach(inst => {
+            const opt = document.createElement('option');
+            opt.value = inst;
+            datalist.appendChild(opt);
+        });
+    }
+
+    function isGibberish(text) {
+        if (!text || text.trim().length === 0) return false;
+        const cleanText = text.trim();
+        if (cleanText.length > 15 && !cleanText.includes(" ")) return true;
+        if (/(.)\1{3,}/i.test(cleanText)) return true;
+        const lettersOnly = cleanText.replace(/[^a-zA-Z]/g, '');
+        if (lettersOnly.length > 8) {
+            const vowels = lettersOnly.match(/[aeiouy]/gi);
+            const ratio = (vowels ? vowels.length : 0) / lettersOnly.length;
+            if (ratio < 0.10) return true;
+        }
+        return false;
+    }
+
+    function cleanProfanity(text) {
+        if (!text) return "";
+        let cleanedText = text;
+        badWords.forEach(word => {
+            const regex = new RegExp(`\\b${word}\\b`, "gi");
+            cleanedText = cleanedText.replace(regex, "***");
+        });
+        return cleanedText;
+    }
+
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const lastSubmit = localStorage.getItem('last_submit_time');
+        const now = Date.now();
+        if (lastSubmit && (now - lastSubmit < 20000)) {
+            showStatus('🚨 Anti-Spam Alert: Please wait 20 seconds before submitting again.', 'error');
+            return;
+        }
+
+        const formData = new FormData(this);
+        const instructorRaw = formData.get('instructorNameInput');
+        const courseCode = formData.get('courseCode');
+        const opinion = formData.get('opinion');
+
+        if (isGibberish(instructorRaw) || isGibberish(courseCode) || isGibberish(opinion)) {
+            showStatus('❌ Submission rejected: Detected meaningless/gibberish text.', 'error');
+            return;
+        }
+
+        const reviewData = {
+            id: String(Date.now()) + "_" + Math.random().toString(36).slice(2),
+            ownerId: getOwnerId(),
+            instructor: cleanProfanity(instructorRaw.trim()),
+            course: cleanProfanity(courseCode.trim()),
+            date: formData.get('date'),
+            quizDifficulty: formData.get('quiz'),
+            teaching: formData.get('teaching'),
+            understanding: formData.get('understanding'),
+            bonusMarks: formData.get('bonus'),
+            shortOpinion: cleanProfanity(opinion)
+        };
+
+        const currentReviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+        currentReviews.push(reviewData);
+        localStorage.setItem('orbit_reviews', JSON.stringify(currentReviews));
+        localStorage.setItem('last_submit_time', now);
+
+        showStatus(`🚀 Review for "${reviewData.instructor}" added to their file!`, 'success');
+        resetForm(false);
+        loadPublicReviews();
+    });
+
+    function showStatus(msg, type) {
+        const el = document.getElementById('statusMsg');
+        el.innerText = msg;
+        el.className = `status-msg status-${type}`;
+        el.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        setTimeout(() => { el.style.display = 'none'; }, 6000);
+    }
+
+    function resetForm(confirmReq = true) {
+        if (!confirmReq || confirm('Are you sure you want to clear this form?')) {
+            document.getElementById('feedbackForm').reset();
+            const today = new Date().toLocaleDateString('en-GB');
+            document.getElementById('date').value = today;
+        }
+    }
+
+    /* Admin Modal and Grouping Logic */
+    function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
+    function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+
+    function loginAdmin() {
+        const input = document.getElementById('adminPassword').value;
+        if (input === ADMIN_PASSWORD) {
+            document.getElementById('adminAuthSection').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            loadAdminData();
+        } else {
+            alert('Incorrect Admin Password');
+        }
+    }
+
+    function loadAdminData(searchFilter = '') {
+        const list = document.getElementById('adminDataList');
+        const rawReviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+
+        if (rawReviews.length === 0) {
+            list.innerHTML = '<p style="color: var(--olive-medium);">No reviews stored yet.</p>';
+            document.getElementById('submissionCount').innerText = '0';
+            return;
+        }
+
+        // Group reviews by Instructor Name
+        const stackedFiles = {};
+
+        rawReviews.forEach(rev => {
+            const key = rev.instructor.trim().toLowerCase();
+            if (!stackedFiles[key]) {
+                stackedFiles[key] = {
+                    displayName: rev.instructor,
+                    reviews: []
+                };
+            }
+            stackedFiles[key].reviews.push(rev);
+        });
+
+        // Filter based on Search Query
+        const filteredKeys = Object.keys(stackedFiles).filter(key => {
+            return key.includes(searchFilter.trim().toLowerCase());
+        });
+
+        document.getElementById('submissionCount').innerText = filteredKeys.length;
+
+        if (filteredKeys.length === 0) {
+            list.innerHTML = '<p style="color: var(--olive-medium);">No instructor files found matching your search.</p>';
+            return;
+        }
+
+        list.innerHTML = filteredKeys.map(key => {
+            const file = stackedFiles[key];
+            return `
+                <div class="instructor-file-card">
+                    <div class="instructor-file-title">
+                        <span>👨‍🏫 File: ${file.displayName}</span>
+                        <span style="font-size: 0.85rem; background: var(--olive-dark); color: var(--yellow-main); padding: 4px 10px; border-radius: 20px;">
+                            ${file.reviews.length} ${file.reviews.length === 1 ? 'Review' : 'Reviews Stacked'}
+                        </span>
+                    </div>
+
+                    ${file.reviews.map(rev => `
+                        <div class="review-stacked-item">
+                            <div style="font-weight: 800; color: var(--olive-dark); margin-bottom: 6px;">
+                                📚 Course: ${rev.course} | 🗓️ Date: ${rev.date || 'N/A'}
+                            </div>
+                            <div style="font-size: 0.9rem; margin-bottom: 6px;">
+                                <strong>Quiz:</strong> ${rev.quizDifficulty} | 
+                                <strong>Teaching:</strong> ${rev.teaching} | 
+                                <strong>Understanding:</strong> ${rev.understanding} | 
+                                <strong>Bonus/Pushes:</strong> ${rev.bonusMarks}
+                            </div>
+                            ${rev.shortOpinion ? `<div style="font-size: 0.88rem; background: #faf4db; padding: 6px 10px; border-radius: 6px; border-left: 3px solid var(--olive-dark);"><em>"${rev.shortOpinion}"</em></div>` : ''}
+                            <div style="margin-top: 8px; display: flex; gap: 6px;">
+                                <button class="btn-edit" onclick="editReviewOpinion(${rev.id})">Edit Review</button>
+                                <button class="btn-danger" onclick="deleteReviewItem(${rev.id})">Delete</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }).join('');
+    }
+
+    function filterAdminData() {
+        const query = document.getElementById('adminSearchInput').value;
+        loadAdminData(query);
+    }
+
+    function deleteReviewItem(reviewId) {
+        if (confirm('Delete this specific review from the instructor file?')) {
+            let reviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+            reviews = reviews.filter(r => r.id !== reviewId);
+            localStorage.setItem('orbit_reviews', JSON.stringify(reviews));
+            filterAdminData();
+        }
+    }
+
+    function editReviewOpinion(reviewId) {
+        let reviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+        const targetIndex = reviews.findIndex(r => r.id === reviewId);
+        if (targetIndex !== -1) {
+            const newText = prompt("Edit review text:", reviews[targetIndex].shortOpinion);
+            if (newText !== null) {
+                reviews[targetIndex].shortOpinion = newText;
+                localStorage.setItem('orbit_reviews', JSON.stringify(reviews));
+                filterAdminData();
+            }
+        }
+    }
+
+    function loadPublicReviews() {
+        const list = document.getElementById("publicReviewsList");
+        const search = String(document.getElementById("publicSearchInput").value || "").trim().toLowerCase();
+        const ownerId = getOwnerId();
+        const reviews = readReviews().filter(function(review) {
+            return !search || String(review.instructor || "").toLowerCase().includes(search) || String(review.course || "").toLowerCase().includes(search);
+        }).slice().reverse();
+        if (!reviews.length) { list.innerHTML = '<p style="color:var(--olive-medium);">' + escapeHtml(tr("noReviews")) + '</p>'; return; }
+        list.innerHTML = reviews.map(function(review) {
+            const mine = review.ownerId && review.ownerId === ownerId;
+            return '<div class="review-stacked-item">' +
+                '<div style="font-weight:900;color:var(--olive-dark);">👨‍🏫 ' + escapeHtml(review.instructor || tr("notAvailable")) + (mine ? ' <span style="font-size:.72rem;">(' + escapeHtml(tr("yourReview")) + ')</span>' : '') + '</div>' +
+                '<div style="font-size:.88rem;margin:6px 0;">📚 ' + escapeHtml(review.course || tr("notAvailable")) + ' | 🗓️ ' + escapeHtml(review.date || tr("notAvailable")) + '</div>' +
+                '<div style="font-size:.88rem;">' + escapeHtml(tr("quiz")) + ': ' + escapeHtml(translateRating(review.quizDifficulty)) + ' | ' + escapeHtml(tr("teaching")) + ': ' + escapeHtml(translateRating(review.teaching)) + ' | ' + escapeHtml(tr("understanding")) + ': ' + escapeHtml(translateRating(review.understanding)) + '</div>' +
+                (review.shortOpinion ? '<div style="margin-top:7px;"><em>“' + escapeHtml(review.shortOpinion) + '”</em></div>' : '') +
+                (mine ? '<button type="button" class="btn-danger public-delete" data-review-id="' + escapeHtml(review.id) + '" style="margin-top:8px;">' + escapeHtml(tr("delete")) + '</button>' : '') +
+                '</div>';
+        }).join("");
+    }
+
+    function deleteOwnReview(reviewId) {
+        const ownerId = getOwnerId();
+        const reviews = readReviews();
+        const target = reviews.find(function(r) { return String(r.id) === String(reviewId); });
+        if (!target || target.ownerId !== ownerId) return;
+        if (!confirm(tr("confirmDelete"))) return;
+        writeReviews(reviews.filter(function(r) { return String(r.id) !== String(reviewId); }));
+        loadPublicReviews();
+        if (document.getElementById("adminDashboard").style.display !== "none") filterAdminData();
+    }
+
+    function clearAllData() {
+        if (confirm('Are you sure you want to delete ALL stored reviews permanently?')) {
+            localStorage.removeItem('orbit_reviews');
+            filterAdminData();
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        populateSuggestions();
+        const today = new Date().toLocaleDateString('en-GB');
+        document.getElementById('date').value = today;
+    });
+</script>
+
+<script src="js/script-01.js"></script>
+
+
+
+<link rel="stylesheet" href="css/style-09.css">
+
+<script id="orbit108ModerationScript" src="js/script-02.js"></script>
+
+
+<script id="orbitGuidedChat110" src="js/script-03.js"></script>
+
+
+<script id="orbitIndoorRouting116" src="js/script-04.js"></script>
+
+<script src="js/script-05.js"></script>
+<script id="orbitParkingPrototype" src="js/script-06.js"></script>
+
+
+<link rel="stylesheet" href="css/style-10.css">
+<script id="orbitNavigationRecovery" src="js/script-07.js"></script><script id="orbitDirectionsDockControl136" src="js/script-08.js"></script>
+
+<script id="orbitEmergencyRestaurantDemoScript" src="js/script-09.js"></script>
+</body>
+</html>
+
+<link rel="stylesheet" href="css/style-11.css">
+
+<link rel="stylesheet" href="css/style-12.css">
