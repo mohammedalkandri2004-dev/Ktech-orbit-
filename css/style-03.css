@@ -1,0 +1,28 @@
+
+/* Orbit 1.33: mobile-only usability adjustments; desktop design unchanged */
+@media (max-width: 700px) {
+ html { -webkit-text-size-adjust:100%; }
+ body { padding: 6px !important; overflow-x:hidden; }
+ .container { width:100%; max-width:100%; padding:12px !important; border-width:2px; border-radius:14px; }
+ img, video, canvas, svg { max-width:100%; }
+ button, select, input, textarea { font-size:16px; }
+ button, [role="button"] { touch-action:manipulation; }
+ .orbit-nav { gap:7px !important; }
+ .orbit-nav button, .orbit-tab-btn { min-height:44px; padding:9px 7px !important; }
+ .orbit-floor-tabs, .orbit-floors-v2 { gap:6px !important; }
+ .orbit-floor-tabs button, .orbit-floors-v2 button { min-height:44px; }
+ .orbit-nav-v2-layout { min-width:0; }
+ .orbit-navigation-v2, .orbit-nav-map, #orbitParkingPanel { max-width:100%; min-width:0; }
+ .orbit-chat-log { max-height: min(43dvh,380px); overflow-y:auto; overscroll-behavior:contain; }
+ .orbit-chat-row { min-width:0; }
+ .orbit-chat-row input, .orbit-chat-row textarea { min-width:0; max-width:100%; }
+ .orbit-map-v2-actionbar { gap:5px !important; }
+ .orbit-map-v2-actionbar button { min-height:44px; }
+ .orbit-parking-stats { display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)); }
+ .orbit-parking-stat { min-width:0; }
+}
+@media (max-width: 390px) {
+ .container { padding:8px !important; }
+ .orbit-parking-stat { padding:7px 3px !important; }
+ .orbit-nav button, .orbit-tab-btn { font-size:12px !important; }
+}

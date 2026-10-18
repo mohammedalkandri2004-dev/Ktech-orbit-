@@ -1,0 +1,22 @@
+000001| 
+000002| /* Route directions live in document flow ABOVE the map, never overlay its rooms. */
+000003| #mapView .orbit-directions-dock{position:relative!important;display:block;width:100%;margin:7px 0 10px;z-index:1;min-width:0}
+000004| #mapView .orbit-directions-tab{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:43px;padding:9px 14px;background:#34372e;color:#f5d044;border:1px solid #d7b735;border-radius:12px;font-size:15px;font-weight:800;text-align:left;cursor:pointer}
+000005| #mapView .orbit-directions-tab:hover{background:#42463b}
+000006| #mapView #orbitDirectionsSheet:not([hidden]){position:static!important;inset:auto!important;top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;width:100%!important;max-width:none!important;max-height:none!important;margin:6px 0 0!important;padding:12px 15px!important;overflow:visible!important;border-radius:12px!important;box-sizing:border-box!important;box-shadow:none!important;background:#2b302b!important;backdrop-filter:none!important}
+000007| #mapView #orbitDirectionsSheet[hidden]{display:none!important}
+000008| #mapView #orbitDirectionsSheet .orbit-nav-v2-route-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+000009| #mapView #orbitDirectionsSheet .orbit-nav-v2-route-top strong{font-size:1rem!important;line-height:1.4;overflow-wrap:anywhere}
+000010| #mapView #orbitDirectionsSheet #orbitRouteDescriptor{font-size:.92rem!important;line-height:1.55!important;overflow-wrap:anywhere}
+000011| #mapView #orbitDirectionsSheet .orbit-nav-v2-steps{max-height:none!important;overflow:visible!important;margin:8px 0!important;padding-left:25px!important}
+000012| #mapView #orbitDirectionsSheet .orbit-nav-v2-steps li{font-size:.95rem!important;line-height:1.5!important;overflow-wrap:anywhere}
+000013| #mapView #orbitDirectionsSheet .orbit-nav-v2-step-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:8px}
+000014| #mapView #orbitDirectionsSheet .orbit-nav-v2-step-actions button{font-size:.87rem!important;min-height:40px!important;padding:8px 12px!important;white-space:normal}
+000015| #mapView #orbitDirectionsSheet .orbit-route-top-actions button{min-width:40px;min-height:38px}
+000016| #mapView #orbitDirectionsSheet.minimized:not([hidden]){padding:8px 12px!important}
+000017| @media(max-width:700px){
+000018|  #mapView .orbit-directions-tab{min-height:45px;font-size:14px}
+000019|  #mapView #orbitDirectionsSheet:not([hidden]){padding:11px!important}
+000020|  #mapView #orbitDirectionsSheet .orbit-nav-v2-step-actions button{flex:1;min-width:90px}
+000021|  #mapView #orbitDirectionsSheet .orbit-nav-v2-route-top strong{font-size:.92rem!important}
+000022| }

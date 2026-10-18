@@ -1,0 +1,350 @@
+000309|         document.getElementById("duckAvatarBtn").setAttribute("aria-label", tr("openAdmin"));
+000310|         document.getElementById("closeAdminButton").setAttribute("aria-label", tr("close"));
+000311|         document.getElementById("orbitChatFab").setAttribute("aria-label", tr("openChat"));
+000312|         document.getElementById("orbitChatFab").title = tr("openChat");
+000313|         document.getElementById("orbitChatClose").setAttribute("aria-label", tr("closeChat"));
+000314| 
+000315|         document.querySelectorAll("[data-option-key]").forEach(function(element) {
+000316|             element.textContent = tr(element.dataset.optionKey);
+000317|         });
+000318| 
+000319|         document.getElementById("langEn").classList.toggle("active", currentLanguage === "en");
+000320|         document.getElementById("langAr").classList.toggle("active", currentLanguage === "ar");
+000321|         document.getElementById("langEn").setAttribute("aria-pressed", String(currentLanguage === "en"));
+000322|         document.getElementById("langAr").setAttribute("aria-pressed", String(currentLanguage === "ar"));
+000323| 
+000324|         if (document.getElementById("adminDashboard").style.display !== "none") {
+000325|             filterAdminData();
+000326|         }
+000327|     }
+000328| 
+000329|     function populateSuggestionsV2() {
+000330|         const datalist = document.getElementById("instructorSuggestions");
+000331|         datalist.innerHTML = "";
+000332|         knownInstructorsV2.forEach(function(instructor) {
+000333|             const option = document.createElement("option");
+000334|             option.value = instructor;
+000335|             datalist.appendChild(option);
+000336|         });
+000337|     }
+000338| 
+000339|     function showStatusV2(message, type) {
+000340|         const element = document.getElementById("statusMsg");
+000341|         element.textContent = message;
+000342|         element.className = "status-msg status-" + type;
+000343|         element.style.display = "block";
+000344|         window.scrollTo({ top: 0, behavior: "smooth" });
+000345|         window.setTimeout(function() {
+000346|             element.style.display = "none";
+000347|         }, 6000);
+000348|     }
+000349| 
+000350|     function resetForm(confirmRequired) {
+000351|         const shouldConfirm = confirmRequired !== false;
+000352|         if (!shouldConfirm || confirm(tr("confirmReset"))) {
+000353|             document.getElementById("feedbackForm").reset();
+000354|             document.getElementById("date").value = new Date().toLocaleDateString("en-GB");
+000355|         }
+000356|     }
+000357| 
+000358|     function openAdminModal() {
+000359|         document.getElementById("adminModal").style.display = "flex";
+000360|         window.setTimeout(function() {
+000361|             document.getElementById("adminPassword").focus();
+000362|         }, 0);
+000363|     }
+000364| 
+000365|     function closeAdminModal() {
+000366|         document.getElementById("adminModal").style.display = "none";
+000367|     }
+000368| 
+000369|     function loginAdmin() {
+000370|         const input = document.getElementById("adminPassword").value.trim();
+000371|         if (input === ADMIN_PASSWORD_V2) {
+000372|             document.getElementById("adminAuthSection").style.display = "none";
+000373|             document.getElementById("adminDashboard").style.display = "block";
+000374|             loadAdminData();
+000375|         } else {
+000376|             alert(tr("wrongPassword"));
+000377|         }
+000378|     }
+000379| 
+000380|     function loadAdminData(searchFilter) {
+000381|         const filter = String(searchFilter || "").trim().toLowerCase();
+000382|         const list = document.getElementById("adminDataList");
+000383|         const rawReviews = readReviews();
+000384| 
+000385|         if (rawReviews.length === 0) {
+000386|             list.innerHTML = '<p style="color: var(--olive-medium);">' + escapeHtml(tr("noReviews")) + "</p>";
+000387|             document.getElementById("submissionCount").textContent = "0";
+000388|             return;
+000389|         }
+000390| 
+000391|         const stackedFiles = {};
+000392|         rawReviews.forEach(function(review) {
+000393|             const displayName = String(review.instructor || "").trim() || tr("notAvailable");
+000394|             const key = displayName.toLowerCase();
+000395|             if (!stackedFiles[key]) {
+000396|                 stackedFiles[key] = { displayName: displayName, reviews: [] };
+000397|             }
+000398|             stackedFiles[key].reviews.push(review);
+000399|         });
+000400| 
+000401|         const filteredKeys = Object.keys(stackedFiles).filter(function(key) {
+000402|             return key.includes(filter);
+000403|         });
+000404| 
+000405|         document.getElementById("submissionCount").textContent = String(filteredKeys.length);
+000406| 
+000407|         if (filteredKeys.length === 0) {
+000408|             list.innerHTML = '<p style="color: var(--olive-medium);">' + escapeHtml(tr("noMatches")) + "</p>";
+000409|             return;
+000410|         }
+000411| 
+000412|         list.innerHTML = filteredKeys.map(function(key) {
+000413|             const file = stackedFiles[key];
+000414|             const countLabel = file.reviews.length === 1 ? tr("review") : tr("reviews");
+000415|             const reviewMarkup = file.reviews.map(function(review) {
+000416|                 const opinionMarkup = review.shortOpinion
+000417|                     ? '<div style="font-size: 0.88rem; background: #faf4db; padding: 6px 10px; border-radius: 6px; border-left: 3px solid var(--olive-dark);"><em>"' + escapeHtml(review.shortOpinion) + '"</em></div>'
+000418|                     : "";
+000419| 
+000420|                 return '<div class="review-stacked-item">' +
+000421|                     '<div style="font-weight: 800; color: var(--olive-dark); margin-bottom: 6px;">📚 ' +
+000422|                     escapeHtml(tr("course")) + ": " + escapeHtml(review.course || tr("notAvailable")) +
+000423|                     " | 🗓️ " + escapeHtml(tr("date")) + ": " + escapeHtml(review.date || tr("notAvailable")) + "</div>" +
+000424|                     '<div style="font-size: 0.9rem; margin-bottom: 6px;">' +
+000425|                     "<strong>" + escapeHtml(tr("quiz")) + ":</strong> " + escapeHtml(translateRating(review.quizDifficulty)) + " | " +
+000426|                     "<strong>" + escapeHtml(tr("teaching")) + ":</strong> " + escapeHtml(translateRating(review.teaching)) + " | " +
+000427|                     "<strong>" + escapeHtml(tr("understanding")) + ":</strong> " + escapeHtml(translateRating(review.understanding)) + " | " +
+000428|                     "<strong>" + escapeHtml(tr("bonus")) + ":</strong> " + escapeHtml(translateRating(review.bonusMarks)) +
+000429|                     "</div>" + opinionMarkup +
+000430|                     '<div style="margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap;">' +
+000431|                     '<button type="button" class="btn-edit" data-action="edit" data-review-id="' + escapeHtml(review.id) + '">' + escapeHtml(tr("edit")) + "</button>" +
+000432|                     '<button type="button" class="btn-danger" data-action="delete" data-review-id="' + escapeHtml(review.id) + '">' + escapeHtml(tr("delete")) + "</button>" +
+000433|                     "</div></div>";
+000434|             }).join("");
+000435| 
+000436|             return '<div class="instructor-file-card">' +
+000437|                 '<div class="instructor-file-title"><span>👨‍🏫 ' + escapeHtml(tr("file")) + ": " + escapeHtml(file.displayName) + "</span>" +
+000438|                 '<span style="font-size: 0.85rem; background: var(--olive-dark); color: var(--yellow-main); padding: 4px 10px; border-radius: 20px;">' +
+000439|                 String(file.reviews.length) + " " + escapeHtml(countLabel) + "</span></div>" +
+000440|                 reviewMarkup + "</div>";
+000441|         }).join("");
+000442|     }
+000443| 
+000444|     function filterAdminData() {
+000445|         loadAdminData(document.getElementById("adminSearchInput").value);
+000446|     }
+000447| 
+000448|     function deleteReviewItem(reviewId) {
+000449|         if (!confirm(tr("confirmDelete"))) return;
+000450|         const reviews = readReviews().filter(function(review) {
+000451|             return String(review.id) !== String(reviewId);
+000452|         });
+000453|         writeReviews(reviews);
+000454|         filterAdminData();
+000455|     }
+000456| 
+000457|     function editReviewText(reviewId) {
+000458|         const reviews = readReviews();
+000459|         const targetIndex = reviews.findIndex(function(review) {
+000460|             return String(review.id) === String(reviewId);
+000461|         });
+000462|         if (targetIndex === -1) return;
+000463| 
+000464|         const newText = prompt(tr("editPrompt"), reviews[targetIndex].shortOpinion || "");
+000465|         if (newText === null) return;
+000466| 
+000467|         reviews[targetIndex].shortOpinion = cleanProfanityV2(newText.trim());
+000468|         writeReviews(reviews);
+000469|         filterAdminData();
+000470|     }
+000471| 
+000472|     function loadPublicReviews() {
+000473|         const list = document.getElementById("publicReviewsList");
+000474|         const search = String(document.getElementById("publicSearchInput").value || "").trim().toLowerCase();
+000475|         const ownerId = getOwnerId();
+000476|         const reviews = readReviews().filter(function(review) {
+000477|             return !search || String(review.instructor || "").toLowerCase().includes(search) || String(review.course || "").toLowerCase().includes(search);
+000478|         }).slice().reverse();
+000479|         if (!reviews.length) { list.innerHTML = '<p style="color:var(--olive-medium);">' + escapeHtml(tr("noReviews")) + '</p>'; return; }
+000480|         list.innerHTML = reviews.map(function(review) {
+000481|             const mine = review.ownerId && review.ownerId === ownerId;
+000482|             return '<div class="review-stacked-item">' +
+000483|                 '<div style="font-weight:900;color:var(--olive-dark);">👨‍🏫 ' + escapeHtml(review.instructor || tr("notAvailable")) + (mine ? ' <span style="font-size:.72rem;">(' + escapeHtml(tr("yourReview")) + ')</span>' : '') + '</div>' +
+000484|                 '<div style="font-size:.88rem;margin:6px 0;">📚 ' + escapeHtml(review.course || tr("notAvailable")) + ' | 🗓️ ' + escapeHtml(review.date || tr("notAvailable")) + '</div>' +
+000485|                 '<div style="font-size:.88rem;">' + escapeHtml(tr("quiz")) + ': ' + escapeHtml(translateRating(review.quizDifficulty)) + ' | ' + escapeHtml(tr("teaching")) + ': ' + escapeHtml(translateRating(review.teaching)) + ' | ' + escapeHtml(tr("understanding")) + ': ' + escapeHtml(translateRating(review.understanding)) + '</div>' +
+000486|                 (review.shortOpinion ? '<div style="margin-top:7px;"><em>“' + escapeHtml(review.shortOpinion) + '”</em></div>' : '') +
+000487|                 (mine ? '<button type="button" class="btn-danger public-delete" data-review-id="' + escapeHtml(review.id) + '" style="margin-top:8px;">' + escapeHtml(tr("delete")) + '</button>' : '') +
+000488|                 '</div>';
+000489|         }).join("");
+000490|     }
+000491| 
+000492|     function deleteOwnReview(reviewId) {
+000493|         const ownerId = getOwnerId();
+000494|         const reviews = readReviews();
+000495|         const target = reviews.find(function(r) { return String(r.id) === String(reviewId); });
+000496|         if (!target || target.ownerId !== ownerId) return;
+000497|         if (!confirm(tr("confirmDelete"))) return;
+000498|         writeReviews(reviews.filter(function(r) { return String(r.id) !== String(reviewId); }));
+000499|         loadPublicReviews();
+000500|         if (document.getElementById("adminDashboard").style.display !== "none") filterAdminData();
+000501|     }
+000502| 
+000503|     function clearAllData() {
+000504|         if (!confirm(tr("confirmDeleteAll"))) return;
+000505|         localStorage.removeItem("orbit_reviews");
+000506|         filterAdminData();
+000507|     }
+000508| 
+000509|     document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+000510|         event.preventDefault();
+000511| 
+000512|         const lastSubmit = Number(localStorage.getItem("last_submit_time") || 0);
+000513|         const now = Date.now();
+000514|         if (lastSubmit && now - lastSubmit < 20000) {
+000515|             showStatusV2(tr("antiSpam"), "error");
+000516|             return;
+000517|         }
+000518| 
+000519|         const formData = new FormData(this);
+000520|         const instructorRaw = String(formData.get("instructorNameInput") || "");
+000521|         const courseCode = String(formData.get("courseCode") || "");
+000522|         const opinion = String(formData.get("opinion") || "");
+000523| 
+000524|         if (isGibberishV2(instructorRaw) || isGibberishV2(courseCode) || isGibberishV2(opinion)) {
+000525|             showStatusV2(tr("gibberish"), "error");
+000526|             return;
+000527|         }
+000528| 
+000529|         const reviewData = {
+000530|             id: String(Date.now()) + "_" + Math.random().toString(36).slice(2),
+000531|             ownerId: getOwnerId(),
+000532|             instructor: cleanProfanityV2(instructorRaw.trim()),
+000533|             course: cleanProfanityV2(courseCode.trim()),
+000534|             date: String(formData.get("date") || ""),
+000535|             quizDifficulty: String(formData.get("quiz") || ""),
+000536|             teaching: String(formData.get("teaching") || ""),
+000537|             understanding: String(formData.get("understanding") || ""),
+000538|             bonusMarks: String(formData.get("bonus") || ""),
+000539|             shortOpinion: cleanProfanityV2(opinion.trim())
+000540|         };
+000541| 
+000542|         const reviews = readReviews();
+000543|         reviews.push(reviewData);
+000544|         writeReviews(reviews);
+000545|         localStorage.setItem("last_submit_time", String(now));
+000546| 
+000547|         showStatusV2(tr("success").replace("{name}", reviewData.instructor), "success");
+000548|         resetForm(false);
+000549|         loadPublicReviews();
+000550|     });
+000551| 
+000552|     document.getElementById("publicSearchInput").addEventListener("input", loadPublicReviews);
+000553|     document.getElementById("publicReviewsList").addEventListener("click", function(event) {
+000554|         const button = event.target.closest("button.public-delete");
+000555|         if (button) deleteOwnReview(button.dataset.reviewId);
+000556|     });
+000557| 
+000558|     document.getElementById("adminDataList").addEventListener("click", function(event) {
+000559|         const button = event.target.closest("button[data-action]");
+000560|         if (!button) return;
+000561|         const reviewId = button.dataset.reviewId;
+000562|         if (button.dataset.action === "edit") editReviewText(reviewId);
+000563|         if (button.dataset.action === "delete") deleteReviewItem(reviewId);
+000564|     });
+000565| 
+000566|     document.getElementById("duckAvatarBtn").addEventListener("click", openAdminModal);
+000567|     document.getElementById("duckAvatarBtn").addEventListener("keydown", function(event) {
+000568|         if (event.key === "Enter" || event.key === " ") {
+000569|             event.preventDefault();
+000570|             openAdminModal();
+000571|         }
+000572|     });
+000573| 
+000574|     document.getElementById("langEn").addEventListener("click", function() {
+000575|         setLanguage("en");
+000576|     });
+000577| 
+000578|     document.getElementById("langAr").addEventListener("click", function() {
+000579|         setLanguage("ar");
+000580|     });
+000581| 
+000582|     document.getElementById("adminPassword").addEventListener("keydown", function(event) {
+000583|         if (event.key === "Enter") {
+000584|             event.preventDefault();
+000585|             loginAdmin();
+000586|         }
+000587|     });
+000588| 
+000589|     document.getElementById("adminModal").addEventListener("click", function(event) {
+000590|         if (event.target === this) closeAdminModal();
+000591|     });
+000592| 
+000593|     document.addEventListener("keydown", function(event) {
+000594|         if (event.key === "Escape" && document.getElementById("adminModal").style.display === "flex") {
+000595|             closeAdminModal();
+000596|         }
+000597|     });
+000598| 
+000599| 
+000600| 
+000601|     populateSuggestionsV2();
+000602|     document.getElementById("date").value = new Date().toLocaleDateString("en-GB");
+000603|     setLanguage(currentLanguage);
+000604|     loadPublicReviews();
+000605| 
+000606| 
+000607|     function openOrbitView(viewId) {
+000608|         document.querySelectorAll('.orbit-view').forEach(function(view) {
+000609|             view.classList.toggle('active', view.id === viewId);
+000610|         });
+000611|         document.querySelectorAll('.orbit-tab-btn[data-view]').forEach(function(button) {
+000612|             button.classList.toggle('active', button.dataset.view === viewId);
+000613|         });
+000614|         if (viewId === 'reviewsView') loadPublicReviews();
+000615|         window.scrollTo({ top: 0, behavior: 'smooth' });
+000616|     }
+000617| 
+000618|     function toggleOrbitChat(forceOpen) {
+000619|         var drawer = document.getElementById('orbitChatDrawer');
+000620|         if (!drawer) return;
+000621| 
+000622|         var shouldOpen = typeof forceOpen === 'boolean'
+000623|             ? forceOpen
+000624|             : !drawer.classList.contains('open');
+000625| 
+000626|         drawer.classList.toggle('open', shouldOpen);
+000627|         drawer.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
+000628|     }
+000629| 
+000630|     function initOrbitDashboard() {
+000631|         document.querySelectorAll('.orbit-tab-btn[data-view]').forEach(function(button) {
+000632|             button.addEventListener('click', function() {
+000633|                 openOrbitView(button.getAttribute('data-view'));
+000634|             });
+000635|         });
+000636| 
+000637|         var chatFab = document.getElementById('orbitChatFab');
+000638|         var chatClose = document.getElementById('orbitChatClose');
+000639| 
+000640|         if (chatFab) {
+000641|             chatFab.addEventListener('click', function(event) {
+000642|                 event.preventDefault();
+000643|                 toggleOrbitChat();
+000644|             });
+000645|         }
+000646| 
+000647|         if (chatClose) {
+000648|             chatClose.addEventListener('click', function(event) {
+000649|                 event.preventDefault();
+000650|                 toggleOrbitChat(false);
+000651|             });
+000652|         }
+000653| 
+000654|         openOrbitView('reviewView');
+000655|         toggleOrbitChat(false);
+000656|     }
+000657| 
+000658|     if (document.readyState === "loading") {

@@ -1,0 +1,343 @@
+000001| 
+000002| (function(){
+000003|   "use strict";
+000004| 
+000005|   const O108_REVIEW_KEY = "orbit_reviews";
+000006|   const O108_LAST_SUBMIT_KEY = "last_submit_time";
+000007| 
+000008|   const O108_PROFANITY_EN = [
+000009|     "fuck","fucker","fucking","bitch","bastard","asshole","motherfucker","shithead","cunt"
+000010|   ];
+000011|   const O108_PROFANITY_AR = [
+000012|     "كلب","حمار","غبي","تافه","زباله","زق","خرا","قحبه","شرموط","شرموطة","كس","طيز","منيوك"
+000013|   ];
+000014| 
+000015|   function o108Lang(){
+000016|     try { return (localStorage.getItem("orbit_language") === "ar" || document.documentElement.lang === "ar") ? "ar" : "en"; }
+000017|     catch(e){ return "en"; }
+000018|   }
+000019| 
+000020|   function o108Text(en, ar){ return o108Lang() === "ar" ? ar : en; }
+000021| 
+000022|   function o108Normalize(text){
+000023|     return String(text || "")
+000024|       .toLowerCase()
+000025|       .replace(/[إأآ]/g,"ا")
+000026|       .replace(/ة/g,"ه")
+000027|       .replace(/ى/g,"ي")
+000028|       .replace(/[0]/g,"o")
+000029|       .replace(/[1!]/g,"i")
+000030|       .replace(/[3]/g,"e")
+000031|       .replace(/[4@]/g,"a")
+000032|       .replace(/[5$]/g,"s")
+000033|       .replace(/[7]/g,"t")
+000034|       .replace(/[8]/g,"b");
+000035|   }
+000036| 
+000037|   function o108Compact(text){
+000038|     return o108Normalize(text).replace(/[\s._\-–—*~`'"،,;:!?؟/\\|()[\]{}<>]+/g,"");
+000039|   }
+000040| 
+000041|   function o108HasProfanity(text){
+000042|     const normalized = o108Normalize(text);
+000043|     const compact = o108Compact(text);
+000044|     const words = normalized.split(/[^a-z\u0600-\u06ff]+/).filter(Boolean);
+000045|     for (const bad of O108_PROFANITY_EN) {
+000046|       const b = o108Compact(bad);
+000047|       if (words.includes(bad) || (b.length >= 4 && compact.includes(b))) return bad;
+000048|     }
+000049|     for (const bad of O108_PROFANITY_AR) {
+000050|       const b = o108Compact(bad);
+000051|       if (normalized.includes(bad) || (b.length >= 3 && compact.includes(b))) return bad;
+000052|     }
+000053|     return "";
+000054|   }
+000055| 
+000056|   function o108RepeatedChars(text){
+000057|     return /(.)\1{4,}/iu.test(String(text || ""));
+000058|   }
+000059| 
+000060|   function o108TokenStats(text){
+000061|     const tokens = o108Normalize(text).match(/[a-z\u0600-\u06ff]+/g) || [];
+000062|     const counts = {};
+000063|     tokens.forEach(t => counts[t] = (counts[t] || 0) + 1);
+000064|     let max = 0;
+000065|     Object.keys(counts).forEach(k => { if (counts[k] > max) max = counts[k]; });
+000066|     return {tokens, counts, max};
+000067|   }
+000068| 
+000069|   function o108RepeatedWords(text){
+000070|     const s = o108TokenStats(text);
+000071|     if (s.tokens.length >= 5 && s.max >= 4) return true;
+000072|     if (s.tokens.length >= 8 && s.max / s.tokens.length >= .55) return true;
+000073|     return false;
+000074|   }
+000075| 
+000076|   function o108AlternatingPattern(text){
+000077|     const tokens = o108TokenStats(text).tokens;
+000078|     if (tokens.length < 6) return false;
+000079|     // A H A H A H / yes no yes no yes no
+000080|     if (tokens[0] !== tokens[1]) {
+000081|       let alt = true;
+000082|       for (let i=2;i<tokens.length;i++) if (tokens[i] !== tokens[i%2]) { alt=false; break; }
+000083|       if (alt) return true;
+000084|     }
+000085|     // many one-letter tokens are almost always random input in an opinion
+000086|     const oneLetter = tokens.filter(t => t.length === 1).length;
+000087|     return tokens.length >= 6 && oneLetter / tokens.length >= .7;
+000088|   }
+000089| 
+000090|   function o108KeyboardMash(text){
+000091|     const compact = o108Compact(text);
+000092|     if (!compact) return false;
+000093|     const mash = ["asdf","qwer","zxcv","hjkl","poiuy","lkjh","mnbv","12345","09876"];
+000094|     if (mash.some(x => compact.includes(x))) return true;
+000095|     if (/^(?:[a-z]{1,3})\1{3,}$/i.test(compact)) return true;
+000096|     const letters = compact.replace(/[^a-z]/g,"");
+000097|     if (letters.length >= 10) {
+000098|       const vowels = (letters.match(/[aeiouy]/g) || []).length;
+000099|       if (vowels / letters.length < .08) return true;
+000100|     }
+000101|     return false;
+000102|   }
+000103| 
+000104|   function o108SymbolSpam(text){
+000105|     const s = String(text || "");
+000106|     if (s.length < 6) return false;
+000107|     const useful = (s.match(/[a-zA-Z\u0600-\u06ff0-9]/g) || []).length;
+000108|     return useful / s.length < .35;
+000109|   }
+000110| 
+000111|   function o108LinkSpam(text){
+000112|     const s = String(text || "");
+000113|     const links = s.match(/(?:https?:\/\/|www\.|\.com\b|\.net\b|\.org\b)/gi) || [];
+000114|     return links.length >= 1;
+000115|   }
+000116| 
+000117|   function o108LooksUncertain(text){
+000118|     const raw = String(text || "").trim();
+000119|     if (!raw) return false; // short opinion is optional
+000120|     const stats = o108TokenStats(raw);
+000121|     const compact = o108Compact(raw);
+000122|     if (stats.tokens.length === 1 && compact.length <= 4) return true;
+000123|     // Two very short/random-looking tokens such as "Sam A" should be reviewed, not auto-rejected.
+000124|     if (stats.tokens.length === 2 && stats.tokens.some(t => t.length === 1)) return true;
+000125|     if (stats.tokens.length <= 2 && /^[a-z\s]+$/i.test(raw)) {
+000126|       const safeShort = ["good","very good","not bad","excellent","helpful","clear","great","okay","ok","زين","وايد زين","ممتاز","واضح","خوش دكتور","خوش دكتوره"];
+000127|       if (!safeShort.includes(o108Normalize(raw).replace(/\s+/g," ").trim())) return true;
+000128|     }
+000129|     return false;
+000130|   }
+000131| 
+000132|   function o108Moderate(instructor, course, opinion){
+000133|     const combined = [instructor, course, opinion].join(" ");
+000134|     const bad = o108HasProfanity(combined);
+000135|     if (bad) return {decision:"reject", code:"profanity"};
+000136| 
+000137|     if (o108RepeatedChars(opinion) || o108RepeatedWords(opinion) || o108AlternatingPattern(opinion)) {
+000138|       return {decision:"reject", code:"repetition"};
+000139|     }
+000140|     if (o108KeyboardMash(opinion) || o108SymbolSpam(opinion)) {
+000141|       return {decision:"reject", code:"random"};
+000142|     }
+000143|     if (o108LinkSpam(opinion)) return {decision:"reject", code:"spam"};
+000144| 
+000145|     if (o108LooksUncertain(opinion)) return {decision:"pending", code:"uncertain"};
+000146|     return {decision:"publish", code:"clean"};
+000147|   }
+000148| 
+000149|   function o108RejectMessage(code){
+000150|     const map = {
+000151|       profanity: ["Your review contains inappropriate or insulting language. Please edit it and try again.", "تقييمك يحتوي على كلام غير لائق أو إهانة. عدل الكلام وجرب مرة ثانية."],
+000152|       repetition: ["Your review contains too much repeated text. Please edit it and try again.", "تقييمك فيه تكرار وايد. عدل الكلام وجرب مرة ثانية."],
+000153|       random: ["Your review looks like random or meaningless text. Please write a clear review and try again.", "التقييم يبين فيه كلام أو حروف راندم وما له معنى واضح. اكتب تقييم واضح وجرب مرة ثانية."],
+000154|       spam: ["Links or promotional spam are not allowed in reviews. Please edit it and try again.", "الروابط أو السبام الإعلاني مو مسموح داخل التقييم. عدل الكلام وجرب مرة ثانية."]
+000155|     };
+000156|     const pair = map[code] || map.random;
+000157|     return o108Text(pair[0], pair[1]);
+000158|   }
+000159| 
+000160|   function o108ReasonLabel(code){
+000161|     const map = {
+000162|       uncertain:["Filter was not confident about this review.","الفلتر مو متأكد من التقييم."],
+000163|       repetition:["Repeated text detected.","تم اكتشاف تكرار بالكلام."],
+000164|       random:["Random or unclear text detected.","تم اكتشاف كلام راندم أو غير واضح."],
+000165|       profanity:["Possible inappropriate language.","احتمال وجود كلام غير لائق."],
+000166|       spam:["Possible spam.","احتمال سبام."]
+000167|     };
+000168|     const p = map[code] || map.uncertain;
+000169|     return o108Text(p[0],p[1]);
+000170|   }
+000171| 
+000172|   function o108Read(){
+000173|     try {
+000174|       const arr = JSON.parse(localStorage.getItem(O108_REVIEW_KEY) || "[]");
+000175|       if (!Array.isArray(arr)) return [];
+000176|       return arr.map(r => {
+000177|         if (!r.status) r.status = "published"; // migrate older reviews
+000178|         return r;
+000179|       });
+000180|     } catch(e){ return []; }
+000181|   }
+000182|   function o108Write(arr){ localStorage.setItem(O108_REVIEW_KEY, JSON.stringify(arr)); }
+000183| 
+000184|   function o108Esc(value){
+000185|     if (typeof escapeHtml === "function") return escapeHtml(value);
+000186|     return String(value == null ? "" : value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+000187|   }
+000188| 
+000189|   function o108Show(msg,type){
+000190|     if (typeof showStatusV2 === "function") showStatusV2(msg,type);
+000191|     else if (typeof showStatus === "function") showStatus(msg,type);
+000192|   }
+000193| 
+000194|   function o108Submit(event){
+000195|     event.preventDefault();
+000196|     const form = event.currentTarget;
+000197|     const lastSubmit = Number(localStorage.getItem(O108_LAST_SUBMIT_KEY) || 0);
+000198|     const now = Date.now();
+000199|     if (lastSubmit && now-lastSubmit < 20000) {
+000200|       o108Show(o108Text("Anti-Spam: Please wait 20 seconds before submitting again.","مكافحة السبام: نطر 20 ثانية قبل لا تدز تقييم ثاني."),"error");
+000201|       return;
+000202|     }
+000203| 
+000204|     const fd = new FormData(form);
+000205|     const instructor = String(fd.get("instructorNameInput") || "").trim();
+000206|     const course = String(fd.get("courseCode") || "").trim();
+000207|     const opinion = String(fd.get("opinion") || "").trim();
+000208|     const result = o108Moderate(instructor, course, opinion);
+000209| 
+000210|     if (result.decision === "reject") {
+000211|       o108Show("❌ " + o108RejectMessage(result.code), "error");
+000212|       return;
+000213|     }
+000214| 
+000215|     const review = {
+000216|       id: String(Date.now()) + "_" + Math.random().toString(36).slice(2),
+000217|       ownerId: (typeof getOwnerId === "function" ? getOwnerId() : "owner_local"),
+000218|       instructor: instructor,
+000219|       course: course,
+000220|       date: String(fd.get("date") || ""),
+000221|       quizDifficulty: String(fd.get("quiz") || ""),
+000222|       teaching: String(fd.get("teaching") || ""),
+000223|       understanding: String(fd.get("understanding") || ""),
+000224|       bonusMarks: String(fd.get("bonus") || ""),
+000225|       shortOpinion: opinion,
+000226|       status: result.decision === "pending" ? "pending" : "published",
+000227|       moderationCode: result.code,
+000228|       createdAt: now
+000229|     };
+000230| 
+000231|     const arr = o108Read();
+000232|     arr.push(review);
+000233|     o108Write(arr);
+000234|     localStorage.setItem(O108_LAST_SUBMIT_KEY,String(now));
+000235| 
+000236|     if (review.status === "pending") {
+000237|       o108Show("⏳ " + o108Text(
+000238|         "Your review has been forwarded to the admin for approval. It has not been published yet. You can delete it while it is pending.",
+000239|         "تم إرسال تقييمك للأدمن للمراجعة. التقييم للحين ما اننشر، وتقدر تمسحه وهو Pending."
+000240|       ), "success");
+000241|     } else {
+000242|       o108Show("🚀 " + o108Text("Your review was published successfully.","تم نشر تقييمك بنجاح."), "success");
+000243|     }
+000244| 
+000245|     if (typeof resetForm === "function") resetForm(false); else form.reset();
+000246|     o108LoadPublic();
+000247|   }
+000248| 
+000249|   function o108DeleteOwn(id){
+000250|     const owner = (typeof getOwnerId === "function" ? getOwnerId() : "owner_local");
+000251|     const arr = o108Read();
+000252|     const target = arr.find(r => String(r.id) === String(id));
+000253|     if (!target || target.ownerId !== owner) return;
+000254|     if (!confirm(o108Text("Delete this review permanently?","متأكد تبي تمسح هالتقييم نهائيا؟"))) return;
+000255|     o108Write(arr.filter(r => String(r.id) !== String(id)));
+000256|     o108LoadPublic();
+000257|     o108LoadAdmin(document.getElementById("adminSearchInput")?.value || "");
+000258|   }
+000259| 
+000260|   function o108LoadPublic(){
+000261|     const list = document.getElementById("publicReviewsList");
+000262|     if (!list) return;
+000263|     const search = String(document.getElementById("publicSearchInput")?.value || "").trim().toLowerCase();
+000264|     const owner = (typeof getOwnerId === "function" ? getOwnerId() : "owner_local");
+000265|     const all = o108Read().filter(r => {
+000266|       const searchable = String(r.instructor||"").toLowerCase().includes(search) || String(r.course||"").toLowerCase().includes(search);
+000267|       if (search && !searchable) return false;
+000268|       return r.status === "published" || (r.status === "pending" && r.ownerId === owner);
+000269|     }).slice().reverse();
+000270| 
+000271|     if (!all.length) {
+000272|       list.innerHTML = '<p style="color:var(--olive-medium);">' + o108Esc(o108Text("No reviews stored yet.","ماكو تقييمات للحين.")) + '</p>';
+000273|       return;
+000274|     }
+000275| 
+000276|     list.innerHTML = all.map(r => {
+000277|       const mine = r.ownerId === owner;
+000278|       const pending = r.status === "pending";
+000279|       const badge = pending
+000280|         ? '<span class="orbit-status-badge orbit-status-pending">⏳ ' + o108Esc(o108Text("Pending","قيد المراجعة")) + '</span>'
+000281|         : '';
+000282|       const note = pending
+000283|         ? '<div class="orbit-pending-note">' + o108Esc(o108Text("Not published yet — waiting for admin approval. You can delete it anytime while pending.","للحين ما اننشر — ناطر موافقة الأدمن. تقدر تمسحه بأي وقت وهو قيد المراجعة.")) + '</div>'
+000284|         : '';
+000285|       return '<div class="review-stacked-item">' +
+000286|         '<div style="font-weight:900;color:var(--olive-dark);">👨‍🏫 ' + o108Esc(r.instructor || "N/A") + badge + (mine ? ' <span style="font-size:.72rem;">(' + o108Esc(o108Text("Your review","تقييمك")) + ')</span>' : '') + '</div>' +
+000287|         '<div style="font-size:.88rem;margin:6px 0;">📚 ' + o108Esc(r.course || "N/A") + ' | 🗓️ ' + o108Esc(r.date || "N/A") + '</div>' +
+000288|         '<div style="font-size:.88rem;">' + o108Esc(o108Text("Quiz","الكويز")) + ': ' + o108Esc(r.quizDifficulty || "N/A") + ' | ' + o108Esc(o108Text("Teaching","الشرح")) + ': ' + o108Esc(r.teaching || "N/A") + ' | ' + o108Esc(o108Text("Understanding","الفهم")) + ': ' + o108Esc(r.understanding || "N/A") + '</div>' +
+000289|         (r.shortOpinion ? '<div style="margin-top:7px;"><em>“' + o108Esc(r.shortOpinion) + '”</em></div>' : '') + note +
+000290|         (mine ? '<button type="button" class="btn-danger o108-own-delete" data-review-id="' + o108Esc(r.id) + '" style="margin-top:8px;">' + o108Esc(o108Text("Delete Review","مسح التقييم")) + '</button>' : '') +
+000291|         '</div>';
+000292|     }).join("");
+000293|   }
+000294| 
+000295|   function o108Approve(id){
+000296|     const arr = o108Read();
+000297|     const idx = arr.findIndex(r => String(r.id) === String(id));
+000298|     if (idx < 0) return;
+000299|     arr[idx].status = "published";
+000300|     arr[idx].moderationCode = "approved_by_admin";
+000301|     arr[idx].approvedAt = Date.now();
+000302|     o108Write(arr);
+000303|     o108LoadAdmin(document.getElementById("adminSearchInput")?.value || "");
+000304|     o108LoadPublic();
+000305|   }
+000306| 
+000307|   function o108AdminDelete(id){
+000308|     if (!confirm(o108Text("Delete this review permanently?","متأكد تبي تمسح هالتقييم نهائيا؟"))) return;
+000309|     o108Write(o108Read().filter(r => String(r.id) !== String(id)));
+000310|     o108LoadAdmin(document.getElementById("adminSearchInput")?.value || "");
+000311|     o108LoadPublic();
+000312|   }
+000313| 
+000314|   function o108ReviewCard(r, pending){
+000315|     return '<div class="review-stacked-item">' +
+000316|       '<div style="font-weight:900;color:var(--olive-dark);margin-bottom:6px;">👨‍🏫 ' + o108Esc(r.instructor || "N/A") +
+000317|       (pending ? '<span class="orbit-status-badge orbit-status-pending">⏳ ' + o108Esc(o108Text("Pending","قيد المراجعة")) + '</span>' : '<span class="orbit-status-badge orbit-status-published">✓ ' + o108Esc(o108Text("Published","منشور")) + '</span>') + '</div>' +
+000318|       '<div style="font-size:.88rem;margin-bottom:6px;">📚 ' + o108Esc(r.course || "N/A") + ' | 🗓️ ' + o108Esc(r.date || "N/A") + '</div>' +
+000319|       '<div style="font-size:.88rem;">' + o108Esc(o108Text("Quiz","الكويز")) + ': ' + o108Esc(r.quizDifficulty || "N/A") + ' | ' + o108Esc(o108Text("Teaching","الشرح")) + ': ' + o108Esc(r.teaching || "N/A") + ' | ' + o108Esc(o108Text("Understanding","الفهم")) + ': ' + o108Esc(r.understanding || "N/A") + '</div>' +
+000320|       (r.shortOpinion ? '<div style="margin-top:7px;background:#faf4db;padding:7px 9px;border-radius:7px;"><em>“' + o108Esc(r.shortOpinion) + '”</em></div>' : '') +
+000321|       (pending ? '<div class="orbit-review-reason">⚠️ ' + o108Esc(o108Text("Reason: ","السبب: ") + o108ReasonLabel(r.moderationCode)) + '</div>' : '') +
+000322|       '<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">' +
+000323|       (pending ? '<button type="button" class="btn-approve" data-o108-action="approve" data-review-id="' + o108Esc(r.id) + '">✓ ' + o108Esc(o108Text("Approve","موافقة")) + '</button>' : '') +
+000324|       '<button type="button" class="btn-danger" data-o108-action="delete" data-review-id="' + o108Esc(r.id) + '">' + o108Esc(o108Text("Delete","مسح")) + '</button>' +
+000325|       '</div></div>';
+000326|   }
+000327| 
+000328|   function o108LoadAdmin(searchFilter){
+000329|     const list = document.getElementById("adminDataList");
+000330|     if (!list) return;
+000331|     const filter = String(searchFilter || "").trim().toLowerCase();
+000332|     const all = o108Read().filter(r => !filter || String(r.instructor||"").toLowerCase().includes(filter) || String(r.course||"").toLowerCase().includes(filter));
+000333|     const pending = all.filter(r => r.status === "pending").slice().reverse();
+000334|     const published = all.filter(r => r.status === "published").slice().reverse();
+000335|     const count = document.getElementById("submissionCount");
+000336|     if (count) count.textContent = String(all.length);
+000337| 
+000338|     if (!all.length) {
+000339|       list.innerHTML = '<p style="color:var(--olive-medium);">' + o108Esc(o108Text("No reviews stored yet.","ماكو تقييمات للحين.")) + '</p>';
+000340|       return;
+000341|     }
+000342| 
+000343|     let html = '<div class="orbit-admin-queue"><h3>⏳ ' + o108Esc(o108Text("Pending Review Queue","التقييمات الناطرة موافقة")) + ' (' + pending.length + ')</h3>';

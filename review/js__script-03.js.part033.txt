@@ -1,0 +1,109 @@
+000010| [segment 33/33] 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DMyIDU1Ni4xNTIzIDU1Ni4xNTIzIAogIDU1Ni4xNTIzIDU1Ni4xNTIzIDU1Ni4xNTIzIDU1Ni4xNTIzIDU1Ni4xNTIzIDU1Ni4xNTIzIDU1Ni4xNTIzIDU1Ni4xNTIzIDI3Ny44MzIgMjc3LjgzMiAKICA1ODMuOTg0NCA1ODMuOTg0NCA1ODMuOTg0NCA1NTYuMTUyMyAxMDE1LjEzNyA2NjYuOTkyMiA2NjYuOTkyMiA3MjIuMTY4IDcyMi4xNjggNjY2Ljk5MjIgCiAgNjEwLjgzOTggNzc3LjgzMiA3MjIuMTY4IDI3Ny44MzIgNTAwIDY2Ni45OTIyIDU1Ni4xNTIzIDgzMy4wMDc4IDcyMi4xNjggNzc3LjgzMiAKICA2NjYuOTkyMiA3NzcuODMyIDcyMi4xNjggNjY2Ljk5MjIgNjEwLjgzOTggNzIyLjE2OCA2NjYuOTkyMiA5NDMuODQ3NyA2NjYuOTkyMiA2NjYuOTkyMiAKICA2MTAuODM5OCAyNzcuODMyIDI3Ny44MzIgMjc3LjgzMiA0NjkuMjM4MyA1NTYuMTUyMyAzMzMuMDA3OCA1NTYuMTUyMyA1NTYuMTUyMyA1MDAgCiAgNTU2LjE1MjMgNTU2LjE1MjMgMjc3LjgzMiA1NTYuMTUyMyA1NTYuMTUyMyAyMjIuMTY4IDIyMi4xNjggNTAwIDIyMi4xNjggODMzLjAwNzggCiAgNTU2LjE1MjMgNTU2LjE1MjMgNTU2LjE1MjMgNTU2LjE1MjMgMzMzLjAwNzggNTAwIDI3Ny44MzIgNTU2LjE1MjMgNTAwIDcyMi4xNjggCiAgNTAwIDUwMCA1MDAgMzMzLjk4NDQgMjU5Ljc2NTYgMzMzLjk4NDQgNTgzLjk4NDQgNzUwIF0KPj4KZW5kb2JqCjEyIDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgMTQgMCBSIC9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iagoxMyAwIG9iago8PAovQXV0aG9yIChLVEVDSCBPcmJpdCAtIGZvcm1hdHRlZCBmcm9tIHN1cHBsaWVkIE1ham9yIFNoZWV0cykgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MTAxMTIzNDk0NSswMCcwMCcpIC9DcmVhdG9yIChhbm9ueW1vdXMpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MTAxMTIzNDk0NSswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0ICh1bnNwZWNpZmllZCkgL1RpdGxlIChCYWNoZWxvciBvZiBNYXJrZXRpbmcpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKMTQgMCBvYmoKPDwKL0NvdW50IDEgL0tpZHMgWyAzIDAgUiBdIC9UeXBlIC9QYWdlcwo+PgplbmRvYmoKMTUgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMzEyNAo+PgpzdHJlYW0KR2F0bipnTiklPCZyLGxKJ1FgTUxmOTgzOlo8Kj8kLyNsIiJiMmRIajxvbyd1QCM4JDxlOk5vYGhQXTY4OC43MkgjMkxpQj5kZj1WT1NyXE82aGdOJ1RrIjYoYVI3cnRSXilIRXFyKjA8O1ItJEYtNE1uTXJbVz1bNU5DLS8wLSM/N1pbIk43MVcta11nX3NVKEtZTC0hQSMiVlRYT3NIPmNVQE5pKyJ0cWNHTzJOdGlOcEY4R1shdWcmKXFdOGdkckJOUU9fIkJjL3BuKTwuQlEjZUQsNEYqRVRBbTJzNisyYShpInJmXUVqWj84VlxdRzBCUXJHQVI3K1J0Jz5PODVTL0ZhXjRzL2drXmw/TV1jVC85TGVBPE1TaWY5JkwvUWYpSypKXmJHLGteRjxmSXReXE4pXUJVRUNNZnJWM1NtQjEyayo4U1BLOSJhKFc4T2xhU0AwLDpEU2RWQz44OzFhO0srOyJJY2pAODhnZkxbTFteSFBxS2NHXXJxb2FGaDxpLCJQRiJJUGlfMGlkdDloVl85TyFTbjdRaW4/YiRvIURvI3UsUVdnaGVFLTMsUVxbXGs+X01bdShQQDRBIUouO25gLTNyPjM7YyFiImhRLkwsQk09VzdCNGxmIztpcEIndG5KMzQrIXFhXXRNKSxuaT8wXz8iQ1M7a3JCVyI/THEtQl4zVTVBdW5TQzplJmBoLiFrS21acickRyhtZ2c4QlAkYF9AWm06OyZZVENORk9ccmNSOjVPQDNVSnBRREYjVnEpYGh0KEMxZ1xFXEVaVEVvRDsiMGBXIk5FJF4xKjtLLWQoUFVzYHBGNCFYWkYlaEhyZkR0LCo3RkxcYUglIUgrWDdeQThnOiIhXEVqYl5RWiFvakszJEVwYSRsR0tHSmlFZlQ2aGgoVytzRElKZS5HQ15ydFttJjdPazE0Ljc0OVtDImUpLik3VlZHLmU8NmNvMVByMDNNWTIma0dWKTklLjBtZUxxKSo9XCdIcDJkLj9PQm5UaFpaRSM4ZDopJmtPRFwvR0RWNmhDZUhFamtIV1dZbTheQDZvdWNAQURnR2tZTlBham1vNWFlRzNocFFkOUk4Uzg5RTlWQDFnSUMmW3E9P0VCTCpBW1ErPD00USxFcTcwdExeTmxgK3I7JCpVZCVxXjJiPm9CYThyPkJPL1AiZCtWKyUibDhwS0YtW1A1ZkFVL0BPdVRMXTd0O3MjPEBNVWB0QlFnXGlGUkMlNGU6RW8nRFBUZ3RUS0dyTTU6ZlBaMVwlQlYiXiVjKko+NDArOEZHKGBLJ0tRR0ApKFtgZiJFYWkuTEA/JzMzJCFcQShgY1pLaSpiL1o5TGg5OHJPPW5cWi40KSxWZ11KTWgtN0cmQ01rRVFNXEAoUl4rUzE6ZztDVjZdYFpuUD1fRlIqcHJhdGg6Y2I5bScmSFxuXGhVUTFYSTY7SUJGS2c6JlJ1KkxSJmFvXiQtI2RiJE9uYksmSDNBUkJVLlo0NVZEaDhBIWhpaSpyZ1tpOmgqJG41Vm4tPiQvSG1TK1czWXEsUzVzbzg0N1pZTStHWEosKGE+NiU2UEZSMyhwRlpiMUtfcE87V1tKUElsXnFsVCpHMVRmPTswRlxddFZOZls6N1ApPmFrIVZRaiIiJ2A5PFtwL21NRE4/QyNwTUJoMkQ0MysrLmpLSFszZDxlMWtlbGAmLiF1NC4/NFI+I09hOkVKailmZDw5Um1HLD5AZGtFZG9nP2xOVVx1QVcsbChgSE5pMFQ5MV1jZG1mKWZlSTk1NzJnTGckYCo4cXMlPWdfR3ByUDhPUDhRZ2NTYW90M09KVnQ0KlVTTl4iIVxCaUlWXyFsJzQ1OWRJT1pvUEZObClpNXFodFYqJWFxQWBSXDF0YlRfJ0duTjEyIj4mYkpebCdbXGshZmtmN2tHMT9bPEQlKEkpWWknVTdqOkxNbFU1cl8zZHBeJHAzKlBzKk5jdTlVOUd0Yy4pWFknTEpfQ1NVaSVYJ29Lcic7PEVCJjdWRmo8VSFjUU9KSzEnRWFJODBfLUA+QWQjKEBoPWYjSm9hM2g2SnU7WVQ0Kj1QJzIhTU5SUmthRixVciNVZHI7PzJVRFtIPClFNj9vXSIpRywpaztMZDYoTEE/YlJxaHIiZDEuaUM7IkNAcFduJ046NHFwbG0sazleXG8jS1I+cWFjZUxUNTJaaWNraz0xS25gWyNTSUdnJSxqIUdFJytFYiZOay9eLnJCJjwwcVcvYlNeNXJOcSZCamZtTDp0RTdLQF1sYCxCS1YkMUU0dXE6JVRJWU4jKj9sdWhvJioqdENtJkpjKS9ZUlVtJkFAKUwycS07Tk9Ub2tkQ2ZaOTxvZUdgQlo0PFkjTWtMRVoyYzRrWCpvVlchXUk0JTtcYyQjKl1GSS9BSEEzMjU9NV1pUEElR2A+LStoOkAiIypTNiNZYyVULiQ1RVJJMC1dVzFgYzNUSUFHPlxmXktwZTI4JVxxbDF0NE4nNzIyUDZIWVw/XSFcLUxkWExGODYtUUlxLjgmYmUmbU86M2RGP14sKVRlVjVIPTBEMy0/cE4qSmgyZVcuUmxvIUNfblxxVVFEKF4sITNNTEMvNDZtbjo4JyopWCV1OjU2TFlRSkVLZE1kVE0qMWJtW3Q9PDNfMjMjVFptZWA3VD5LKUJMVjtlRyJHakBjWEdULW9pWDxaNTxQRDVYSXJeYlU0QVEsN2hSazMwYVQ6J1A5dGpKVmFockJCKi9nMG5oYGM8LjhfVENIMVdKMzw0JFFSLk1vVmJfQHJBalw+ZXBTZTJcSzBtTFNBbVd1T15MYjhwSixcPztFbEMwYHRdViFMNyNiR1teajJhbl5YXVNHXGcwJ0g/LCZmb1oqLyMwVj5SYlRqaS9cTnBBWC1WNF9qNDtZSmRhPT03KVNMcWYsR2ZjSytAJ3BcQjpnQGxvbThsJz49YkIxTyNSUSNTMXRzQiRqOFFuKGwlNmEyTXMyRV5mQWE9Xio2anRWYGpCWGpvL29XIShVSyRvITVMXmpMMStJOmVuKzFnSExAInBsZ0xwOCM/XU9pck5DPDhdPlBRV0FmU0MoPENAL09lUmRRUy5nSnUhW2dBMSRsZWdZJCRmWzJoNypUQmQoRWs+XEBbOihBdGsxTUVBQi9AUlZZXkQwITpuTCY5OjpFVSE+QUFFV0xNLGs6SzlDYkhgbU1JWDUxR0AyRnVfam5iM0JjcSVYTiVTZD9zLF87MSdIajEnZT9PNVZRcUJDUUNdcmFGWEdLOzJCZHFcR2VqO3EyY21SU1BlKjE8Yy1AbDpiRFApPDRIZEssV3RPMj4nJzdaJnJkOmEuPEZFJEBkMTFJK2JcLixjbSlTN3MoXGY9RyZaJ19VTU9JKV8ySmtAZTdIRGpeM14/PzBKVXEuQTRMY2w9PURtalpMSUJlMz82KkItbyhwUl1AX00iZC8kUjhkVlQkL1E9VVIzSXBYaEUjXCRXOmNgWyIlRzMkWVArUDpxIzZDT1pcIUwhTT85N0AqKGY/SDBhWXNLT3NZYkQ0XCReLTkyJWJFU2VNYl5tald0TmwzLV5ILktJRVdFTyUwPmZLQTBWTy0+O1pMU0xAYFReWHM1ZFpEb1dtOnJuNFwlZjl0O0dQamJONVQ7W2kzYFBkN2puTy5vU2FULiliRj4taVdvSEcrUk1YKHFgc09HVj0kYSktV1hIMEc6KmZtTkxXRGQzQUJQTiM2PjEqPD9yPUQ+Om09UmVhYTJvKCpiT08rPUlnOTBmVGZAbi8zQ0duLiNmMGRkOz0jNk1NJ21eRzBUU0gnSWAtYjJJYSQ1TTU/NihINjBxJ0IlajhFKlEwW0A0cmxAWUJmVz9EW1Q/USgmVD1EJmxJZnRVImAyJk1XOFBiVSMnRD1QIlVaZk5faltDTT9tUisockJvKlUiYDEzR2s/TSpPK2tvTS1dLCgzXlFIZVJsQVdgaDgubmVfSj1vO2w8I2NRK11kM0ttOGtEa2EjXyhpc1RTUldxL1ZWTE5fMmdca19JS15tRS5AcEMpSk5ISWNlK0ItKF8rXlclSzI3L15tO11PcGpaZUs2JFFiOWtYTkglXllPPCNZJGBpV0thPWcuSyFHc0EhYEg8PnFuJ1cvbVtlIkk/PUlSSSM+LmZQQ11+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDE2CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDA2MSAwMDAwMCBuIAowMDAwMDAwMTE3IDAwMDAwIG4gCjAwMDAwMDAyMjQgMDAwMDAgbiAKMDAwMDAwMDQxOSAwMDAwMCBuIAowMDAwMDAxMTczIDAwMDAwIG4gCjAwMDAwMTgxMjIgMDAwMDAgbiAKMDAwMDAxODM4OSAwMDAwMCBuIAowMDAwMDE5NTY2IDAwMDAwIG4gCjAwMDAwMjAzMTQgMDAwMDAgbiAKMDAwMDAzNzY2OCAwMDAwMCBuIAowMDAwMDM3OTI1IDAwMDAwIG4gCjAwMDAwMzkwNjEgMDAwMDAgbiAKMDAwMDAzOTEzMSAwMDAwMCBuIAowMDAwMDM5NDQ3IDAwMDAwIG4gCjAwMDAwMzk1MDcgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8NzFmNmM3YTg2NDk3MjliMWFmNTAxZGU2MTVhNThhMTI+PDcxZjZjN2E4NjQ5NzI5YjFhZjUwMWRlNjE1YTU4YTEyPl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyAxMyAwIFIKL1Jvb3QgMTIgMCBSCi9TaXplIDE2Cj4+CnN0YXJ0eHJlZgo0MjcyMwolJUVPRgo="}]};
+000011|   const majorDocumentUrls=new Map();
+000012|   function getMajorPdfUrl(document){
+000013|     if(majorDocumentUrls.has(document.name))return majorDocumentUrls.get(document.name);
+000014|     const raw=atob(document.data),chunks=[],limit=32768;
+000015|     for(let i=0;i<raw.length;i+=limit){
+000016|       const part=raw.slice(i,i+limit),bytes=new Uint8Array(part.length);
+000017|       for(let j=0;j<part.length;j++)bytes[j]=part.charCodeAt(j);
+000018|       chunks.push(bytes);
+000019|     }
+000020|     const url=URL.createObjectURL(new Blob(chunks,{type:'application/pdf'}));
+000021|     majorDocumentUrls.set(document.name,url);
+000022|     return url;
+000023|   }
+000024|   function sendMajorDocument(major,degree,docAsset){
+000025|     const majorLabel=major+' — '+tx(degree==='diploma'?'Diploma':'Bachelor',degree==='diploma'?'دبلوم':'بكالوريوس');
+000026|     say('user',majorLabel);
+000027|     say('bot',tx('Here is the Major Sheet you requested. Select View to read it, or Download to save the PDF.',
+000028|                  'هذي الخطة الدراسية اللي طلبتها. اضغط عرض لقراءتها أو تحميل لحفظ ملف PDF.')+'\n\n'+
+000029|                  tx(docAsset.source==='provided-pdf'?'Formatted from the uploaded NSMS PDF. Confirm the approved plan with Academic Advising.':'Formatted to match the supplied Accounting Diploma design using the 2026–2027 Excel study plan. Confirm the approved plan with Academic Advising.',
+000030|                     docAsset.source==='provided-pdf'?'الخطة مُنسّقة من ملف NSMS المرفوع. تأكد من اعتماد الخطة لدى الإرشاد الأكاديمي.':'الخطة من ملف إكسل 2026–2027 ومُنسّقة حسب النموذج المرفوع. تأكد من اعتماد الخطة لدى الإرشاد الأكاديمي.'));
+000031|     const card=document.createElement('div');card.className='orbit-major-file-card';
+000032|     const heading=document.createElement('div');heading.className='orbit-major-file-heading';
+000033|     const icon=document.createElement('span');icon.textContent='📄';icon.setAttribute('aria-hidden','true');
+000034|     const title=document.createElement('span');title.textContent=majorLabel+' · PDF';heading.append(icon,title);
+000035|     const buttons=document.createElement('div');buttons.className='orbit-major-file-buttons';
+000036|     const view=document.createElement('button');view.type='button';view.className='orbit-major-file-control';view.textContent=tx('📖 View Major Sheet','📖 عرض الخطة الدراسية');
+000037|     const download=document.createElement('a');download.className='orbit-major-file-control';download.textContent=tx('⬇️ Download PDF','⬇️ تحميل PDF');
+000038|     download.download=docAsset.name;download.href=getMajorPdfUrl(docAsset);
+000039|     const pdfPanel=document.createElement('div');pdfPanel.className='orbit-major-pdf-preview';pdfPanel.hidden=true;
+000040|     view.addEventListener('click',()=>{
+000041|       pdfPanel.hidden=!pdfPanel.hidden;
+000042|       view.textContent=pdfPanel.hidden?tx('📖 View Major Sheet','📖 عرض الخطة الدراسية'):tx('✕ Close Preview','✕ إغلاق العرض');
+000043|       if(!pdfPanel.hidden&&!pdfPanel.childElementCount){
+000044|         const frame=document.createElement('iframe');frame.loading='lazy';frame.src=getMajorPdfUrl(docAsset)+'#toolbar=0';
+000045|         frame.title=majorLabel+' PDF';frame.setAttribute('aria-label',frame.title);pdfPanel.appendChild(frame);
+000046|         const alt=document.createElement('p');alt.textContent=tx('If the PDF preview does not appear on your device, use Download PDF.',
+000047|           'إذا ملف PDF ما ظهر عندك، اضغط تحميل PDF.');pdfPanel.appendChild(alt);
+000048|       }
+000049|       els.log.scrollTop=els.log.scrollHeight;
+000050|     });
+000051|     buttons.append(view,download);card.append(heading,buttons,pdfPanel);els.log.appendChild(card);els.log.scrollTop=els.log.scrollHeight;
+000052|   }
+000053|   const info={
+000054|     finance:[
+000055|       ['💳 Pay KTECH fees','💳 رابط دفع رسوم KTECH','https://upayto.me/http4wi1j'],
+000056|       ['✉️ finance@ktech.edu.kw','✉️ finance@ktech.edu.kw','mailto:finance@ktech.edu.kw'],
+000057|       ['📞 +965 6514 5596','📞 +965 6514 5596','tel:+96565145596'],
+000058|       ['📞 +965 6760 1894','📞 +965 6760 1894','tel:+96567601894']
+000059|     ],
+000060|     studentlife:[],
+000061|     advising:[
+000062|       ['✉️ academicadvising@ktech.edu.kw','✉️ academicadvising@ktech.edu.kw','mailto:academicadvising@ktech.edu.kw'],
+000063|       ['📍 Ground Floor — Office 171','📍 الدور الأرضي — مكتب 171',null],
+000064|       ['📞 Jawad AlMuhsen: +965 6554 1840','📞 جواد المحسن: +965 6554 1840','tel:+96565541840'],
+000065|       ['📞 Hessa: +965 6618 8026','📞 حصة: +965 6618 8026','tel:+96566188026'],
+000066|       ['📞 Sarah Azhari: +965 6991 5724','📞 سارة أزهري: +965 6991 5724','tel:+96569915724'],
+000067|       ['📞 Malak: +965 9772 4603','📞 ملاك: +965 9772 4603','tel:+96597724603'],
+000068|       ['📞 Fatema Alzamel: +965 6070 0265','📞 فاطمة الزامل: +965 6070 0265','tel:+96560700265'],
+000069|       ['📞 Ayman: +965 6550 2616','📞 أيمن: +965 6550 2616','tel:+96565502616'],
+000070|       ['📞 Zyad Al Abduhadi: +965 6930 9418','📞 زياد العبدالهادي: +965 6930 9418','tel:+96569309418'],
+000071|       ['📞 Wahab Almutawa: +965 6579 6890','📞 وهاب المطوع: +965 6579 6890','tel:+96565796890']
+000072|     ],
+000073|     it:[
+000074|       ['🕐 Working hours: 8 AM–5 PM','🕐 ساعات العمل: 8 ص–5 م',null],
+000075|       ['📞 IT: +965 2228 5070','📞 الدعم: +965 2228 5070','tel:+96522285070'],
+000076|       ['💬 WhatsApp Abu Shahama: +965 6582 4107','💬 واتساب أبو شهامة: +965 6582 4107','https://wa.me/96565824107'],
+000077|       ['💬 WhatsApp Ali Lalaji: +965 9922 9037','💬 واتساب علي لالاجي: +965 9922 9037','https://wa.me/96599229037'],
+000078|       ['✉️ helpdesk@ktech.edu.kw','✉️ helpdesk@ktech.edu.kw','mailto:helpdesk@ktech.edu.kw'],
+000079|       ['🌐 IT support website','🌐 موقع الدعم الفني','https://tks.ktech.edu.kw']
+000080|     ]
+000081|   };
+000082|   const questions={
+000083|     finance:[
+000084|       ['How can I pay my KTECH fees online?','شلون أدفع رسوم KTECH أونلاين؟'],
+000085|       ['What are the current tuition and registration fees?','شنو الرسوم الدراسية ورسوم التسجيل الحالية؟'],
+000086|       ['How does the installment payment plan work?','شلون نظام الأقساط والدفع؟'],
+000087|       ['How can I check my outstanding balance?','شلون أتأكد من المبلغ المتبقي علي؟'],
+000088|       ['What fees do I need to pay before registration?','شنو الرسوم اللي لازم أدفعها قبل التسجيل؟'],
+000089|       ['My payment is not showing. What should I do?','دفعت بس المبلغ للحين مو ظاهر شنو أسوي؟'],
+000090|       ['How do I get a payment receipt?','شلون آخذ إيصال أو إثبات دفع؟'],
+000091|       ['The payment link is not working. Who can help?','رابط الدفع مو شغال منو أكلم؟'],
+000092|       ['Can Finance confirm if my payment was received?','هل المالية تقدر تتأكد إذا وصل الدفع؟'],
+000093|       ['How can I contact Finance?','شلون أتواصل مع المالية؟'],
+000094|       ['What is the Finance email?','شنو إيميل المالية؟'],
+000095|       ['What are Finance phone numbers?','شنو أرقام المالية؟']
+000096|     ],
+000097|     studentlife:[
+000098|       ['What clubs and student activities are available?','شنو الأندية والأنشطة الطلابية الموجودة؟'],
+000099|       ['How can I join a club or activity?','شلون أنضم لنادي أو نشاط طلابي؟'],
+000100|       ['Are there sports teams at KTECH?','هل في فرق رياضية في KTECH؟'],
+000101|       ['Where can I find upcoming student events?','وين أشوف الفعاليات الطلابية القادمة؟'],
+000102|       ['How can I contact Student Life?','شلون أتواصل مع Student Life؟'],
+000103|       ['Where can I find the Student Life office?','وين مكان مكتب الحياة الطلابية؟']
+000104|     ],
+000105|     advising:[
+000106|       ['How do prerequisites work?','شلون تشتغل المتطلبات السابقة؟'],
+000107|       ['What if a section is full?','شنو أسوي إذا السكشن Full؟'],
+000108|       ['How does Add & Drop work?','شلون نظام Add & Drop؟'],
+000109|       ['Which courses should I take next?','شنو المواد اللي آخذها بعد حسب الـ Major Sheet؟'],
+000110|       ['I dropped a course and cannot find another section.','سويت Drop والحين ماكو سكاشن شنو أسوي؟'],
+000111|       ['Can Advising request a place in a full section?','هل Advising يقدر يقدم لي طلب على سكشن Full؟'],
+000112|       ['Why does a course disappear during registration?','ليش المادة تختفي لما أحاول أسجلها؟'],
+000113|       ['How can I check a course prerequisite?','شلون أتأكد إذا المادة لها Prerequisite؟'],
+000114|       ['How many credit hours can I register?','جم وحدة أقدر أسجل؟'],
+000115|       ['How can I change my schedule?','شلون أغير جدولي؟'],
+000116|       ['I have a registration hold. Who should I contact?','عندي Registration Hold منو أكلم؟'],
+000117|       ['Where do I submit medical or absence documents?','وين أقدم التقارير الطبية أو مستندات الغياب؟'],
+000118|       ['Where is the Advising office?','وين مكتب الـ Advising؟'],

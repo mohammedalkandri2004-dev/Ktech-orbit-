@@ -1,0 +1,247 @@
+000001| <!DOCTYPE html>
+000002| <html lang="en">
+000003| <head>
+000004|     <meta charset="UTF-8">
+000005|     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+000006|     <title>KTECH Orbit | Smart Parking Demo</title>
+000007|     <link rel="stylesheet" href="css/style-01.css">
+000008| <link rel="stylesheet" href="css/style-02.css"><link rel="stylesheet" href="css/style-03.css">
+000009| <link rel="stylesheet" href="css/style-04.css">
+000010| <link rel="stylesheet" href="css/style-05.css">
+000011| 
+000012| <link rel="stylesheet" href="css/style-06.css">
+000013| <link rel="stylesheet" href="css/style-07.css">
+000014| 
+000015| <link rel="stylesheet" href="css/style-08.css">
+000016| </head>
+000017| <body>
+000018| 
+000019| <div class="container">
+000020|     <header>
+000021|         <div class="logo-title">
+000022|             <!-- Clickable Duck Logo triggers Admin Panel -->
+000023|             <div class="duck-circle-avatar" id="duckAvatarBtn" role="button" tabindex="0" aria-label="Open Admin Panel" title="Click for Admin Access">
+000024|                 <img src="assets/image-01-595b162249.jpg" alt="KTECH Orbit duck mascot">
+000025|             </div>
+000026|             <div>
+000027|                 <h1>KTECH Orbit</h1>
+000028|                 <p id="subtitleText">Course & Instructor Feedback Hub</p>
+000029|                 <div class="header-contact-strip" aria-label="Feedback and contact">
+000030|                     <span class="header-contact-text" id="headerContactText">Have feedback or a suggestion?</span>
+000031|                     <a class="header-contact-email" href="mailto:ktechorbit@gmail.com">✉️ ktechorbit@gmail.com</a>
+000032|                 </div>
+000033|             </div>
+000034|         </div>
+000035|         <div class="header-controls">
+000036|             <div class="language-switcher" aria-label="Language">
+000037|                 <button type="button" class="lang-btn active" id="langEn" data-lang="en">EN</button>
+000038|                 <button type="button" class="lang-btn" id="langAr" data-lang="ar">AR</button>
+000039|             </div>
+000040|             <div class="anon-badge" id="anonBadge">🔒 100% Anonymous</div>
+000041|         </div>
+000042|     </header>
+000043| 
+000044| 
+000045| 
+000046| 
+000047|     <div class="orbit-help-banner" role="region" aria-labelledby="orbitHelpBannerTitle">
+000048|       <div>
+000049|         <strong id="orbitHelpBannerTitle">🛟 Not sure who can help you at KTECH?</strong>
+000050|         <p id="orbitHelpBannerText">Try the Student Help Guide. Pick a problem, follow simple steps, and contact the right department.</p>
+000051|       </div>
+000052|       <button type="button" id="orbitHelpShortcut">Try the Help Guide ›</button>
+000053|     </div>
+000054| 
+000055|     <nav class="orbit-nav" aria-label="KTECH Orbit sections">
+000056|         <button type="button" class="orbit-tab-btn active" data-view="reviewView">
+000057|             <span class="tab-icon">📝</span>
+000058|             <span class="orbit-tab-title" id="navReview">Instructor Review</span>
+000059|             <span class="orbit-tab-bio" id="navReviewBio">Open the review app and submit instructor feedback.</span>
+000060|         </button>
+000061|         <button type="button" class="orbit-tab-btn" data-view="reviewsView">
+000062|             <span class="tab-icon">⭐</span>
+000063|             <span class="orbit-tab-title" id="navReviews">Student Reviews</span>
+000064|             <span class="orbit-tab-bio" id="navReviewsBio">Browse feedback and experiences shared by KTECH students.</span>
+000065|         </button>
+000066|         <button type="button" class="orbit-tab-btn" data-view="mapView">
+000067|             <span class="tab-icon">🗺️</span>
+000068|             <span class="orbit-tab-title" id="navMap">KTECH Map</span>
+000069|             <span class="orbit-tab-bio" id="navMapBio">Explore rooms and campus maps.</span>
+000070|         </button>
+000071|     </nav>
+000072| 
+000073| <section id="mapView" class="orbit-view" aria-labelledby="orbitMapTitle">
+000074|   <div class="orbit-map-panel orbit-navigation-v2">
+000075|     <div class="orbit-nav-v2-heading">
+000076|       <div><span class="orbit-map-eyebrow">KTECH ORBIT · INDOOR WAYFINDING</span>
+000077|       <h2 id="orbitMapTitle">🗺️ KTECH Campus Map</h2>
+000078|       <p class="orbit-map-subtitle">Find classrooms and services, with routes that follow the corridors.</p></div>
+000079|       <span class="orbit-map-v2-chip">INTERACTIVE 2D MAP</span>
+000080|     </div>
+000081|     <div class="orbit-floor-tabs orbit-floors-v2" role="group" aria-label="Choose a floor">
+000082|       <button type="button" class="orbit-floor-btn" data-floor="ground">Ground Floor</button>
+000083|       <button type="button" class="orbit-floor-btn selected" data-floor="one">Floor 1</button>
+000084|       <button type="button" class="orbit-floor-btn" data-floor="two">Floor 2</button>
+000085|       <button type="button" class="orbit-floor-btn" data-floor="campus">Campus</button>
+000086|     </div>
+000087|     <section id="orbitParkingPanel" class="orbit-parking-panel" aria-labelledby="orbitParkingTitle" hidden>
+000088|       <div class="orbit-parking-heading">
+000089|         <div><h3 id="orbitParkingTitle">🚗 Smart Parking</h3><p id="orbitParkingSub">See which spaces are free on the KTECH campus map.</p></div>
+000090|         <span id="orbitParkingBadge" class="orbit-parking-badge">REFERENCE MAP · PARKING STATUS NOT LIVE</span>
+000091|       </div>
+000092|       <div class="orbit-parking-stats" aria-live="polite">
+000093|         <div class="orbit-parking-stat free"><strong id="orbitParkingFree">0</strong><small id="orbitParkingFreeLabel">Available</small></div>
+000094|         <div class="orbit-parking-stat busy"><strong id="orbitParkingBusy">0</strong><small id="orbitParkingBusyLabel">Occupied</small></div>
+000095|         <div class="orbit-parking-stat access"><strong id="orbitParkingAccess">0</strong><small id="orbitParkingAccessLabel">Accessible available ♿</small></div>
+000096|       </div>
+000097|       <div class="orbit-parking-meter" aria-hidden="true"><span id="orbitParkingMeter"></span></div>
+000098|       <div class="orbit-parking-legend" aria-label="Parking status legend">
+000099|         <span><i class="orbit-parking-dot free"></i><b id="orbitParkingGreen">Green = available</b></span>
+000100|         <span><i class="orbit-parking-dot busy"></i><b id="orbitParkingRed">Red = occupied</b></span>
+000101|         <span><i class="orbit-parking-dot access"></i><b id="orbitParkingBlue">♿ = accessible space</b></span>
+000102|       </div>
+000103|       <p id="orbitParkingInstruction" class="orbit-parking-instruction">Tap a colored space to change its status. The buttons demonstrate a car arriving or leaving.</p>
+000104|       <div id="orbitParkingGates" class="orbit-parking-gates" aria-label="Accessible spaces by gate"></div>
+000105|       <div class="orbit-parking-actions" hidden><button id="orbitParkingFind" hidden type="button"></button><button id="orbitParkingFindAccess" hidden type="button"></button><button id="orbitParkingArrive" hidden type="button"></button><button id="orbitParkingLeave" hidden type="button"></button><button id="orbitParkingReset" hidden type="button"></button>
+000106|         
+000107|         
+000108|         
+000109|         
+000110|         
+000111|       </div>
+000112|       <p id="orbitParkingNote" class="orbit-parking-instruction" style="margin:10px 0 0;font-size:.7rem">Concept demo: the colored spaces and occupancy are simulated. Real-time availability would require sensors and a connected service; accessible-space positions must be confirmed with KTECH.</p>
+000113|       <div id="orbitParkingSelection" class="orbit-parking-selection" role="status" aria-live="polite" hidden>
+000114|         <div><strong id="orbitParkingSpotName"></strong><br><span id="orbitParkingSpotStatus"></span></div>
+000115|         <button type="button" id="orbitParkingToggle">Change status</button>
+000116|       </div>
+000117|     </section>
+000118|     <div class="orbit-nav-v2-form" id="orbitNavForm">
+000119|       <div class="orbit-nav-v2-location"><label for="orbitNavFrom"><span class="orbit-nav-dot start"></span> Starting location</label>
+000120|         <select id="orbitNavFrom" aria-label="Choose your starting location"></select></div>
+000121|       <button id="orbitSwapRoute" class="orbit-nav-swap" type="button" aria-label="Swap start and destination">⇅</button>
+000122|       <div class="orbit-nav-v2-location"><label for="orbitNavTo"><span class="orbit-nav-dot end"></span> Destination</label>
+000123|         <select id="orbitNavTo" aria-label="Choose your destination"></select></div>
+000124|     </div>
+000125|     <div class="orbit-nav-v2-settings">
+000126|       <label class="orbit-access-toggle" for="orbitAccessible"><input id="orbitAccessible" type="checkbox" /> <span>♿ Accessible route — use wheelchair-accessible elevators, not stairs</span></label>
+000127|       <button type="button" id="orbitFindRoute">Get Directions →</button>
+000128|     </div>
+000129|     <div class="orbit-nav-v2-layout">
+000130|       <div class="orbit-nav-v2-map-wrap">
+000131|         <div class="orbit-nav-v2-map-head"><span id="orbitFloorCurrentLabel">Floor 1</span><span id="orbitMapHint">Tap a room or choose it above</span>
+000132|         <div class="orbit-nav-v2-zoom"><button type="button" id="orbitZoomOut" aria-label="Zoom out">−</button><button type="button" id="orbitZoomIn" aria-label="Zoom in">+</button></div></div>
+000133|         <div class="orbit-directions-dock" id="orbitDirectionsDock" aria-label="Route directions">
+000134|           <button type="button" class="orbit-directions-tab" id="orbitDirectionsTab" aria-expanded="false" aria-controls="orbitDirectionsSheet"><span>➤ Directions</span><span id="orbitDirectionsTabState">▾</span></button>
+000135|     <div class="orbit-nav-v2-instructions" id="orbitDirectionsSheet" hidden aria-live="polite">
+000136|       <div class="orbit-nav-v2-route-top"><strong id="orbitRouteSummary">Route</strong><div class="orbit-route-top-actions"><button type="button" id="orbitMinimizeNavigation" aria-label="Minimize directions">−</button><button type="button" id="orbitStopNavigation">✕</button></div></div>
+000137|       <div id="orbitRouteDescriptor"></div>
+000138|       <ol id="orbitRouteSteps" class="orbit-nav-v2-steps"></ol>
+000139|       <div class="orbit-nav-v2-step-actions"><button type="button" id="orbitStepBack">← Previous</button><span id="orbitRouteProgress"></span><button type="button" id="orbitStepNext">Next step →</button></div>
+000140|     </div>
+000141|         </div>
+000142|         <div class="orbit-map-stage" id="orbitMapStage" role="region" aria-label="Interactive map with selectable rooms" tabindex="0">
+000143|           <div class="orbit-map-canvas" id="orbitMapCanvas">
+000144|             <img id="orbitFloorImage" alt="KTECH floor plan" draggable="false" />
+000145|             <svg id="orbitFloorOverlay" class="orbit-map-overlay" viewBox="0 0 1060 620" preserveAspectRatio="none" aria-label="Room selection and directions">
+000146|               <g id="orbitRouteGraphics"></g><g id="orbitRoomLayer"></g><g id="orbitParkingLayer"></g>
+000147|             </svg>
+000148|           </div>
+000149|         </div>
+000150|     <div id="orbitKeyPicker" class="orbit-key-picker" hidden><div class="orbit-key-picker-head"><strong id="orbitKeyPickerTitle">Locations</strong><button type="button" id="orbitCloseKeyPicker" aria-label="Close">✕</button></div><div id="orbitKeyPickerOptions" class="orbit-key-picker-options"></div></div>
+000151|         <p id="orbitMapSelection" role="status" aria-live="polite" class="orbit-map-selection">Choose two locations; the yellow dots indicate classroom doors.</p>
+000152|         <p class="orbit-map-v2-caution">Map-based route preview, not live GPS. Door targets are shown as yellow dots; confirm precise doorway positions and accessibility onsite.</p>
+000153|       </div>
+000154|       <aside class="orbit-map-v2-key" aria-label="Map Key">
+000155|         <details open><summary>Map Key</summary>
+000156|           <div class="orbit-map-v2-key-rows" id="orbitMapKeyRows"></div>
+000157|         </details>
+000158|       </aside>
+000159|     </div>
+000160| 
+000161|     <div class="orbit-map-v2-actionbar" role="group" aria-label="Map tools" hidden>
+000162|        <button type="button" id="orbitActionDirections">➤ <span>Get Directions</span></button>
+000163|        <button type="button" id="orbitActionFind">📍 <span>Find Location</span></button>
+000164|        <button type="button" id="orbitActionFloor">▤ <span>Change Floor</span></button>
+000165|        <button type="button" id="orbitActionList">☷ <span>Location List</span></button>
+000166|        <button type="button" id="orbitActionInfo">ⓘ <span>Map Info</span></button>
+000167|     </div>
+000168|     <div id="orbitMapInfoPanel" class="orbit-map-v2-info" hidden>
+000169|        This is a manually selected starting-point route preview, not real-time GPS tracking. The yellow dots represent classroom doors. Routes follow white corridors to these entrances; confirm exact entrances and accessibility onsite.
+000170|     </div>
+000171|     <div id="orbitMapQuickLinks" class="orbit-nav-v2-quicklinks" hidden>
+000172|       <button type="button" data-locate="one|IT Department">IT Department</button>
+000173|       <button type="button" data-locate="one|Finance Department">Finance Department</button>
+000174|       <button type="button" data-locate="two|Library">Library (Floor 2)</button>
+000175|       <button type="button" id="orbitShowRooms">Room list</button>
+000176|     </div>
+000177|     <div id="orbitRoomList" class="orbit-nav-v2-roomlist" hidden></div>
+000178|   </div>
+000179| </section>
+000180| 
+000181| 
+000182|     <section id="homeView" class="orbit-view" style="display:none">
+000183|         <div class="orbit-home-hero">
+000184|             <h2 id="homeTitle">Everything around one student platform.</h2>
+000185|             <p id="homeText">Choose a section below. Each KTECH Orbit service has its own space, while Orbit Chat stays available wherever you are.</p>
+000186|         </div>
+000187|         <div class="orbit-feature-grid">
+000188|             <button type="button" class="orbit-feature-card" data-open-view="reviewView"><span class="feature-icon">📝</span><h3 id="cardReviewTitle">Instructor Review</h3><p id="cardReviewText">Open the review app and submit instructor feedback.</p></button>
+000189|             <button type="button" class="orbit-feature-card" data-open-view="reviewsView"><span class="feature-icon">⭐</span><h3 id="cardReviewsTitle">Student Reviews</h3><p id="cardReviewsText">Browse feedback shared by students.</p></button>
+000190|             <button type="button" class="orbit-feature-card" data-open-chat="true"><span class="feature-icon">💬</span><h3 id="cardChatTitle">Orbit Chat</h3><p id="cardChatText">Ask KTECH questions without leaving your current page.</p></button>
+000191|             <button type="button" class="orbit-feature-card" data-open-view="contactView"><span class="feature-icon">✉️</span><h3 id="cardContactTitle">Contact</h3><p id="cardContactText">Send feedback or get help with KTECH Orbit.</p></button>
+000192|         </div>
+000193|     </section>
+000194| 
+000195|     <section id="reviewView" class="orbit-view active">
+000196|     <div class="privacy-notice">
+000197|         <span id="privacyText">🛡️ <strong>Student Shield:</strong> Submit your honest review! Spam, gibberish, and profanity filters are enabled.</span>
+000198|     </div>
+000199| 
+000200|     <div id="statusMsg" class="status-msg"></div>
+000201| 
+000202|     <form id="feedbackForm">
+000203|         <div class="student-info">
+000204|             <div class="input-group">
+000205|                 <label for="instructorNameInput" id="instructorLabel">Instructor Name</label>
+000206|                 <input type="text" id="instructorNameInput" name="instructorNameInput" placeholder="Type Instructor Name..." list="instructorSuggestions" required>
+000207|                 <datalist id="instructorSuggestions"></datalist>
+000208|             </div>
+000209|             <div class="input-group">
+000210|                 <label for="courseCode" id="courseLabel">Course Name / Code</label>
+000211|                 <input type="text" id="courseCode" name="courseCode" placeholder="e.g. CS101 / Java Programming" required>
+000212|             </div>
+000213|             <div class="input-group">
+000214|                 <label for="date" id="dateLabel">Date</label>
+000215|                 <input type="text" id="date" name="date" placeholder="DD/MM/YYYY">
+000216|             </div>
+000217|         </div>
+000218| 
+000219|         <div class="table-responsive">
+000220|             <table>
+000221|                 <thead>
+000222|                     <tr>
+000223|                         <th id="quizHeader">Quiz Difficulty</th>
+000224|                         <th id="teachingHeader">Teaching Quality</th>
+000225|                         <th id="understandingHeader">Understanding</th>
+000226|                         <th id="bonusHeader">Bonus Marks / Pushes</th>
+000227|                         <th id="opinionHeader">Short Opinion & Suggestions</th>
+000228|                     </tr>
+000229|                 </thead>
+000230|                 <tbody>
+000231|                     <tr>
+000232|                         <td>
+000233|                             <div class="radio-group">
+000234|                                 <label class="radio-label"><input type="radio" name="quiz" value="Easy" required><span data-option-key="easy">Easy</span></label>
+000235|                                 <label class="radio-label"><input type="radio" name="quiz" value="Medium"><span data-option-key="medium">Medium</span></label>
+000236|                                 <label class="radio-label"><input type="radio" name="quiz" value="Hard"><span data-option-key="hard">Hard</span></label>
+000237|                             </div>
+000238|                         </td>
+000239|                         <td>
+000240|                             <div class="radio-group">
+000241|                                 <label class="radio-label"><input type="radio" name="teaching" value="Needs work" required><span data-option-key="needsWork">Needs work</span></label>
+000242|                                 <label class="radio-label"><input type="radio" name="teaching" value="Good"><span data-option-key="good">Good</span></label>
+000243|                                 <label class="radio-label"><input type="radio" name="teaching" value="Excellent"><span data-option-key="excellent">Excellent</span></label>
+000244|                             </div>
+000245|                         </td>
+000246|                         <td>
+000247|                             <div class="radio-group">

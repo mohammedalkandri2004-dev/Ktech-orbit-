@@ -1,0 +1,9 @@
+
+  .orbit-status-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;font-size:.72rem;font-weight:900;margin-inline-start:6px}
+  .orbit-status-pending{background:#fff3cd;color:#705400;border:1px solid #ead27a}
+  .orbit-status-published{background:#e9f7ea;color:#245c2a;border:1px solid #b9dfbd}
+  .orbit-pending-note{margin-top:8px;padding:8px 10px;border-radius:8px;background:#fff8df;border:1px solid #ead27a;font-size:.82rem;font-weight:700;color:#665000}
+  .orbit-admin-queue{margin-bottom:18px;padding:12px;border:1px solid #ead27a;border-radius:14px;background:#fffaf0}
+  .orbit-admin-queue h3{margin:0 0 10px;color:var(--olive-dark)}
+  .orbit-review-reason{font-size:.78rem;margin-top:7px;padding:6px 8px;border-radius:7px;background:#f4f1e7;color:#5e583e}
+  .btn-approve{background:var(--olive-dark);color:var(--yellow-main);border:none;border-radius:8px;padding:8px 12px;font-weight:900;cursor:pointer}

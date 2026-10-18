@@ -1,0 +1,1219 @@
+
+        :root {
+            --yellow-main: #f5cb0e;
+            --yellow-light: #fff2a3;
+            --cream-bg: #faf4db;
+            --olive-dark: #3a3b1a;
+            --olive-medium: #5b5c2a;
+            --text-dark: #222310;
+            --card-bg: rgba(255, 255, 255, 0.94);
+            --error: #d93838;
+            --success: #2e7d32;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--yellow-main);
+            background-image: 
+                radial-gradient(circle at 0% 0%, var(--olive-dark) 25%, transparent 26%),
+                radial-gradient(circle at 100% 100%, var(--olive-medium) 25%, transparent 26%),
+                linear-gradient(45deg, var(--yellow-light) 25%, transparent 25%, transparent 75%, var(--yellow-light) 75%),
+                linear-gradient(45deg, var(--yellow-light) 25%, var(--yellow-main) 25%, var(--yellow-main) 75%, var(--yellow-light) 75%);
+            background-size: 120px 120px;
+            background-position: 0 0, 0 0, 0 0, 60px 60px;
+            color: var(--text-dark);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 4px solid var(--olive-dark);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            padding: 30px;
+        }
+
+        header {
+            border-bottom: 3px solid var(--olive-dark);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        /* Clickable Duck Logo Avatar Header */
+        .duck-circle-avatar {
+            width: 76px;
+            height: 76px;
+            background: var(--yellow-main);
+            border: 3.5px solid var(--olive-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+            overflow: hidden;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .duck-circle-avatar:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.28);
+        }
+
+        .duck-circle-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 42%;
+            display: block;
+        }
+
+        .logo-title h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--olive-dark);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .logo-title p {
+            color: var(--olive-medium);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .anon-badge {
+            background: var(--olive-dark);
+            color: var(--yellow-main);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .language-switcher {
+            display: inline-flex;
+            overflow: hidden;
+            border: 2px solid var(--olive-dark);
+            border-radius: 8px;
+            background: white;
+        }
+
+        .lang-btn {
+            min-width: 46px;
+            padding: 7px 10px;
+            border: 0;
+            border-radius: 0;
+            background: white;
+            color: var(--olive-dark);
+            box-shadow: none;
+            font-size: 0.78rem;
+        }
+
+        .lang-btn + .lang-btn {
+            border-left: 2px solid var(--olive-dark);
+        }
+
+        .lang-btn.active {
+            background: var(--olive-dark);
+            color: var(--yellow-main);
+        }
+
+        .privacy-notice {
+            background: var(--yellow-light);
+            border: 2px solid var(--yellow-main);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            color: var(--olive-dark);
+            font-weight: 600;
+        }
+
+        .student-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            background: var(--cream-bg);
+            border: 2px solid var(--olive-dark);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-weight: 800;
+            font-size: 0.8rem;
+            color: var(--olive-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .input-group input {
+            padding: 10px 14px;
+            border: 2px solid var(--olive-dark);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: white;
+            color: var(--text-dark);
+            outline: none;
+            font-weight: 600;
+        }
+
+        .input-group input:focus {
+            border-color: var(--yellow-main);
+            box-shadow: 0 0 0 3px rgba(245, 203, 14, 0.4);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: left;
+            margin-bottom: 25px;
+            border: 2px solid var(--olive-dark);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px 15px;
+            border-bottom: 1px solid rgba(58, 59, 26, 0.15);
+            vertical-align: top;
+        }
+
+        th {
+            background-color: var(--olive-dark);
+            color: var(--yellow-main);
+            font-weight: 800;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tr:nth-child(even) { background-color: var(--cream-bg); }
+        tr:nth-child(odd) { background-color: #ffffff; }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 110px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .radio-label input {
+            cursor: pointer;
+            accent-color: var(--olive-dark);
+        }
+
+        textarea {
+            width: 100%;
+            min-width: 220px;
+            padding: 10px;
+            border: 2px solid var(--olive-dark);
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 70px;
+            font-size: 0.88rem;
+            background: white;
+            color: var(--text-dark);
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: var(--yellow-main);
+            box-shadow: 0 0 0 3px rgba(245, 203, 14, 0.4);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            border: 2px solid var(--olive-dark);
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit {
+            background: var(--yellow-main);
+            color: var(--olive-dark);
+            box-shadow: 0 4px 0 var(--olive-dark);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 var(--olive-dark);
+        }
+
+        .btn-reset {
+            background: #ffffff;
+            color: var(--olive-dark);
+        }
+
+        .btn-reset:hover { background: var(--cream-bg); }
+
+        .btn-admin {
+            background: var(--olive-dark);
+            color: var(--yellow-main);
+            padding: 8px 16px;
+            font-size: 0.8rem;
+        }
+
+        .btn-danger {
+            background: var(--error);
+            color: white;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+        }
+
+        .btn-edit {
+            background: var(--yellow-main);
+            color: var(--olive-dark);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+        }
+
+        .status-msg {
+            display: none;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+            border: 2px solid var(--olive-dark);
+        }
+
+        .status-success { background: #e8f5e9; color: var(--success); }
+        .status-error { background: #ffebee; color: var(--error); }
+
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border: 4px solid var(--olive-dark);
+            border-radius: 16px;
+            padding: 25px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--olive-dark);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background: transparent;
+            color: var(--olive-dark);
+            font-size: 1.8rem;
+            padding: 0;
+            border: none;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--olive-dark);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: var(--cream-bg);
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: var(--yellow-main);
+            background: white;
+        }
+
+        .instructor-file-card {
+            background: var(--cream-bg);
+            border: 3px solid var(--olive-dark);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .instructor-file-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--olive-dark);
+            border-bottom: 2px dashed var(--olive-dark);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .review-stacked-item {
+            background: white;
+            border: 2px solid var(--olive-dark);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .contact-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--cream-bg);
+            border: 2px solid var(--olive-dark);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            color: var(--olive-dark);
+            font-size: 1.25rem;
+            margin-bottom: 7px;
+        }
+
+        .contact-section p {
+            color: var(--olive-medium);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: var(--olive-dark);
+            color: var(--yellow-main);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .contact-email:hover {
+            background: var(--olive-medium);
+        }
+
+        html[dir="rtl"] body {
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        html[dir="rtl"] .lang-btn + .lang-btn {
+            border-left: 0;
+            border-right: 2px solid var(--olive-dark);
+        }
+
+        html[dir="rtl"] table,
+        html[dir="rtl"] .modal-content {
+            text-align: right;
+        }
+
+        html[dir="rtl"] .radio-label {
+            flex-direction: row;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { padding: 15px; }
+            .actions { flex-direction: column; }
+            .header-controls { width: 100%; justify-content: space-between; }
+        }
+
+
+        /* KTECH Orbit AI Assistant */
+        .orbit-ai-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--cream-bg);
+            border: 3px solid var(--olive-dark);
+            border-radius: 14px;
+            text-align: left;
+        }
+        .orbit-ai-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .orbit-ai-title { color: var(--olive-dark); font-size: 1.3rem; font-weight: 900; }
+        .orbit-ai-badge {
+            background: var(--olive-dark); color: var(--yellow-main); border-radius: 999px;
+            padding: 6px 10px; font-size: .75rem; font-weight: 800;
+        }
+        .orbit-ai-disclaimer { color: var(--olive-medium); font-weight: 650; font-size: .88rem; margin-bottom: 12px; }
+        .orbit-chat-log {
+            height: 300px; overflow-y: auto; background: #fff; border: 2px solid var(--olive-dark);
+            border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;
+        }
+        .orbit-chat-message { max-width: 86%; padding: 10px 12px; border-radius: 12px; line-height: 1.45; white-space: pre-wrap; word-break: break-word; }
+        .orbit-chat-message.user { align-self: flex-end; background: var(--yellow-main); color: var(--text-dark); border: 2px solid var(--olive-dark); }
+        .orbit-chat-message.bot { align-self: flex-start; background: #fff; color: var(--text-dark); border: 2px solid var(--olive-dark); }
+        .orbit-chat-message.system { align-self: center; max-width: 100%; background: #fff8d7; color: var(--olive-dark); border: 1px dashed var(--olive-dark); font-size: .84rem; }
+        .orbit-chat-row { display: flex; gap: 10px; margin-top: 10px; }
+        .orbit-chat-row input { flex: 1; min-width: 0; padding: 12px 14px; border: 2px solid var(--olive-dark); border-radius: 8px; font-size: .95rem; outline: none; }
+        .orbit-chat-row input:focus { border-color: var(--yellow-main); box-shadow: 0 0 0 3px rgba(245,203,14,.35); }
+        .orbit-chat-meta { margin-top: 7px; display: flex; justify-content: space-between; gap: 10px; color: var(--olive-medium); font-size: .76rem; font-weight: 700; }
+        .orbit-chat-send:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+        html[dir="rtl"] .orbit-ai-section { text-align: right; }
+        html[dir="rtl"] .orbit-chat-message.user { align-self: flex-start; }
+        html[dir="rtl"] .orbit-chat-message.bot { align-self: flex-end; }
+        @media (max-width: 600px) {
+            .orbit-chat-row { flex-direction: column; }
+            .orbit-chat-row button { width: 100%; }
+            .orbit-chat-log { height: 340px; }
+            .orbit-chat-message { max-width: 94%; }
+        }
+
+
+        /* Orbit app dashboard / tab interface */
+        .orbit-nav {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+            margin: 0 0 22px;
+            position: sticky;
+            top: 8px;
+            z-index: 80;
+            padding: 9px;
+            border: 2px solid var(--olive-dark);
+            border-radius: 14px;
+            background: rgba(250,244,219,.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 5px 16px rgba(0,0,0,.12);
+        }
+        .orbit-tab-btn {
+            padding: 11px 8px;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--olive-dark);
+            box-shadow: none;
+            text-transform: none;
+            letter-spacing: .2px;
+            font-size: .84rem;
+            min-width: 0;
+        }
+        .orbit-tab-btn:hover, .orbit-tab-btn.active {
+            background: var(--olive-dark);
+            color: var(--yellow-main);
+            transform: none;
+        }
+        .orbit-tab-btn .tab-icon { display:block; font-size:1.2rem; margin-bottom:3px; }
+        .orbit-view { display:none; animation: orbitFade .22s ease; }
+        .orbit-view.active { display:block; }
+        @keyframes orbitFade { from { opacity:.25; transform:translateY(4px); } to { opacity:1; transform:none; } }
+
+        .orbit-home-hero {
+            padding: 28px;
+            border: 3px solid var(--olive-dark);
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--yellow-light), #fff 60%);
+            margin-bottom: 18px;
+        }
+        .orbit-home-hero h2 { font-size: clamp(1.55rem, 4vw, 2.35rem); color:var(--olive-dark); margin-bottom:8px; }
+        .orbit-home-hero p { color:var(--olive-medium); font-weight:700; line-height:1.55; max-width:760px; }
+        .orbit-feature-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+        .orbit-feature-card {
+            text-align:left;
+            padding:20px;
+            border:3px solid var(--olive-dark);
+            border-radius:16px;
+            background:#fff;
+            color:var(--text-dark);
+            box-shadow:0 5px 0 rgba(58,59,26,.18);
+            cursor:pointer;
+            transition:.18s ease;
+        }
+        .orbit-feature-card:hover { transform:translateY(-3px); box-shadow:0 8px 0 rgba(58,59,26,.18); }
+        .orbit-feature-card .feature-icon { font-size:2rem; display:block; margin-bottom:8px; }
+        .orbit-feature-card h3 { color:var(--olive-dark); margin-bottom:5px; font-size:1.08rem; }
+        .orbit-feature-card p { color:var(--olive-medium); font-size:.88rem; font-weight:650; line-height:1.45; }
+
+        /* Floating chat: available from every tab */
+        .orbit-chat-fab {
+            position:fixed;
+            right:22px;
+            bottom:22px;
+            z-index:900;
+            width:62px;
+            height:62px;
+            border-radius:50%;
+            padding:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:1.55rem;
+            background:var(--olive-dark);
+            color:var(--yellow-main);
+            border:3px solid var(--yellow-main);
+            box-shadow:0 8px 24px rgba(0,0,0,.3);
+        }
+        .orbit-chat-fab:hover { transform:scale(1.06); }
+        .orbit-chat-drawer {
+            position:fixed;
+            right:18px;
+            bottom:94px;
+            width:min(430px, calc(100vw - 24px));
+            max-height:min(700px, calc(100vh - 120px));
+            z-index:899;
+            display:none;
+            overflow:auto;
+            background:#fff;
+            border:3px solid var(--olive-dark);
+            border-radius:18px;
+            box-shadow:0 16px 45px rgba(0,0,0,.32);
+            padding:14px;
+        }
+        .orbit-chat-drawer.open { display:block; animation:orbitFade .18s ease; }
+        .orbit-chat-drawer-head { display:flex; justify-content:flex-end; margin-bottom:4px; }
+        .orbit-chat-drawer .orbit-ai-section { margin:0; border:0; padding:8px; background:transparent; }
+        .orbit-chat-close { padding:4px 9px; border:0; background:transparent; font-size:1.5rem; color:var(--olive-dark); }
+        html[dir="rtl"] .orbit-feature-card { text-align:right; }
+        html[dir="rtl"] .orbit-chat-fab { right:auto; left:22px; }
+        html[dir="rtl"] .orbit-chat-drawer { right:auto; left:18px; }
+
+        @media (max-width: 768px) {
+            .orbit-nav { grid-template-columns:repeat(5, minmax(68px,1fr)); overflow-x:auto; position:sticky; top:4px; }
+            .orbit-tab-btn { font-size:.72rem; padding:9px 5px; }
+            .orbit-feature-grid { grid-template-columns:1fr; }
+            .orbit-home-hero { padding:20px; }
+        }
+        @media (max-width: 520px) {
+            body { padding-bottom:90px; }
+            .orbit-nav { margin-left:-5px; margin-right:-5px; }
+            .orbit-chat-fab { right:14px; bottom:14px; width:58px; height:58px; }
+            html[dir="rtl"] .orbit-chat-fab { right:auto; left:14px; }
+            .orbit-chat-drawer { right:12px; bottom:82px; width:calc(100vw - 24px); max-height:calc(100vh - 100px); }
+            html[dir="rtl"] .orbit-chat-drawer { right:auto; left:12px; }
+        }
+
+    
+        /* Legacy two-tab layout rules (overridden by KTECH Orbit 1.07 below) */
+        .orbit-nav { grid-template-columns:repeat(2,minmax(0,1fr)) !important; max-width:560px; margin:0 auto 22px !important; }
+        .orbit-tab-btn { font-size:.92rem; }
+        .orbit-chat-fab, .orbit-chat-close { display:none !important; }
+        .orbit-chat-drawer, .orbit-chat-drawer.open {
+            display:block !important; position:fixed; right:18px; bottom:18px;
+            width:min(390px,calc(100vw - 36px)); max-height:min(620px,calc(100vh - 36px));
+            z-index:899; overflow:auto; background:#fff; border:3px solid var(--olive-dark);
+            border-radius:18px; box-shadow:0 16px 45px rgba(0,0,0,.32); padding:14px;
+        }
+        html[dir="rtl"] .orbit-chat-drawer, html[dir="rtl"] .orbit-chat-drawer.open { right:auto; left:18px; }
+        @media (min-width:1100px) {
+            body { padding-right:430px; }
+            html[dir="rtl"] body { padding-right:20px; padding-left:430px; }
+        }
+        @media (max-width:768px) {
+            .orbit-nav { grid-template-columns:repeat(2,minmax(120px,1fr)) !important; overflow:visible !important; }
+            .orbit-chat-drawer, .orbit-chat-drawer.open { right:10px; left:10px; bottom:10px; width:auto; max-height:46vh; }
+            html[dir="rtl"] .orbit-chat-drawer, html[dir="rtl"] .orbit-chat-drawer.open { right:10px; left:10px; }
+            body { padding-bottom:48vh !important; }
+        }
+
+    
+        /* KTECH Orbit 1.07 — simple floating chat bubble */
+        .orbit-chat-fab {
+            display:flex !important;
+            position:fixed;
+            right:18px;
+            bottom:18px;
+            z-index:901;
+            width:58px;
+            height:58px;
+            border-radius:50%;
+            padding:0;
+            align-items:center;
+            justify-content:center;
+            font-size:1.45rem;
+            background:var(--olive-dark);
+            color:var(--yellow-main);
+            border:3px solid var(--yellow-main);
+            box-shadow:0 8px 24px rgba(0,0,0,.28);
+            cursor:pointer;
+        }
+        .orbit-chat-close { display:block !important; }
+        .orbit-chat-drawer {
+            display:none !important;
+            position:fixed;
+            right:18px;
+            bottom:88px;
+            width:min(390px,calc(100vw - 36px));
+            max-height:min(620px,calc(100vh - 120px));
+            z-index:900;
+            overflow:auto;
+            background:#fff;
+            border:3px solid var(--olive-dark);
+            border-radius:18px;
+            box-shadow:0 16px 45px rgba(0,0,0,.32);
+            padding:14px;
+        }
+        .orbit-chat-drawer.open { display:block !important; }
+        html[dir="rtl"] .orbit-chat-fab { right:auto; left:18px; }
+        html[dir="rtl"] .orbit-chat-drawer { right:auto; left:18px; }
+        @media (min-width:1100px) {
+            body, html[dir="rtl"] body { padding-right:20px !important; padding-left:20px !important; }
+        }
+        @media (max-width:768px) {
+            body { padding-bottom:90px !important; }
+            .orbit-chat-fab { right:12px; bottom:12px; width:56px; height:56px; }
+            html[dir="rtl"] .orbit-chat-fab { right:auto; left:12px; }
+            .orbit-chat-drawer {
+                right:10px;
+                left:10px;
+                bottom:78px;
+                width:auto;
+                max-height:70vh;
+            }
+            html[dir="rtl"] .orbit-chat-drawer { right:10px; left:10px; }
+        }
+
+    
+        /* Contact / feedback shown under the main KTECH Orbit title on every tab */
+        .header-contact-strip {
+            display:flex;
+            align-items:center;
+            gap:8px 12px;
+            flex-wrap:wrap;
+            margin-top:8px;
+            font-size:.82rem;
+            font-weight:700;
+            color:var(--olive-medium);
+        }
+        .header-contact-email {
+            color:var(--olive-dark);
+            text-decoration:none;
+            font-weight:900;
+            background:var(--yellow-light);
+            border:1.5px solid var(--olive-dark);
+            border-radius:999px;
+            padding:5px 10px;
+            transition:.18s ease;
+        }
+        .header-contact-email:hover {
+            background:var(--olive-dark);
+            color:var(--yellow-main);
+        }
+        html[dir="rtl"] .header-contact-strip { justify-content:flex-start; }
+        @media (max-width:600px) {
+            .header-contact-strip {
+                font-size:.78rem;
+                gap:6px;
+            }
+            .header-contact-email {
+                padding:5px 9px;
+                max-width:100%;
+                overflow-wrap:anywhere;
+            }
+        }
+
+        /* KTECH Orbit 1.07 — section cards matched to the reference image */
+        .orbit-nav {
+            display:grid !important;
+            grid-template-columns:1fr !important;
+            gap:18px !important;
+            max-width:none !important;
+            margin:0 0 26px !important;
+            padding:0 !important;
+            position:static !important;
+            overflow:visible !important;
+            border:0 !important;
+            background:transparent !important;
+            box-shadow:none !important;
+            backdrop-filter:none !important;
+            -webkit-backdrop-filter:none !important;
+        }
+        .orbit-tab-btn {
+            width:100%;
+            min-height:220px;
+            padding:34px 44px 32px !important;
+            display:flex !important;
+            flex-direction:column !important;
+            align-items:flex-start !important;
+            justify-content:flex-start !important;
+            gap:0 !important;
+            text-align:left !important;
+            border:4px solid var(--olive-dark) !important;
+            border-radius:30px !important;
+            background:#fff !important;
+            color:var(--olive-dark) !important;
+            box-shadow:0 10px 0 rgba(58,59,26,.14) !important;
+            text-transform:none !important;
+            letter-spacing:normal !important;
+            transition:transform .18s ease, box-shadow .18s ease !important;
+        }
+        .orbit-tab-btn:hover {
+            transform:translateY(-2px) !important;
+            box-shadow:0 13px 0 rgba(58,59,26,.17) !important;
+            background:#fff !important;
+        }
+        .orbit-tab-btn.active {
+            background:#fff !important;
+            color:var(--olive-dark) !important;
+        }
+        .orbit-tab-btn .tab-icon {
+            display:block !important;
+            font-size:2.9rem !important;
+            line-height:1 !important;
+            margin:0 0 34px !important;
+        }
+        .orbit-tab-title {
+            display:block;
+            font-size:clamp(1.55rem,3.2vw,2.2rem);
+            line-height:1.08;
+            font-weight:900;
+            letter-spacing:1.7px;
+            text-transform:uppercase;
+            margin-bottom:14px;
+        }
+        .orbit-tab-bio {
+            display:block;
+            max-width:850px;
+            color:var(--olive-medium);
+            font-size:clamp(1rem,2.1vw,1.35rem);
+            line-height:1.5;
+            font-weight:800;
+            letter-spacing:1.15px;
+            text-transform:uppercase;
+        }
+        html[dir="rtl"] .orbit-tab-btn {
+            text-align:right !important;
+            align-items:flex-start !important;
+        }
+        html[dir="rtl"] .orbit-tab-title,
+        html[dir="rtl"] .orbit-tab-bio { text-align:right !important; }
+        @media (max-width:600px) {
+            .orbit-nav { gap:14px !important; }
+            .orbit-tab-btn {
+                min-height:190px;
+                padding:26px 24px 24px !important;
+                border-width:3px !important;
+                border-radius:24px !important;
+            }
+            .orbit-tab-btn .tab-icon {
+                font-size:2.45rem !important;
+                margin-bottom:26px !important;
+            }
+            .orbit-tab-title {
+                font-size:1.35rem;
+                letter-spacing:1.1px;
+                margin-bottom:10px;
+            }
+            .orbit-tab-bio {
+                font-size:.92rem;
+                letter-spacing:.65px;
+                line-height:1.45;
+            }
+        }
+
+    
+        /* KTECH Orbit 1.07 compact cards — same small footprint as 1.06 */
+        .orbit-feature-grid { gap:10px !important; }
+        .orbit-feature-card { padding:12px 14px !important; border-radius:12px !important; border-width:2px !important; min-height:0 !important; box-shadow:0 3px 0 rgba(58,59,26,.16) !important; }
+        .orbit-feature-card .feature-icon { font-size:1.25rem !important; margin-bottom:4px !important; }
+        .orbit-feature-card h3 { font-size:.95rem !important; margin-bottom:3px !important; }
+        .orbit-feature-card p { font-size:.76rem !important; line-height:1.3 !important; margin:0 !important; }
+        @media (max-width:768px) {
+          .orbit-feature-card { padding:11px 12px !important; }
+          .orbit-feature-card .feature-icon { font-size:1.15rem !important; }
+          .orbit-feature-card h3 { font-size:.9rem !important; }
+          .orbit-feature-card p { font-size:.73rem !important; }
+        }
+
+
+        /* KTECH Orbit 1.07 — compact 1.06-style tabs with small bios */
+        .orbit-nav {
+            display:grid !important;
+            grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+            gap:10px !important;
+            max-width:560px !important;
+            margin:0 auto 22px !important;
+            padding:9px !important;
+            position:sticky !important; top:8px !important; z-index:80 !important;
+            border:2px solid var(--olive-dark) !important; border-radius:14px !important;
+            background:rgba(250,244,219,.96) !important; box-shadow:0 5px 16px rgba(0,0,0,.12) !important;
+        }
+        .orbit-tab-btn {
+            width:auto !important; min-height:76px !important; padding:8px 9px !important;
+            display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important;
+            text-align:center !important; border:2px solid transparent !important; border-radius:10px !important;
+            background:transparent !important; color:var(--olive-dark) !important; box-shadow:none !important;
+        }
+        .orbit-tab-btn:hover,.orbit-tab-btn.active { background:var(--olive-dark) !important; color:var(--yellow-main) !important; transform:none !important; box-shadow:none !important; }
+        .orbit-tab-btn .tab-icon { font-size:1.15rem !important; line-height:1 !important; margin:0 0 3px !important; }
+        .orbit-tab-title { font-size:.80rem !important; line-height:1.12 !important; font-weight:900 !important; letter-spacing:.15px !important; margin:0 0 3px !important; text-transform:none !important; }
+        .orbit-tab-bio { max-width:220px !important; font-size:.60rem !important; line-height:1.18 !important; font-weight:600 !important; letter-spacing:0 !important; text-transform:none !important; color:inherit !important; opacity:.82; }
+        html[dir="rtl"] .orbit-tab-btn, html[dir="rtl"] .orbit-tab-title, html[dir="rtl"] .orbit-tab-bio { text-align:center !important; align-items:center !important; }
+        @media(max-width:600px){
+            .orbit-nav{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:7px !important;padding:7px !important;margin:0 auto 18px !important;}
+            .orbit-tab-btn{min-height:70px !important;padding:7px 6px !important;}
+            .orbit-tab-btn .tab-icon{font-size:1.05rem !important;margin-bottom:3px !important;}
+            .orbit-tab-title{font-size:.72rem !important;margin-bottom:2px !important;}
+            .orbit-tab-bio{font-size:.55rem !important;line-height:1.15 !important;}
+        }
+
+
+/* KTECH Orbit 1.10 — guided, tap-only chatbot */
+.orbit-guide { margin-top: 13px; border: 2px solid var(--olive-dark); background: var(--cream-bg); padding: 12px; border-radius: 12px; }
+.orbit-guide-label { font-size: .92rem; font-weight: 900; color: var(--olive-dark); margin-bottom: 9px; }
+.orbit-guide-options { display: grid; grid-template-columns: 1fr; gap: 8px; max-height: 320px; overflow-y: auto; overscroll-behavior: contain; padding: 2px; }
+.orbit-guide-btn { display: block; width: 100%; text-align: start; white-space: normal; text-transform: none; letter-spacing: 0; line-height: 1.42; font-size: .82rem; font-weight: 750; background: #fff; color: var(--olive-dark); border: 2px solid var(--olive-dark); padding: 10px 12px; border-radius: 10px; text-decoration: none; box-shadow: none; }
+.orbit-guide-btn:hover, .orbit-guide-btn:focus-visible { background: var(--yellow-light); outline-offset: 1px; }
+.orbit-guide-btn.main { background: var(--yellow-main); }
+.orbit-guide-btn.back { background: var(--olive-dark); color: var(--yellow-main); }
+.orbit-guide-btn.info-link { background: #f8fff3; }
+.orbit-guide-btn:disabled { cursor: default; opacity: .8; }
+.orbit-chat-log { height: 235px; }
+.orbit-chat-message { font-size: .86rem; }
+.orbit-chat-message a { color: #493800; text-decoration: underline; font-weight: 800; }
+.orbit-guide-hint {font-size:.77rem;color:var(--olive-medium);font-weight:650;line-height:1.4;margin-bottom:2px}
+.orbit-chat-drawer { max-height: min(730px, calc(100vh - 115px)); }
+@media(max-width:600px) { .orbit-guide-options {max-height: min(37vh,320px);} .orbit-chat-log{height: min(29vh, 240px);} .orbit-chat-drawer{max-height:calc(100dvh - 102px);} }
+
+/* KTECH Orbit 1.12 — Library & Aafaq contact groups inside the tap-only assistant */
+.orbit-guide-section{padding:11px 12px;background:#fff9dd;border:2px solid var(--olive-dark);border-radius:11px;line-height:1.45}
+.orbit-guide-section-heading{font-weight:900;font-size:.91rem;color:var(--olive-dark);margin-bottom:5px}
+.orbit-guide-section-description{font-size:.8rem;color:var(--olive-medium);font-weight:650;white-space:pre-line}
+.orbit-guide-btn.policy-link{background:#fff4cf}
+/* KTECH Orbit - tappable campus map */
+#orbitMapAvailable[hidden],#orbitMapPlaceholder[hidden]{display:none !important;}
+.orbit-nav:has([data-view="mapView"]){grid-template-columns:repeat(3,minmax(0,1fr)) !important;max-width:780px !important}
+.orbit-map-panel{background:var(--cream-bg);border:2px solid var(--olive-dark);border-radius:16px;padding:18px}
+.orbit-map-panel h2{color:var(--olive-dark);margin-bottom:6px}
+.orbit-map-subtitle{font-size:.89rem;color:var(--olive-medium);font-weight:650;margin-bottom:15px}
+.orbit-floor-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:14px 0 18px}
+.orbit-floor-btn{padding:12px 6px;font-size:.82rem;letter-spacing:0;text-transform:none;background:white;color:var(--olive-dark)}
+.orbit-floor-btn.selected{background:var(--olive-dark);color:var(--yellow-main)}
+.orbit-map-search{width:100%;max-width:410px;padding:11px 13px;border:2px solid var(--olive-dark);border-radius:9px;font-size:1rem;margin-bottom:12px;background:white}
+.orbit-map-stage{position:relative;width:100%;overflow:auto;border-radius:14px;border:2px solid var(--olive-dark);background:#fff}
+.orbit-map-canvas{position:relative;width:100%;min-width:500px;line-height:0}
+.orbit-map-canvas img{display:block;width:100%;height:auto}
+.orbit-map-overlay{position:absolute;inset:0;width:100%;height:100%}
+.orbit-room{fill:transparent;stroke:transparent;stroke-width:3;cursor:pointer;pointer-events:all}
+.orbit-room:hover,.orbit-room:focus{fill:rgba(245,203,14,.4);stroke:#a17a00;outline:none}
+.orbit-room.selected{fill:rgba(255,199,0,.48);stroke:#e04721;stroke-width:4}
+.orbit-room.found{fill:rgba(245,203,14,.4);stroke:#aa7200;stroke-width:3}
+.orbit-map-selection{margin-top:12px;padding:12px 15px;border:2px solid var(--olive-dark);border-radius:10px;background:#fff;font-weight:800;color:var(--olive-dark)}
+.orbit-map-empty{background:#fff;border:2px dashed var(--olive-dark);border-radius:14px;min-height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px;gap:12px;color:var(--olive-dark)}
+.orbit-map-empty .big-icon{font-size:3rem}
+.orbit-map-empty p{font-size:.9rem;line-height:1.5;max-width:400px}
+.orbit-map-hint{font-size:.78rem;color:var(--olive-medium);margin:10px 0;line-height:1.5}
+@media(max-width:650px){.orbit-floor-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.orbit-map-panel{padding:11px}.orbit-nav:has([data-view="mapView"]){gap:5px !important;padding:5px !important}.orbit-nav:has([data-view="mapView"]) .orbit-tab-bio{display:none}.orbit-nav:has([data-view="mapView"]) .orbit-tab-btn{min-height:55px !important}}
+
+
+/* KTECH Orbit 1.12 — Student Help Guide demo shortcut */
+.orbit-help-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 17px;margin:0 0 20px;background:#fff9d8;border:2px solid var(--olive-dark);border-radius:15px}
+.orbit-help-banner strong{font-size:.98rem;color:var(--olive-dark)}
+.orbit-help-banner p{font-size:.8rem;color:var(--olive-medium);font-weight:650;line-height:1.45;margin-top:3px}
+.orbit-help-banner button{padding:10px 15px;border-radius:10px;color:var(--yellow-main);background:var(--olive-dark);font-size:.8rem;letter-spacing:0;text-transform:none}
+.orbit-help-banner button:hover,.orbit-help-banner button:focus-visible{background:var(--olive-medium)}
+.orbit-help-status{font-size:.79rem;color:var(--olive-medium);font-weight:750}
+.orbit-guide-btn.help-answer{border-left:5px solid #a78100;background:#fffdf3}
+.orbit-guide-section.help-outcome{background:#f7ffeb}
+@media(max-width:600px){.orbit-help-banner{align-items:stretch}.orbit-help-banner button{width:100%}}
+
+/* KTECH Orbit 1.13 - Avenues-inspired 2D campus wayfinding */
+.orbit-nav-map{background:#fff !important;padding:clamp(12px,2.4vw,24px) !important;border:2px solid var(--olive-dark);}
+.orbit-wayfinding-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:17px}
+.orbit-map-eyebrow{display:block;font-weight:900;font-size:.72rem;letter-spacing:1.4px;color:#866700;margin-bottom:5px}
+.orbit-wayfinding-head h2{font-size:clamp(1.4rem,3.5vw,1.95rem) !important;margin:0 0 6px !important}
+.orbit-wayfinding-head .orbit-map-subtitle{line-height:1.45;margin:0;max-width:520px}
+.orbit-map-two-d{white-space:nowrap;border:1px solid #ddc562;color:var(--olive-dark);background:#fff7c8;border-radius:999px;padding:7px 11px;font-size:.7rem;letter-spacing:.6px;font-weight:900}
+.orbit-route-card{background:#fff;border:2px solid #ddd8bf;border-radius:20px;padding:10px 11px;display:flex;align-items:center;gap:8px;box-shadow:0 3px 12px #24200a0a;position:relative;}
+.orbit-route-fields{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.orbit-route-row{display:flex;align-items:center;gap:11px;background:#f9f9f3;border:2px solid #e5e4d9;border-radius:13px;padding:8px 10px;min-height:64px;transition:border-color .15s,background .15s}
+.orbit-route-row.active,.orbit-route-row:focus-within{border-color:#c8a20a;background:#fffbed}
+.orbit-map-pin-dot{display:block;border-radius:50%;width:13px;height:13px;flex-shrink:0;box-shadow:0 0 0 4px #eaf0fa}
+.orbit-map-pin-dot.from{background:#3469e9}
+.orbit-map-pin-dot.to{background:#e9405d;box-shadow:0 0 0 4px #ffedf1}
+.orbit-route-field-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.orbit-route-field-main label{font-size:.62rem;font-weight:900;color:#6a6b68;letter-spacing:.6px}
+.orbit-route-field-main input{background:transparent;border:0;color:#232516;box-shadow:none;font-size:1.02rem;font-weight:800;min-width:0;width:100%;outline:none;padding:1px 0;border-radius:0}
+.orbit-route-field-main input:focus{box-shadow:none;border:0}
+.orbit-route-field-main input::placeholder{font-weight:600;color:#91908a;opacity:1}
+.orbit-map-panel .orbit-small-clear{background:transparent;border:0;border-radius:50%;color:#817d72;box-shadow:none;padding:1px 8px;font-size:1.7rem;font-weight:400;line-height:1;flex-shrink:0}
+.orbit-map-panel .orbit-swap-route{width:42px;min-width:42px;height:48px;padding:0;border:0;border-radius:14px;background:#fff4b3;color:#474018;font-size:1.7rem;line-height:1;box-shadow:none}
+.orbit-map-panel .orbit-swap-route:hover{background:#eed467}
+.orbit-route-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:12px;margin-top:8px;border:1px solid #d6d2bd;border-radius:12px;background:#fff;max-height:166px;overflow:auto;box-shadow:0 8px 16px #0000000a}
+.orbit-route-suggestions[hidden],.orbit-directions-sheet[hidden],.orbit-step-row[hidden],.orbit-directions-buttons button[hidden],#orbitRouteCard[hidden],#orbitRoutePrompt[hidden]{display:none !important}
+.orbit-map-panel .orbit-suggestion{border:1px solid #d5d3c9;background:#fbfaf5;border-radius:10px;padding:8px 11px;font-size:.78rem;font-weight:800;letter-spacing:0;text-transform:none;box-shadow:none}
+.orbit-map-panel .orbit-suggestion:hover{background:#ffe68c}
+.orbit-route-prompt{font-size:.83rem;font-weight:700;line-height:1.4;color:#5b5c2a;padding:9px 1px 1px;min-height:29px}
+.orbit-nav-map .orbit-floor-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:13px 0}
+.orbit-nav-map .orbit-floor-btn{padding:10px 3px;border:2px solid #d9d7c6;border-radius:10px;font-size:.73rem;font-weight:900;text-transform:none;letter-spacing:0;box-shadow:none}
+.orbit-nav-map .orbit-floor-btn.selected{background:var(--olive-dark);border-color:var(--olive-dark);color:var(--yellow-main)}
+.orbit-map-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.orbit-map-tools .orbit-map-hint{font-size:.78rem;margin:0;font-weight:700;line-height:1.35}
+.orbit-zoom-controls{display:flex;gap:4px;flex-shrink:0}
+.orbit-map-panel .orbit-zoom-controls button{height:36px;width:36px;padding:0;background:white;color:#39391d;border:1px solid #bdbbaa;border-radius:9px;font-size:1.35rem;text-transform:none;box-shadow:none;line-height:1}
+.orbit-map-panel .orbit-zoom-controls button:disabled{opacity:.35;cursor:default}
+.orbit-nav-map .orbit-map-stage{height:auto;max-height:600px;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y;border:1.5px solid #d6d4c5;border-radius:15px;background:#fdfdfc;}
+.orbit-nav-map .orbit-map-canvas{width:100%;min-width:500px;position:relative;line-height:0}
+.orbit-map-canvas img{user-select:none;-webkit-user-drag:none}
+.orbit-room{transition:fill .15s,stroke .15s}
+.orbit-room.route-from{fill:rgba(61,112,234,.29);stroke:#306de5;stroke-width:4}
+.orbit-room.route-to{fill:rgba(255,78,111,.31);stroke:#ed4161;stroke-width:4}
+.orbit-room:focus-visible{stroke:#202020;stroke-width:5;fill:rgba(245,203,14,.3)}
+.orbit-map-selection{background:#fffdf3;font-size:.8rem;border-color:#e9dda4;line-height:1.4;margin-top:10px;padding:10px 12px}
+.orbit-directions-sheet{margin:15px auto 0;background:#fff;border:2px solid #e0dfd7;border-radius:22px;padding:11px clamp(14px,2vw,22px) 18px;box-shadow:0 -5px 24px #26241312;max-width:830px;position:sticky;bottom:9px;z-index:75}
+body:has(#mapView.active) .orbit-nav{position:static !important;top:auto !important}
+.orbit-directions-handle{width:57px;height:5px;background:#d4d4d4;border-radius:12px;margin:0 auto 6px}
+.orbit-map-panel .orbit-sheet-toggle{display:block;margin:0 0 7px auto;padding:4px 9px;background:transparent;border:0;box-shadow:none;color:#6e6a60;font-size:.69rem;letter-spacing:0;text-transform:none}
+.orbit-directions-sheet.collapsed .orbit-directions-buttons,.orbit-directions-sheet.collapsed .orbit-demo-notice,.orbit-directions-sheet.collapsed .orbit-step-row,.orbit-directions-sheet.collapsed #orbitRouteDescriptor{display:none !important}
+.orbit-directions-sheet.collapsed{padding-bottom:10px}
+.orbit-directions-sheet.collapsed .orbit-directions-header{border:0;padding:0}
+.orbit-directions-header{display:flex;align-items:center;justify-content:space-between;gap:9px;padding-bottom:12px;border-bottom:1px solid #e8e8e8}
+.orbit-directions-kicker{font-size:.66rem;font-weight:900;color:#8c6b00;letter-spacing:.8px}
+.orbit-directions-header h3{font-size:1.05rem;margin:5px 0;color:#25261a;font-weight:900}
+.orbit-directions-header p{font-size:.8rem;color:#77766d;font-weight:650;line-height:1.3}
+.orbit-directions-icon{font-size:1.7rem;border-radius:16px;padding:10px;background:#fff0ab}
+.orbit-directions-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.orbit-directions-buttons button{padding:12px 15px;border-radius:13px;font-size:.85rem;text-transform:none;letter-spacing:0;box-shadow:none}
+.orbit-directions-buttons #orbitStartNavigation,.orbit-directions-buttons #orbitStepNext{flex:1;background:#f6ca11;color:#262914}
+.orbit-directions-buttons #orbitStepBack,.orbit-directions-buttons #orbitStopNavigation{background:white;border-color:#a6a6a2;color:#44443b}
+.orbit-step-row{background:#fff9df;padding:11px;border-radius:12px;margin-top:12px;display:flex;align-items:center;gap:10px}
+.orbit-step-count{padding:6px 9px;background:#3a3b1a;color:#fff2a3;border-radius:9px;white-space:nowrap;font-weight:900;font-size:.72rem}
+.orbit-step-row p{font-size:.87rem;line-height:1.4;font-weight:750}
+.orbit-demo-notice{font-size:.67rem;color:#7e7969;line-height:1.45;margin-top:10px;font-weight:600}
+@media(max-width:650px){.orbit-map-two-d{display:none}.orbit-nav-map .orbit-floor-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.orbit-route-row{padding:6px 7px;gap:7px;min-height:58px}.orbit-route-field-main input{font-size:.91rem}.orbit-directions-sheet{bottom:9px;padding:10px 12px 14px}.orbit-directions-buttons button{padding:11px 12px}.orbit-nav-map .orbit-map-stage{max-height:450px}}
+html[dir="rtl"] .orbit-wayfinding-head,html[dir="rtl"] .orbit-route-card,html[dir="rtl"] .orbit-route-row,html[dir="rtl"] .orbit-map-tools{direction:rtl}
+html[dir="rtl"] .orbit-route-field-main label,html[dir="rtl"] .orbit-route-field-main input{text-align:right}
+
+/* KTECH Orbit 1.15 indoor navigation, scoped: other pages unchanged */
+.orbit-navigation-v2{background:#fff !important;border-color:#3a3b1a;padding:clamp(12px,2vw,24px) !important;}
+.orbit-nav-v2-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.orbit-nav-v2-heading h2{color:#222310;font-size:clamp(1.2rem,3vw,1.8rem);margin:0 0 5px}
+.orbit-nav-v2-heading .orbit-map-subtitle{margin:0;line-height:1.45}
+.orbit-map-v2-chip{font-size:.63rem;background:#fff6cf;color:#504300;padding:8px;border-radius:999px;border:1px solid #e6d57a;font-weight:850;white-space:nowrap}
+.orbit-navigation-v2 .orbit-floors-v2{margin:13px 0 16px;gap:7px}
+.orbit-navigation-v2 .orbit-floor-btn{background:#f7f8fa;color:#1a2540;border:1px solid #dadde3;border-radius:999px;padding:10px 4px;text-transform:none;letter-spacing:0;font-size:.83rem;box-shadow:none}
+.orbit-navigation-v2 .orbit-floor-btn.selected{background:#ffdc3d;color:#172039;border:2px solid #101b34}
+.orbit-nav-v2-form{display:flex;gap:9px;align-items:stretch;padding:14px;border:1px solid #e2e4e4;background:#f9fafb;border-radius:16px}
+.orbit-nav-v2-location{flex:1;min-width:0}
+.orbit-nav-v2-location label{font-size:.76rem;display:flex;gap:7px;align-items:center;font-weight:850;color:#343a40;margin-bottom:6px}
+.orbit-nav-dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex-shrink:0}
+.orbit-nav-dot.start{background:#256ae7}.orbit-nav-dot.end{background:#ed4763}
+.orbit-nav-v2-location select{width:100%;max-width:100%;font-weight:750;font-size:.91rem;color:#1e2430;background:#fff;border:2px solid #d4d9e2;border-radius:11px;padding:11px 8px;min-height:44px}
+.orbit-navigation-v2 .orbit-nav-swap{padding:0;min-width:43px;background:#fff6d3;border-color:#e4d594;color:#222310;font-size:1.5rem;border-radius:10px;text-transform:none;letter-spacing:0}
+.orbit-nav-v2-settings{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:13px 0 17px}
+.orbit-access-toggle{display:flex;gap:8px;align-items:center;font-size:.87rem;color:#202d35;line-height:1.35;font-weight:750;cursor:pointer;flex:1;min-width:245px}
+.orbit-access-toggle input{height:20px;width:20px;accent-color:#1565c0;flex-shrink:0}
+#orbitFindRoute{background:#ffd63c;color:#131e30;border:2px solid #192841;border-radius:12px;box-shadow:none;padding:12px 18px;text-transform:none;letter-spacing:0;font-size:.93rem}
+.orbit-nav-v2-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,235px);gap:15px;align-items:start}
+.orbit-nav-v2-map-wrap{min-width:0}
+.orbit-nav-v2-map-head{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:8px;font-size:.77rem;color:#6a7180;font-weight:750}
+#orbitFloorCurrentLabel{font-weight:900;color:#081c39;background:#ffdf54;padding:6px 10px;border-radius:9px;white-space:nowrap}
+.orbit-nav-v2-zoom{display:flex;gap:4px}
+.orbit-navigation-v2 .orbit-nav-v2-zoom button{width:32px;height:32px;padding:0;border:1px solid #d5d9dd;border-radius:7px;background:#fff;color:#101828;font-size:1.2rem;text-transform:none;letter-spacing:0;box-shadow:none}
+.orbit-navigation-v2 .orbit-map-stage{background:#d3d6d4;border:1px solid #bac0c1;border-radius:13px;overflow:auto;max-height:min(68vh,740px);touch-action:pan-x pan-y}
+.orbit-navigation-v2 .orbit-map-canvas{min-width:0;width:100%;position:relative;line-height:0}
+.orbit-navigation-v2 .orbit-map-canvas img{display:block;width:100%;height:auto}
+.orbit-navigation-v2 #orbitFloorOverlay{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit{fill:transparent;stroke:transparent;stroke-width:2;cursor:pointer;pointer-events:all}
+.orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit:hover,.orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit:focus{fill:#fff46666;stroke:#eead00;outline:none}
+.orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit.selected{stroke:#ffdb22;stroke-width:5;fill:#ffdd3330}
+.orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit.end{stroke:#ee2f50;stroke-width:5;fill:#ff9baa29}
+.orbit-nav-v2-key{background:#fff;border-radius:15px;border:1px solid #e4e7eb;box-shadow:0 2px 12px #11182710;padding:12px}
+.orbit-nav-v2-key summary{font-size:1.12rem;font-weight:900;color:#101d37;cursor:pointer;list-style-position:inside;padding:4px 3px 11px}
+.orbit-map-v2-key-rows{display:grid;gap:7px}
+.orbit-map-v2-key-row{display:flex;align-items:center;gap:9px;padding:10px 8px;border-radius:9px;background:#f2f3f6;font-size:.77rem;font-weight:750;color:#18233e;line-height:1.2}
+.orbit-map-v2-key-swatch{width:28px;min-width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.05rem}
+.orbit-navigation-v2 .orbit-map-selection{font-size:.82rem;margin:10px 0 0;padding:10px 12px;background:#fffdf1;border:1px solid #e7d68b;border-radius:9px;color:#40391b}
+.orbit-map-v2-caution{font-size:.71rem;font-weight:650;line-height:1.4;color:#707070;margin-top:8px}
+.orbit-nav-v2-instructions{border:2px solid #e0d6a9;background:#fffdf4;border-radius:14px;padding:15px;margin-top:14px}
+.orbit-nav-v2-instructions[hidden],.orbit-nav-v2-roomlist[hidden]{display:none !important}
+.orbit-nav-v2-route-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+.orbit-nav-v2-route-top strong{font-size:.99rem;color:#171c2d}
+.orbit-navigation-v2 #orbitStopNavigation{font-size:.73rem;padding:7px 9px;background:white;border:1px solid #ccc;color:#263449;text-transform:none;letter-spacing:0}
+.orbit-nav-v2-steps{list-style:none;display:grid;gap:7px;margin:13px 0;padding:0}
+.orbit-nav-v2-steps li{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #ebe3c4;border-radius:10px;padding:9px 10px;font-size:.84rem;line-height:1.4;color:#263449;font-weight:650}
+.orbit-nav-v2-steps li.current{border:2px solid #e9b900;background:#fff4c4}
+.orbit-nav-v2-steps .num{background:#26344b;color:#fff;border-radius:50%;width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.74rem}
+.orbit-nav-v2-step-actions{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:10px}
+.orbit-nav-v2-step-actions button{background:#fff;color:#263449;border:1px solid #999;padding:9px 12px;border-radius:10px;font-size:.79rem;letter-spacing:0;text-transform:none;box-shadow:none}
+.orbit-navigation-v2 #orbitStepNext{background:#ffd63c;border:2px solid #222310}
+.orbit-nav-v2-step-actions button:disabled{opacity:.42;cursor:default}
+#orbitRouteProgress{font-size:.78rem;color:#565d66;font-weight:800}
+.orbit-nav-v2-quicklinks{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.orbit-nav-v2-quicklinks button{background:#fff;border:1px solid #d5d9de;border-radius:10px;padding:8px 10px;font-size:.76rem;text-transform:none;letter-spacing:0;color:#23324a;box-shadow:none}
+.orbit-nav-v2-roomlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:7px;padding:11px;margin-top:9px;border:1px solid #e4e4e4;border-radius:11px;background:#fafafa}
+.orbit-nav-v2-roomlist button{padding:9px 4px;font-size:.72rem;letter-spacing:0;text-transform:none;background:#fff;color:#16305c;border:1px solid #dbe2ea;box-shadow:none}
+@media (max-width:780px){.orbit-nav-v2-layout{grid-template-columns:1fr}.orbit-map-v2-key-rows{grid-template-columns:repeat(2,minmax(0,1fr))}.orbit-nav-v2-key summary{font-size:.96rem}.orbit-nav-v2-heading .orbit-map-v2-chip{display:none}}
+@media (max-width:540px){.orbit-navigation-v2 .orbit-floors-v2{grid-template-columns:repeat(2,minmax(0,1fr))}.orbit-nav-v2-form{flex-wrap:wrap;padding:9px}.orbit-nav-v2-location{min-width:calc(50% - 26px)}.orbit-nav-v2-location select{font-size:.8rem}.orbit-nav-v2-settings #orbitFindRoute{width:100%}.orbit-map-v2-key-rows{grid-template-columns:1fr 1fr}.orbit-map-v2-key-row{font-size:.7rem;padding:7px 5px}.orbit-map-v2-key-swatch{width:23px;min-width:23px;height:23px}.orbit-nav-v2-map-head #orbitMapHint{display:none}}
+
+.orbit-map-v2-actionbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:17px 0 7px}
+.orbit-navigation-v2 .orbit-map-v2-actionbar button{display:flex;align-items:center;justify-content:center;gap:6px;background:#f8f9fc;color:#172641;border:1px solid #d4d8e2;border-radius:10px;padding:10px 5px;font-size:.79rem;letter-spacing:0;text-transform:none;box-shadow:none}
+.orbit-navigation-v2 .orbit-map-v2-actionbar button:first-child{background:#ffd83d;border-color:#baa12a}
+.orbit-map-v2-info{margin:10px 0;padding:12px;background:#fff8d7;border:1px solid #dfcb72;border-radius:12px;font-size:.84rem;line-height:1.5;color:#403a20;font-weight:700}
+.orbit-map-v2-info[hidden]{display:none}
+@media(max-width:640px){.orbit-map-v2-actionbar{grid-template-columns:repeat(3,minmax(0,1fr))}.orbit-navigation-v2 .orbit-map-v2-actionbar button{font-size:.7rem}.orbit-navigation-v2 .orbit-map-v2-actionbar button:nth-child(4),.orbit-navigation-v2 .orbit-map-v2-actionbar button:nth-child(5){grid-column:auto}}
+
+/* KTECH Orbit 1.16: yellow classroom doorway targets without changing map layout */
+.orbit-classroom-door{fill:#ffdb22;stroke:#2e2c22;stroke-width:1.6;paint-order:stroke;pointer-events:all;cursor:pointer;filter:drop-shadow(0 0 1px #fff)}
+.orbit-classroom-door.active{stroke:#fff;stroke-width:2.7;filter:drop-shadow(0 1px 2px #181818)}
+.orbit-classroom-door:focus-visible{stroke:#fa213f;stroke-width:4;outline:none}
+
+
+/* Localized indoor map: preserve the map coordinates while supporting readable Arabic text */
+html[lang="ar"] .orbit-navigation-v2 .orbit-map-stage,html[lang="ar"] .orbit-navigation-v2 .orbit-map-canvas{direction:ltr}
+html[lang="ar"] .orbit-navigation-v2 .orbit-nav-v2-map-head{direction:rtl}
+html[lang="ar"] .orbit-navigation-v2 .orbit-nav-v2-steps li{direction:rtl;text-align:right}
+html[lang="ar"] .orbit-navigation-v2 .orbit-nav-v2-form{direction:rtl}
+html[lang="ar"] .orbit-navigation-v2 select{direction:rtl;text-align:right}
+html[lang="ar"] .orbit-navigation-v2 .orbit-map-v2-key-row{direction:rtl;text-align:right}
+html[lang="ar"] .orbit-navigation-v2 .orbit-map-v2-actionbar button{line-height:1.45}
+
+/* KTECH Orbit 1.23: in-chat Major Sheet PDF cards; leaves existing chatbot and map layout untouched. */
+.orbit-major-file-card{margin:10px 0 16px;max-width:95%;padding:13px;border:1px solid #dfd3a8;background:#fffdf4;border-radius:12px;color:#1f2c43;box-shadow:0 2px 8px rgba(12,32,61,.08)}
+.orbit-major-file-heading{display:flex;align-items:center;gap:9px;font-size:.92rem;font-weight:800;line-height:1.4;overflow-wrap:anywhere}
+.orbit-major-file-heading>span:first-child{font-size:1.5rem}
+.orbit-major-file-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.orbit-major-file-buttons .orbit-major-file-control{font:inherit;font-size:.79rem!important;font-weight:800!important;letter-spacing:normal!important;text-transform:none!important;text-align:center;padding:9px 11px;border-radius:8px;background:#ffdb4d!important;color:#17243c!important;border:1px solid #b99d36!important;box-shadow:none!important;min-height:35px;cursor:pointer;text-decoration:none!important}
+.orbit-major-file-buttons .orbit-major-file-control:hover{background:#fff1a1!important}
+.orbit-major-pdf-preview[hidden]{display:none!important}
+.orbit-major-pdf-preview{margin-top:12px;border-top:1px solid #e0e2e5;padding-top:10px}
+.orbit-major-pdf-preview iframe{width:100%;min-height:410px;border:1px solid #d0d4d9;border-radius:8px;background:white}
+.orbit-major-pdf-preview p{font-size:.77rem;color:#566071;line-height:1.4;margin:6px 0 0}
+/* Practical chatbot source links (1.14 update) */
+.orbit-official-links{border-top:1px solid rgba(82,77,28,.22);margin-top:12px;padding-top:10px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;font-size:.81rem;font-weight:750}
+.orbit-official-links a{display:block;overflow-wrap:anywhere;padding:6px 9px;border-radius:8px;background:#fff3ad;border:1px solid #a58b1e;color:#332900!important;line-height:1.35}
+.orbit-official-links a:hover,.orbit-official-links a:focus-visible{background:#ffe66f}
+/* KTECH Orbit parking occupancy prototype, shown only on the Campus map. */
+#orbitParkingPanel[hidden],#orbitParkingSelection[hidden]{display:none !important}
+#mapView.parking-mode .orbit-nav-v2-form,#mapView.parking-mode .orbit-nav-v2-settings,
+#mapView.parking-mode .orbit-map-v2-actionbar,#mapView.parking-mode .orbit-nav-v2-quicklinks,
+#mapView.parking-mode .orbit-nav-v2-instructions,#mapView.parking-mode .orbit-nav-v2-roomlist,
+#mapView.parking-mode .orbit-map-v2-key,#mapView.parking-mode #orbitMapSelection,
+#mapView.parking-mode .orbit-map-v2-caution,#mapView.parking-mode #orbitMapHint,
+#mapView.parking-mode .orbit-nav-v2-zoom {display:none !important}
+#mapView.parking-mode .orbit-nav-v2-layout{display:block}
+#mapView.parking-mode .orbit-map-canvas{min-width:920px;width:100%}
+#mapView.parking-mode .orbit-map-stage{max-height:min(61vh,680px);background:#f5f1e6}
+.orbit-parking-panel{background:#fffdf3;border:2px solid #d5c88b;border-radius:17px;padding:clamp(13px,2.5vw,22px);margin:0 0 14px;color:#263024}
+.orbit-parking-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.orbit-parking-heading h3{font-size:1.22rem;color:#28351c;margin:0 0 3px}
+.orbit-parking-heading p{font-size:.82rem;line-height:1.42;color:#5b5c2a;margin:0}
+.orbit-parking-badge{font-size:.68rem;font-weight:900;color:#4f3b00;background:#ffe393;border:1px solid #a98723;border-radius:999px;padding:6px 10px;white-space:nowrap}
+.orbit-parking-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}
+.orbit-parking-stat{background:#fff;border:1px solid #dfded1;border-radius:11px;padding:10px 12px;min-width:0}
+.orbit-parking-stat strong{display:block;font-size:1.35rem;line-height:1.15;font-variant-numeric:tabular-nums}
+.orbit-parking-stat small{display:block;font-size:.71rem;font-weight:800;margin-top:3px;color:#555d53}
+.orbit-parking-stat.free strong{color:#127942}.orbit-parking-stat.busy strong{color:#be3740}.orbit-parking-stat.access strong{color:#165a9b}
+.orbit-parking-meter{height:8px;background:#eddee0;border-radius:99px;overflow:hidden}
+.orbit-parking-meter span{display:block;width:0;height:100%;background:#159355;transition:width .25s}
+.orbit-parking-legend{display:flex;gap:12px;flex-wrap:wrap;margin:13px 0 10px;font-size:.76rem;font-weight:850}
+.orbit-parking-legend span{display:inline-flex;align-items:center;gap:5px}
+.orbit-parking-dot{width:14px;height:14px;border-radius:4px;display:inline-block;border:1px solid #fff;box-shadow:0 0 0 1px #888}
+.orbit-parking-dot.free{background:#19a45a}.orbit-parking-dot.busy{background:#d43d43}.orbit-parking-dot.access{background:#236ac0}
+.orbit-parking-instruction{font-size:.79rem;line-height:1.45;color:#515844;font-weight:700;margin-bottom:10px}
+.orbit-parking-actions{display:flex;flex-wrap:wrap;gap:8px}
+.orbit-parking-actions button,.orbit-parking-selection button{padding:9px 12px;border:1px solid #77784d;border-radius:9px;background:#fff;color:#303820;font-size:.76rem;letter-spacing:0;text-transform:none;box-shadow:none}
+.orbit-parking-actions button:first-child{background:#f5cb0e;border-color:#3a3b1a}
+.orbit-parking-actions button:hover,.orbit-parking-selection button:hover{background:#fff0ae}
+.orbit-parking-gates{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 12px}
+.orbit-parking-gates button{border:1px solid #245da0;background:#edf6ff;color:#164977;border-radius:9px;padding:7px 10px;font-size:.76rem;font-weight:800;cursor:pointer}
+.orbit-parking-gates button:hover,.orbit-parking-gates button:focus-visible{background:#d4eaff;outline:2px solid #164977;outline-offset:1px}
+.orbit-parking-selection{background:#fff;border:1px solid #d5c88b;border-radius:11px;padding:11px 13px;margin:10px 0 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.82rem;font-weight:750}
+.orbit-parking-selection strong{font-size:.93rem}
+#orbitParkingLayer{pointer-events:none}
+#orbitParkingLayer .orbit-parking-spot{pointer-events:all;cursor:pointer;stroke:#fff;stroke-width:2.5;filter:drop-shadow(0 1px 2px #171b20a6);transition:fill .2s,stroke-width .2s}
+#orbitParkingLayer .orbit-parking-spot.free{fill:#0f9c51;fill-opacity:.92}
+#orbitParkingLayer .orbit-parking-spot.busy{fill:#d83b42;fill-opacity:.94}
+#orbitParkingLayer .orbit-parking-spot.accessible{stroke:#0b4faf;stroke-width:4}
+#orbitParkingLayer .orbit-parking-spot.selected,#orbitParkingLayer .orbit-parking-spot:focus-visible{stroke:#f9d737;stroke-width:5;outline:none}
+#orbitParkingLayer .orbit-parking-spot:hover{stroke:#ffe55b;stroke-width:5}
+#orbitParkingLayer .orbit-parking-access-icon{pointer-events:none;fill:#fff;font-size:12px;font-weight:900;text-anchor:middle;dominant-baseline:middle}
+#orbitParkingLayer .orbit-parking-gate-label{pointer-events:none;fill:#17436d;stroke:#fff;stroke-width:3;paint-order:stroke;font-size:16px;font-weight:900;text-anchor:middle}
+@media(max-width:560px){.orbit-parking-stats{gap:5px}.orbit-parking-stat{padding:9px 6px}.orbit-parking-stat strong{font-size:1.13rem}.orbit-parking-stat small{font-size:.61rem}.orbit-parking-actions button{flex:1 1 calc(50% - 8px)}.orbit-parking-selection button{width:100%}}
+html[dir="rtl"] .orbit-parking-panel,html[dir="rtl"] .orbit-parking-selection{text-align:right}
+
+/* Ground Floor exact-reference fixes */
+#mapView .orbit-nav-hit.food-hall-hit{stroke:transparent!important;fill:transparent;fill-rule:evenodd}
+#mapView .orbit-nav-hit.food-hall-hit:hover,#mapView .orbit-nav-hit.food-hall-hit:focus{stroke:transparent!important;fill:#fff46666}
+#mapView .orbit-nav-hit.food-hall-hit.selected{stroke:transparent!important;fill:#ffdd3330}
+#mapView .orbit-nav-hit.food-hall-hit.end{stroke:transparent!important;fill:#ff9baa29}
+#mapView .food-hall-outline{vector-effect:non-scaling-stroke}
+#mapView .orbit-map-v2-key[hidden]{display:none!important}
+

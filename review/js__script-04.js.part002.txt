@@ -1,0 +1,269 @@
+000126|  tuneRoom('two','CL380',{approach:[939, 358],door:[939, 388]});
+000127|  tuneRoom('two','C325',{approach:[372, 459],door:[372, 458]});
+000128|  tuneRoom('two','C321',{approach:[199, 459],door:[199, 488]});
+000129|  tuneRoom('two','C322',{approach:[267, 459],door:[267, 488]});
+000130|  tuneRoom('two','C323',{approach:[338, 459],door:[338, 488]});
+000131|  tuneRoom('two','C329',{approach:[402, 459],door:[402, 488]});
+000132|  tuneRoom('two','C374',{approach:[724, 459],door:[724, 488]});
+000133|  tuneRoom('two','C373',{approach:[798, 459],door:[798, 488]});
+000134|  tuneRoom('two','C372',{approach:[857, 459],door:[857, 488]});
+000135|  tuneRoom('two','C371',{approach:[919, 459],door:[919, 488]});
+000136|  tuneRoom('two','C320',{approach:[140, 506],door:[130, 506]});
+000137|  tuneRoom('two','C370',{approach:[962, 562],door:[976, 562]});
+000138|  // Floor 2 library fix: restore the selection outline to follow the real library shape,
+000139|  // and restore the two visible door dots at the library entrances.
+000140|  tuneRoom('two','Library',{
+000141|    approach:[695,358],
+000142|    door:[702,347],
+000143|    doorDots:[[449,347],[702,347]],
+000144|    poly:[[417,241],[414,278],[447,311],[447,347],[492,342],[493,504],[652,503],[652,342],[698,347],[731,242],[659,219],[497,219]]
+000145|  });
+000146| 
+000147|  // Ground Floor rebuilt against the exact 1619×972 reference image supplied by the project owner.
+000148|  // Floor 1 and Floor 2 definitions above are intentionally untouched.
+000149|  const groundPlaces=[
+000150|  ["Food Hall","food",284,119,1154,271,590,271],
+000151|  ["Gaming Room","gaming",243,270,393,433,304,445],
+000152|  ["Administration","admin",393,270,559,433,526,445],
+000153|  ["Auditorium","auditorium",607,270,834,433,724,445],
+000154|  ["Student Life","studentlife",876,339,1012,433,984,445],
+000155|  ["Registration Office","registration",1012,339,1165,433,1143,445],
+000156|  ["Advising","advising",1054,710,1174,813,1112,700],
+000157|  ["Clinic","clinic",974,710,1054,813,1014,700],
+000158|  ["Security Office","security",870,710,974,813,921,700],
+000159|  ["ATM","atm",869,402,916,448,850,425],
+000160|  ["eSports Room","esports",238,511,319,616,281,495],
+000161|  ["Restaurants / Coffee Shops (Food Hall West)","shops",357,137,499,241,425,264],
+000162|  ["Restaurants / Coffee Shops (Food Hall Center)","shops",651,176,803,264,724,264],
+000163|  ["Restaurants / Coffee Shops (Food Hall East)","shops",947,137,1085,241,1005,264],
+000164|  ["Restaurants / Coffee Shops (Southwest)","shops",319,511,518,616,400,495],
+000165|  ["Restaurants / Coffee Shops (Southeast)","shops",962,511,1174,617,1060,495],
+000166|  ["Under Maintenance","maintenance",109,511,554,814,240,616],
+000167|  ["Men's Bathroom (West)","bathmen",152,298,205,364,220,330],
+000168|  ["Men's Bathroom (North)","bathmen",509,270,560,340,580,304],
+000169|  ["Women's Bathroom (North)","bathwomen",874,270,921,342,850,305],
+000170|  ["Women's Bathroom (South)","bathwomen",917,615,962,680,885,647],
+000171|  ["Elevator (West)","accessible",118,191,208,268,220,264],
+000172|  ["Elevator (Center)","elevator",658,489,782,613,640,550],
+000173|  ["Elevator (East North) Accessible","accessible",1209,193,1302,268,1188,264],
+000174|  ["Elevator (East South) Accessible","accessible",1221,518,1296,600,1188,570],
+000175|  ["Stairs (West North)","stairs",151,137,208,190,220,181],
+000176|  ["Stairs (East North)","stairs",1209,140,1265,192,1188,181],
+000177|  ["Stairs (Southwest Inner)","stairs",457,557,522,616,540,589],
+000178|  ["Stairs (Southwest Outer)","stairs",553,585,613,654,640,651],
+000179|  ["Stairs (Southeast Inner)","stairs",910,555,962,614,885,586],
+000180|  ["Stairs (Southeast Outer)","stairs",817,585,880,653,846,700],
+000181|  ["Stairs (East South)","stairs",1221,600,1286,665,1188,630],
+000182|  ["Gate 1 — Open","gate",640,842,805,913,710,815],
+000183|  ["Gate 2 — Open","gate",1175,795,1328,866,1188,815],
+000184|  ["Gate 3 — Closed","closed",1210,413,1340,488,1188,469],
+000185|  ["Gate 4 — Open","gate",1121,31,1290,106,1194,120],
+000186|  ["Gate 5 — Open","gate",629,13,796,78,711,118],
+000187|  ["Gate 6 — Open","gate",151,32,313,97,235,120],
+000188|  ["Gate 7 — Closed","closed",49,413,183,486,188,449],
+000189|  ["Gate 8 — Closed for Maintenance","closed",54,734,198,824,188,774]
+000190|  ];
+000191|  groundPlaces.forEach(([id,kind,x1,y1,x2,y2,dx,dy])=>room('ground',id,kind,x1,y1,x2,y2,dx,dy));
+000192| 
+000193|  // Exact non-rectangular room outlines so clickable/highlighted areas do not cover bathrooms, ATMs, or stairs.
+000194|  tuneRoom('ground','Administration',{poly:[[393,270],[509,270],[509,340],[560,340],[560,433],[393,433]]});
+000195|  tuneRoom('ground','Student Life',{poly:[[876,343],[1012,343],[1012,433],[916,433],[916,402],[876,402]]});
+000196|  tuneRoom('ground','Restaurants / Coffee Shops (Southwest)',{poly:[[319,511],[518,511],[518,556],[456,556],[456,616],[319,616]]});
+000197| 
+000198|  // One continuous Food Hall hit target: outer pink hall with holes for the three green shop islands
+000199|  // and the two white service boxes. This replaces the old scattered pink mini-buttons.
+000200|  const foodHallShape={
+000201|    outer:[[284,119],[1154,119],[1154,270],[284,270]],
+000202|    holes:[
+000203|      [[357,137],[499,137],[499,241],[357,241]],
+000204|      [[651,176],[803,176],[803,264],[651,264]],
+000205|      [[947,137],[1085,137],[1085,241],[947,241]],
+000206|      [[286,215],[357,215],[357,248],[286,248]],
+000207|      [[1085,215],[1152,215],[1152,248],[1085,248]]
+000208|    ]
+000209|  };
+000210|  const pathFromRings=(outer,holes=[])=>{
+000211|    const ring=r=>'M '+r.map(p=>p[0]+' '+p[1]).join(' L ')+' Z';
+000212|    return [ring(outer),...holes.map(ring)].join(' ');
+000213|  };
+000214|  const foodHallPathD=pathFromRings(foodHallShape.outer,foodHallShape.holes);
+000215| 
+000216|  // One connected maintenance shape matching the orange area. It intentionally excludes eSports,
+000217|  // the southwest restaurant, both stair boxes and every white corridor.
+000218|  const maintenanceShape=[[109,511],[238,511],[238,616],[553,616],[553,814],[201,814],[201,631],[184,631],[184,603],[109,603]];
+000219|  const maintenancePathD=pathFromRings(maintenanceShape);
+000220| 
+000221|  const roomById=new Map(rooms.map(r=>[r.id,r]));
+000222|  // Walkable corridor centre-lines. NEVER connect across a room or the gray elevator cores.
+000223|  const hallway={
+000224|   ground:[['h',415,300,1110],['h',450,300,1110],['h',620,300,1110],['v',300,415,620],['v',600,415,620],['v',710,415,620],['v',820,415,620],['v',884,415,620],['v',1010,415,620],['v',1110,415,620]],
+000225|   one:[
+000226|    ['h',232,174,1018],['h',328,174,488],['h',328,724,1018],['h',410,488,724],
+000227|    ['h',592,174,488],['h',592,724,1018],['h',635,488,724],
+000228|    ['v',174,232,592],['v',488,232,635],['v',724,232,635],['v',1018,232,592]
+000229|   ],
+000230|   two:[
+000231|    ['h',358,140,446],['h',358,695,962],['h',459,140,446],['h',459,695,962],
+000232|    ['h',551,446,695],['h',825,140,962],
+000233|    ['v',140,358,825],['v',446,358,825],['v',695,358,825],['v',962,358,825]
+000234|   ]
+000235|  };
+000236|  // Linked floor-change symbols are paired by name on the supplied diagrams; site confirmation is still required.
+000237|  const portals={
+000238|   NW:{name:'northwest',type:'stairs',one:[174,232],two:[140,358]},
+000239|   NE:{name:'northeast',type:'stairs',one:[1018,232],two:[962,358]},
+000240|   SW:{name:'southwest',type:'stairs',one:[174,592],two:[140,705]},
+000241|   SE:{name:'southeast',type:'stairs',one:[1018,592],two:[962,705]},
+000242|   MIDL:{name:'middle-left',type:'stairs',one:[488,482],two:[446,616]},
+000243|   MIDR:{name:'middle-right',type:'stairs',one:[724,482],two:[695,616]},
+000244|   ANW:{name:'northwest',type:'accessible',one:[174,247],two:[140,380]},
+000245|   ANE:{name:'northeast',type:'accessible',one:[1018,247],two:[962,380]},
+000246|   ASW:{name:'southwest',type:'accessible',one:[174,550],two:[140,680]},
+000247|   ASE:{name:'southeast',type:'accessible',one:[1018,550],two:[962,680]}
+000248|  };
+000249|  const state={floor:'one',from:'',to:'',accessible:false,route:null,step:0,zoom:1};
+000250|  function fromOriginal(f,p){return [p[0]-floors[f].crop[0],p[1]-floors[f].crop[1]];}
+000251|  function labelFor(r){if(!r)return '';return placeLabel(r.id)+(r.kind==='lab'?' · '+mt('nameLab'):'');}
+000252|  function svgEl(tag,attrs,parent){const el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));(parent||refs.lines).appendChild(el);return el;}
+000253|  function graphPath(f,start,end){
+000254|   const seg=hallway[f];if(!seg||!start||!end)return null;
+000255|   const points=new Map(),edges=new Map();
+000256|   const key=(p)=>p[0].toFixed(2)+','+p[1].toFixed(2);
+000257|   function node(p){const k=key(p);if(!points.has(k)){points.set(k,p);edges.set(k,[]);}return k;}
+000258|   const allEndpoints=[start,end,...Object.values(portals).map(x=>x[f])];
+000259|   for(const s of seg){const [ori,v,a,b]=s;node(ori==='h'?[a,v]:[v,a]);node(ori==='h'?[b,v]:[v,b]);}
+000260|   for(let i=0;i<seg.length;i++)for(let j=i+1;j<seg.length;j++){
+000261|    const a=seg[i],b=seg[j];if(a[0]===b[0])continue;
+000262|    const h=a[0]==='h'?a:b,v=a[0]==='v'?a:b;
+000263|    if(v[1]>=h[2]&&v[1]<=h[3]&&h[1]>=v[2]&&h[1]<=v[3])node([v[1],h[1]]);
+000264|   }
+000265|   for(const p of allEndpoints)if(p)node(p);
+000266|   // Split each known safe corridor into adjacent steps at every crossing, portal and doorway.
+000267|   for(const s of seg){const [dir,z,a,b]=s;const found=Array.from(points.values()).filter(p=>dir==='h'?Math.abs(p[1]-z)<.01&&p[0]>=a-.01&&p[0]<=b+.01:Math.abs(p[0]-z)<.01&&p[1]>=a-.01&&p[1]<=b+.01).sort((x,y)=>dir==='h'?x[0]-y[0]:x[1]-y[1]);
+000268|    for(let i=1;i<found.length;i++){const u=key(found[i-1]),v=key(found[i]),w=Math.hypot(found[i][0]-found[i-1][0],found[i][1]-found[i-1][1]);edges.get(u).push([v,w]);edges.get(v).push([u,w]);}}
+000269|   const source=key(start),target=key(end);
+000270|   const dist=new Map([[source,0]]),previous=new Map(),queue=new Set(edges.keys());
+000271|   while(queue.size){let u=null,best=Infinity;for(const id of queue){const d=dist.get(id)??Infinity;if(d<best){best=d;u=id;}}if(u===null)break;if(u===target)break;queue.delete(u);for(const [v,w] of edges.get(u)||[]){const nd=best+w;if(nd<(dist.get(v)??Infinity)){dist.set(v,nd);previous.set(v,u);}}}
+000272|   if(!dist.has(target))return null;
+000273|   const result=[end];let walk=target,count=0;while(walk!==source&&count++<points.size){walk=previous.get(walk);if(!walk)return null;result.push(points.get(walk));}result.reverse();
+000274|   // Remove redundant collinear waypoints for clear right-angle directions.
+000275|   const compact=result.filter((p,i)=>{if(i===0||i===result.length-1)return true;const a=result[i-1],b=result[i+1];return !((a[0]===p[0]&&p[0]===b[0])||(a[1]===p[1]&&p[1]===b[1]));});
+000276|   return {points:compact,length:dist.get(target)};
+000277|  }
+000278|  function extendToDoors(path,first,last){
+000279|   // Keep the doorway connection in the white corridor. Never draw a diagonal
+000280|   // across a classroom just because a door marker and approach are offset.
+000281|   const result=path.slice();
+000282|   const different=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1])>.01;
+000283|   if(first&&different(first.door,first.approach)){
+000284|    const corner=[first.door[0],first.approach[1]];
+000285|    if(different(corner,first.door)&&different(corner,result[0]))result.unshift(corner);
+000286|    result.unshift(first.door);
+000287|   }
+000288|   if(last&&different(last.door,last.approach)){
+000289|    const corner=[last.door[0],last.approach[1]];
+000290|    if(different(corner,last.door)&&different(corner,result[result.length-1]))result.push(corner);
+000291|    result.push(last.door);
+000292|   }
+000293|   return result;
+000294|  }
+000295|  function entrances(r){
+000296|   if(r.id==='Library'&&r.floor==='two')return [
+000297|    {approach:[446,358],door:[449,347],name:'west'},
+000298|    {approach:[695,358],door:[702,347],name:'east'}
+000299|   ];
+000300|   return [{approach:r.approach,door:r.door,name:'main'}];
+000301|  }
+000302| 
+000303|  // Ground Floor navigation graph rebuilt from the visible white corridors and the yellow entrance dots
+000304|  // WALL-SAFE RULE: intermediate nodes sit inside corridor centers; only the final short segment may touch a yellow entrance dot.
+000305|  // on the exact supplied reference image. Every link below is horizontal/vertical and stays outside rooms.
+000306|  const groundWaypoints={
+000307|    // Upper Food Hall / north corridor
+000308|    U0:[220,264], U_FHW:[358,264], U_SHW:[425,264], U_M:[580,264], U_590:[590,264],
+000309|    U_FHC:[724,264], U_853:[853,264], U_SHE:[1005,264], U_FHE:[1083,264], U_R:[1188,264],
+000310|    FH_W:[358,258], FH_ML:[590,271], FH_MR:[853,271], FH_E:[1083,258],
+000311|    SHW_D:[425,241], SHC_D:[724,264], SHE_D:[1005,241],
+000312|    MENW_A:[220,330], MENW_D:[204,330], MENN_A:[580,304], MENN_D:[559,304],
+000313|    WOMN_A:[850,305], WOMN_D:[876,305],
+000314|    ACC_W_D:[208,264], ACC_EN_D:[1208,264],
+000315|    NW_COR:[220,181], NW_STAIR_D:[208,181], NE_COR:[1188,181], NE_STAIR_D:[1208,181],
+000316|    G6_COR:[220,120], G6_D:[235,120], FHTOP_L:[580,150], G5_M:[711,150], G5_D:[711,118], G4_D:[1194,120],
+000317| 
+000318|    // Main corridor under the upper rooms. These points are deliberately centered
+000319|    // in the WHITE walkway between the room walls and the long gray barriers.
+000320|    // Keeping the route away from both edges stops the guidance line from visually
+000321|    // cutting through walls when the map is zoomed.
+000322|    L_MAIN:[220,441], GAM_A:[305,441], GAM_D:[305,432], ADM_A:[526,441], ADM_D:[526,432],
+000323|    ML_MAIN:[575,441], AUD_A:[724,441], AUD_D:[724,431], MR_MAIN:[850,441],
+000324|    ATM_A:[850,425], ATM_D:[868,425],
+000325|    R_START:[930,441], STU_A:[984,441], STU_D:[984,435], REG_A:[1143,441], REG_D:[1143,435], R_MAIN:[1176,441],
+000326| 
+000327|    // Lower-left corridor. The 492 lane is centered between the gray barrier above
+000328|    // and the eSports/shop/stair blocks below. The 535 lane is the middle of the
+000329|    // narrow white passage beside the Southwest Inner stair.
+000330|    L_LOW:[220,492], ES_A:[281,492], ES_D:[281,512], SWS_A:[400,492], SWS_D:[400,511],
+000331|    SWI_TOP:[535,492], SWI_A:[535,589], SWI_D:[519,589], ML_LOW:[575,492],
+000332|    BYPL_TOP:[635,492], BYPL_550:[635,550], BYPL_651:[635,651], BYPL_BOT:[635,691],
+000333|    ELEV_C_D:[660,550], SWO_D:[581,651],
+000334| 
+000335|    // Lower-right corridor. Keep the route centered in the white vertical channel
+000336|    // between the center elevator and the Southeast stair/shop structure.
+000337|    MR_LOW:[850,492], BYPR_TOP:[887,492], BYPR_586:[887,586], BYPR_647:[887,647], BYPR_BOT:[887,691],
+000338|    SES_A:[1060,492], SES_D:[1060,511], SEI_D:[914,586], WOM_S_D:[918,647],
+000339|    SEO_BOT:[847,691], SEO_D:[847,652],
+000340| 
+000341|    // South service corridor / entrances. y=691 is the center of the open strip
+000342|    // above Security / Clinic / Advising and below the lower stair structures.
+000343|    BOT_L:[710,691], SEC_A:[922,691], SEC_D:[922,712], CL_A:[1014,691], CL_D:[1014,712],
+000344|    ADV_A:[1100,691], ADV_D:[1100,712], R_BOT:[1176,691], G1_D:[710,815], G2_D:[1176,815],
+000345| 
+000346|    // East vertical corridor. x=1176 stays in the middle of the white passage
+000347|    // between Registration/gray barrier and the east accessible-elevator blocks.
+000348|    R_LOW:[1176,492], R_ACC:[1176,570], ACC_ES_D:[1200,570], R_STAIR:[1176,630], EAST_S_D:[1200,630]
+000349|  };
+000350|  const groundLinks=[
+000351|    // continuous bottom edge of the Food Hall
+000352|    ['U0','U_FHW'],['U_FHW','U_SHW'],['U_SHW','U_M'],['U_M','U_590'],['U_590','U_FHC'],['U_FHC','U_853'],['U_853','U_SHE'],['U_SHE','U_FHE'],['U_FHE','U_R'],
+000353|    ['U_FHW','FH_W'],['U_590','FH_ML'],['U_853','FH_MR'],['U_FHE','FH_E'],
+000354|    ['U_SHW','SHW_D'],['U_FHC','SHC_D'],['U_SHE','SHE_D'],
+000355|    ['U0','ACC_W_D'],['U_R','ACC_EN_D'],
+000356|    ['U0','NW_COR'],['NW_COR','NW_STAIR_D'],['NW_COR','G6_COR'],['G6_COR','G6_D'],
+000357|    ['U_R','NE_COR'],['NE_COR','NE_STAIR_D'],['NE_COR','G4_D'],
+000358|    ['U_M','FHTOP_L'],['FHTOP_L','G5_M'],['G5_M','G5_D'],
+000359|    ['U0','MENW_A'],['MENW_A','MENW_D'],['U_M','MENN_A'],['MENN_A','MENN_D'],['U_853','WOMN_A'],['WOMN_A','WOMN_D'],
+000360| 
+000361|    // vertical connections from upper corridor to the main corridor
+000362|    ['U0','L_MAIN'],['U_M','ML_MAIN'],['U_853','MR_MAIN'],['U_R','R_MAIN'],
+000363| 
+000364|    // left/main corridor under Gaming, Administration and Auditorium
+000365|    ['L_MAIN','GAM_A'],['GAM_A','ADM_A'],['ADM_A','ML_MAIN'],['GAM_A','GAM_D'],['ADM_A','ADM_D'],
+000366|    ['ML_MAIN','AUD_A'],['AUD_A','MR_MAIN'],['AUD_A','AUD_D'],
+000367|    ['MR_MAIN','ATM_A'],['ATM_A','ATM_D'],
+000368| 
+000369|    // right main corridor is separated from the left by the ATM; it reconnects around the lower corridor
+000370|    ['R_START','STU_A'],['STU_A','REG_A'],['REG_A','R_MAIN'],['STU_A','STU_D'],['REG_A','REG_D'],
+000371| 
+000372|    // lower-left lane
+000373|    ['ML_MAIN','ML_LOW'],['ML_LOW','SWI_TOP'],['SWI_TOP','SWS_A'],['SWS_A','ES_A'],['ES_A','L_LOW'],
+000374|    ['ES_A','ES_D'],['SWS_A','SWS_D'],['SWI_TOP','SWI_A'],['SWI_A','SWI_D'],
+000375|    ['ML_LOW','BYPL_TOP'],['BYPL_TOP','BYPL_550'],['BYPL_550','BYPL_651'],['BYPL_651','BYPL_BOT'],
+000376|    ['BYPL_550','ELEV_C_D'],['BYPL_651','SWO_D'],
+000377| 
+000378|    // lower-right lane / right bypass
+000379|    ['MR_MAIN','MR_LOW'],['MR_LOW','BYPR_TOP'],['BYPR_TOP','SES_A'],['SES_A','R_LOW'],['SES_A','SES_D'],
+000380|    ['BYPR_TOP','BYPR_586'],['BYPR_586','BYPR_647'],['BYPR_647','BYPR_BOT'],['BYPR_586','SEI_D'],['BYPR_647','WOM_S_D'],
+000381|    ['R_MAIN','R_LOW'],['R_LOW','R_ACC'],['R_ACC','R_STAIR'],['R_STAIR','R_BOT'],['R_ACC','ACC_ES_D'],['R_STAIR','EAST_S_D'],
+000382| 
+000383|    // bottom service corridor and the clear passage under the center elevator
+000384|    ['BYPL_BOT','BOT_L'],['BOT_L','SEO_BOT'],['SEO_BOT','BYPR_BOT'],['SEO_BOT','SEO_D'],
+000385|    ['BYPR_BOT','SEC_A'],['SEC_A','CL_A'],['CL_A','ADV_A'],['ADV_A','R_BOT'],
+000386|    ['SEC_A','SEC_D'],['CL_A','CL_D'],['ADV_A','ADV_D'],['BOT_L','G1_D'],['R_BOT','G2_D']
+000387|  ];
+000388| 
+000389|  // Each location can have one or more real entrances. Food Hall has four yellow entrances,
+000390|  // so routing automatically chooses the closest valid one instead of forcing every trip to the middle.
+000391|  const groundAccess={
+000392|    'Food Hall':['FH_W','FH_ML','FH_MR','FH_E'],
+000393|    'Gaming Room':['GAM_D'],'Administration':['ADM_D'],'Auditorium':['AUD_D'],
+000394|    'Student Life':['STU_D'],'Registration Office':['REG_D'],'ATM':['ATM_D'],

@@ -1,0 +1,11 @@
+
+
+/* Ground Floor precision targets: keep hover/selection inside the exact mapped symbol/room. */
+#mapView #orbitRoomLayer .orbit-nav-hit[data-room^="Elevator"],
+#mapView #orbitRoomLayer .orbit-nav-hit[data-room^="Stairs"]{vector-effect:non-scaling-stroke}
+
+/* Reference-image mode: no invented parking rectangles */
+#orbitParkingLayer {display:block !important;}
+#orbitMapCanvas.parking-compact #orbitFloorOverlay {display:block !important;pointer-events:none;}
+#orbitMapCanvas.parking-compact #orbitParkingLayer {pointer-events:none;}
+.orbit-map-canvas img {object-fit:contain;}

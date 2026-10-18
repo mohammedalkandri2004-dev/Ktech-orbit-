@@ -1,0 +1,136 @@
+000473|           ['Open the KTECH Map tab on this website.','افتح تبويب خريطة KTECH في الموقع.'],
+000474|           ['Select Floor 1 and tap a room, or use room-number search.','اختار الدور الأول واضغط على الغرفة أو ابحث برقمها.'],
+000475|           ['Other floor plans are not included yet. Confirm the room with campus staff if it is not shown.','خرائط الأدوار الثانية مو مضافة للحين. إذا ما لقيت القاعة اسأل موظفين الكلية.']
+000476|         ]}
+000477|       ]
+000478|     }
+000479|   };
+000480|   function renderHelp(){
+000481|     const parts=page.split('/');
+000482|     const key=parts[1], choiceKey=parts[2];
+000483|     els.label.textContent=tx('🛟 Student Help Guide','🛟 دليل مساعدة الطلبة');
+000484|     if(!key){
+000485|       hint(tx('Choose a problem. This guide suggests steps and tells you who to contact. It cannot change SIS, approve requests, or fix every issue.','اختار مشكلتك. الدليل يعطيك خطوات ويوجهك للقسم المناسب. ما يقدر يعدل SIS أو يوافق على طلبك أو يحل كل مشكلة.'));
+000486|       button(t().back,()=>navigate('home'),'back');
+000487|       Object.keys(helpTopics).forEach(id=>button(helpTopics[id].label[d()]+'  ›',()=>{
+000488|         say('user',helpTopics[id].label[d()].replace(/^[^\p{L}]+/u,''));
+000489|         say('bot',helpTopics[id].prompt[d()]);
+000490|         navigate('help/'+id);
+000491|       },'main'));
+000492|       return;
+000493|     }
+000494|     const topic=helpTopics[key];if(!topic){navigate('help');return;}
+000495|     if(!choiceKey){
+000496|       hint(topic.prompt[d()]);
+000497|       button(t().back,()=>navigate('help'),'back');
+000498|       topic.choices.forEach(choice=>button('› '+choice.label[d()],()=>{
+000499|         say('user',choice.label[d()]);
+000500|         say('bot',tx('Here are some steps you can try, plus the right contact if you still need help.','هذي خطوات ممكن تساعدك، ومعاها جهة التواصل إذا احتجت مساعدة.'));
+000501|         navigate('help/'+key+'/'+choice.id);
+000502|       },'main'));
+000503|       return;
+000504|     }
+000505|     const choice=topic.choices.find(c=>c.id===choiceKey);if(!choice){navigate('help/'+key);return;}
+000506|     hint(tx('Guidance only — KTECH departments make all official decisions.','هذه إرشادات فقط — القرار الرسمي عند أقسام الكلية.'));
+000507|     button(t().back,()=>navigate('help/'+key),'back');
+000508|     section(tx('✅ Suggested next steps','✅ الخطوات المقترحة'),choice.steps.map((st,i)=>(i+1)+'. '+st[d()]).join('\n'));
+000509|     const target=choice.target;
+000510|     if(target==='map'){
+000511|       section(tx('📍 Where to go next','📍 شنو تسوي الحين'),tx('Use the existing campus map to check available room locations.','استخدم خريطة الكلية الموجودة بالموقع للبحث عن الغرف المتوفرة.'));
+000512|       button(tx('🗺️ Open KTECH Map','🗺️ فتح خريطة KTECH'),()=>{
+000513|         document.querySelector('.orbit-tab-btn[data-view="mapView"]')?.click();
+000514|         const drawer=document.getElementById('orbitChatDrawer');
+000515|         if(drawer?.classList.contains('open'))document.getElementById('orbitChatClose')?.click();
+000516|       },'main');
+000517|     }else{
+000518|       const contactTitle={it:['💻 IT Helpdesk','💻 الدعم الفني IT'],advising:['🧭 Academic Advising','🧭 الإرشاد الأكاديمي'],finance:['💳 Finance Department','💳 قسم المالية'],library:['📚 KTECH Library','📚 مكتبة KTECH'],aafaq:['🛒 Aafaq Distribution','🛒 شركة آفاق للتوزيع']};
+000519|       section(tx('📩 Who can help?','📩 منو يقدر يساعد؟'),contactTitle[target][d()]+ '\n'+tx('The department confirms the official next step.','القسم المختص يحدد الإجراء الرسمي.'));
+000520|       const links={
+000521|         it:[info.it[4],info.it[1]],advising:[info.advising[0],info.advising[1]],
+000522|         finance:[info.finance[1],info.finance[2]],
+000523|         library:[libraryContacts.ktech[0],libraryContacts.ktech[1]],
+000524|         aafaq:[libraryContacts.aafaq[0],libraryContacts.aafaq[2]]
+000525|       };
+000526|       (links[target]||[]).forEach(contact);
+000527|       if(target==='aafaq')button(tx('📋 Aafaq refund & exchange policy','📋 سياسة الاسترجاع والاستبدال من آفاق'),()=>navigate('library::policy'),'main');
+000528|       button(tx('🏫 View all department contacts','🏫 عرض كل معلومات التواصل'),()=>navigate(target==='library'||target==='aafaq'?'library':target),'main');
+000529|     }
+000530|     button(tx('🛟 Choose another problem','🛟 اختار مشكلة ثانية'),()=>navigate('help'),'main');
+000531|   }
+000532| 
+000533|   function render(){
+000534|     els.options.replaceChildren();const labels=t();const deg=page;
+000535|     els.label.textContent=names[deg]?.[d()]||labels[deg]||labels.home;
+000536|     if(page==='home'){
+000537|       hint(labels.choose);
+000538|       button('📚 '+labels.major,()=>navigate('major'),'main');
+000539|       button('🏫 '+labels.departments,()=>navigate('departments'),'main');
+000540|       button(tx('🛟 I Need Help','🛟 أحتاج مساعدة'),()=>navigate('help'),'main');
+000541|     }else if(page==='help'||page.startsWith('help/')){
+000542|       renderHelp();
+000543|     }else if(page==='major'){
+000544|       hint(labels.majorInfo);button(labels.back,()=>navigate('home'),'back');
+000545|       button('🎓 '+tx('Diploma','دبلوم'),()=>navigate('diploma'),'main');
+000546|       button('🎓 '+tx('Bachelor','بكالوريوس'),()=>navigate('bachelor'),'main');
+000547|     }else if(page==='diploma'||page==='bachelor'){
+000548|       hint(labels.majorInfo);button(labels.back,()=>navigate('major'),'back');
+000549|       const lang=isAr()?'ar':'en';const arr=majorNames[lang][page];
+000550|       arr.forEach((major,index)=>button('📄 '+major,()=>{
+000551|         const chosen=majorDocumentCatalog[page]?.[index];
+000552|         if(chosen){sendMajorDocument(major,page,chosen);return;}
+000553|         const degree=page==='diploma'?tx('Diploma','دبلوم'):tx('Bachelor','بكالوريوس');
+000554|         ask(major+' — '+degree,tx('This plan was not included in the 2026–2027 workbook. Please contact Academic Advising for the approved Major Sheet.',
+000555|           'الخطة الدراسية لهذا التخصص مو موجودة في ملف إكسل 2026–2027 المرفوع. تواصل مع الإرشاد الأكاديمي للحصول على الخطة المعتمدة.')+'\n'+tx('Email: academicadvising@ktech.edu.kw','الإيميل: academicadvising@ktech.edu.kw'));
+000556|       },'main'));
+000557|     }else if(page==='departments'){
+000558|       hint(labels.choose);button(labels.back,()=>navigate('home'),'back');
+000559|       ['finance','studentlife','advising','it','library'].forEach(k=>button(({finance:'💳 ',studentlife:'🎉 ',advising:'🧭 ',it:'💻 ',library:'📚 '})[k]+names[k][d()],()=>navigate(k),'main'));
+000560|     }else if(page==='library'){
+000561|       hint(tx('Borrowing books and buying books are separate services. Use the correct contact below.', 'استعارة الكتب من المكتبة وشراء الكتب من آفاق خدمتين مختلفتين. اختار جهة التواصل المناسبة.'));
+000562|       button(labels.back,()=>navigate('departments'),'back');
+000563|       section(tx('📚 KTECH Library — borrow books','📚 مكتبة KTECH — استعارة الكتب'),tx('Ask the KTECH librarian about book availability, borrowing and loan rules. These contacts are for the college library, not Aafaq.', 'تواصل مع أمين المكتبة للاستفسار عن توفر الكتب وشروط الاستعارة ومدتها. هذي بيانات مكتبة الكلية، مو بيانات آفاق.'));
+000564|       libraryContacts.ktech.forEach(contact);
+000565|       section(tx('🛒 Aafaq Distribution — buy course books','🛒 شركة آفاق للتوزيع — شراء الكتب'),tx('Purchase physical/digital textbooks and access codes using the KTECH Aafaq store. For sales or order support, contact Aafaq via its email below.', 'لشراء الكتب الورقية والإلكترونية والأكسس كود افتح متجر آفاق الخاص بـ KTECH. للاستفسارات عن الطلبات تواصل مع آفاق بالإيميل.'));
+000566|       libraryContacts.aafaq.forEach(contact);
+000567|       section(tx('📄 Aafaq refunds & exchanges','📄 سياسة آفاق للاسترداد والاستبدال'),tx('The posted policy says sales are usually final. Exceptional cases may be reviewed. Read the terms before requesting a refund.', 'بحسب إعلان آفاق المبيعات نهائية عادةً، وقد تتم مراجعة الحالات الاستثنائية. اقرأ الشروط قبل تقديم طلب استرجاع.'));
+000568|       button(tx('📋 Read Aafaq sales & refund policy','📋 عرض سياسة البيع والاسترجاع من آفاق'),()=>navigate('library::policy'),'main policy-link');
+000569|       libraryContacts.refund.forEach(contact);
+000570|       button(labels.questions+'  ›',()=>navigate('library::questions'),'main');
+000571|     }else if(page==='library::policy'){
+000572|       button(labels.back,()=>navigate('library'),'back');
+000573|       section(tx('Aafaq sales — general policy','سياسة البيع العامة لآفاق'),tx('The policy sign states that sales are final for both physical and digital academic books. Refunds are not normally offered; exceptions are considered by the Aafaq team.', 'بحسب إعلان آفاق، مبيعات الكتب الورقية والإلكترونية نهائية ولا تُرد المبالغ عادةً. الاستثناءات تخضع لتقييم فريق آفاق.'));
+000574|       section(tx('Physical books — exchange exception','الكتب الورقية — حالات الاستبدال'),tx('Physical books are non-returnable. If the wrong book was supplied by mistake, request an exchange within 24 hours of purchase. It must be original and unused, with no scratches, writing or damage.', 'الكتب الورقية لا تُرد عادةً. إذا استلمت الكتاب الخطأ بالخطأ، اطلب استبداله خلال 24 ساعة من الشراء، بشرط يكون أصلي وغير مستخدم وما فيه خدوش أو كتابة أو تلف.'));
+000575|       section(tx('Digital books & access codes','الكتب الإلكترونية والأكسس كود'),tx('Digital products, including access codes, are generally non-refundable. For a serious issue, Aafaq may review a request and decide whether a refund or replacement can be issued.', 'المنتجات الرقمية والأكسس كود لا تُسترد عادةً. إذا عندك مشكلة جدية، قدم طلب مراجعة وآفاق تقرر إذا توافق على استرداد أو استبدال.'));
+000576|       section(tx('Delivery & refund requests','تسليم المنتجات وطلبات الاسترجاع'),tx('The posted notice says digital books/platforms are delivered within 2–5 working days. Aafaq reviews requests individually and notifies you if approved or declined. Sending a request does not guarantee a refund.', 'بحسب الإعلان، الكتب الرقمية والمنصات تصل خلال 2–5 أيام عمل. آفاق تراجع كل طلب بشكل منفصل وتبلغك بالقرار. تقديم الطلب لا يعني ضمان الاسترداد.'));
+000577|       libraryContacts.refund.forEach(contact);
+000578|       contact(libraryContacts.aafaq[2]);
+000579|     }else if(page.endsWith('::questions')){
+000580|       const department=page.split('::')[0];els.label.textContent=labels.questions;
+000581|       hint(labels.questionHint);button(labels.back,()=>navigate(department),'back');
+000582|       (questions[department]||[]).forEach(([en,ar],i)=>button('› '+tx(en,ar),()=>ask(tx(en,ar),answer(department,i),officialSources(department,i)),'main'));
+000583|     }else if(names[page]){
+000584|       hint(labels.deptHint);button(labels.back,()=>navigate('departments'),'back');
+000585|       (info[page]||[]).forEach(contact);
+000586|       if(questions[page]?.length){button(labels.questions+'  ›',()=>navigate(page+'::questions'),'main');}
+000587|     }else navigate('home');
+000588|     els.options.scrollTop=0;
+000589|   }
+000590|   // Language toggle works with the existing page language implementation.
+000591|   for(const id of ['langEn','langAr']) document.getElementById(id)?.addEventListener('click',()=>setTimeout(render,0));
+000592|   window.renderOrbitGuide=()=>render();
+000593|   window.openOrbitHelpGuide=()=>{
+000594|     const drawer=document.getElementById('orbitChatDrawer');
+000595|     if(drawer&&!drawer.classList.contains('open'))document.getElementById('orbitChatFab')?.click();
+000596|     navigate('help');
+000597|   };
+000598|   document.getElementById('orbitHelpShortcut')?.addEventListener('click',()=>window.openOrbitHelpGuide());
+000599|   function translateHelpBanner(){
+000600|     const set=(id,value)=>{const n=document.getElementById(id);if(n)n.textContent=value;};
+000601|     set('orbitHelpBannerTitle',tx('🛟 Not sure who can help you at KTECH?','🛟 مو عارف منو يساعدك بالكلية؟'));
+000602|     set('orbitHelpBannerText',tx('Try the Student Help Guide. Pick a problem, follow simple steps, and contact the right department.','جرب دليل مساعدة الطلبة. اختار المشكلة وشوف الخطوات وطريقة التواصل مع القسم المناسب.'));
+000603|     set('orbitHelpShortcut',tx('Try the Help Guide ›','جرّب دليل المساعدة ›'));
+000604|   }
+000605|   for(const id of ['langEn','langAr'])document.getElementById(id)?.addEventListener('click',()=>setTimeout(translateHelpBanner,0));
+000606|   translateHelpBanner();
+000607|   render();
+000608| })();

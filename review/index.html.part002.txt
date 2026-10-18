@@ -1,0 +1,311 @@
+000248|                                 <label class="radio-label"><input type="radio" name="understanding" value="Hard to follow" required><span data-option-key="hardToFollow">Hard to follow</span></label>
+000249|                                 <label class="radio-label"><input type="radio" name="understanding" value="Mostly clear"><span data-option-key="mostlyClear">Mostly clear</span></label>
+000250|                                 <label class="radio-label"><input type="radio" name="understanding" value="Very clear"><span data-option-key="veryClear">Very clear</span></label>
+000251|                             </div>
+000252|                         </td>
+000253|                         <td>
+000254|                             <div class="radio-group">
+000255|                                 <label class="radio-label"><input type="radio" name="bonus" value="Never" required><span data-option-key="never">Never</span></label>
+000256|                                 <label class="radio-label"><input type="radio" name="bonus" value="Sometimes"><span data-option-key="sometimes">Sometimes</span></label>
+000257|                                 <label class="radio-label"><input type="radio" name="bonus" value="Often"><span data-option-key="often">Often</span></label>
+000258|                             </div>
+000259|                         </td>
+000260|                         <td>
+000261|                             <textarea id="opinionInput" name="opinion" placeholder="Does he/she give pushes, bonuses? Are quizzes hard? Write suggestions..."></textarea>
+000262|                         </td>
+000263|                     </tr>
+000264|                 </tbody>
+000265|             </table>
+000266|         </div>
+000267| 
+000268|         <div class="actions">
+000269|             <div style="display: flex; gap: 10px;">
+000270|                 <button type="button" class="btn-reset" id="clearButton" onclick="resetForm()">Clear All</button>
+000271|                 <button type="submit" class="btn-submit" id="submitButton">Submit Feedback 🚀</button>
+000272|             </div>
+000273|         </div>
+000274|     </form>
+000275| 
+000276|     </section>
+000277| 
+000278|     <section id="reviewsView" class="orbit-view">
+000279|     <section class="contact-section" aria-labelledby="publicReviewsTitle" style="text-align:left;">
+000280|         <h2 id="publicReviewsTitle">Student Reviews</h2>
+000281|         <p id="publicReviewsText">Everyone can view reviews  You can permanently delete reviews submitted from this browser, but regular users cannot edit reviews</p>
+000282|         <input type="text" id="publicSearchInput" class="search-box" placeholder="Search instructor reviews..." autocomplete="off">
+000283|         <div id="publicReviewsList"></div>
+000284|     </section>
+000285| 
+000286| 
+000287| 
+000288|     </section>
+000289| 
+000290|     <div id="orbitChatDrawer" class="orbit-chat-drawer" aria-hidden="false">
+000291|         <div class="orbit-chat-drawer-head"><button type="button" class="orbit-chat-close" id="orbitChatClose" aria-label="Close chat">&times;</button></div>
+000292|     <section class="orbit-ai-section" aria-labelledby="orbitAiTitle">
+000293|         <div class="orbit-ai-header">
+000294|             <h2 class="orbit-ai-title" id="orbitAiTitle">🪐 Ask KTECH Orbit</h2>
+000295|             <span class="orbit-ai-badge" id="orbitAiBadge">KTECH-only assistant</span>
+000296|         </div>
+000297|         <p class="orbit-ai-disclaimer" id="orbitAiDisclaimer">KTECH Orbit is an independent student project. Tap a question for a direct answer and useful KTECH links.</p>
+000298|         <div class="orbit-chat-log" id="orbitChatLog" aria-live="polite">
+000299|             <div class="orbit-chat-message system" id="orbitAiWelcome">Welcome! Tap an option below to ask a question — no typing needed.</div>
+000300|         </div>
+000301|         <div class="orbit-guide" id="orbitGuide" aria-label="Tap-only KTECH assistant">
+000302|             <div class="orbit-guide-label" id="orbitGuideLabel">Choose a topic</div>
+000303|             <div class="orbit-guide-options" id="orbitGuideOptions"></div>
+000304|         </div>
+000305|     </section>
+000306| 
+000307|     </div>
+000308| 
+000309| <section id="restaurantsView" class="orbit-view">
+000310|   <div class="orbit-restaurants-page">
+000311|     <div class="orbit-restaurants-head">
+000312|       <div><span class="orbit-map-eyebrow">KTECH ORBIT · DEMO ORDERING</span><h2>🍽️ Restaurants & Pickup</h2><p class="orbit-map-subtitle">Choose a restaurant location, place a demo order, pay, and track it until pickup.</p></div>
+000313|       <span class="orbit-map-v2-chip">PAYMENT-GATED DEMO</span>
+000314|     </div>
+000315|     <div id="orbitStudentSession"></div>
+000316|     <div class="orbit-demo-note">Demo only — no real money is charged and the restaurant names/menus are placeholders. An order is sent to the restaurant dashboard only after the demo payment is completed.</div>
+000317|     <div class="orbit-restaurants-layout">
+000318|       <div>
+000319|         <div id="orbitRestaurantSelect" class="orbit-restaurant-select"></div>
+000320|         <div id="orbitMenuGrid" class="orbit-menu-grid"></div>
+000321|       </div>
+000322|       <aside class="orbit-cart">
+000323|         <h3>🛒 Your Order</h3>
+000324|         <div id="orbitCartRestaurant" class="orbit-mini-meta">Choose a restaurant</div>
+000325|         <div id="orbitCartList" class="orbit-cart-list"></div>
+000326|         <div class="orbit-cart-total"><span>Total</span><span id="orbitCartTotal">KD 0.000</span></div>
+000327|         <div class="orbit-btn-row"><button type="button" id="orbitCheckoutBtn" class="orbit-btn primary">Proceed to Demo Payment</button><button type="button" id="orbitClearCart" class="orbit-btn secondary">Clear</button></div>
+000328|       </aside>
+000329|     </div>
+000330|   </div>
+000331| </section>
+000332| 
+000333| <section id="staffView" class="orbit-view">
+000334|   <div class="orbit-staff-page">
+000335|     <div class="orbit-restaurants-head">
+000336|       <div><span class="orbit-map-eyebrow">KTECH ORBIT · STAFF DEMO</span><h2>🔐 Staff Portals</h2><p class="orbit-map-subtitle">Separate demo logins for Clinic and Restaurant staff.</p></div>
+000337|       <span class="orbit-map-v2-chip">LOCAL DEMO</span>
+000338|     </div>
+000339|     <div class="orbit-staff-grid">
+000340|       <section class="orbit-staff-panel"><h3>🏥 Clinic Staff</h3><p class="orbit-mini-meta">Receive emergency alerts and live location updates.</p><div id="orbitClinicPortal"></div></section>
+000341|       <section class="orbit-staff-panel"><h3>🍴 Restaurant Staff</h3><p class="orbit-mini-meta">Only paid/verified demo orders appear here.</p><div id="orbitRestaurantPortal"></div></section>
+000342|     </div>
+000343|   </div>
+000344| </section>
+000345| 
+000346| <button type="button" id="orbitEmergencyFab" class="orbit-emergency-fab" aria-label="Emergency help" title="Emergency">🚨</button>
+000347| <button type="button" id="orbitOrderSideTab" class="orbit-order-side-tab" aria-label="Open order tracking">🍔 Orders</button>
+000348| 
+000349| <div id="orbitEmergencyModal" class="orbit-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="orbitEmergencyTitle">
+000350|   <div class="orbit-feature-modal emergency">
+000351|     <div class="orbit-feature-modal-head"><div><h2 id="orbitEmergencyTitle">🚨 Emergency Help</h2><p class="orbit-mini-meta">Send an alert to the Clinic demo dashboard with your current location.</p></div><button type="button" class="orbit-x" data-close="orbitEmergencyModal">×</button></div>
+000352|     <div class="orbit-danger-note"><strong>For the real system:</strong> this feature needs a secure backend, authenticated users, clinic devices, and an approved indoor-location system. Browser GPS alone cannot reliably identify a room inside a building.</div>
+000353|     <div id="orbitEmergencyStudent"></div>
+000354|     <div id="orbitEmergencyForm"></div>
+000355|     <div id="orbitEmergencyActive"></div>
+000356|   </div>
+000357| </div>
+000358| 
+000359| <div id="orbitPaymentModal" class="orbit-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="orbitPaymentTitle">
+000360|   <div class="orbit-feature-modal">
+000361|     <div class="orbit-feature-modal-head"><div><h2 id="orbitPaymentTitle">💳 Demo Payment</h2><p class="orbit-mini-meta">No real payment information is collected.</p></div><button type="button" class="orbit-x" data-close="orbitPaymentModal">×</button></div>
+000362|     <div class="orbit-demo-note">This simulates the payment verification step. The restaurant will not receive the order until you press <strong>Confirm Demo Payment</strong>.</div>
+000363|     <div id="orbitPaymentSummary"></div>
+000364|     <div class="orbit-btn-row"><button type="button" id="orbitConfirmPayment" class="orbit-btn good">Confirm Demo Payment</button><button type="button" class="orbit-btn secondary" data-close="orbitPaymentModal">Cancel</button></div>
+000365|   </div>
+000366| </div>
+000367| 
+000368| <aside id="orbitOrderDrawer" class="orbit-order-drawer" aria-label="Order tracking">
+000369|   <div class="orbit-order-drawer-head"><div><h2>🍔 My Orders</h2><p class="orbit-mini-meta">Live demo order status</p></div><button type="button" class="orbit-x" id="orbitOrderDrawerClose">×</button></div>
+000370|   <div id="orbitOrderTracker"></div>
+000371| </aside>
+000372| 
+000373| 
+000374|     <section id="contactView" class="orbit-view" style="display:none">
+000375|     <section class="contact-section" aria-labelledby="contactTitle">
+000376|         <h2 id="contactTitle">Feedback &amp; Contact</h2>
+000377|         <p id="contactText">Have feedback or need help with KTECH Orbit? Email us directly.</p>
+000378|         <a class="contact-email" id="contactEmail" href="mailto:ktechorbit@gmail.com">✉️ ktechorbit@gmail.com</a>
+000379|     </section>
+000380|     </section>
+000381| </div>
+000382| 
+000383| <button type="button" id="orbitChatFab" class="orbit-chat-fab" aria-label="Open Orbit Chat" title="Orbit Chat">💬</button>
+000384| 
+000385| <div id="adminModal" class="admin-modal">
+000386|     <div class="modal-content">
+000387|         <div class="modal-header">
+000388|             <h2 id="adminTitle" style="color: var(--olive-dark);">🔑 KTECH Orbit Admin Panel</h2>
+000389|             <button type="button" class="close-btn" id="closeAdminButton" onclick="closeAdminModal()" aria-label="Close">&times;</button>
+000390|         </div>
+000391| 
+000392|         <div id="adminAuthSection">
+000393|             <p id="adminPrompt" style="margin-bottom: 15px; color: var(--olive-medium); font-weight: 600;">Enter master password to view feedback:</p>
+000394|             <div class="input-group" style="margin-bottom: 15px;">
+000395|                 <input type="password" id="adminPassword" placeholder="Master Password">
+000396|             </div>
+000397|             <button type="button" class="btn-submit" id="authenticateButton" onclick="loginAdmin()">Authenticate</button>
+000398|         </div>
+000399| 
+000400|         <div id="adminDashboard" style="display: none;">
+000401|             <!-- Search Bar for Stacks -->
+000402|             <input type="text" id="adminSearchInput" class="search-box" placeholder="🔍 Type instructor name to view stacked reviews..." oninput="filterAdminData()">
+000403| 
+000404|             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+000405|                 <h3><span id="instructorFilesLabel">Instructor Files</span> (<span id="submissionCount">0</span>)</h3>
+000406|                 <button type="button" class="btn-reset" id="deleteAllButton" style="color: var(--error); border-color: var(--error);" onclick="clearAllData()">Delete All Data</button>
+000407|             </div>
+000408| 
+000409|             <div id="adminDataList">
+000410|                 <!-- Stacked reviews per instructor render here -->
+000411|             </div>
+000412|         </div>
+000413|     </div>
+000414| </div>
+000415| 
+000416| <script type="text/plain" id="legacyScript">
+000417|     const knownInstructors = [
+000418|         "Alaa Zayed", "Adnan Oudah", "Prof. Issam Moghrabi", "Dr Reem M. Al Qenai",
+000419|         "Riham Hakkani", "Abdelrahman Enayah", "Ebtehal Al Ayoub", "Batoul Salman",
+000420|         "Dr. Remie Nasr", "Ali El Khatib", "Annet Noel", "Fatma Rezk",
+000421|         "Mary Nelson", "Ahlam Mousa", "Tina Daniel", "Yousef Saeam",
+000422|         "Dhai Aljeeran", "Mohammad Alqallaf", "Nada Farah"
+000423|     ];
+000424| 
+000425|     const badWords = ["badword", "stupid", "idiot", "dumb", "hate", "scam", "fool", "crap", "trash", "worst", "suck"];
+000426|     const ADMIN_PASSWORD = "ktech2004"; 
+000427| 
+000428|     function populateSuggestions() {
+000429|         const datalist = document.getElementById('instructorSuggestions');
+000430|         datalist.innerHTML = '';
+000431|         knownInstructors.forEach(inst => {
+000432|             const opt = document.createElement('option');
+000433|             opt.value = inst;
+000434|             datalist.appendChild(opt);
+000435|         });
+000436|     }
+000437| 
+000438|     function isGibberish(text) {
+000439|         if (!text || text.trim().length === 0) return false;
+000440|         const cleanText = text.trim();
+000441|         if (cleanText.length > 15 && !cleanText.includes(" ")) return true;
+000442|         if (/(.)\1{3,}/i.test(cleanText)) return true;
+000443|         const lettersOnly = cleanText.replace(/[^a-zA-Z]/g, '');
+000444|         if (lettersOnly.length > 8) {
+000445|             const vowels = lettersOnly.match(/[aeiouy]/gi);
+000446|             const ratio = (vowels ? vowels.length : 0) / lettersOnly.length;
+000447|             if (ratio < 0.10) return true;
+000448|         }
+000449|         return false;
+000450|     }
+000451| 
+000452|     function cleanProfanity(text) {
+000453|         if (!text) return "";
+000454|         let cleanedText = text;
+000455|         badWords.forEach(word => {
+000456|             const regex = new RegExp(`\\b${word}\\b`, "gi");
+000457|             cleanedText = cleanedText.replace(regex, "***");
+000458|         });
+000459|         return cleanedText;
+000460|     }
+000461| 
+000462|     document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+000463|         e.preventDefault();
+000464| 
+000465|         const lastSubmit = localStorage.getItem('last_submit_time');
+000466|         const now = Date.now();
+000467|         if (lastSubmit && (now - lastSubmit < 20000)) {
+000468|             showStatus('🚨 Anti-Spam Alert: Please wait 20 seconds before submitting again.', 'error');
+000469|             return;
+000470|         }
+000471| 
+000472|         const formData = new FormData(this);
+000473|         const instructorRaw = formData.get('instructorNameInput');
+000474|         const courseCode = formData.get('courseCode');
+000475|         const opinion = formData.get('opinion');
+000476| 
+000477|         if (isGibberish(instructorRaw) || isGibberish(courseCode) || isGibberish(opinion)) {
+000478|             showStatus('❌ Submission rejected: Detected meaningless/gibberish text.', 'error');
+000479|             return;
+000480|         }
+000481| 
+000482|         const reviewData = {
+000483|             id: String(Date.now()) + "_" + Math.random().toString(36).slice(2),
+000484|             ownerId: getOwnerId(),
+000485|             instructor: cleanProfanity(instructorRaw.trim()),
+000486|             course: cleanProfanity(courseCode.trim()),
+000487|             date: formData.get('date'),
+000488|             quizDifficulty: formData.get('quiz'),
+000489|             teaching: formData.get('teaching'),
+000490|             understanding: formData.get('understanding'),
+000491|             bonusMarks: formData.get('bonus'),
+000492|             shortOpinion: cleanProfanity(opinion)
+000493|         };
+000494| 
+000495|         const currentReviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+000496|         currentReviews.push(reviewData);
+000497|         localStorage.setItem('orbit_reviews', JSON.stringify(currentReviews));
+000498|         localStorage.setItem('last_submit_time', now);
+000499| 
+000500|         showStatus(`🚀 Review for "${reviewData.instructor}" added to their file!`, 'success');
+000501|         resetForm(false);
+000502|         loadPublicReviews();
+000503|     });
+000504| 
+000505|     function showStatus(msg, type) {
+000506|         const el = document.getElementById('statusMsg');
+000507|         el.innerText = msg;
+000508|         el.className = `status-msg status-${type}`;
+000509|         el.style.display = 'block';
+000510|         window.scrollTo({ top: 0, behavior: 'smooth' });
+000511| 
+000512|         setTimeout(() => { el.style.display = 'none'; }, 6000);
+000513|     }
+000514| 
+000515|     function resetForm(confirmReq = true) {
+000516|         if (!confirmReq || confirm('Are you sure you want to clear this form?')) {
+000517|             document.getElementById('feedbackForm').reset();
+000518|             const today = new Date().toLocaleDateString('en-GB');
+000519|             document.getElementById('date').value = today;
+000520|         }
+000521|     }
+000522| 
+000523|     /* Admin Modal and Grouping Logic */
+000524|     function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
+000525|     function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+000526| 
+000527|     function loginAdmin() {
+000528|         const input = document.getElementById('adminPassword').value;
+000529|         if (input === ADMIN_PASSWORD) {
+000530|             document.getElementById('adminAuthSection').style.display = 'none';
+000531|             document.getElementById('adminDashboard').style.display = 'block';
+000532|             loadAdminData();
+000533|         } else {
+000534|             alert('Incorrect Admin Password');
+000535|         }
+000536|     }
+000537| 
+000538|     function loadAdminData(searchFilter = '') {
+000539|         const list = document.getElementById('adminDataList');
+000540|         const rawReviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+000541| 
+000542|         if (rawReviews.length === 0) {
+000543|             list.innerHTML = '<p style="color: var(--olive-medium);">No reviews stored yet.</p>';
+000544|             document.getElementById('submissionCount').innerText = '0';
+000545|             return;
+000546|         }
+000547| 
+000548|         // Group reviews by Instructor Name
+000549|         const stackedFiles = {};
+000550| 
+000551|         rawReviews.forEach(rev => {
+000552|             const key = rev.instructor.trim().toLowerCase();
+000553|             if (!stackedFiles[key]) {
+000554|                 stackedFiles[key] = {
+000555|                     displayName: rev.instructor,
+000556|                     reviews: []
+000557|                 };
+000558|             }

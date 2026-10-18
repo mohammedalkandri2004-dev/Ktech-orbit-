@@ -1,0 +1,171 @@
+000894|         .orbit-feature-card { padding:12px 14px !important; border-radius:12px !important; border-width:2px !important; min-height:0 !important; box-shadow:0 3px 0 rgba(58,59,26,.16) !important; }
+000895|         .orbit-feature-card .feature-icon { font-size:1.25rem !important; margin-bottom:4px !important; }
+000896|         .orbit-feature-card h3 { font-size:.95rem !important; margin-bottom:3px !important; }
+000897|         .orbit-feature-card p { font-size:.76rem !important; line-height:1.3 !important; margin:0 !important; }
+000898|         @media (max-width:768px) {
+000899|           .orbit-feature-card { padding:11px 12px !important; }
+000900|           .orbit-feature-card .feature-icon { font-size:1.15rem !important; }
+000901|           .orbit-feature-card h3 { font-size:.9rem !important; }
+000902|           .orbit-feature-card p { font-size:.73rem !important; }
+000903|         }
+000904| 
+000905| 
+000906|         /* KTECH Orbit 1.07 — compact 1.06-style tabs with small bios */
+000907|         .orbit-nav {
+000908|             display:grid !important;
+000909|             grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+000910|             gap:10px !important;
+000911|             max-width:560px !important;
+000912|             margin:0 auto 22px !important;
+000913|             padding:9px !important;
+000914|             position:sticky !important; top:8px !important; z-index:80 !important;
+000915|             border:2px solid var(--olive-dark) !important; border-radius:14px !important;
+000916|             background:rgba(250,244,219,.96) !important; box-shadow:0 5px 16px rgba(0,0,0,.12) !important;
+000917|         }
+000918|         .orbit-tab-btn {
+000919|             width:auto !important; min-height:76px !important; padding:8px 9px !important;
+000920|             display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important;
+000921|             text-align:center !important; border:2px solid transparent !important; border-radius:10px !important;
+000922|             background:transparent !important; color:var(--olive-dark) !important; box-shadow:none !important;
+000923|         }
+000924|         .orbit-tab-btn:hover,.orbit-tab-btn.active { background:var(--olive-dark) !important; color:var(--yellow-main) !important; transform:none !important; box-shadow:none !important; }
+000925|         .orbit-tab-btn .tab-icon { font-size:1.15rem !important; line-height:1 !important; margin:0 0 3px !important; }
+000926|         .orbit-tab-title { font-size:.80rem !important; line-height:1.12 !important; font-weight:900 !important; letter-spacing:.15px !important; margin:0 0 3px !important; text-transform:none !important; }
+000927|         .orbit-tab-bio { max-width:220px !important; font-size:.60rem !important; line-height:1.18 !important; font-weight:600 !important; letter-spacing:0 !important; text-transform:none !important; color:inherit !important; opacity:.82; }
+000928|         html[dir="rtl"] .orbit-tab-btn, html[dir="rtl"] .orbit-tab-title, html[dir="rtl"] .orbit-tab-bio { text-align:center !important; align-items:center !important; }
+000929|         @media(max-width:600px){
+000930|             .orbit-nav{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:7px !important;padding:7px !important;margin:0 auto 18px !important;}
+000931|             .orbit-tab-btn{min-height:70px !important;padding:7px 6px !important;}
+000932|             .orbit-tab-btn .tab-icon{font-size:1.05rem !important;margin-bottom:3px !important;}
+000933|             .orbit-tab-title{font-size:.72rem !important;margin-bottom:2px !important;}
+000934|             .orbit-tab-bio{font-size:.55rem !important;line-height:1.15 !important;}
+000935|         }
+000936| 
+000937| 
+000938| /* KTECH Orbit 1.10 — guided, tap-only chatbot */
+000939| .orbit-guide { margin-top: 13px; border: 2px solid var(--olive-dark); background: var(--cream-bg); padding: 12px; border-radius: 12px; }
+000940| .orbit-guide-label { font-size: .92rem; font-weight: 900; color: var(--olive-dark); margin-bottom: 9px; }
+000941| .orbit-guide-options { display: grid; grid-template-columns: 1fr; gap: 8px; max-height: 320px; overflow-y: auto; overscroll-behavior: contain; padding: 2px; }
+000942| .orbit-guide-btn { display: block; width: 100%; text-align: start; white-space: normal; text-transform: none; letter-spacing: 0; line-height: 1.42; font-size: .82rem; font-weight: 750; background: #fff; color: var(--olive-dark); border: 2px solid var(--olive-dark); padding: 10px 12px; border-radius: 10px; text-decoration: none; box-shadow: none; }
+000943| .orbit-guide-btn:hover, .orbit-guide-btn:focus-visible { background: var(--yellow-light); outline-offset: 1px; }
+000944| .orbit-guide-btn.main { background: var(--yellow-main); }
+000945| .orbit-guide-btn.back { background: var(--olive-dark); color: var(--yellow-main); }
+000946| .orbit-guide-btn.info-link { background: #f8fff3; }
+000947| .orbit-guide-btn:disabled { cursor: default; opacity: .8; }
+000948| .orbit-chat-log { height: 235px; }
+000949| .orbit-chat-message { font-size: .86rem; }
+000950| .orbit-chat-message a { color: #493800; text-decoration: underline; font-weight: 800; }
+000951| .orbit-guide-hint {font-size:.77rem;color:var(--olive-medium);font-weight:650;line-height:1.4;margin-bottom:2px}
+000952| .orbit-chat-drawer { max-height: min(730px, calc(100vh - 115px)); }
+000953| @media(max-width:600px) { .orbit-guide-options {max-height: min(37vh,320px);} .orbit-chat-log{height: min(29vh, 240px);} .orbit-chat-drawer{max-height:calc(100dvh - 102px);} }
+000954| 
+000955| /* KTECH Orbit 1.12 — Library & Aafaq contact groups inside the tap-only assistant */
+000956| .orbit-guide-section{padding:11px 12px;background:#fff9dd;border:2px solid var(--olive-dark);border-radius:11px;line-height:1.45}
+000957| .orbit-guide-section-heading{font-weight:900;font-size:.91rem;color:var(--olive-dark);margin-bottom:5px}
+000958| .orbit-guide-section-description{font-size:.8rem;color:var(--olive-medium);font-weight:650;white-space:pre-line}
+000959| .orbit-guide-btn.policy-link{background:#fff4cf}
+000960| /* KTECH Orbit - tappable campus map */
+000961| #orbitMapAvailable[hidden],#orbitMapPlaceholder[hidden]{display:none !important;}
+000962| .orbit-nav:has([data-view="mapView"]){grid-template-columns:repeat(3,minmax(0,1fr)) !important;max-width:780px !important}
+000963| .orbit-map-panel{background:var(--cream-bg);border:2px solid var(--olive-dark);border-radius:16px;padding:18px}
+000964| .orbit-map-panel h2{color:var(--olive-dark);margin-bottom:6px}
+000965| .orbit-map-subtitle{font-size:.89rem;color:var(--olive-medium);font-weight:650;margin-bottom:15px}
+000966| .orbit-floor-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:14px 0 18px}
+000967| .orbit-floor-btn{padding:12px 6px;font-size:.82rem;letter-spacing:0;text-transform:none;background:white;color:var(--olive-dark)}
+000968| .orbit-floor-btn.selected{background:var(--olive-dark);color:var(--yellow-main)}
+000969| .orbit-map-search{width:100%;max-width:410px;padding:11px 13px;border:2px solid var(--olive-dark);border-radius:9px;font-size:1rem;margin-bottom:12px;background:white}
+000970| .orbit-map-stage{position:relative;width:100%;overflow:auto;border-radius:14px;border:2px solid var(--olive-dark);background:#fff}
+000971| .orbit-map-canvas{position:relative;width:100%;min-width:500px;line-height:0}
+000972| .orbit-map-canvas img{display:block;width:100%;height:auto}
+000973| .orbit-map-overlay{position:absolute;inset:0;width:100%;height:100%}
+000974| .orbit-room{fill:transparent;stroke:transparent;stroke-width:3;cursor:pointer;pointer-events:all}
+000975| .orbit-room:hover,.orbit-room:focus{fill:rgba(245,203,14,.4);stroke:#a17a00;outline:none}
+000976| .orbit-room.selected{fill:rgba(255,199,0,.48);stroke:#e04721;stroke-width:4}
+000977| .orbit-room.found{fill:rgba(245,203,14,.4);stroke:#aa7200;stroke-width:3}
+000978| .orbit-map-selection{margin-top:12px;padding:12px 15px;border:2px solid var(--olive-dark);border-radius:10px;background:#fff;font-weight:800;color:var(--olive-dark)}
+000979| .orbit-map-empty{background:#fff;border:2px dashed var(--olive-dark);border-radius:14px;min-height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px;gap:12px;color:var(--olive-dark)}
+000980| .orbit-map-empty .big-icon{font-size:3rem}
+000981| .orbit-map-empty p{font-size:.9rem;line-height:1.5;max-width:400px}
+000982| .orbit-map-hint{font-size:.78rem;color:var(--olive-medium);margin:10px 0;line-height:1.5}
+000983| @media(max-width:650px){.orbit-floor-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.orbit-map-panel{padding:11px}.orbit-nav:has([data-view="mapView"]){gap:5px !important;padding:5px !important}.orbit-nav:has([data-view="mapView"]) .orbit-tab-bio{display:none}.orbit-nav:has([data-view="mapView"]) .orbit-tab-btn{min-height:55px !important}}
+000984| 
+000985| 
+000986| /* KTECH Orbit 1.12 — Student Help Guide demo shortcut */
+000987| .orbit-help-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 17px;margin:0 0 20px;background:#fff9d8;border:2px solid var(--olive-dark);border-radius:15px}
+000988| .orbit-help-banner strong{font-size:.98rem;color:var(--olive-dark)}
+000989| .orbit-help-banner p{font-size:.8rem;color:var(--olive-medium);font-weight:650;line-height:1.45;margin-top:3px}
+000990| .orbit-help-banner button{padding:10px 15px;border-radius:10px;color:var(--yellow-main);background:var(--olive-dark);font-size:.8rem;letter-spacing:0;text-transform:none}
+000991| .orbit-help-banner button:hover,.orbit-help-banner button:focus-visible{background:var(--olive-medium)}
+000992| .orbit-help-status{font-size:.79rem;color:var(--olive-medium);font-weight:750}
+000993| .orbit-guide-btn.help-answer{border-left:5px solid #a78100;background:#fffdf3}
+000994| .orbit-guide-section.help-outcome{background:#f7ffeb}
+000995| @media(max-width:600px){.orbit-help-banner{align-items:stretch}.orbit-help-banner button{width:100%}}
+000996| 
+000997| /* KTECH Orbit 1.13 - Avenues-inspired 2D campus wayfinding */
+000998| .orbit-nav-map{background:#fff !important;padding:clamp(12px,2.4vw,24px) !important;border:2px solid var(--olive-dark);}
+000999| .orbit-wayfinding-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:17px}
+001000| .orbit-map-eyebrow{display:block;font-weight:900;font-size:.72rem;letter-spacing:1.4px;color:#866700;margin-bottom:5px}
+001001| .orbit-wayfinding-head h2{font-size:clamp(1.4rem,3.5vw,1.95rem) !important;margin:0 0 6px !important}
+001002| .orbit-wayfinding-head .orbit-map-subtitle{line-height:1.45;margin:0;max-width:520px}
+001003| .orbit-map-two-d{white-space:nowrap;border:1px solid #ddc562;color:var(--olive-dark);background:#fff7c8;border-radius:999px;padding:7px 11px;font-size:.7rem;letter-spacing:.6px;font-weight:900}
+001004| .orbit-route-card{background:#fff;border:2px solid #ddd8bf;border-radius:20px;padding:10px 11px;display:flex;align-items:center;gap:8px;box-shadow:0 3px 12px #24200a0a;position:relative;}
+001005| .orbit-route-fields{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+001006| .orbit-route-row{display:flex;align-items:center;gap:11px;background:#f9f9f3;border:2px solid #e5e4d9;border-radius:13px;padding:8px 10px;min-height:64px;transition:border-color .15s,background .15s}
+001007| .orbit-route-row.active,.orbit-route-row:focus-within{border-color:#c8a20a;background:#fffbed}
+001008| .orbit-map-pin-dot{display:block;border-radius:50%;width:13px;height:13px;flex-shrink:0;box-shadow:0 0 0 4px #eaf0fa}
+001009| .orbit-map-pin-dot.from{background:#3469e9}
+001010| .orbit-map-pin-dot.to{background:#e9405d;box-shadow:0 0 0 4px #ffedf1}
+001011| .orbit-route-field-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+001012| .orbit-route-field-main label{font-size:.62rem;font-weight:900;color:#6a6b68;letter-spacing:.6px}
+001013| .orbit-route-field-main input{background:transparent;border:0;color:#232516;box-shadow:none;font-size:1.02rem;font-weight:800;min-width:0;width:100%;outline:none;padding:1px 0;border-radius:0}
+001014| .orbit-route-field-main input:focus{box-shadow:none;border:0}
+001015| .orbit-route-field-main input::placeholder{font-weight:600;color:#91908a;opacity:1}
+001016| .orbit-map-panel .orbit-small-clear{background:transparent;border:0;border-radius:50%;color:#817d72;box-shadow:none;padding:1px 8px;font-size:1.7rem;font-weight:400;line-height:1;flex-shrink:0}
+001017| .orbit-map-panel .orbit-swap-route{width:42px;min-width:42px;height:48px;padding:0;border:0;border-radius:14px;background:#fff4b3;color:#474018;font-size:1.7rem;line-height:1;box-shadow:none}
+001018| .orbit-map-panel .orbit-swap-route:hover{background:#eed467}
+001019| .orbit-route-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:12px;margin-top:8px;border:1px solid #d6d2bd;border-radius:12px;background:#fff;max-height:166px;overflow:auto;box-shadow:0 8px 16px #0000000a}
+001020| .orbit-route-suggestions[hidden],.orbit-directions-sheet[hidden],.orbit-step-row[hidden],.orbit-directions-buttons button[hidden],#orbitRouteCard[hidden],#orbitRoutePrompt[hidden]{display:none !important}
+001021| .orbit-map-panel .orbit-suggestion{border:1px solid #d5d3c9;background:#fbfaf5;border-radius:10px;padding:8px 11px;font-size:.78rem;font-weight:800;letter-spacing:0;text-transform:none;box-shadow:none}
+001022| .orbit-map-panel .orbit-suggestion:hover{background:#ffe68c}
+001023| .orbit-route-prompt{font-size:.83rem;font-weight:700;line-height:1.4;color:#5b5c2a;padding:9px 1px 1px;min-height:29px}
+001024| .orbit-nav-map .orbit-floor-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:13px 0}
+001025| .orbit-nav-map .orbit-floor-btn{padding:10px 3px;border:2px solid #d9d7c6;border-radius:10px;font-size:.73rem;font-weight:900;text-transform:none;letter-spacing:0;box-shadow:none}
+001026| .orbit-nav-map .orbit-floor-btn.selected{background:var(--olive-dark);border-color:var(--olive-dark);color:var(--yellow-main)}
+001027| .orbit-map-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+001028| .orbit-map-tools .orbit-map-hint{font-size:.78rem;margin:0;font-weight:700;line-height:1.35}
+001029| .orbit-zoom-controls{display:flex;gap:4px;flex-shrink:0}
+001030| .orbit-map-panel .orbit-zoom-controls button{height:36px;width:36px;padding:0;background:white;color:#39391d;border:1px solid #bdbbaa;border-radius:9px;font-size:1.35rem;text-transform:none;box-shadow:none;line-height:1}
+001031| .orbit-map-panel .orbit-zoom-controls button:disabled{opacity:.35;cursor:default}
+001032| .orbit-nav-map .orbit-map-stage{height:auto;max-height:600px;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y;border:1.5px solid #d6d4c5;border-radius:15px;background:#fdfdfc;}
+001033| .orbit-nav-map .orbit-map-canvas{width:100%;min-width:500px;position:relative;line-height:0}
+001034| .orbit-map-canvas img{user-select:none;-webkit-user-drag:none}
+001035| .orbit-room{transition:fill .15s,stroke .15s}
+001036| .orbit-room.route-from{fill:rgba(61,112,234,.29);stroke:#306de5;stroke-width:4}
+001037| .orbit-room.route-to{fill:rgba(255,78,111,.31);stroke:#ed4161;stroke-width:4}
+001038| .orbit-room:focus-visible{stroke:#202020;stroke-width:5;fill:rgba(245,203,14,.3)}
+001039| .orbit-map-selection{background:#fffdf3;font-size:.8rem;border-color:#e9dda4;line-height:1.4;margin-top:10px;padding:10px 12px}
+001040| .orbit-directions-sheet{margin:15px auto 0;background:#fff;border:2px solid #e0dfd7;border-radius:22px;padding:11px clamp(14px,2vw,22px) 18px;box-shadow:0 -5px 24px #26241312;max-width:830px;position:sticky;bottom:9px;z-index:75}
+001041| body:has(#mapView.active) .orbit-nav{position:static !important;top:auto !important}
+001042| .orbit-directions-handle{width:57px;height:5px;background:#d4d4d4;border-radius:12px;margin:0 auto 6px}
+001043| .orbit-map-panel .orbit-sheet-toggle{display:block;margin:0 0 7px auto;padding:4px 9px;background:transparent;border:0;box-shadow:none;color:#6e6a60;font-size:.69rem;letter-spacing:0;text-transform:none}
+001044| .orbit-directions-sheet.collapsed .orbit-directions-buttons,.orbit-directions-sheet.collapsed .orbit-demo-notice,.orbit-directions-sheet.collapsed .orbit-step-row,.orbit-directions-sheet.collapsed #orbitRouteDescriptor{display:none !important}
+001045| .orbit-directions-sheet.collapsed{padding-bottom:10px}
+001046| .orbit-directions-sheet.collapsed .orbit-directions-header{border:0;padding:0}
+001047| .orbit-directions-header{display:flex;align-items:center;justify-content:space-between;gap:9px;padding-bottom:12px;border-bottom:1px solid #e8e8e8}
+001048| .orbit-directions-kicker{font-size:.66rem;font-weight:900;color:#8c6b00;letter-spacing:.8px}
+001049| .orbit-directions-header h3{font-size:1.05rem;margin:5px 0;color:#25261a;font-weight:900}
+001050| .orbit-directions-header p{font-size:.8rem;color:#77766d;font-weight:650;line-height:1.3}
+001051| .orbit-directions-icon{font-size:1.7rem;border-radius:16px;padding:10px;background:#fff0ab}
+001052| .orbit-directions-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+001053| .orbit-directions-buttons button{padding:12px 15px;border-radius:13px;font-size:.85rem;text-transform:none;letter-spacing:0;box-shadow:none}
+001054| .orbit-directions-buttons #orbitStartNavigation,.orbit-directions-buttons #orbitStepNext{flex:1;background:#f6ca11;color:#262914}
+001055| .orbit-directions-buttons #orbitStepBack,.orbit-directions-buttons #orbitStopNavigation{background:white;border-color:#a6a6a2;color:#44443b}
+001056| .orbit-step-row{background:#fff9df;padding:11px;border-radius:12px;margin-top:12px;display:flex;align-items:center;gap:10px}
+001057| .orbit-step-count{padding:6px 9px;background:#3a3b1a;color:#fff2a3;border-radius:9px;white-space:nowrap;font-weight:900;font-size:.72rem}
+001058| .orbit-step-row p{font-size:.87rem;line-height:1.4;font-weight:750}
+001059| .orbit-demo-notice{font-size:.67rem;color:#7e7969;line-height:1.45;margin-top:10px;font-weight:600}
+001060| @media(max-width:650px){.orbit-map-two-d{display:none}.orbit-nav-map .orbit-floor-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.orbit-route-row{padding:6px 7px;gap:7px;min-height:58px}.orbit-route-field-main input{font-size:.91rem}.orbit-directions-sheet{bottom:9px;padding:10px 12px 14px}.orbit-directions-buttons button{padding:11px 12px}.orbit-nav-map .orbit-map-stage{max-height:450px}}
+001061| html[dir="rtl"] .orbit-wayfinding-head,html[dir="rtl"] .orbit-route-card,html[dir="rtl"] .orbit-route-row,html[dir="rtl"] .orbit-map-tools{direction:rtl}
+001062| html[dir="rtl"] .orbit-route-field-main label,html[dir="rtl"] .orbit-route-field-main input{text-align:right}
+001063| 
+001064| /* KTECH Orbit 1.15 indoor navigation, scoped: other pages unchanged */

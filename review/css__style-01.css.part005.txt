@@ -1,0 +1,4 @@
+001216| #mapView .orbit-nav-hit.food-hall-hit.end{stroke:transparent!important;fill:#ff9baa29}
+001217| #mapView .food-hall-outline{vector-effect:non-scaling-stroke}
+001218| #mapView .orbit-map-v2-key[hidden]{display:none!important}
+001219| 

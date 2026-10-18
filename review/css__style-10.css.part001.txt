@@ -1,0 +1,21 @@
+000001| 
+000002| /* Compact, touch-first parking dashboard. */
+000003| #orbitParkingGates,#orbitParkingSelection,#orbitParkingInstruction,#orbitParkingMeter,.orbit-parking-actions{display:none!important}
+000004| #orbitParkingPanel{padding:10px!important;margin:5px 0!important}
+000005| #orbitParkingPanel .orbit-parking-heading{margin:0 0 5px!important}
+000006| #orbitParkingPanel .orbit-parking-heading p{display:none!important}
+000007| #orbitParkingPanel .orbit-parking-stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px!important;margin:5px 0!important}
+000008| #orbitParkingPanel .orbit-parking-stat{padding:6px!important;min-width:0!important}
+000009| #orbitParkingPanel .orbit-parking-stat strong{font-size:1.25rem!important}
+000010| #orbitParkingPanel .orbit-parking-stat small{font-size:.65rem!important;line-height:1.1!important}
+000011| #orbitParkingPanel .orbit-parking-legend{gap:7px!important;margin:5px 0!important;font-size:.65rem!important}
+000012| #orbitParkingNote{font-size:.62rem!important;margin:4px 0!important}
+000013| #orbitParkingBadge{font-size:.6rem!important}
+000014| #orbitMapCanvas.parking-compact #orbitFloorOverlay{display:block!important;pointer-events:none!important}
+000015| #orbitMapCanvas.parking-compact #orbitFloorImage{width:100%!important;height:auto!important;display:block!important}
+000016| #orbitMapCanvas.parking-compact{position:relative!important;width:100%!important;max-width:100%!important;transform:none!important;left:auto!important;top:auto!important}
+000017| #orbitMapStage:has(.parking-compact){overflow:auto!important;max-height:min(65dvh,680px)!important;touch-action:pan-x pan-y!important}
+000018| #orbitParkingLiveOverlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+000019| #orbitParkingLiveOverlay rect{pointer-events:auto;cursor:pointer;stroke:white;stroke-width:1.3;rx:1.2}
+000020| #orbitParkingLiveOverlay rect:focus{stroke:#ffe100;stroke-width:4;outline:none}
+000021| @media(max-width:700px){#orbitParkingPanel{padding:7px!important}#orbitParkingPanel h3{font-size:1rem!important}#orbitParkingBadge{display:none!important}#orbitMapStage:has(.parking-compact){max-height:55dvh!important}#orbitParkingPanel .orbit-parking-legend{flex-wrap:wrap!important}#orbitParkingNote{line-height:1.2!important}}

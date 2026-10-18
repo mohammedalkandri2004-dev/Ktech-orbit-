@@ -1,0 +1,149 @@
+000559|             stackedFiles[key].reviews.push(rev);
+000560|         });
+000561| 
+000562|         // Filter based on Search Query
+000563|         const filteredKeys = Object.keys(stackedFiles).filter(key => {
+000564|             return key.includes(searchFilter.trim().toLowerCase());
+000565|         });
+000566| 
+000567|         document.getElementById('submissionCount').innerText = filteredKeys.length;
+000568| 
+000569|         if (filteredKeys.length === 0) {
+000570|             list.innerHTML = '<p style="color: var(--olive-medium);">No instructor files found matching your search.</p>';
+000571|             return;
+000572|         }
+000573| 
+000574|         list.innerHTML = filteredKeys.map(key => {
+000575|             const file = stackedFiles[key];
+000576|             return `
+000577|                 <div class="instructor-file-card">
+000578|                     <div class="instructor-file-title">
+000579|                         <span>👨‍🏫 File: ${file.displayName}</span>
+000580|                         <span style="font-size: 0.85rem; background: var(--olive-dark); color: var(--yellow-main); padding: 4px 10px; border-radius: 20px;">
+000581|                             ${file.reviews.length} ${file.reviews.length === 1 ? 'Review' : 'Reviews Stacked'}
+000582|                         </span>
+000583|                     </div>
+000584| 
+000585|                     ${file.reviews.map(rev => `
+000586|                         <div class="review-stacked-item">
+000587|                             <div style="font-weight: 800; color: var(--olive-dark); margin-bottom: 6px;">
+000588|                                 📚 Course: ${rev.course} | 🗓️ Date: ${rev.date || 'N/A'}
+000589|                             </div>
+000590|                             <div style="font-size: 0.9rem; margin-bottom: 6px;">
+000591|                                 <strong>Quiz:</strong> ${rev.quizDifficulty} | 
+000592|                                 <strong>Teaching:</strong> ${rev.teaching} | 
+000593|                                 <strong>Understanding:</strong> ${rev.understanding} | 
+000594|                                 <strong>Bonus/Pushes:</strong> ${rev.bonusMarks}
+000595|                             </div>
+000596|                             ${rev.shortOpinion ? `<div style="font-size: 0.88rem; background: #faf4db; padding: 6px 10px; border-radius: 6px; border-left: 3px solid var(--olive-dark);"><em>"${rev.shortOpinion}"</em></div>` : ''}
+000597|                             <div style="margin-top: 8px; display: flex; gap: 6px;">
+000598|                                 <button class="btn-edit" onclick="editReviewOpinion(${rev.id})">Edit Review</button>
+000599|                                 <button class="btn-danger" onclick="deleteReviewItem(${rev.id})">Delete</button>
+000600|                             </div>
+000601|                         </div>
+000602|                     `).join('')}
+000603|                 </div>
+000604|             `;
+000605|         }).join('');
+000606|     }
+000607| 
+000608|     function filterAdminData() {
+000609|         const query = document.getElementById('adminSearchInput').value;
+000610|         loadAdminData(query);
+000611|     }
+000612| 
+000613|     function deleteReviewItem(reviewId) {
+000614|         if (confirm('Delete this specific review from the instructor file?')) {
+000615|             let reviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+000616|             reviews = reviews.filter(r => r.id !== reviewId);
+000617|             localStorage.setItem('orbit_reviews', JSON.stringify(reviews));
+000618|             filterAdminData();
+000619|         }
+000620|     }
+000621| 
+000622|     function editReviewOpinion(reviewId) {
+000623|         let reviews = JSON.parse(localStorage.getItem('orbit_reviews') || '[]');
+000624|         const targetIndex = reviews.findIndex(r => r.id === reviewId);
+000625|         if (targetIndex !== -1) {
+000626|             const newText = prompt("Edit review text:", reviews[targetIndex].shortOpinion);
+000627|             if (newText !== null) {
+000628|                 reviews[targetIndex].shortOpinion = newText;
+000629|                 localStorage.setItem('orbit_reviews', JSON.stringify(reviews));
+000630|                 filterAdminData();
+000631|             }
+000632|         }
+000633|     }
+000634| 
+000635|     function loadPublicReviews() {
+000636|         const list = document.getElementById("publicReviewsList");
+000637|         const search = String(document.getElementById("publicSearchInput").value || "").trim().toLowerCase();
+000638|         const ownerId = getOwnerId();
+000639|         const reviews = readReviews().filter(function(review) {
+000640|             return !search || String(review.instructor || "").toLowerCase().includes(search) || String(review.course || "").toLowerCase().includes(search);
+000641|         }).slice().reverse();
+000642|         if (!reviews.length) { list.innerHTML = '<p style="color:var(--olive-medium);">' + escapeHtml(tr("noReviews")) + '</p>'; return; }
+000643|         list.innerHTML = reviews.map(function(review) {
+000644|             const mine = review.ownerId && review.ownerId === ownerId;
+000645|             return '<div class="review-stacked-item">' +
+000646|                 '<div style="font-weight:900;color:var(--olive-dark);">👨‍🏫 ' + escapeHtml(review.instructor || tr("notAvailable")) + (mine ? ' <span style="font-size:.72rem;">(' + escapeHtml(tr("yourReview")) + ')</span>' : '') + '</div>' +
+000647|                 '<div style="font-size:.88rem;margin:6px 0;">📚 ' + escapeHtml(review.course || tr("notAvailable")) + ' | 🗓️ ' + escapeHtml(review.date || tr("notAvailable")) + '</div>' +
+000648|                 '<div style="font-size:.88rem;">' + escapeHtml(tr("quiz")) + ': ' + escapeHtml(translateRating(review.quizDifficulty)) + ' | ' + escapeHtml(tr("teaching")) + ': ' + escapeHtml(translateRating(review.teaching)) + ' | ' + escapeHtml(tr("understanding")) + ': ' + escapeHtml(translateRating(review.understanding)) + '</div>' +
+000649|                 (review.shortOpinion ? '<div style="margin-top:7px;"><em>“' + escapeHtml(review.shortOpinion) + '”</em></div>' : '') +
+000650|                 (mine ? '<button type="button" class="btn-danger public-delete" data-review-id="' + escapeHtml(review.id) + '" style="margin-top:8px;">' + escapeHtml(tr("delete")) + '</button>' : '') +
+000651|                 '</div>';
+000652|         }).join("");
+000653|     }
+000654| 
+000655|     function deleteOwnReview(reviewId) {
+000656|         const ownerId = getOwnerId();
+000657|         const reviews = readReviews();
+000658|         const target = reviews.find(function(r) { return String(r.id) === String(reviewId); });
+000659|         if (!target || target.ownerId !== ownerId) return;
+000660|         if (!confirm(tr("confirmDelete"))) return;
+000661|         writeReviews(reviews.filter(function(r) { return String(r.id) !== String(reviewId); }));
+000662|         loadPublicReviews();
+000663|         if (document.getElementById("adminDashboard").style.display !== "none") filterAdminData();
+000664|     }
+000665| 
+000666|     function clearAllData() {
+000667|         if (confirm('Are you sure you want to delete ALL stored reviews permanently?')) {
+000668|             localStorage.removeItem('orbit_reviews');
+000669|             filterAdminData();
+000670|         }
+000671|     }
+000672| 
+000673|     document.addEventListener('DOMContentLoaded', () => {
+000674|         populateSuggestions();
+000675|         const today = new Date().toLocaleDateString('en-GB');
+000676|         document.getElementById('date').value = today;
+000677|     });
+000678| </script>
+000679| 
+000680| <script src="js/script-01.js"></script>
+000681| 
+000682| 
+000683| 
+000684| <link rel="stylesheet" href="css/style-09.css">
+000685| 
+000686| <script id="orbit108ModerationScript" src="js/script-02.js"></script>
+000687| 
+000688| 
+000689| <script id="orbitGuidedChat110" src="js/script-03.js"></script>
+000690| 
+000691| 
+000692| <script id="orbitIndoorRouting116" src="js/script-04.js"></script>
+000693| 
+000694| <script src="js/script-05.js"></script>
+000695| <script id="orbitParkingPrototype" src="js/script-06.js"></script>
+000696| 
+000697| 
+000698| <link rel="stylesheet" href="css/style-10.css">
+000699| <script id="orbitNavigationRecovery" src="js/script-07.js"></script><script id="orbitDirectionsDockControl136" src="js/script-08.js"></script>
+000700| 
+000701| <script id="orbitEmergencyRestaurantDemoScript" src="js/script-09.js"></script>
+000702| </body>
+000703| </html>
+000704| 
+000705| <link rel="stylesheet" href="css/style-11.css">
+000706| 
+000707| <link rel="stylesheet" href="css/style-12.css">

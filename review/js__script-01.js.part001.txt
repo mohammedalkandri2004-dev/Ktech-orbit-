@@ -1,0 +1,308 @@
+000001| 
+000002|     const knownInstructorsV2 = [
+000003|         "Alaa Zayed", "Adnan Oudah", "Prof. Issam Moghrabi", "Dr Reem M. Al Qenai",
+000004|         "Riham Hakkani", "Abdelrahman Enayah", "Ebtehal Al Ayoub", "Batoul Salman",
+000005|         "Dr. Remie Nasr", "Ali El Khatib", "Annet Noel", "Fatma Rezk",
+000006|         "Mary Nelson", "Ahlam Mousa", "Tina Daniel", "Yousef Saeam",
+000007|         "Dhai Aljeeran", "Mohammad Alqallaf", "Nada Farah"
+000008|     ];
+000009| 
+000010|     const badWordsV2 = ["badword", "stupid", "idiot", "dumb", "hate", "scam", "fool", "crap", "trash", "worst", "suck"];
+000011|     const ADMIN_PASSWORD_V2 = "ktech2004";
+000012| 
+000013|     const translations = {
+000014|         en: {
+000015|             pageTitle: "KTECH Orbit | Instructor Feedback Hub",
+000016|             subtitle: "Course & Instructor Feedback Hub",
+000017|             anonymous: "🔒 100% Anonymous",
+000018|             navHome: "Home", navReview: "Instructor Review", navReviews: "Student Reviews", navReviewBio: "Open the review app and submit instructor feedback.", navReviewsBio: "Browse feedback and experiences shared by KTECH students.", navChat: "Chat", navContact: "Contact",
+000019|             homeTitle: "Everything around one student platform.", homeText: "Choose a section below. Each KTECH Orbit service has its own space, while Orbit Chat stays available wherever you are.",
+000020|             cardReviewTitle: "Instructor Review", cardReviewText: "Open the review app and submit instructor feedback.", cardReviewsTitle: "Student Reviews", cardReviewsText: "Browse feedback shared by students.", cardChatTitle: "Orbit Chat", cardChatText: "Ask KTECH questions without leaving your current page.", cardContactTitle: "Contact", cardContactText: "Send feedback or get help with KTECH Orbit.", openChat: "Open Orbit Chat", closeChat: "Close chat",
+000021|             privacyHtml: "🛡️ <strong>Student Shield:</strong> Submit your honest review! Spam, gibberish, and profanity filters are enabled.",
+000022|             instructorLabel: "Instructor Name",
+000023|             instructorPlaceholder: "Type Instructor Name...",
+000024|             courseLabel: "Course Name / Code",
+000025|             coursePlaceholder: "e.g. CS101 / Java Programming",
+000026|             dateLabel: "Date",
+000027|             datePlaceholder: "DD/MM/YYYY",
+000028|             quizHeader: "Quiz Difficulty",
+000029|             teachingHeader: "Teaching Quality",
+000030|             understandingHeader: "Understanding",
+000031|             bonusHeader: "Bonus Marks / Pushes",
+000032|             opinionHeader: "Short Opinion & Suggestions",
+000033|             opinionPlaceholder: "Does he/she give pushes, bonuses? Are quizzes hard? Write suggestions...",
+000034|             easy: "Easy",
+000035|             medium: "Medium",
+000036|             hard: "Hard",
+000037|             needsWork: "Needs work",
+000038|             good: "Good",
+000039|             excellent: "Excellent",
+000040|             hardToFollow: "Hard to follow",
+000041|             mostlyClear: "Mostly clear",
+000042|             veryClear: "Very clear",
+000043|             never: "Never",
+000044|             sometimes: "Sometimes",
+000045|             often: "Often",
+000046|             clear: "Clear All",
+000047|             submit: "Submit Feedback 🚀",
+000048|             contactTitle: "Feedback & Contact",
+000049|             contactText: "Have feedback or need help with KTECH Orbit? Email us directly.",
+000050|             headerContactText: "Have feedback or a suggestion?",
+000051|             adminTitle: "🔑 KTECH Orbit Admin Panel",
+000052|             adminPrompt: "Enter master password to view feedback:",
+000053|             passwordPlaceholder: "Master Password",
+000054|             authenticate: "Authenticate",
+000055|             searchPlaceholder: "🔍 Type instructor name to view stacked reviews...",
+000056|             instructorFiles: "Instructor Files",
+000057|             deleteAll: "Delete All Data",
+000058|             close: "Close",
+000059|             openAdmin: "Open Admin Panel",
+000060|             antiSpam: "🚨 Anti-Spam Alert: Please wait 20 seconds before submitting again.",
+000061|             gibberish: "❌ Submission rejected: Detected meaningless/gibberish text.",
+000062|             success: "🚀 Review for {name} added to their file!",
+000063|             confirmReset: "Are you sure you want to clear this form?",
+000064|             wrongPassword: "Incorrect Admin Password",
+000065|             noReviews: "No reviews stored yet.",
+000066|             noMatches: "No instructor files found matching your search.",
+000067|             file: "File",
+000068|             review: "Review",
+000069|             reviews: "Reviews Stacked",
+000070|             course: "Course",
+000071|             date: "Date",
+000072|             notAvailable: "N/A",
+000073|             quiz: "Quiz",
+000074|             teaching: "Teaching",
+000075|             understanding: "Understanding",
+000076|             bonus: "Bonus/Pushes",
+000077|             edit: "Edit Review",
+000078|             delete: "Delete",
+000079|             confirmDelete: "Delete this specific review from the instructor file?",
+000080|             editPrompt: "Edit review text:",
+000081|             confirmDeleteAll: "Are you sure you want to delete ALL stored reviews permanently?",
+000082|             publicTitle: "Student Reviews", publicText: "Everyone can view reviews  You can permanently delete reviews submitted from this browser, but regular users cannot edit reviews", publicSearch: "Search instructor reviews...", yourReview: "Your review", deleted: "Review permanently deleted",
+000083|             aiTitle: "🪐 Ask KTECH Orbit", aiBadge: "KTECH-only assistant", aiDisclaimer: "KTECH Orbit is an independent student project. Tap a question for a direct answer and useful KTECH links.", aiWelcome: "Welcome! Tap an option below to ask a question — no typing needed.", aiPlaceholder: "Ask about KTECH...", aiSend: "Send 🚀", aiReady: "Ready", aiThinking: "Orbit is checking the verified KTECH information...", aiError: "Could not connect to the KTECH Orbit service."
+000084|         },
+000085|         ar: {
+000086|             pageTitle: "KTECH Orbit | مركز تقييم الدكاترة",
+000087|             subtitle: "مركز تقييم المقررات والدكاترة",
+000088|             anonymous: "🔒 مجهول الهوية 100%",
+000089|             navHome: "الرئيسية", navReview: "تقييم الدكاترة", navReviews: "تقييمات الطلبة", navReviewBio: "افتح تطبيق التقييم وشارك تقييمك وتجربتك مع الدكتور.", navReviewsBio: "تصفح آراء وتجارب طلبة KTECH.", navChat: "المحادثة", navContact: "تواصل",
+000090|             homeTitle: "كل شي يحتاجه الطالب حول منصة وحدة.", homeText: "اختار القسم اللي تبيه. كل خدمة في KTECH Orbit لها مساحتها الخاصة، ومحادثة Orbit تظل متاحة لك من أي مكان.",
+000091|             cardReviewTitle: "تقييم الدكاترة", cardReviewText: "افتح تطبيق التقييم وشارك تجربتك مع الدكتور.", cardReviewsTitle: "تقييمات الطلبة", cardReviewsText: "شوف التقييمات والتجارب اللي شاركها الطلبة.", cardChatTitle: "محادثة Orbit", cardChatText: "اسأل عن KTECH بدون ما تطلع من القسم اللي انت فيه.", cardContactTitle: "تواصل معنا", cardContactText: "ارسل اقتراحك أو اطلب مساعدة بخصوص KTECH Orbit.", openChat: "فتح محادثة Orbit", closeChat: "إغلاق المحادثة",
+000092|             privacyHtml: "🛡️ <strong>حماية الطالب:</strong> شارك تقييمك بكل صراحة! تم تفعيل الحماية من السبام والكلام العشوائي والألفاظ غير المناسبة.",
+000093|             instructorLabel: "اسم الدكتور",
+000094|             instructorPlaceholder: "اكتب اسم الدكتور...",
+000095|             courseLabel: "اسم المقرر / الرمز",
+000096|             coursePlaceholder: "مثال: CS101 / Java Programming",
+000097|             dateLabel: "التاريخ",
+000098|             datePlaceholder: "يوم/شهر/سنة",
+000099|             quizHeader: "صعوبة الكويز",
+000100|             teachingHeader: "جودة التدريس",
+000101|             understandingHeader: "وضوح الشرح",
+000102|             bonusHeader: "البونس / البوش",
+000103|             opinionHeader: "رأي مختصر واقتراحات",
+000104|             opinionPlaceholder: "هل يعطي بوش أو بونس؟ هل الكويزات صعبة؟ اكتب رأيك واقتراحاتك...",
+000105|             easy: "سهل",
+000106|             medium: "متوسط",
+000107|             hard: "صعب",
+000108|             needsWork: "يحتاج تحسين",
+000109|             good: "جيد",
+000110|             excellent: "ممتاز",
+000111|             hardToFollow: "صعب المتابعة",
+000112|             mostlyClear: "واضح غالبا",
+000113|             veryClear: "واضح جدا",
+000114|             never: "أبدا",
+000115|             sometimes: "أحيانا",
+000116|             often: "غالبا",
+000117|             clear: "مسح الكل",
+000118|             submit: "إرسال التقييم 🚀",
+000119|             contactTitle: "الملاحظات والتواصل",
+000120|             contactText: "عندك ملاحظة أو تحتاج مساعدة بخصوص KTECH Orbit؟ تواصل معنا مباشرة عبر الإيميل.",
+000121|             headerContactText: "عندك ملاحظة أو اقتراح؟",
+000122|             adminTitle: "🔑 لوحة تحكم KTECH Orbit",
+000123|             adminPrompt: "اكتب كلمة المرور لعرض التقييمات:",
+000124|             passwordPlaceholder: "كلمة المرور",
+000125|             authenticate: "دخول",
+000126|             searchPlaceholder: "🔍 اكتب اسم الدكتور لعرض كل تقييماته...",
+000127|             instructorFiles: "ملفات الدكاترة",
+000128|             deleteAll: "حذف جميع البيانات",
+000129|             close: "إغلاق",
+000130|             openAdmin: "فتح لوحة التحكم",
+000131|             antiSpam: "🚨 يرجى الانتظار 20 ثانية قبل إرسال تقييم آخر.",
+000132|             gibberish: "❌ تم رفض الإرسال بسبب وجود كلام عشوائي أو غير مفهوم.",
+000133|             success: "🚀 تمت إضافة تقييم {name} إلى ملفه!",
+000134|             confirmReset: "هل أنت متأكد أنك تريد مسح جميع البيانات من النموذج؟",
+000135|             wrongPassword: "كلمة المرور غير صحيحة",
+000136|             noReviews: "لا توجد تقييمات محفوظة حاليا.",
+000137|             noMatches: "لا توجد ملفات دكاترة مطابقة للبحث.",
+000138|             file: "ملف",
+000139|             review: "تقييم واحد",
+000140|             reviews: "تقييمات",
+000141|             course: "المقرر",
+000142|             date: "التاريخ",
+000143|             notAvailable: "غير متوفر",
+000144|             quiz: "الكويز",
+000145|             teaching: "التدريس",
+000146|             understanding: "الوضوح",
+000147|             bonus: "البونس/البوش",
+000148|             edit: "تعديل التقييم",
+000149|             delete: "حذف",
+000150|             confirmDelete: "هل تريد حذف هذا التقييم من ملف الدكتور؟",
+000151|             editPrompt: "عدل نص التقييم:",
+000152|             confirmDeleteAll: "هل أنت متأكد أنك تريد حذف جميع التقييمات نهائيا؟",
+000153|             publicTitle: "تقييمات الطلبة", publicText: "الجميع يقدر يشوف التقييمات  وتقدر تحذف نهائيا التقييمات اللي أرسلتها من هذا المتصفح، والمستخدم العادي ما يقدر يعدل التقييم", publicSearch: "ابحث عن تقييمات دكتور...", yourReview: "تقييمك", deleted: "تم حذف التقييم نهائيا",
+000154|             aiTitle: "🪐 اسأل KTECH Orbit", aiBadge: "مساعد خاص بـ KTECH", aiDisclaimer: "KTECH Orbit مشروع طلابي مستقل. اضغط على أي سؤال عشان تحصل على جواب واضح وروابط مفيدة من KTECH.", aiWelcome: "هلا فيك! اضغط على الخيارات اللي تحت عشان تسأل — بدون كتابة.", aiPlaceholder: "اسأل عن KTECH...", aiSend: "إرسال 🚀", aiReady: "جاهز", aiThinking: "Orbit قاعد يراجع معلومات KTECH الموثقة...", aiError: "تعذر الاتصال بخدمة KTECH Orbit."
+000155|         }
+000156|     };
+000157| 
+000158|     let currentLanguage = localStorage.getItem("orbit_language") === "ar" ? "ar" : "en";
+000159| 
+000160|     function tr(key) {
+000161|         return translations[currentLanguage][key] || translations.en[key] || key;
+000162|     }
+000163| 
+000164|     function setText(id, value) {
+000165|         const element = document.getElementById(id);
+000166|         if (element) element.textContent = value;
+000167|     }
+000168| 
+000169|     function setPlaceholder(id, value) {
+000170|         const element = document.getElementById(id);
+000171|         if (element) element.placeholder = value;
+000172|     }
+000173| 
+000174|     function escapeHtml(value) {
+000175|         return String(value == null ? "" : value)
+000176|             .replace(/&/g, "&amp;")
+000177|             .replace(/</g, "&lt;")
+000178|             .replace(/>/g, "&gt;")
+000179|             .replace(/"/g, "&quot;")
+000180|             .replace(/'/g, "&#039;");
+000181|     }
+000182| 
+000183|     function cleanProfanityV2(text) {
+000184|         if (!text) return "";
+000185|         let cleaned = String(text);
+000186|         badWordsV2.forEach(function(word) {
+000187|             const regex = new RegExp("\\b" + word + "\\b", "gi");
+000188|             cleaned = cleaned.replace(regex, "***");
+000189|         });
+000190|         return cleaned;
+000191|     }
+000192| 
+000193|     function isGibberishV2(text) {
+000194|         if (!text || String(text).trim().length === 0) return false;
+000195|         const cleanText = String(text).trim();
+000196|         if (cleanText.length > 15 && !cleanText.includes(" ")) return true;
+000197|         if (/(.)\1{3,}/i.test(cleanText)) return true;
+000198|         const lettersOnly = cleanText.replace(/[^a-zA-Z]/g, "");
+000199|         if (lettersOnly.length > 8) {
+000200|             const vowels = lettersOnly.match(/[aeiouy]/gi);
+000201|             const ratio = (vowels ? vowels.length : 0) / lettersOnly.length;
+000202|             if (ratio < 0.10) return true;
+000203|         }
+000204|         return false;
+000205|     }
+000206| 
+000207|     function getOwnerId() {
+000208|         let ownerId = localStorage.getItem("orbit_owner_id");
+000209|         if (!ownerId) {
+000210|             ownerId = "owner_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+000211|             localStorage.setItem("orbit_owner_id", ownerId);
+000212|         }
+000213|         return ownerId;
+000214|     }
+000215| 
+000216|     function readReviews() {
+000217|         try {
+000218|             const reviews = JSON.parse(localStorage.getItem("orbit_reviews") || "[]");
+000219|             return Array.isArray(reviews) ? reviews : [];
+000220|         } catch (error) {
+000221|             return [];
+000222|         }
+000223|     }
+000224| 
+000225|     function writeReviews(reviews) {
+000226|         localStorage.setItem("orbit_reviews", JSON.stringify(reviews));
+000227|     }
+000228| 
+000229|     function translateRating(value) {
+000230|         const ratingKeys = {
+000231|             "Easy": "easy",
+000232|             "Medium": "medium",
+000233|             "Hard": "hard",
+000234|             "Needs work": "needsWork",
+000235|             "Good": "good",
+000236|             "Excellent": "excellent",
+000237|             "Hard to follow": "hardToFollow",
+000238|             "Mostly clear": "mostlyClear",
+000239|             "Very clear": "veryClear",
+000240|             "Never": "never",
+000241|             "Sometimes": "sometimes",
+000242|             "Often": "often"
+000243|         };
+000244|         return ratingKeys[value] ? tr(ratingKeys[value]) : (value || tr("notAvailable"));
+000245|     }
+000246| 
+000247|     function setLanguage(language) {
+000248|         currentLanguage = language === "ar" ? "ar" : "en";
+000249|         localStorage.setItem("orbit_language", currentLanguage);
+000250|         document.documentElement.lang = currentLanguage;
+000251|         document.documentElement.dir = currentLanguage === "ar" ? "rtl" : "ltr";
+000252|         document.title = tr("pageTitle");
+000253| 
+000254|         setText("subtitleText", tr("subtitle"));
+000255|         setText("navHome", tr("navHome"));
+000256|         setText("navReview", tr("navReview"));
+000257|         setText("navReviews", tr("navReviews"));
+000258|         setText("navReviewBio", tr("navReviewBio"));
+000259|         setText("navReviewsBio", tr("navReviewsBio"));
+000260|         setText("navChat", tr("navChat"));
+000261|         setText("navContact", tr("navContact"));
+000262|         setText("homeTitle", tr("homeTitle"));
+000263|         setText("homeText", tr("homeText"));
+000264|         setText("cardReviewTitle", tr("cardReviewTitle"));
+000265|         setText("cardReviewText", tr("cardReviewText"));
+000266|         setText("cardReviewsTitle", tr("cardReviewsTitle"));
+000267|         setText("cardReviewsText", tr("cardReviewsText"));
+000268|         setText("cardChatTitle", tr("cardChatTitle"));
+000269|         setText("cardChatText", tr("cardChatText"));
+000270|         setText("cardContactTitle", tr("cardContactTitle"));
+000271|         setText("cardContactText", tr("cardContactText"));
+000272|         setText("anonBadge", tr("anonymous"));
+000273|         document.getElementById("privacyText").innerHTML = tr("privacyHtml");
+000274|         setText("instructorLabel", tr("instructorLabel"));
+000275|         setPlaceholder("instructorNameInput", tr("instructorPlaceholder"));
+000276|         setText("courseLabel", tr("courseLabel"));
+000277|         setPlaceholder("courseCode", tr("coursePlaceholder"));
+000278|         setText("dateLabel", tr("dateLabel"));
+000279|         setPlaceholder("date", tr("datePlaceholder"));
+000280|         setText("quizHeader", tr("quizHeader"));
+000281|         setText("teachingHeader", tr("teachingHeader"));
+000282|         setText("understandingHeader", tr("understandingHeader"));
+000283|         setText("bonusHeader", tr("bonusHeader"));
+000284|         setText("opinionHeader", tr("opinionHeader"));
+000285|         setPlaceholder("opinionInput", tr("opinionPlaceholder"));
+000286|         setText("clearButton", tr("clear"));
+000287|         setText("submitButton", tr("submit"));
+000288|         setText("contactTitle", tr("contactTitle"));
+000289|         setText("publicReviewsTitle", tr("publicTitle"));
+000290|         setText("publicReviewsText", tr("publicText"));
+000291|         setText("orbitAiTitle", tr("aiTitle"));
+000292|         setText("orbitAiBadge", tr("aiBadge"));
+000293|         setText("orbitAiDisclaimer", tr("aiDisclaimer"));
+000294|         setText("orbitAiWelcome", tr("aiWelcome"));
+000295|         setPlaceholder("orbitUserInput", tr("aiPlaceholder"));
+000296|         setText("orbitSendButton", tr("aiSend"));
+000297|         setPlaceholder("publicSearchInput", tr("publicSearch"));
+000298|         setText("contactText", tr("contactText"));
+000299|         setText("headerContactText", tr("headerContactText"));
+000300|         setText("adminTitle", tr("adminTitle"));
+000301|         setText("adminPrompt", tr("adminPrompt"));
+000302|         setPlaceholder("adminPassword", tr("passwordPlaceholder"));
+000303|         setText("authenticateButton", tr("authenticate"));
+000304|         setPlaceholder("adminSearchInput", tr("searchPlaceholder"));
+000305|         setText("instructorFilesLabel", tr("instructorFiles"));
+000306|         setText("deleteAllButton", tr("deleteAll"));
+000307| 
+000308|         document.getElementById("duckAvatarBtn").title = tr("openAdmin");

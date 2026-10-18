@@ -1,0 +1,51 @@
+000344|     html += pending.length ? pending.map(r => o108ReviewCard(r,true)).join("") : '<p style="margin:0;color:var(--olive-medium);">' + o108Esc(o108Text("No pending reviews.","ماكو تقييمات ناطرة موافقة.")) + '</p>';
+000345|     html += '</div>';
+000346|     html += '<h3 style="color:var(--olive-dark);margin:8px 0 10px;">✓ ' + o108Esc(o108Text("Published Reviews","التقييمات المنشورة")) + ' (' + published.length + ')</h3>';
+000347|     html += published.length ? published.map(r => o108ReviewCard(r,false)).join("") : '<p style="color:var(--olive-medium);">' + o108Esc(o108Text("No published reviews.","ماكو تقييمات منشورة.")) + '</p>';
+000348|     list.innerHTML = html;
+000349|   }
+000350| 
+000351|   // Remove the two older submit listeners by cloning the form, then attach the 1.08 workflow once.
+000352|   const oldForm = document.getElementById("feedbackForm");
+000353|   if (oldForm) {
+000354|     const newForm = oldForm.cloneNode(true);
+000355|     oldForm.replaceWith(newForm);
+000356|     newForm.addEventListener("submit", o108Submit);
+000357|   }
+000358| 
+000359|   // Replace admin list to remove old edit/delete delegated listener; 1.08 uses Approve/Delete for pending.
+000360|   const oldAdminList = document.getElementById("adminDataList");
+000361|   if (oldAdminList) {
+000362|     const newAdminList = oldAdminList.cloneNode(false);
+000363|     oldAdminList.replaceWith(newAdminList);
+000364|     newAdminList.addEventListener("click", function(e){
+000365|       const btn = e.target.closest("button[data-o108-action]");
+000366|       if (!btn) return;
+000367|       if (btn.dataset.o108Action === "approve") o108Approve(btn.dataset.reviewId);
+000368|       if (btn.dataset.o108Action === "delete") o108AdminDelete(btn.dataset.reviewId);
+000369|     });
+000370|   }
+000371| 
+000372|   const publicList = document.getElementById("publicReviewsList");
+000373|   if (publicList) publicList.addEventListener("click", function(e){
+000374|     const btn = e.target.closest("button.o108-own-delete");
+000375|     if (btn) o108DeleteOwn(btn.dataset.reviewId);
+000376|   });
+000377| 
+000378|   const adminSearch = document.getElementById("adminSearchInput");
+000379|   if (adminSearch) adminSearch.addEventListener("input", function(){ o108LoadAdmin(this.value); });
+000380|   const publicSearch = document.getElementById("publicSearchInput");
+000381|   if (publicSearch) publicSearch.addEventListener("input", o108LoadPublic);
+000382| 
+000383|   // Override global render/filter functions used elsewhere by the existing UI.
+000384|   window.loadPublicReviews = o108LoadPublic;
+000385|   window.loadAdminData = o108LoadAdmin;
+000386|   window.filterAdminData = function(){ o108LoadAdmin(document.getElementById("adminSearchInput")?.value || ""); };
+000387|   window.deleteOwnReview = o108DeleteOwn;
+000388| 
+000389|   o108Write(o108Read()); // migrate older reviews to published status
+000390|   o108LoadPublic();
+000391| 
+000392|   // Small test hook for this prototype: available from browser console only.
+000393|   window.KTECH_ORBIT_108_TEST = function(text){ return o108Moderate("Dr. Test","IST100",text); };
+000394| })();

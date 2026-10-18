@@ -1,0 +1,85 @@
+000119|       ['Who are the KTECH student advisors?','منو الـ Student Advisors؟'],
+000120|       ['What are the Academic Advising contact numbers?','شنو أرقام Academic Advising؟']
+000121|     ],
+000122|     it:[
+000123|       ['I cannot log in to KTECH SIS. What should I do?','ما أقدر أدش KTECH SIS شنو أسوي؟'],
+000124|       ['How can I reset my KTECH password?','شلون أسوي Reset لباسورد حساب KTECH؟'],
+000125|       ['My KTECH account is locked. What should I do?','حساب KTECH مقفل شنو أسوي؟'],
+000126|       ['I forgot my username. Who can help?','نسيت اليوزر منو أكلم؟'],
+000127|       ['My KTECH email is not working.','إيميل KTECH مو شغال شنو أسوي؟'],
+000128|       ['I have a Microsoft 365 account problem.','عندي مشكلة بحساب Microsoft 365.'],
+000129|       ['KTECH Wi-Fi is not working on my device.','واي فاي الكلية مو شغال عندي.'],
+000130|       ['I cannot access a KTECH online service.','ما أقدر أفتح موقع من مواقع الكلية.'],
+000131|       ['Where can I send an IT support request?','وين أرسل طلب دعم فني؟'],
+000132|       ['What are IT working hours?','شنو ساعات عمل الـ IT؟'],
+000133|       ['What is the IT phone number?','شنو رقم الـ IT؟'],
+000134|       ['Who can I contact on WhatsApp for IT?','منو أكلم على واتساب حق الـ IT؟'],
+000135|       ['What is the Helpdesk email?','شنو إيميل الـ Helpdesk؟'],
+000136|       ['What is the IT support website?','شنو موقع الدعم الفني؟']
+000137|     ]
+000138|   };
+000139|   // Two different organizations: KTECH Library for borrowing; Aafaq Distribution for sales.
+000140|   // KTECH Library: contacts supplied by the student from the library sign.
+000141|   // Aafaq: KTECH purchasing link supplied by student; contacts & policy from Aafaq's printed notice.
+000142|   const libraryContacts={
+000143|     ktech:[
+000144|       ['✉️ KTECH Library: library@ktech.edu.kw','✉️ إيميل مكتبة KTECH: library@ktech.edu.kw','mailto:library@ktech.edu.kw'],
+000145|       ['📞 KTECH Library: 1811222 (Ext. 524 or 520)','📞 هاتف مكتبة KTECH: 1811222 (داخلي 524 أو 520)','tel:+9651811222']
+000146|     ],
+000147|     aafaq:[
+000148|       ['🛒 Buy course books — KTECH Aafaq store','🛒 شراء الكتب — متجر آفاق الخاص بـ KTECH','https://ktech.aafaqeducation.com'],
+000149|       ['🌐 Aafaq Distribution website','🌐 موقع شركة آفاق للتوزيع','https://www.aafaqdistribution.com'],
+000150|       ['✉️ Aafaq: info@aafaqdistribution.com','✉️ إيميل آفاق: info@aafaqdistribution.com','mailto:info@aafaqdistribution.com'],
+000151|       ['📍 Aafaq: P.O. Box 20585, Safat 13066, Kuwait','📍 آفاق: ص.ب 20585، الصفاة 13066، الكويت',null]
+000152|     ],
+000153|     refund:[
+000154|       ['📄 Aafaq request / refund review form (sign QR)','📄 نموذج طلب مراجعة / استرداد آفاق (رمز QR)','https://forms.zohopublic.com/aafaqdistributioncompany1/form/ktechMaterialRequest1/formperma/RbnxfeD8cYvrrn6QgfdAfRE0mrj6BiCfWyDtXSjTxPk']
+000155|     ]
+000156|   };
+000157|   questions.library=[
+000158|     ['How do I ask to borrow a book from KTECH Library?','شلون أسأل عن استعارة كتاب من مكتبة KTECH؟'],
+000159|     ['How do I contact the KTECH librarian by email?','شلون أتواصل مع أمين المكتبة بالإيميل؟'],
+000160|     ['What is the KTECH Library phone number and extension?','شنو رقم مكتبة KTECH والداخلي؟'],
+000161|     ['Where can I buy my KTECH textbooks or access codes?','وين أشتري كتب KTECH أو أكواد المواد؟'],
+000162|     ['How can I contact Aafaq about buying books?','شلون أتواصل مع آفاق بخصوص شراء الكتب؟'],
+000163|     ['How long does Aafaq take to deliver digital books?','جم يوم يحتاج توصيل الكتب الإلكترونية من آفاق؟'],
+000164|     ['Can I return or exchange a physical book from Aafaq?','أقدر أرجع أو أبدل كتاب ورقي من آفاق؟'],
+000165|     ['Can I get a refund for a digital book or access code?','أقدر أسترجع مبلغ كتاب إلكتروني أو أكسس كود؟'],
+000166|     ['Where is the Aafaq refund or issue request form?','وين نموذج طلب مراجعة / استرجاع آفاق؟'],
+000167|     ['Is KTECH Library borrowing different from buying books at Aafaq?','هل استعارة كتب المكتبة تختلف عن شراء الكتب من آفاق؟']
+000168|   ];
+000169|   const names={finance:['Finance Department','قسم المالية'],studentlife:['Student Life','الحياة الطلابية'],advising:['Academic Advising','الإرشاد الأكاديمي'],it:['IT Department','قسم تقنية المعلومات'],library:['Library & Aafaq','مكتبة KTECH وآفاق']};
+000170|   const labels={
+000171|     en:{home:'Quick Questions — Tap an option', major:'Major Sheets',diploma:'Diploma Major Sheets',bachelor:'Bachelor Major Sheets',departments:'KTECH Departments',back:'← Back',majorInfo:'Choose your degree and major to request a Major Sheet.',noPdf:'The official PDF for this Major Sheet is not included in the uploaded version yet. Contact Academic Advising for the current approved plan.',deptHint:'Tap a contact link, or choose questions you may have.',questions:'👉 Questions you may have',questionHint:'Tap any question for an instant answer.',choose:'Tap an option to continue.',foot:'Information may change. Confirm official details with KTECH.'},
+000172|     ar:{home:'أسئلة سريعة — اضغط على خيار',major:'الخطط الدراسية',diploma:'خطط الدبلوم',bachelor:'خطط البكالوريوس',departments:'أقسام KTECH',back:'رجوع →',majorInfo:'اختار الدبلوم أو البكالوريوس وبعدها التخصص.',noPdf:'ملف الـ PDF الرسمي للخطة الدراسية مو مرفوع بهالنسخة للحين. تواصل مع الإرشاد الأكاديمي عشان تحصل على الخطة المعتمدة.',deptHint:'اضغط على رابط التواصل أو شوف الأسئلة اللي ممكن تكون عندك.',questions:'👉 أسئلة ممكن تكون عندك',questionHint:'اضغط على أي سؤال وراح يطلع لك الجواب على طول.',choose:'اضغط على الخيار اللي تبيه عشان تكمل.',foot:'المعلومات قابلة للتغيير. تأكد من KTECH للأمور الرسمية.'}
+000173|   };
+000174|   const els={log:document.getElementById('orbitChatLog'), options:document.getElementById('orbitGuideOptions'), label:document.getElementById('orbitGuideLabel')};
+000175|   let page='home';
+000176|   const isAr=()=>document.documentElement.lang==='ar';
+000177|   const d=()=>isAr()?1:0;
+000178|   const tx=(en,ar)=>isAr()?ar:en;
+000179|   const t=()=>labels[isAr()?'ar':'en'];
+000180|   function say(role,text){
+000181|     const div=document.createElement('div');div.className='orbit-chat-message '+role;div.textContent=text;
+000182|     els.log.appendChild(div);els.log.scrollTop=els.log.scrollHeight;
+000183|   }
+000184|   function button(label,fn,cls=''){
+000185|     const el=document.createElement('button');el.type='button';el.className='orbit-guide-btn '+cls;el.textContent=label;
+000186|     el.addEventListener('click',fn);els.options.appendChild(el);return el;
+000187|   }
+000188|   function hint(txt){const el=document.createElement('div');el.className='orbit-guide-hint';el.textContent=txt;els.options.appendChild(el);}
+000189|   function section(head,detail){
+000190|     const el=document.createElement('section');el.className='orbit-guide-section';
+000191|     const title=document.createElement('h3');title.className='orbit-guide-section-heading';title.textContent=head;el.appendChild(title);
+000192|     const description=document.createElement('p');description.className='orbit-guide-section-description';description.textContent=detail;el.appendChild(description);
+000193|     els.options.appendChild(el);
+000194|   }
+000195|   function contact(item){
+000196|     if(!item[2]) {const el=button(item[d()],()=>{},'');el.disabled=true;return;}
+000197|     const a=document.createElement('a'); a.className='orbit-guide-btn info-link';a.textContent=item[d()];a.href=item[2];
+000198|     if(item[2].startsWith('https://')){a.target='_blank';a.rel='noopener noreferrer';}
+000199|     els.options.appendChild(a);
+000200|   }
+000201|   function navigate(path){page=path;render();}
+000202|   function ask(q,answer,sources=[]){say('user',q);say('bot',answer);addOfficialSources(sources);}
+000203|   const ORBIT_OFFICIAL_SOURCES = {"life":["KTECH Student Life","https://ktech.edu.kw/en/student-life/campus-life/"],"sports":["KTECH Sports Center","https://ktech.edu.kw/en/student-life/sport-center/"],"news":["KTECH News & Events","https://ktech.edu.kw/en/news-listing/news-page/"],"instagram":["KTECH Instagram (@ktech.kw)","https://www.instagram.com/ktech.kw/"],"contact":["KTECH Official Contact","https://ktech.edu.kw/en/contact-us/"],"fees":["KTECH Tuition & Fees","https://ktech.edu.kw/en/admission/tuition-fees/"],"calendar":["KTECH Academic Calendar","https://ktech.edu.kw/en/academic-programs/academic-calendar/"],"apps":["KTECH Student Apps","https://ktech.edu.kw/en/student-life/important-links/"],"hub":["KTECH Hub","https://hub.ktech.edu.kw/"],"syllabus":["KTECH Published Syllabus","https://syllabus.ktech.edu.kw/syllabus/68cfc251953cc1a9ce06cf6d/view?fullwidth=0"]};

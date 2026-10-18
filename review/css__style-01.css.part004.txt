@@ -1,0 +1,151 @@
+001065| .orbit-navigation-v2{background:#fff !important;border-color:#3a3b1a;padding:clamp(12px,2vw,24px) !important;}
+001066| .orbit-nav-v2-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+001067| .orbit-nav-v2-heading h2{color:#222310;font-size:clamp(1.2rem,3vw,1.8rem);margin:0 0 5px}
+001068| .orbit-nav-v2-heading .orbit-map-subtitle{margin:0;line-height:1.45}
+001069| .orbit-map-v2-chip{font-size:.63rem;background:#fff6cf;color:#504300;padding:8px;border-radius:999px;border:1px solid #e6d57a;font-weight:850;white-space:nowrap}
+001070| .orbit-navigation-v2 .orbit-floors-v2{margin:13px 0 16px;gap:7px}
+001071| .orbit-navigation-v2 .orbit-floor-btn{background:#f7f8fa;color:#1a2540;border:1px solid #dadde3;border-radius:999px;padding:10px 4px;text-transform:none;letter-spacing:0;font-size:.83rem;box-shadow:none}
+001072| .orbit-navigation-v2 .orbit-floor-btn.selected{background:#ffdc3d;color:#172039;border:2px solid #101b34}
+001073| .orbit-nav-v2-form{display:flex;gap:9px;align-items:stretch;padding:14px;border:1px solid #e2e4e4;background:#f9fafb;border-radius:16px}
+001074| .orbit-nav-v2-location{flex:1;min-width:0}
+001075| .orbit-nav-v2-location label{font-size:.76rem;display:flex;gap:7px;align-items:center;font-weight:850;color:#343a40;margin-bottom:6px}
+001076| .orbit-nav-dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex-shrink:0}
+001077| .orbit-nav-dot.start{background:#256ae7}.orbit-nav-dot.end{background:#ed4763}
+001078| .orbit-nav-v2-location select{width:100%;max-width:100%;font-weight:750;font-size:.91rem;color:#1e2430;background:#fff;border:2px solid #d4d9e2;border-radius:11px;padding:11px 8px;min-height:44px}
+001079| .orbit-navigation-v2 .orbit-nav-swap{padding:0;min-width:43px;background:#fff6d3;border-color:#e4d594;color:#222310;font-size:1.5rem;border-radius:10px;text-transform:none;letter-spacing:0}
+001080| .orbit-nav-v2-settings{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:13px 0 17px}
+001081| .orbit-access-toggle{display:flex;gap:8px;align-items:center;font-size:.87rem;color:#202d35;line-height:1.35;font-weight:750;cursor:pointer;flex:1;min-width:245px}
+001082| .orbit-access-toggle input{height:20px;width:20px;accent-color:#1565c0;flex-shrink:0}
+001083| #orbitFindRoute{background:#ffd63c;color:#131e30;border:2px solid #192841;border-radius:12px;box-shadow:none;padding:12px 18px;text-transform:none;letter-spacing:0;font-size:.93rem}
+001084| .orbit-nav-v2-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,235px);gap:15px;align-items:start}
+001085| .orbit-nav-v2-map-wrap{min-width:0}
+001086| .orbit-nav-v2-map-head{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:8px;font-size:.77rem;color:#6a7180;font-weight:750}
+001087| #orbitFloorCurrentLabel{font-weight:900;color:#081c39;background:#ffdf54;padding:6px 10px;border-radius:9px;white-space:nowrap}
+001088| .orbit-nav-v2-zoom{display:flex;gap:4px}
+001089| .orbit-navigation-v2 .orbit-nav-v2-zoom button{width:32px;height:32px;padding:0;border:1px solid #d5d9dd;border-radius:7px;background:#fff;color:#101828;font-size:1.2rem;text-transform:none;letter-spacing:0;box-shadow:none}
+001090| .orbit-navigation-v2 .orbit-map-stage{background:#d3d6d4;border:1px solid #bac0c1;border-radius:13px;overflow:auto;max-height:min(68vh,740px);touch-action:pan-x pan-y}
+001091| .orbit-navigation-v2 .orbit-map-canvas{min-width:0;width:100%;position:relative;line-height:0}
+001092| .orbit-navigation-v2 .orbit-map-canvas img{display:block;width:100%;height:auto}
+001093| .orbit-navigation-v2 #orbitFloorOverlay{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+001094| .orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit{fill:transparent;stroke:transparent;stroke-width:2;cursor:pointer;pointer-events:all}
+001095| .orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit:hover,.orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit:focus{fill:#fff46666;stroke:#eead00;outline:none}
+001096| .orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit.selected{stroke:#ffdb22;stroke-width:5;fill:#ffdd3330}
+001097| .orbit-navigation-v2 #orbitRoomLayer .orbit-nav-hit.end{stroke:#ee2f50;stroke-width:5;fill:#ff9baa29}
+001098| .orbit-nav-v2-key{background:#fff;border-radius:15px;border:1px solid #e4e7eb;box-shadow:0 2px 12px #11182710;padding:12px}
+001099| .orbit-nav-v2-key summary{font-size:1.12rem;font-weight:900;color:#101d37;cursor:pointer;list-style-position:inside;padding:4px 3px 11px}
+001100| .orbit-map-v2-key-rows{display:grid;gap:7px}
+001101| .orbit-map-v2-key-row{display:flex;align-items:center;gap:9px;padding:10px 8px;border-radius:9px;background:#f2f3f6;font-size:.77rem;font-weight:750;color:#18233e;line-height:1.2}
+001102| .orbit-map-v2-key-swatch{width:28px;min-width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.05rem}
+001103| .orbit-navigation-v2 .orbit-map-selection{font-size:.82rem;margin:10px 0 0;padding:10px 12px;background:#fffdf1;border:1px solid #e7d68b;border-radius:9px;color:#40391b}
+001104| .orbit-map-v2-caution{font-size:.71rem;font-weight:650;line-height:1.4;color:#707070;margin-top:8px}
+001105| .orbit-nav-v2-instructions{border:2px solid #e0d6a9;background:#fffdf4;border-radius:14px;padding:15px;margin-top:14px}
+001106| .orbit-nav-v2-instructions[hidden],.orbit-nav-v2-roomlist[hidden]{display:none !important}
+001107| .orbit-nav-v2-route-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+001108| .orbit-nav-v2-route-top strong{font-size:.99rem;color:#171c2d}
+001109| .orbit-navigation-v2 #orbitStopNavigation{font-size:.73rem;padding:7px 9px;background:white;border:1px solid #ccc;color:#263449;text-transform:none;letter-spacing:0}
+001110| .orbit-nav-v2-steps{list-style:none;display:grid;gap:7px;margin:13px 0;padding:0}
+001111| .orbit-nav-v2-steps li{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #ebe3c4;border-radius:10px;padding:9px 10px;font-size:.84rem;line-height:1.4;color:#263449;font-weight:650}
+001112| .orbit-nav-v2-steps li.current{border:2px solid #e9b900;background:#fff4c4}
+001113| .orbit-nav-v2-steps .num{background:#26344b;color:#fff;border-radius:50%;width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.74rem}
+001114| .orbit-nav-v2-step-actions{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:10px}
+001115| .orbit-nav-v2-step-actions button{background:#fff;color:#263449;border:1px solid #999;padding:9px 12px;border-radius:10px;font-size:.79rem;letter-spacing:0;text-transform:none;box-shadow:none}
+001116| .orbit-navigation-v2 #orbitStepNext{background:#ffd63c;border:2px solid #222310}
+001117| .orbit-nav-v2-step-actions button:disabled{opacity:.42;cursor:default}
+001118| #orbitRouteProgress{font-size:.78rem;color:#565d66;font-weight:800}
+001119| .orbit-nav-v2-quicklinks{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+001120| .orbit-nav-v2-quicklinks button{background:#fff;border:1px solid #d5d9de;border-radius:10px;padding:8px 10px;font-size:.76rem;text-transform:none;letter-spacing:0;color:#23324a;box-shadow:none}
+001121| .orbit-nav-v2-roomlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:7px;padding:11px;margin-top:9px;border:1px solid #e4e4e4;border-radius:11px;background:#fafafa}
+001122| .orbit-nav-v2-roomlist button{padding:9px 4px;font-size:.72rem;letter-spacing:0;text-transform:none;background:#fff;color:#16305c;border:1px solid #dbe2ea;box-shadow:none}
+001123| @media (max-width:780px){.orbit-nav-v2-layout{grid-template-columns:1fr}.orbit-map-v2-key-rows{grid-template-columns:repeat(2,minmax(0,1fr))}.orbit-nav-v2-key summary{font-size:.96rem}.orbit-nav-v2-heading .orbit-map-v2-chip{display:none}}
+001124| @media (max-width:540px){.orbit-navigation-v2 .orbit-floors-v2{grid-template-columns:repeat(2,minmax(0,1fr))}.orbit-nav-v2-form{flex-wrap:wrap;padding:9px}.orbit-nav-v2-location{min-width:calc(50% - 26px)}.orbit-nav-v2-location select{font-size:.8rem}.orbit-nav-v2-settings #orbitFindRoute{width:100%}.orbit-map-v2-key-rows{grid-template-columns:1fr 1fr}.orbit-map-v2-key-row{font-size:.7rem;padding:7px 5px}.orbit-map-v2-key-swatch{width:23px;min-width:23px;height:23px}.orbit-nav-v2-map-head #orbitMapHint{display:none}}
+001125| 
+001126| .orbit-map-v2-actionbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:17px 0 7px}
+001127| .orbit-navigation-v2 .orbit-map-v2-actionbar button{display:flex;align-items:center;justify-content:center;gap:6px;background:#f8f9fc;color:#172641;border:1px solid #d4d8e2;border-radius:10px;padding:10px 5px;font-size:.79rem;letter-spacing:0;text-transform:none;box-shadow:none}
+001128| .orbit-navigation-v2 .orbit-map-v2-actionbar button:first-child{background:#ffd83d;border-color:#baa12a}
+001129| .orbit-map-v2-info{margin:10px 0;padding:12px;background:#fff8d7;border:1px solid #dfcb72;border-radius:12px;font-size:.84rem;line-height:1.5;color:#403a20;font-weight:700}
+001130| .orbit-map-v2-info[hidden]{display:none}
+001131| @media(max-width:640px){.orbit-map-v2-actionbar{grid-template-columns:repeat(3,minmax(0,1fr))}.orbit-navigation-v2 .orbit-map-v2-actionbar button{font-size:.7rem}.orbit-navigation-v2 .orbit-map-v2-actionbar button:nth-child(4),.orbit-navigation-v2 .orbit-map-v2-actionbar button:nth-child(5){grid-column:auto}}
+001132| 
+001133| /* KTECH Orbit 1.16: yellow classroom doorway targets without changing map layout */
+001134| .orbit-classroom-door{fill:#ffdb22;stroke:#2e2c22;stroke-width:1.6;paint-order:stroke;pointer-events:all;cursor:pointer;filter:drop-shadow(0 0 1px #fff)}
+001135| .orbit-classroom-door.active{stroke:#fff;stroke-width:2.7;filter:drop-shadow(0 1px 2px #181818)}
+001136| .orbit-classroom-door:focus-visible{stroke:#fa213f;stroke-width:4;outline:none}
+001137| 
+001138| 
+001139| /* Localized indoor map: preserve the map coordinates while supporting readable Arabic text */
+001140| html[lang="ar"] .orbit-navigation-v2 .orbit-map-stage,html[lang="ar"] .orbit-navigation-v2 .orbit-map-canvas{direction:ltr}
+001141| html[lang="ar"] .orbit-navigation-v2 .orbit-nav-v2-map-head{direction:rtl}
+001142| html[lang="ar"] .orbit-navigation-v2 .orbit-nav-v2-steps li{direction:rtl;text-align:right}
+001143| html[lang="ar"] .orbit-navigation-v2 .orbit-nav-v2-form{direction:rtl}
+001144| html[lang="ar"] .orbit-navigation-v2 select{direction:rtl;text-align:right}
+001145| html[lang="ar"] .orbit-navigation-v2 .orbit-map-v2-key-row{direction:rtl;text-align:right}
+001146| html[lang="ar"] .orbit-navigation-v2 .orbit-map-v2-actionbar button{line-height:1.45}
+001147| 
+001148| /* KTECH Orbit 1.23: in-chat Major Sheet PDF cards; leaves existing chatbot and map layout untouched. */
+001149| .orbit-major-file-card{margin:10px 0 16px;max-width:95%;padding:13px;border:1px solid #dfd3a8;background:#fffdf4;border-radius:12px;color:#1f2c43;box-shadow:0 2px 8px rgba(12,32,61,.08)}
+001150| .orbit-major-file-heading{display:flex;align-items:center;gap:9px;font-size:.92rem;font-weight:800;line-height:1.4;overflow-wrap:anywhere}
+001151| .orbit-major-file-heading>span:first-child{font-size:1.5rem}
+001152| .orbit-major-file-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+001153| .orbit-major-file-buttons .orbit-major-file-control{font:inherit;font-size:.79rem!important;font-weight:800!important;letter-spacing:normal!important;text-transform:none!important;text-align:center;padding:9px 11px;border-radius:8px;background:#ffdb4d!important;color:#17243c!important;border:1px solid #b99d36!important;box-shadow:none!important;min-height:35px;cursor:pointer;text-decoration:none!important}
+001154| .orbit-major-file-buttons .orbit-major-file-control:hover{background:#fff1a1!important}
+001155| .orbit-major-pdf-preview[hidden]{display:none!important}
+001156| .orbit-major-pdf-preview{margin-top:12px;border-top:1px solid #e0e2e5;padding-top:10px}
+001157| .orbit-major-pdf-preview iframe{width:100%;min-height:410px;border:1px solid #d0d4d9;border-radius:8px;background:white}
+001158| .orbit-major-pdf-preview p{font-size:.77rem;color:#566071;line-height:1.4;margin:6px 0 0}
+001159| /* Practical chatbot source links (1.14 update) */
+001160| .orbit-official-links{border-top:1px solid rgba(82,77,28,.22);margin-top:12px;padding-top:10px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;font-size:.81rem;font-weight:750}
+001161| .orbit-official-links a{display:block;overflow-wrap:anywhere;padding:6px 9px;border-radius:8px;background:#fff3ad;border:1px solid #a58b1e;color:#332900!important;line-height:1.35}
+001162| .orbit-official-links a:hover,.orbit-official-links a:focus-visible{background:#ffe66f}
+001163| /* KTECH Orbit parking occupancy prototype, shown only on the Campus map. */
+001164| #orbitParkingPanel[hidden],#orbitParkingSelection[hidden]{display:none !important}
+001165| #mapView.parking-mode .orbit-nav-v2-form,#mapView.parking-mode .orbit-nav-v2-settings,
+001166| #mapView.parking-mode .orbit-map-v2-actionbar,#mapView.parking-mode .orbit-nav-v2-quicklinks,
+001167| #mapView.parking-mode .orbit-nav-v2-instructions,#mapView.parking-mode .orbit-nav-v2-roomlist,
+001168| #mapView.parking-mode .orbit-map-v2-key,#mapView.parking-mode #orbitMapSelection,
+001169| #mapView.parking-mode .orbit-map-v2-caution,#mapView.parking-mode #orbitMapHint,
+001170| #mapView.parking-mode .orbit-nav-v2-zoom {display:none !important}
+001171| #mapView.parking-mode .orbit-nav-v2-layout{display:block}
+001172| #mapView.parking-mode .orbit-map-canvas{min-width:920px;width:100%}
+001173| #mapView.parking-mode .orbit-map-stage{max-height:min(61vh,680px);background:#f5f1e6}
+001174| .orbit-parking-panel{background:#fffdf3;border:2px solid #d5c88b;border-radius:17px;padding:clamp(13px,2.5vw,22px);margin:0 0 14px;color:#263024}
+001175| .orbit-parking-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+001176| .orbit-parking-heading h3{font-size:1.22rem;color:#28351c;margin:0 0 3px}
+001177| .orbit-parking-heading p{font-size:.82rem;line-height:1.42;color:#5b5c2a;margin:0}
+001178| .orbit-parking-badge{font-size:.68rem;font-weight:900;color:#4f3b00;background:#ffe393;border:1px solid #a98723;border-radius:999px;padding:6px 10px;white-space:nowrap}
+001179| .orbit-parking-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}
+001180| .orbit-parking-stat{background:#fff;border:1px solid #dfded1;border-radius:11px;padding:10px 12px;min-width:0}
+001181| .orbit-parking-stat strong{display:block;font-size:1.35rem;line-height:1.15;font-variant-numeric:tabular-nums}
+001182| .orbit-parking-stat small{display:block;font-size:.71rem;font-weight:800;margin-top:3px;color:#555d53}
+001183| .orbit-parking-stat.free strong{color:#127942}.orbit-parking-stat.busy strong{color:#be3740}.orbit-parking-stat.access strong{color:#165a9b}
+001184| .orbit-parking-meter{height:8px;background:#eddee0;border-radius:99px;overflow:hidden}
+001185| .orbit-parking-meter span{display:block;width:0;height:100%;background:#159355;transition:width .25s}
+001186| .orbit-parking-legend{display:flex;gap:12px;flex-wrap:wrap;margin:13px 0 10px;font-size:.76rem;font-weight:850}
+001187| .orbit-parking-legend span{display:inline-flex;align-items:center;gap:5px}
+001188| .orbit-parking-dot{width:14px;height:14px;border-radius:4px;display:inline-block;border:1px solid #fff;box-shadow:0 0 0 1px #888}
+001189| .orbit-parking-dot.free{background:#19a45a}.orbit-parking-dot.busy{background:#d43d43}.orbit-parking-dot.access{background:#236ac0}
+001190| .orbit-parking-instruction{font-size:.79rem;line-height:1.45;color:#515844;font-weight:700;margin-bottom:10px}
+001191| .orbit-parking-actions{display:flex;flex-wrap:wrap;gap:8px}
+001192| .orbit-parking-actions button,.orbit-parking-selection button{padding:9px 12px;border:1px solid #77784d;border-radius:9px;background:#fff;color:#303820;font-size:.76rem;letter-spacing:0;text-transform:none;box-shadow:none}
+001193| .orbit-parking-actions button:first-child{background:#f5cb0e;border-color:#3a3b1a}
+001194| .orbit-parking-actions button:hover,.orbit-parking-selection button:hover{background:#fff0ae}
+001195| .orbit-parking-gates{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 12px}
+001196| .orbit-parking-gates button{border:1px solid #245da0;background:#edf6ff;color:#164977;border-radius:9px;padding:7px 10px;font-size:.76rem;font-weight:800;cursor:pointer}
+001197| .orbit-parking-gates button:hover,.orbit-parking-gates button:focus-visible{background:#d4eaff;outline:2px solid #164977;outline-offset:1px}
+001198| .orbit-parking-selection{background:#fff;border:1px solid #d5c88b;border-radius:11px;padding:11px 13px;margin:10px 0 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.82rem;font-weight:750}
+001199| .orbit-parking-selection strong{font-size:.93rem}
+001200| #orbitParkingLayer{pointer-events:none}
+001201| #orbitParkingLayer .orbit-parking-spot{pointer-events:all;cursor:pointer;stroke:#fff;stroke-width:2.5;filter:drop-shadow(0 1px 2px #171b20a6);transition:fill .2s,stroke-width .2s}
+001202| #orbitParkingLayer .orbit-parking-spot.free{fill:#0f9c51;fill-opacity:.92}
+001203| #orbitParkingLayer .orbit-parking-spot.busy{fill:#d83b42;fill-opacity:.94}
+001204| #orbitParkingLayer .orbit-parking-spot.accessible{stroke:#0b4faf;stroke-width:4}
+001205| #orbitParkingLayer .orbit-parking-spot.selected,#orbitParkingLayer .orbit-parking-spot:focus-visible{stroke:#f9d737;stroke-width:5;outline:none}
+001206| #orbitParkingLayer .orbit-parking-spot:hover{stroke:#ffe55b;stroke-width:5}
+001207| #orbitParkingLayer .orbit-parking-access-icon{pointer-events:none;fill:#fff;font-size:12px;font-weight:900;text-anchor:middle;dominant-baseline:middle}
+001208| #orbitParkingLayer .orbit-parking-gate-label{pointer-events:none;fill:#17436d;stroke:#fff;stroke-width:3;paint-order:stroke;font-size:16px;font-weight:900;text-anchor:middle}
+001209| @media(max-width:560px){.orbit-parking-stats{gap:5px}.orbit-parking-stat{padding:9px 6px}.orbit-parking-stat strong{font-size:1.13rem}.orbit-parking-stat small{font-size:.61rem}.orbit-parking-actions button{flex:1 1 calc(50% - 8px)}.orbit-parking-selection button{width:100%}}
+001210| html[dir="rtl"] .orbit-parking-panel,html[dir="rtl"] .orbit-parking-selection{text-align:right}
+001211| 
+001212| /* Ground Floor exact-reference fixes */
+001213| #mapView .orbit-nav-hit.food-hall-hit{stroke:transparent!important;fill:transparent;fill-rule:evenodd}
+001214| #mapView .orbit-nav-hit.food-hall-hit:hover,#mapView .orbit-nav-hit.food-hall-hit:focus{stroke:transparent!important;fill:#fff46666}
+001215| #mapView .orbit-nav-hit.food-hall-hit.selected{stroke:transparent!important;fill:#ffdd3330}

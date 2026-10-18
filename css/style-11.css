@@ -1,0 +1,5 @@
+
+#mapView:not(.parking-mode) #orbitParkingLayer{display:none!important;visibility:hidden!important}
+#mapView.parking-mode #orbitParkingLayer{display:block!important;visibility:visible!important}
+#mapView.parking-mode #orbitRoomLayer,#mapView.parking-mode #orbitRouteGraphics{display:none!important}
+#mapView.parking-mode #orbitFloorImage{aspect-ratio:16/9;object-fit:fill}

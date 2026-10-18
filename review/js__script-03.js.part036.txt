@@ -1,0 +1,217 @@
+000256|         'According to Aafaq’s posted policy, digital books and access codes are normally non-refundable. Serious issues can be submitted for Aafaq review. Approval is not guaranteed.',
+000257|         'Tap the Aafaq request form link in the Library area under Refund & exchange. It was decoded from the QR sign labeled “To request a refund”; submitting a request does not guarantee approval.',
+000258|         'Yes. KTECH Library handles questions about borrowing and availability. Aafaq Distribution sells physical/digital course books and access codes and handles its orders and refund requests.'
+000259|       ];
+000260|       return replies[i]||'';
+000261|     }
+000262|     const c=ar ? {
+000263|       finance:[
+000264|         'تقدر تدفع من رابط الرسوم الموجود في قسم Finance. قبل الدفع تأكد من بياناتك واحتفظ بالإيصال.',
+000265|         'المبالغ الحالية مو مثبتة في الموقع. تواصل مع المالية عشان تتأكد من الرسوم حسب برنامجك.',
+000266|         'تواصل مع المالية عشان تعرف إذا عندك خيار أقساط والشروط والمواعيد الحالية.',
+000267|         'راجع رصيدك في النظام إذا كان ظاهر عندك، أو تواصل مع المالية واطلب كشف بالمبلغ المتبقي.',
+000268|         'اسأل المالية عن أي رسوم مطلوبة قبل فتح التسجيل، لأن المتطلبات تختلف حسب حالة الطالب.',
+000269|         'احتفظ بإثبات الدفع، وجرب تتحقق من الرصيد بعد التحديث. إذا ما ظهر تواصل مع Finance وارسل الإيصال.',
+000270|         'احتفظ بإيصال الدفع الإلكتروني. إذا تحتاج إثبات رسمي اطلبه من Finance.',
+000271|         'إذا رابط الدفع مو شغال، تواصل مع Finance ولا تكرر الدفع قبل التأكد إنه ما انخصم المبلغ.',
+000272|         'نعم تقدر تتواصل مع المالية وتطلب تأكيد استلام الدفع مع تقديم بيانات العملية.',
+000273|         'إيميل Finance هو finance@ktech.edu.kw والأرقام +965 6514 5596 و +965 6760 1894.',
+000274|         'إيميل المالية: finance@ktech.edu.kw.',
+000275|         'أرقام المالية: +965 6514 5596 و +965 6760 1894.'
+000276|       ],
+000277|       studentlife:[
+000278|         'شوف الإعلانات الطلابية الرسمية أو استفسر من Student Life عن قائمة الأندية والأنشطة الحالية.',
+000279|         'تواصل مع Student Life واسألهم عن طريقة الانضمام والتسجيل بالأنشطة الحالية.',
+000280|         'للتأكد من الفرق الرياضية الحالية ومواعيد التسجيل راجع Student Life.',
+000281|         'تابع إعلانات KTECH الرسمية واسأل Student Life عن الفعاليات القادمة.',
+000282|         'تواصل مع قسم Student Life عن طريق خدمات الطلاب في الكلية؛ ما عندنا رقم موثق له بالقائمة الحالية.'
+000283|       ],
+000284|       advising:[
+000285|         'الـ Prerequisite مادة لازم تخلصها قبل ما تسجل مادة ثانية. تقدر تتأكد من الـ Major Sheet أو الـ Advising.',
+000286|         'إذا السكشن Full راجع Advising عشان يشوفون المقاعد والبدائل، ولا تسوي Drop لمادتك قبل ما تتأكد من بديل.',
+000287|         'بفترة Add & Drop تقدر تغير المواد إذا في مقاعد واستوفيت المتطلبات. راجع Advising عند أي مشكلة.',
+000288|         'راجع الـ Major Sheet وتأكد من المتطلبات السابقة، أو خلي المرشد الأكاديمي يساعدك باختيار المواد.',
+000289|         'تواصل مع Advising بسرعة عشان يناقشون البدائل والسكاشن. لا تفترض إن في مقعد مضمون.',
+000290|         'تقدر تسأل Advising إذا في إمكانية يقدمون طلب، لكن الموافقة تعتمد على المقاعد وسياسة الكلية.',
+000291|         'ممكن يكون في متطلب سابق أو مقعد غير متوفر أو مشكلة تسجيل. تأكد من النظام وراجع Advising.',
+000292|         'شوف بيانات المقرر في SIS والخطة الدراسية، وإذا مو واضح اسأل Advising.',
+000293|         'الحد يعتمد على وضعك الأكاديمي والـ Academic Load في SIS. اسأل Advising عن حالتك.',
+000294|         'تقدر تغير جدولك من SIS بالفترة المسموحة إذا متوفرة المقاعد والمتطلبات، أو راجع Advising.',
+000295|         'تواصل مع Advising عشان تعرف سبب الـ Hold والقسم اللي يقدر يرفعه.',
+000296|         'اسأل Advising عن جهة وطريقة تقديم الطبية ومستندات الغياب والتواريخ المطلوبة.',
+000297|         'مكتب Academic Advising بالدور الأرضي، مكتب 171. الإيميل academicadvising@ktech.edu.kw.',
+000298|         'تقدر تشوف قائمة المستشارين وأرقامهم بالصفحة السابقة بقسم Advising.',
+000299|         'أرقام المستشارين موجودة في قسم Advising فوق. اختار الاسم واضغط على الرقم للاتصال.'
+000300|       ],
+000301|       it:[
+000302|         'إذا ما تقدر تدخل SIS تأكد من بيانات الدخول وجرب متصفح ثاني. إذا استمرت المشكلة تواصل مع IT: helpdesk@ktech.edu.kw أو +965 2228 5070.',
+000303|         'إذا نسيت الباسورد أو تحتاج Reset تواصل مع IT Helpdesk عشان يساعدونك بالطريقة الرسمية.',
+000304|         'إذا الحساب مقفل تواصل مع IT Helpdesk ولا تعيد المحاولة وايد إذا كانت تزيد مشكلة القفل.',
+000305|         'إذا نسيت اليوزر أو بيانات الدخول، تواصل مع IT بعد التحقق من هويتك.',
+000306|         'جرب تدخل مرة ثانية وتأكد من كلمة المرور، وإذا استمرت المشكلة تواصل مع IT Helpdesk.',
+000307|         'مشاكل Microsoft 365 تقدر ترفعها إلى IT Helpdesk بالإيميل أو الاتصال.',
+000308|         'تأكد من شبكة Wi-Fi الصحيحة وإعدادات جهازك، وإذا ما اشتغلت تواصل مع IT.',
+000309|         'جرب متصفح ثاني واتصال مختلف. إذا المشكلة بموقع الكلية، تواصل مع IT.',
+000310|         'تقدر تتواصل مع helpdesk@ktech.edu.kw أو تزور موقع الدعم tks.ktech.edu.kw.',
+000311|         'ساعات عمل IT المذكورة في القائمة: من 8 صباحاً إلى 5 مساءً.',
+000312|         'رقم IT: +965 2228 5070.',
+000313|         'واتساب أبو شهامة: +965 6582 4107 وواتساب علي لالاجي: +965 9922 9037.',
+000314|         'إيميل الدعم الفني: helpdesk@ktech.edu.kw.',
+000315|         'موقع الدعم الفني: https://tks.ktech.edu.kw.'
+000316|       ]
+000317|     } : {
+000318|       finance:[
+000319|         'Use the online fee payment link in Finance. Verify your details and save your receipt.',
+000320|         'Current fee amounts are not listed in this version. Confirm tuition and registration charges with Finance.',
+000321|         'Contact Finance to confirm available installment plans, eligibility, and current deadlines.',
+000322|         'Check your balance in the student system if available, or request a statement from Finance.',
+000323|         'Confirm any required pre-registration fees directly with Finance, since they can depend on your account.',
+000324|         'Keep the transaction receipt and check your account after it updates. If still missing, send proof to Finance.',
+000325|         'Keep your electronic receipt; request official proof of payment from Finance if needed.',
+000326|         'Contact Finance if the payment page fails. Check whether payment was charged before trying again.',
+000327|         'Contact Finance with transaction details to confirm whether your payment has been received.',
+000328|         'Contact finance@ktech.edu.kw or call +965 6514 5596 / +965 6760 1894.',
+000329|         'The Finance email is finance@ktech.edu.kw.',
+000330|         'Finance numbers: +965 6514 5596 and +965 6760 1894.'
+000331|       ],
+000332|       studentlife:[
+000333|         'Check official student announcements or contact Student Life for the current clubs and activities.',
+000334|         'Ask Student Life for the latest club registration and activity signup details.',
+000335|         'Contact Student Life for the currently offered sports teams and how to join.',
+000336|         'Check KTECH official announcements and ask Student Life about upcoming events.',
+000337|         'Ask the campus student services desk for Student Life contact details; no confirmed direct number is listed here.'
+000338|       ],
+000339|       advising:[
+000340|         'A prerequisite is a course you must complete before another. Check the Major Sheet and ask Advising if unsure.',
+000341|         'If a section is full, contact Advising for possible alternatives. Do not drop your current place without checking.',
+000342|         'During Add & Drop you can adjust courses when seats are available and prerequisites are met. Contact Advising for help.',
+000343|         'Check the Major Sheet for your program and completed prerequisites, or discuss your plan with Advising.',
+000344|         'Contact Advising promptly for possible sections and alternatives. A place is not guaranteed.',
+000345|         'You can ask Advising whether a full-section request is possible, subject to college rules and space.',
+000346|         'A course may disappear due to prerequisites, availability, or registration issues. Check SIS and ask Advising.',
+000347|         'Check the course details in SIS and your Major Sheet, or ask Advising to confirm prerequisites.',
+000348|         'Your limit depends on your academic status and Academic Load in SIS. Confirm with Advising.',
+000349|         'Use SIS during the permitted period if seats and prerequisites allow, or contact Advising.',
+000350|         'Ask Advising to identify your hold and which department can resolve it.',
+000351|         'Ask Advising how and where to submit medical or absence documents within the applicable deadline.',
+000352|         'Academic Advising is on the Ground Floor, Office 171. Email academicadvising@ktech.edu.kw.',
+000353|         'The advisors and their numbers are listed as tappable contacts on the previous Advising screen.',
+000354|         'Go back to Academic Advising to view and tap the listed contact numbers.'
+000355|       ],
+000356|       it:[
+000357|         'Double-check your login and try another browser. If SIS still fails, contact helpdesk@ktech.edu.kw or call +965 2228 5070.',
+000358|         'Contact the IT Helpdesk for the official KTECH password-reset process.',
+000359|         'Contact IT Helpdesk for a locked account. Repeated login attempts may not solve a lockout.',
+000360|         'Contact IT Helpdesk to recover your username after identity verification.',
+000361|         'Try signing in again and check your credentials; contact IT for email access problems.',
+000362|         'The IT Helpdesk handles Microsoft 365 account issues. Email or call them.',
+000363|         'Check your network connection and device settings; contact IT if campus Wi-Fi still fails.',
+000364|         'Try another browser or network, and report KTECH service outages to IT.',
+000365|         'You can email helpdesk@ktech.edu.kw or use https://tks.ktech.edu.kw to request support.',
+000366|         'The listed IT working hours are 8:00 AM–5:00 PM.',
+000367|         'Call the IT Department on +965 2228 5070.',
+000368|         'WhatsApp Abu Shahama +965 6582 4107 or Ali Lalaji +965 9922 9037.',
+000369|         'The IT Helpdesk email is helpdesk@ktech.edu.kw.',
+000370|         'The IT support website is https://tks.ktech.edu.kw.'
+000371|       ]
+000372|     };
+000373|     return c[dep]?.[i]||tx('For account-specific details, contact the relevant KTECH department.','للتفاصيل الخاصة بحسابك تواصل مع القسم المختص.');
+000374|   }
+000375| 
+000376|   // Student Help Guide: illustrative pathways, not diagnoses, eligibility decisions or automated fixes.
+000377|   // Steps are informational and direct students to the official department.
+000378|   const helpTopics={
+000379|     registration:{
+000380|       label:['📝 Course registration','📝 تسجيل المواد'],
+000381|       prompt:['What happens when you try to register?','شنو المشكلة اللي تواجهك وقت تسجيل المواد؟'],
+000382|       choices:[
+000383|         {id:'full',label:['My section is full','السكشن اللي أبيه Full'],target:'advising',steps:[
+000384|           ['Check SIS for another suitable section.','شيّك SIS إذا في سكشن ثاني مناسب.'],
+000385|           ['Before dropping an existing section, make sure you have an alternative.','قبل ما تسوي Drop لسكشنك الحالي تأكد إن عندك بديل.'],
+000386|           ['Ask Academic Advising about your options. Seats or special requests are not guaranteed.','اسأل الإرشاد الأكاديمي عن الخيارات المتاحة. ماكو ضمان لمقعد أو استثناء.']
+000387|         ]},
+000388|         {id:'prerequisite',label:['SIS says I need a prerequisite','النظام يقول لازم مادة مسبقة'],target:'advising',steps:[
+000389|           ['Check your Major Sheet and the course prerequisites.','راجع الـ Major Sheet والمتطلبات السابقة للمادة.'],
+000390|           ['Compare those requirements with the courses you have completed.','قارن المتطلبات بالمواد اللي نجحت فيها.'],
+000391|           ['Ask Academic Advising to confirm the requirement or any registration restriction.','تواصل مع الإرشاد الأكاديمي لتأكيد الشرط أو سبب منع التسجيل.']
+000392|         ]},
+000393|         {id:'error',label:['The course is missing or registration fails','المادة مو ظاهرة أو التسجيل ما يضبط'],target:'advising',steps:[
+000394|           ['Check that registration or Add & Drop is currently open.','تأكد إن فترة التسجيل أو Add & Drop مفتوحة.'],
+000395|           ['Check prerequisites, open seats and any account holds.','راجع المتطلبات والمقاعد والـ Holds على حسابك.'],
+000396|           ['Ask Advising to check course restrictions. If SIS itself is inaccessible, choose the SIS help topic for IT.','اسأل Advising عن قيود التسجيل. إذا SIS نفسه ما يفتح، اختار مشكلة SIS عشان دعم IT.']
+000397|         ]}
+000398|       ]
+000399|     },
+000400|     sis:{
+000401|       label:['🔐 SIS & account access','🔐 SIS وحساب الكلية'],
+000402|       prompt:['Which access problem do you have?','شنو نوع مشكلة الدخول؟'],
+000403|       choices:[
+000404|         {id:'cannotLogin',label:['I cannot log in to SIS','ما أقدر أدش SIS'],target:'it',steps:[
+000405|           ['Check the username and password carefully.','تأكد من اليوزر والباسورد.'],
+000406|           ['Try a different browser or internet connection.','جرّب متصفح أو اتصال إنترنت ثاني.'],
+000407|           ['If it still fails, contact IT Helpdesk. Do not share your password in messages.','إذا استمرت المشكلة تواصل مع IT Helpdesk. لا ترسل الباسورد لأحد.']
+000408|         ]},
+000409|         {id:'forgotPassword',label:['I forgot my password','نسيت الباسورد'],target:'it',steps:[
+000410|           ['Use an official password-recovery option if shown on your KTECH sign-in page.','إذا في خيار استرجاع رسمي بصفحة الدخول، استخدمه.'],
+000411|           ['If recovery is unavailable or fails, contact IT for the approved reset process.','إذا ما نفع أو ماكو خيار استرجاع، تواصل مع IT للطريقة الرسمية.'],
+000412|           ['IT may need to verify your student identity.','يمكن IT يطلبون تأكيد هويتك كطالب.']
+000413|         ]},
+000414|         {id:'locked',label:['My account is locked','حسابي مقفل'],target:'it',steps:[
+000415|           ['Avoid repeated login attempts.','لا تكرر محاولات الدخول بشكل مستمر.'],
+000416|           ['Contact IT Helpdesk to confirm why the account was locked and how to regain access.','تواصل مع IT للتأكد من سبب القفل وطريقة فتح الحساب.']
+000417|         ]}
+000418|       ]
+000419|     },
+000420|     books:{
+000421|       label:['📚 Textbooks & library','📚 الكتب والمكتبة'],
+000422|       prompt:['Do you want to buy or borrow a book?','تبي تشتري كتاب ولا تستعيره؟'],
+000423|       choices:[
+000424|         {id:'buy',label:['I want to buy a textbook or access code','أبي أشتري كتاب أو Access Code'],target:'aafaq',steps:[
+000425|           ['Confirm the exact textbook, edition or access code required by your course.','تأكد من اسم الكتاب والإصدار أو الكود المطلوب للمادة.'],
+000426|           ['Open the KTECH Aafaq store to check available books and purchase options.','افتح متجر آفاق الخاص بـ KTECH وشوف الكتب وخيارات الشراء.'],
+000427|           ['For order or product problems, contact Aafaq. This is separate from the college library.','إذا عندك مشكلة بالطلب تواصل مع آفاق. آفاق غير مكتبة الكلية.']
+000428|         ]},
+000429|         {id:'borrow',label:['I want to borrow a book','أبي أستعير كتاب'],target:'library',steps:[
+000430|           ['Ask KTECH Library whether the book is available for borrowing.','اسأل مكتبة KTECH إذا الكتاب متوفر للاستعارة.'],
+000431|           ['Confirm their loan requirements and return date with the librarian.','تأكد من شروط الاستعارة وموعد الإرجاع مع أمين المكتبة.'],
+000432|           ['Contact KTECH Library directly; Aafaq sells books and does not manage library loans.','تواصل مع مكتبة KTECH مباشرةً. آفاق تبيع الكتب وما تدير الاستعارة.']
+000433|         ]},
+000434|         {id:'orderIssue',label:['I bought the wrong book or have an order problem','شريت كتاب خطأ أو عندي مشكلة بالطلب'],target:'aafaq',steps:[
+000435|           ['Keep your receipt and note the exact issue.','احتفظ بالفاتورة وحدد المشكلة.'],
+000436|           ['Review Aafaq’s exchange and refund conditions before submitting a request.','راجع سياسة آفاق للاستبدال والاسترجاع قبل تقديم الطلب.'],
+000437|           ['Contact Aafaq. Any exchange or refund is subject to their decision and policy.','تواصل مع آفاق. أي استبدال أو استرجاع يخضع لسياستهم وقرارهم.']
+000438|         ]}
+000439|       ]
+000440|     },
+000441|     payments:{
+000442|       label:['💳 Fees & payment','💳 الرسوم والدفع'],
+000443|       prompt:['What do you need help with?','شنو موضوع الرسوم اللي تبي تستفسر عنه؟'],
+000444|       choices:[
+000445|         {id:'notShowing',label:['I paid but my balance has not updated','دفعت بس الرصيد ما تغير'],target:'finance',steps:[
+000446|           ['Keep your payment receipt or transaction reference.','احتفظ بإيصال الدفع أو رقم العملية.'],
+000447|           ['Check the student account again for an updated balance.','شيّك حسابك الطلابي مرة ثانية.'],
+000448|           ['Contact Finance with your receipt if the payment still is not reflected.','إذا المبلغ للحين مو ظاهر تواصل مع المالية وأرفق إيصال الدفع.']
+000449|         ]},
+000450|         {id:'fees',label:['I need to know my fees or installments','أبي أعرف الرسوم أو الأقساط'],target:'finance',steps:[
+000451|           ['Check any fee information currently shown in your student account.','راجع الرسوم الظاهرة في حسابك الطلابي.'],
+000452|           ['Ask Finance for current fees, payment deadlines and any approved installment arrangements.','اسأل المالية عن الرسوم الحالية والمواعيد وخيارات التقسيط المعتمدة.'],
+000453|           ['Do not rely on unofficial estimates for account-specific charges.','لا تعتمد على تقديرات غير رسمية لمبلغ الرسوم الخاص بحسابك.']
+000454|         ]}
+000455|       ]
+000456|     },
+000457|     documents:{
+000458|       label:['🩺 Medical excuse & documents','🩺 الطبيات والمستندات'],
+000459|       prompt:['What are you trying to submit?','شنو نوع المستند اللي تبي تقدمه؟'],
+000460|       choices:[
+000461|         {id:'medical',label:['Where do I submit a medical excuse?','وين أقدم الطبية؟'],target:'advising',steps:[
+000462|           ['Keep the original medical document and relevant dates.','احتفظ بالتقرير الطبي والتواريخ الصحيحة.'],
+000463|           ['Ask Academic Advising about the official submission channel and applicable deadline.','اسأل Advising عن جهة التقديم الرسمية والمهلة المطلوبة.'],
+000464|           ['Submission does not automatically mean the excuse is approved; confirm the outcome with KTECH.','تقديم الطبية مو معناته موافقة تلقائية. تأكد من حالة الطلب مع الكلية.']
+000465|         ]}
+000466|       ]
+000467|     },
+000468|     classrooms:{
+000469|       label:['🗺️ Find a classroom','🗺️ وين قاعتي؟'],
+000470|       prompt:['Do you need to locate a room?','تبي تحدد موقع قاعة؟'],
+000471|       choices:[
+000472|         {id:'find',label:['Show me the KTECH campus map','ورّني خريطة الكلية'],target:'map',steps:[

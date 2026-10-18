@@ -1,0 +1,125 @@
+000001| 
+000002| (function(){
+000003|  'use strict';
+000004|  const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
+000005|  const en=(english,arabic)=>document.documentElement.lang==='ar'?arabic:english;
+000006|  const mapLanguage={
+000007|   en:{navMap:'KTECH Map',navMapBio:'Explore rooms and campus maps.',eyebrow:'KTECH ORBIT · INDOOR WAYFINDING',title:'🗺️ KTECH Campus Map',subtitle:'Find classrooms and services, with routes that follow the corridors.',chip:'INTERACTIVE 2D MAP',starting:'Starting location',destination:'Destination',accessible:'♿ Accessible route — use wheelchair-accessible elevators, not stairs',directions:'Get Directions',mapKey:'Map Key',tap:'Tap a room or its yellow door dot',mapOnly:'Map view only',chooseTwo:'Choose two locations; the yellow dots indicate classroom doors.',warning:'Map-based route preview, not live GPS. Yellow dots represent classroom doors; confirm precise doorway positions and accessibility onsite.',route:'Route',clearRoute:'Clear route',previous:'← Previous',next:'Next step →',finished:'Finished',find:'Find Location',change:'Change Floor',locationList:'Location List',mapInfo:'Map Info',roomList:'Room list',info:'This is a manually selected starting-point route preview, not real-time GPS tracking. The yellow dots represent classroom doors. Routes follow white corridors to these entrances; confirm exact entrances and accessibility onsite.',it:'IT Department',finance:'Finance Department',library:'Library',floorLibrary:'Library (Floor 2)',campusDirections:'♿ Campus directions / Accessible elevators',fromPlaceholder:'Select starting location…',toPlaceholder:'Select destination…',labSuffix:' (lab)',floorGround:'Ground Floor',floorOne:'Floor 1',floorTwo:'Floor 2',floorCampus:'Campus',labs:'Labs (CLxxx)',classrooms:'Classrooms (Cxxx)',women:'Women’s bathroom',men:'Men’s bathroom',doors:'Classroom doors (yellow dots)',stairs:'Stairs',elevator:'Elevator',accessibleElevator:'Accessible elevator',offices:'Faculty offices',services:'IT / Finance departments',campusMap:'Campus map view',select:'Select',door:'Door',sectionMap:'Interactive map with selectable rooms',roomsDirections:'Room selection and directions',zoomIn:'Zoom in',zoomOut:'Zoom out',swap:'Swap start and destination',chooseFloor:'Choose a floor',mapTools:'Map tools',chooseStart:'Choose your starting location',chooseEnd:'Choose your destination',mapAlt:'KTECH {floor} floor map',selectionStart:'Starting at {room}. Select a destination.',selectionBoth:'Selected {from} → {to}. Tap Get Directions.',selectionTo:'Destination: {room}. Choose your starting location and tap Get Directions.',chooseToDraw:'Choose Get Directions to draw a corridor route.',chooseBoth:'Choose a starting location and destination first.',alreadyHere:'You are already at that location.',routeFail:'A safe corridor route could not be calculated from the mapped locations. Check the destination or ask campus staff.',routeCleared:'Route cleared. Choose another starting point and destination.',accessibleSelected:'Accessible mode selected. Choose a starting room and destination.',statusRoute:'{from} → {to} · {floor} · Yellow line follows the corridors and finishes at the destination door.',stepProgress:'Step {n} of {total}',sameFloorFirst:'On {floor}, follow the highlighted route from {from} toward the entrance for {to}.',sameFloorLast:'Stop at the marked entrance for {to}; check the room sign.',multiFirst:'On {floor}, follow the highlighted corridor to the {portal} {device}.',multiChange:'Take the {device} {move} to {floor}. The map is showing this floor for the next route step.',multiLast:'Continue along the white corridor and stop at the marked entrance for {to}.',up:'up',down:'down',accessibleDevice:'wheelchair-accessible elevator',stairsDevice:'stairs',descriptorAccessible:'♿ Accessible route via the {portal} elevator.',descriptorElevator:'🚶 Elevator route via the {portal} elevator.',descriptorStairs:'🚶 Stair route via the {portal} staircase.',descriptorSame:'Same-floor route, following hallway centre-lines.',northwest:'northwest',northeast:'northeast',southwest:'southwest',southeast:'southeast',middleLeft:'middle-left',middleRight:'middle-right',bathmen:'Men’s bathroom',bathwomen:'Women’s bathroom',nearC210:'Men’s bathroom (near C210)',nearC262:'Women’s bathroom (near C262)',nameLab:'Lab',unknown:'Location'},
+000008|   ar:{navMap:'خريطة KTECH',navMapBio:'استكشف قاعات الكلية ومرافقها وخريطة الحرم.',eyebrow:'KTECH ORBIT · الإرشاد داخل الكلية',title:'🗺️ خريطة كلية KTECH',subtitle:'اعرف أماكن القاعات والمرافق، وتابع مسارات المشي داخل الممرات.',chip:'خريطة تفاعلية ثنائية الأبعاد',starting:'موقع البداية',destination:'الوجهة',accessible:'♿ مسار مناسب لذوي الإعاقة — استخدم المصاعد المخصصة للكراسي المتحركة بدلاً من الدرج',directions:'عرض الاتجاهات',mapKey:'دليل الخريطة',tap:'اضغط على القاعة أو نقطة بابها الصفراء',mapOnly:'عرض الخريطة فقط',chooseTwo:'اختر موقع البداية والوجهة؛ النقاط الصفراء توضح أبواب القاعات.',warning:'المسار المعروض إرشادي وليس تتبع GPS مباشر. النقاط الصفراء تشير إلى أبواب القاعات؛ تأكد من مواقع الأبواب وإمكانية الوصول داخل الكلية.',route:'المسار',clearRoute:'مسح المسار',previous:'السابق →',next:'← الخطوة التالية',finished:'انتهى',find:'ابحث عن موقع',change:'تغيير الطابق',locationList:'قائمة المواقع',mapInfo:'معلومات الخريطة',roomList:'قائمة القاعات',info:'الخريطة تعرض مساراً إرشادياً يحدد المستخدم نقطة بدايته، وليست نظام GPS مباشراً. تشير النقاط الصفراء إلى أبواب القاعات، وتتبع المسارات الممرات البيضاء. تأكد من المداخل وإمكانية الوصول داخل الكلية.',it:'قسم تقنية المعلومات',finance:'القسم المالي',library:'المكتبة',floorLibrary:'المكتبة (الطابق الثاني)',campusDirections:'♿ الاتجاهات داخل الكلية / المصاعد المهيأة',fromPlaceholder:'اختر موقع البداية…',toPlaceholder:'اختر الوجهة…',labSuffix:' (مختبر)',floorGround:'الطابق الأرضي',floorOne:'الطابق الأول',floorTwo:'الطابق الثاني',floorCampus:'الحرم الجامعي',labs:'المختبرات (CLxxx)',classrooms:'القاعات الدراسية (Cxxx)',women:'حمام النساء',men:'حمام الرجال',doors:'أبواب القاعات (النقاط الصفراء)',stairs:'الدرج',elevator:'المصعد',accessibleElevator:'مصعد مهيأ لذوي الإعاقة',offices:'مكاتب الدكاترة',services:'قسما تقنية المعلومات والمالية',campusMap:'عرض خريطة الحرم',select:'اختر',door:'باب',sectionMap:'خريطة تفاعلية لاختيار القاعات',roomsDirections:'اختيار القاعات والاتجاهات',zoomIn:'تكبير',zoomOut:'تصغير',swap:'تبديل البداية والوجهة',chooseFloor:'اختر الطابق',mapTools:'أدوات الخريطة',chooseStart:'اختر موقع البداية',chooseEnd:'اختر الوجهة',mapAlt:'خريطة KTECH - {floor}',selectionStart:'نقطة البداية: {room}. اختر الوجهة.',selectionBoth:'تم اختيار {from} ← {to}. اضغط عرض الاتجاهات.',selectionTo:'الوجهة: {room}. اختر موقع البداية واضغط عرض الاتجاهات.',chooseToDraw:'اضغط عرض الاتجاهات لإظهار المسار داخل الممرات.',chooseBoth:'اختر موقع البداية والوجهة أولاً.',alreadyHere:'أنت موجود بالفعل في هذا الموقع.',routeFail:'تعذر حساب مسار آمن عبر الممرات المتاحة على الخريطة. تأكد من الوجهة أو اسأل موظفي الكلية.',routeCleared:'تم مسح المسار. اختر نقطة بداية ووجهة جديدتين.',accessibleSelected:'تم تفعيل المسار المهيأ. اختر قاعة البداية والوجهة.',statusRoute:'{from} ← {to} · {floor} · الخط الأصفر يمر بالممرات وينتهي عند باب الوجهة.',stepProgress:'الخطوة {n} من {total}',sameFloorFirst:'في {floor}، اتبع الخط الأصفر داخل الممر الأبيض من {from} باتجاه مدخل {to}.',sameFloorLast:'توقف عند الباب المحدد لـ {to}، وتأكد من لوحة القاعة.',multiFirst:'في {floor}، اتبع المسار المميز عبر الممر إلى {device} في الجهة {portal}.',multiChange:'استخدم {device} واذهب {move} إلى {floor}. ستظهر خريطة هذا الطابق.',multiLast:'تابع عبر الممر الأبيض وتوقف عند المدخل المحدد لـ {to}.',up:'صعوداً',down:'نزولاً',accessibleDevice:'المصعد المهيأ للكراسي المتحركة',stairsDevice:'الدرج',descriptorAccessible:'♿ مسار مهيأ يمر عبر المصعد في الجهة {portal}.',descriptorElevator:'🚶 المسار عبر المصعد في الجهة {portal}.',descriptorStairs:'🚶 المسار عبر الدرج في الجهة {portal}.',descriptorSame:'المسار في الطابق نفسه ويتبع الممرات.',northwest:'الشمالية الغربية',northeast:'الشمالية الشرقية',southwest:'الجنوبية الغربية',southeast:'الجنوبية الشرقية',middleLeft:'الوسطى اليسرى',middleRight:'الوسطى اليمنى',bathmen:'حمام الرجال',bathwomen:'حمام النساء',nearC210:'حمام الرجال (قرب C210)',nearC262:'حمام النساء (قرب C262)',nameLab:'مختبر',unknown:'موقع'}
+000009|  };
+000010|  const ar=()=>document.documentElement.lang==='ar';
+000011|  const mt=(key,fields={})=>{let s=(mapLanguage[ar()?'ar':'en'][key]||mapLanguage.en[key]||key);return s.replace(/\{([A-Za-z]+)\}/g,(_,k)=>fields[k]??'');};
+000012|  const floorLabel=(f)=>mt(({one:'floorOne',two:'floorTwo',ground:'floorGround',campus:'floorCampus'})[f]||'floorOne');
+000013|  const placeLabel=(id)=>({"IT Department":mt('it'),"Finance Department":mt('finance'),"Library":mt('library'),"Men's Bathroom":mt('men'),"Women's Bathroom":mt('women'),"Men's Bathroom (Floor 2)":mt('men')+' · '+floorLabel('two'),"Women's Bathroom (Floor 2)":mt('women')+' · '+floorLabel('two'),"Men's Bathroom (near C210)":mt('nearC210'),"Women's Bathroom (near C262)":mt('nearC262')})[id]||id;
+000014|  const portalLabel=(name)=>mt(({northwest:'northwest',northeast:'northeast',southwest:'southwest',southeast:'southeast','middle-left':'middleLeft','middle-right':'middleRight'})[name]||'northwest');
+000015|  let statusState={key:'chooseTwo',fields:{}};
+000016|  function statusText(key,fields={}){statusState={key,fields};refs.status.textContent=mt(key,fields);}
+000017|  function updateMapLanguage(){
+000018|    const map=$('mapView');
+000019|    const text=(selector,value)=>{const node=map.querySelector(selector)||document.querySelector(selector);if(node)node.textContent=value;};
+000020|    const aria=(selector,value)=>{const node=map.querySelector(selector)||document.querySelector(selector);if(node)node.setAttribute('aria-label',value);};
+000021|    text('#navMap',mt('navMap'));text('#navMapBio',mt('navMapBio'));
+000022|    text('.orbit-map-eyebrow',mt('eyebrow'));text('#orbitMapTitle',mt('title'));text('.orbit-map-subtitle',mt('subtitle'));text('.orbit-map-v2-chip',mt('chip'));
+000023|    for(const [f,k] of Object.entries({ground:'floorGround',one:'floorOne',two:'floorTwo',campus:'floorCampus'})){const b=map.querySelector(`.orbit-floor-btn[data-floor="${f}"]`);if(b)b.textContent=mt(k);}
+000024|    const labels=map.querySelectorAll('.orbit-nav-v2-location label');if(labels[0]){const dot=labels[0].querySelector('span');labels[0].textContent='';if(dot)labels[0].append(dot);labels[0].append(' '+mt('starting'));}if(labels[1]){const dot=labels[1].querySelector('span');labels[1].textContent='';if(dot)labels[1].append(dot);labels[1].append(' '+mt('destination'));}
+000025|    text('.orbit-access-toggle span',mt('accessible'));text('#orbitFindRoute',mt('directions')+' →');
+000026|    text('.orbit-map-v2-key summary',mt('mapKey'));text('.orbit-map-v2-caution',mt('warning'));text('#orbitStopNavigation',mt('clearRoute'));
+000027|    text('#orbitStepBack',mt('previous'));text('#orbitActionDirections span',mt('directions'));text('#orbitActionFind span',mt('find'));text('#orbitActionFloor span',mt('change'));text('#orbitActionList span',mt('locationList'));text('#orbitActionInfo span',mt('mapInfo'));
+000028|    text('#orbitMapInfoPanel',mt('info'));text('#orbitShowRooms',mt('roomList'));
+000029|    map.querySelectorAll('[data-locate]').forEach(b=>{const id=b.dataset.locate.split('|')[1];b.textContent=id==='Library'?mt('floorLibrary'):placeLabel(id);});
+000030|    aria('.orbit-floors-v2',mt('chooseFloor'));aria('#orbitNavFrom',mt('chooseStart'));aria('#orbitNavTo',mt('chooseEnd'));aria('#orbitSwapRoute',mt('swap'));aria('#orbitMapStage',mt('sectionMap'));aria('#orbitFloorOverlay',mt('roomsDirections'));aria('#orbitZoomIn',mt('zoomIn'));aria('#orbitZoomOut',mt('zoomOut'));aria('.orbit-map-v2-key',mt('mapKey'));aria('.orbit-map-v2-actionbar',mt('mapTools'));
+000031|    map.setAttribute('lang',ar()?'ar':'en');
+000032|    // Preserve route selections (English IDs) while re-rendering their readable labels.
+000033|    fillOptions();
+000034|    showFloor(state.floor,false);
+000035|    if(state.route){renderSteps();draw();}
+000036|    else {refs.status.textContent=mt(statusState.key,statusState.fields);}
+000037|    if(!$('orbitRoomList').hidden)fillRoomList();
+000038|    if(guideQuick)guideQuick.textContent=mt('campusDirections');
+000039|  }
+000040|  const refs={map:$('orbitFloorImage'),canvas:$('orbitMapCanvas'),stage:$('orbitMapStage'),svg:$('orbitFloorOverlay'),overlay:$('orbitRoomLayer'),lines:$('orbitRouteGraphics'),key:$('orbitMapKeyRows'),status:$('orbitMapSelection'),from:$('orbitNavFrom'),to:$('orbitNavTo'),accessible:$('orbitAccessible'),sheet:$('orbitDirectionsSheet')};
+000041|  const assets={"one":"assets/image-02-cec9e531c7.jpg","two":"assets/image-03-b5325f6e63.jpg","ground":"assets/image-04-4fc850b02d.jpg","campus":"assets/image-05-e66e7e3cbe.jpg"};
+000042|  const assetsAR={one:'assets/image-06-9e72d028ee.jpg',two:'assets/image-07-cecfcf44eb.jpg'};
+000043|  const floors={
+000044|   one:{key:'one',label:'Floor 1',image:assets.one,crop:[64,124,1120,747],width:1056,height:623},
+000045|   two:{key:'two',label:'Floor 2',image:assets.two,crop:[38,201,1041,900],width:1003,height:699},
+000046|   ground:{key:'ground',label:'Ground Floor',image:'assets/image-08-995faac9a8.jpg',crop:[0,0,1619,972],width:1619,height:972},
+000047|   campus:{key:'campus',label:'Campus',image:assets.campus,crop:[0,0,1536,864],width:1536,height:864}
+000048|  };
+000049|  // All positions are measured against the supplied floor-map reference images.
+000050|  // Corridor routes now start and finish at visible yellow classroom door targets.
+000051|  // This physical door layer is separate from corridor centre-lines: short entry spurs
+000052|  // connect the corridor to the door without ever crossing room interiors.
+000053|  const rooms=[];
+000054|  function room(f,id,kind,x1,y1,x2,y2,dx,dy){
+000055|   // dx,dy is a confirmed traversable corridor node (approach).
+000056|   // The yellow marker is placed just OUTSIDE the facing room boundary.
+000057|   // The point can be tuned from site-marked door dots without moving the room.
+000058|   let door=[dx,dy];
+000059|   if(kind==='class'||kind==='lab'){
+000060|     const gap=5;
+000061|     if(dy<y1)door=[Math.max(x1+3,Math.min(dx,x2-3)),y1-gap];
+000062|     else if(dy>y2)door=[Math.max(x1+3,Math.min(dx,x2-3)),y2+gap];
+000063|     else if(dx<x1)door=[x1-gap,Math.max(y1+3,Math.min(dy,y2-3))];
+000064|     else if(dx>x2)door=[x2+gap,Math.max(y1+3,Math.min(dy,y2-3))];
+000065|   }
+000066|   rooms.push({floor:f,id,kind,rect:[x1,y1,x2,y2],approach:[dx,dy],door});
+000067|  }
+000068|  function row(f,kind,ids,bounds,y1,y2,lane){ids.forEach((id,i)=>{const a=bounds[i],b=bounds[i+1];room(f,id,kind,a,y1,b,y2,(a+b)/2,lane);});}
+000069|  row('one','lab',['CL221','CL223','CL225','CL227'],[212,281,352,422,489],150,209,232);
+000070|  row('one','lab',['CL280','CL272','CL270','CL269','CL267'],[515,703,798,868,939,1007],150,209,232);
+000071|  room('one','C219','class',80,131,191,176,174,232);
+000072|  row('one','lab',['CL220'],[200,315],255,315,328);
+000073|  row('one','class',['C222'],[317,428],256,315,328);
+000074|  row('one','class',['C211','C212','C213'],[200,291,383,469],335,395,328);
+000075|  row('one','class',['C268'],[788,873],256,316,328);
+000076|  row('one','lab',['CL266'],[875,1007],256,316,328);
+000077|  row('one','class',['C265'],[747,825],336,395,328);
+000078|  row('one','lab',['CL264','CL263'],[825,917,1006],336,395,328);
+000079|  room('one','C210','class',77,355,155,419,174,385);
+000080|  room('one','C262','class',1028,355,1105,418,1018,385);
+000081|  row('one','class',['C207','C205','C203'],[200,272,343,411],518,580,592);
+000082|  row('one','class',['C255','C257','C259'],[802,873,937,1007],518,580,592);
+000083|  row('one','class',['C208','C206','C204','C202'],[157,235,314,393,471],608,674,592);
+000084|  row('one','class',['C254','C256','C258','C260'],[745,817,887,956,1028],607,675,592);
+000085|  room('one','IT Department','service',690,676,738,730,688,635);
+000086|  room('one','Finance Department','service',620,676,682,730,657,635);
+000087|  // FLOOR 2 HIT-BOX FIX: exact color-block extents, measured from user's reference image.
+000088|  // Slight inset from the black stroke prevents a tap-target from spilling onto a neighboring room.
+000089|  room('two','C386','class',755,287,838,349,823,358);
+000090|  room('two','C385','class',855,287,940,349,924,358);
+000091|  room('two','CL378','lab',745,388,810,458,757,358);
+000092|  room('two','CL379','lab',814,388,873,458,865,358);
+000093|  room('two','CL380','lab',876,388,945,458,939,358);
+000094|  room('two','C325','class',305,421,386,457,372,459);
+000095|  room('two','C321','class',165,488,234,553,199,459);
+000096|  room('two','C322','class',237,488,305,553,267,459);
+000097|  room('two','C323','class',308,488,375,553,338,459);
+000098|  room('two','C329','class',378,488,442,553,402,459);
+000099|  room('two','C374','class',702,488,763,553,724,459);
+000100|  room('two','C373','class',766,488,826,553,798,459);
+000101|  room('two','C372','class',829,488,885,553,857,459);
+000102|  room('two','C371','class',888,488,946,553,919,459);
+000103|  room('two','C320','class',60,488,126,552,140,506);
+000104|  room('two','C370','class',979,510,1040,574,962,562);
+000105|  room('two','Library','library',478,332,638,495,557,551);
+000106|  // Location doors for restroom/service shortcuts (not classroom guesses).
+000107|  room('one',"Men's Bathroom",'bathmen',429,249,469,318,488,293);
+000108|  room('one',"Women's Bathroom",'bathwomen',745,247,789,317,724,290);
+000109|  room('two',"Men's Bathroom (Floor 2)",'bathmen',390,388,441,457,446,414);
+000110|  room('two',"Women's Bathroom (Floor 2)",'bathwomen',701,388,741,458,695,413);
+000111|  room('one',"Men's Bathroom (near C210)",'bathmen',116,287,153,346,174,328);
+000112|  room('one',"Women's Bathroom (near C262)",'bathwomen',1028,284,1068,349,1018,328);
+000113|  function tuneRoom(floor,id,patch){const r=rooms.find(r=>r.floor===floor&&r.id===id);if(r)Object.assign(r,patch);}
+000114|  // Door dots adjusted to match the user-marked classroom doors on the reference images.
+000115|  tuneRoom('one','CL220',{approach:[257,232],door:[256,250]});
+000116|  tuneRoom('one','C222',{approach:[372,232],door:[366,250]});
+000117|  tuneRoom('one','C213',{approach:[488,365],door:[474,366]});
+000118|  tuneRoom('one','C268',{approach:[830,232],door:[805,251]});
+000119|  tuneRoom('one','CL266',{approach:[941,232],door:[913,251]});
+000120|  tuneRoom('one','C265',{approach:[724,328],door:[742,365]});
+000121|  // Verified door-dot placement from orange wall markers in the user-provided Floor 2 reference.
+000122|  tuneRoom('two','C386',{approach:[823, 358],door:[823, 351]});
+000123|  tuneRoom('two','C385',{approach:[924, 358],door:[924, 351]});
+000124|  tuneRoom('two','CL378',{approach:[757, 358],door:[757, 388]});
+000125|  tuneRoom('two','CL379',{approach:[865, 358],door:[865, 388]});

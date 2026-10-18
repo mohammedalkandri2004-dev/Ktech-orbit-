@@ -1,0 +1,369 @@
+000525|         .orbit-ai-disclaimer { color: var(--olive-medium); font-weight: 650; font-size: .88rem; margin-bottom: 12px; }
+000526|         .orbit-chat-log {
+000527|             height: 300px; overflow-y: auto; background: #fff; border: 2px solid var(--olive-dark);
+000528|             border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;
+000529|         }
+000530|         .orbit-chat-message { max-width: 86%; padding: 10px 12px; border-radius: 12px; line-height: 1.45; white-space: pre-wrap; word-break: break-word; }
+000531|         .orbit-chat-message.user { align-self: flex-end; background: var(--yellow-main); color: var(--text-dark); border: 2px solid var(--olive-dark); }
+000532|         .orbit-chat-message.bot { align-self: flex-start; background: #fff; color: var(--text-dark); border: 2px solid var(--olive-dark); }
+000533|         .orbit-chat-message.system { align-self: center; max-width: 100%; background: #fff8d7; color: var(--olive-dark); border: 1px dashed var(--olive-dark); font-size: .84rem; }
+000534|         .orbit-chat-row { display: flex; gap: 10px; margin-top: 10px; }
+000535|         .orbit-chat-row input { flex: 1; min-width: 0; padding: 12px 14px; border: 2px solid var(--olive-dark); border-radius: 8px; font-size: .95rem; outline: none; }
+000536|         .orbit-chat-row input:focus { border-color: var(--yellow-main); box-shadow: 0 0 0 3px rgba(245,203,14,.35); }
+000537|         .orbit-chat-meta { margin-top: 7px; display: flex; justify-content: space-between; gap: 10px; color: var(--olive-medium); font-size: .76rem; font-weight: 700; }
+000538|         .orbit-chat-send:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+000539|         html[dir="rtl"] .orbit-ai-section { text-align: right; }
+000540|         html[dir="rtl"] .orbit-chat-message.user { align-self: flex-start; }
+000541|         html[dir="rtl"] .orbit-chat-message.bot { align-self: flex-end; }
+000542|         @media (max-width: 600px) {
+000543|             .orbit-chat-row { flex-direction: column; }
+000544|             .orbit-chat-row button { width: 100%; }
+000545|             .orbit-chat-log { height: 340px; }
+000546|             .orbit-chat-message { max-width: 94%; }
+000547|         }
+000548| 
+000549| 
+000550|         /* Orbit app dashboard / tab interface */
+000551|         .orbit-nav {
+000552|             display: grid;
+000553|             grid-template-columns: repeat(5, minmax(0, 1fr));
+000554|             gap: 10px;
+000555|             margin: 0 0 22px;
+000556|             position: sticky;
+000557|             top: 8px;
+000558|             z-index: 80;
+000559|             padding: 9px;
+000560|             border: 2px solid var(--olive-dark);
+000561|             border-radius: 14px;
+000562|             background: rgba(250,244,219,.96);
+000563|             backdrop-filter: blur(12px);
+000564|             -webkit-backdrop-filter: blur(12px);
+000565|             box-shadow: 0 5px 16px rgba(0,0,0,.12);
+000566|         }
+000567|         .orbit-tab-btn {
+000568|             padding: 11px 8px;
+000569|             border: 2px solid transparent;
+000570|             border-radius: 10px;
+000571|             background: transparent;
+000572|             color: var(--olive-dark);
+000573|             box-shadow: none;
+000574|             text-transform: none;
+000575|             letter-spacing: .2px;
+000576|             font-size: .84rem;
+000577|             min-width: 0;
+000578|         }
+000579|         .orbit-tab-btn:hover, .orbit-tab-btn.active {
+000580|             background: var(--olive-dark);
+000581|             color: var(--yellow-main);
+000582|             transform: none;
+000583|         }
+000584|         .orbit-tab-btn .tab-icon { display:block; font-size:1.2rem; margin-bottom:3px; }
+000585|         .orbit-view { display:none; animation: orbitFade .22s ease; }
+000586|         .orbit-view.active { display:block; }
+000587|         @keyframes orbitFade { from { opacity:.25; transform:translateY(4px); } to { opacity:1; transform:none; } }
+000588| 
+000589|         .orbit-home-hero {
+000590|             padding: 28px;
+000591|             border: 3px solid var(--olive-dark);
+000592|             border-radius: 18px;
+000593|             background: linear-gradient(135deg, var(--yellow-light), #fff 60%);
+000594|             margin-bottom: 18px;
+000595|         }
+000596|         .orbit-home-hero h2 { font-size: clamp(1.55rem, 4vw, 2.35rem); color:var(--olive-dark); margin-bottom:8px; }
+000597|         .orbit-home-hero p { color:var(--olive-medium); font-weight:700; line-height:1.55; max-width:760px; }
+000598|         .orbit-feature-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+000599|         .orbit-feature-card {
+000600|             text-align:left;
+000601|             padding:20px;
+000602|             border:3px solid var(--olive-dark);
+000603|             border-radius:16px;
+000604|             background:#fff;
+000605|             color:var(--text-dark);
+000606|             box-shadow:0 5px 0 rgba(58,59,26,.18);
+000607|             cursor:pointer;
+000608|             transition:.18s ease;
+000609|         }
+000610|         .orbit-feature-card:hover { transform:translateY(-3px); box-shadow:0 8px 0 rgba(58,59,26,.18); }
+000611|         .orbit-feature-card .feature-icon { font-size:2rem; display:block; margin-bottom:8px; }
+000612|         .orbit-feature-card h3 { color:var(--olive-dark); margin-bottom:5px; font-size:1.08rem; }
+000613|         .orbit-feature-card p { color:var(--olive-medium); font-size:.88rem; font-weight:650; line-height:1.45; }
+000614| 
+000615|         /* Floating chat: available from every tab */
+000616|         .orbit-chat-fab {
+000617|             position:fixed;
+000618|             right:22px;
+000619|             bottom:22px;
+000620|             z-index:900;
+000621|             width:62px;
+000622|             height:62px;
+000623|             border-radius:50%;
+000624|             padding:0;
+000625|             display:flex;
+000626|             align-items:center;
+000627|             justify-content:center;
+000628|             font-size:1.55rem;
+000629|             background:var(--olive-dark);
+000630|             color:var(--yellow-main);
+000631|             border:3px solid var(--yellow-main);
+000632|             box-shadow:0 8px 24px rgba(0,0,0,.3);
+000633|         }
+000634|         .orbit-chat-fab:hover { transform:scale(1.06); }
+000635|         .orbit-chat-drawer {
+000636|             position:fixed;
+000637|             right:18px;
+000638|             bottom:94px;
+000639|             width:min(430px, calc(100vw - 24px));
+000640|             max-height:min(700px, calc(100vh - 120px));
+000641|             z-index:899;
+000642|             display:none;
+000643|             overflow:auto;
+000644|             background:#fff;
+000645|             border:3px solid var(--olive-dark);
+000646|             border-radius:18px;
+000647|             box-shadow:0 16px 45px rgba(0,0,0,.32);
+000648|             padding:14px;
+000649|         }
+000650|         .orbit-chat-drawer.open { display:block; animation:orbitFade .18s ease; }
+000651|         .orbit-chat-drawer-head { display:flex; justify-content:flex-end; margin-bottom:4px; }
+000652|         .orbit-chat-drawer .orbit-ai-section { margin:0; border:0; padding:8px; background:transparent; }
+000653|         .orbit-chat-close { padding:4px 9px; border:0; background:transparent; font-size:1.5rem; color:var(--olive-dark); }
+000654|         html[dir="rtl"] .orbit-feature-card { text-align:right; }
+000655|         html[dir="rtl"] .orbit-chat-fab { right:auto; left:22px; }
+000656|         html[dir="rtl"] .orbit-chat-drawer { right:auto; left:18px; }
+000657| 
+000658|         @media (max-width: 768px) {
+000659|             .orbit-nav { grid-template-columns:repeat(5, minmax(68px,1fr)); overflow-x:auto; position:sticky; top:4px; }
+000660|             .orbit-tab-btn { font-size:.72rem; padding:9px 5px; }
+000661|             .orbit-feature-grid { grid-template-columns:1fr; }
+000662|             .orbit-home-hero { padding:20px; }
+000663|         }
+000664|         @media (max-width: 520px) {
+000665|             body { padding-bottom:90px; }
+000666|             .orbit-nav { margin-left:-5px; margin-right:-5px; }
+000667|             .orbit-chat-fab { right:14px; bottom:14px; width:58px; height:58px; }
+000668|             html[dir="rtl"] .orbit-chat-fab { right:auto; left:14px; }
+000669|             .orbit-chat-drawer { right:12px; bottom:82px; width:calc(100vw - 24px); max-height:calc(100vh - 100px); }
+000670|             html[dir="rtl"] .orbit-chat-drawer { right:auto; left:12px; }
+000671|         }
+000672| 
+000673|     
+000674|         /* Legacy two-tab layout rules (overridden by KTECH Orbit 1.07 below) */
+000675|         .orbit-nav { grid-template-columns:repeat(2,minmax(0,1fr)) !important; max-width:560px; margin:0 auto 22px !important; }
+000676|         .orbit-tab-btn { font-size:.92rem; }
+000677|         .orbit-chat-fab, .orbit-chat-close { display:none !important; }
+000678|         .orbit-chat-drawer, .orbit-chat-drawer.open {
+000679|             display:block !important; position:fixed; right:18px; bottom:18px;
+000680|             width:min(390px,calc(100vw - 36px)); max-height:min(620px,calc(100vh - 36px));
+000681|             z-index:899; overflow:auto; background:#fff; border:3px solid var(--olive-dark);
+000682|             border-radius:18px; box-shadow:0 16px 45px rgba(0,0,0,.32); padding:14px;
+000683|         }
+000684|         html[dir="rtl"] .orbit-chat-drawer, html[dir="rtl"] .orbit-chat-drawer.open { right:auto; left:18px; }
+000685|         @media (min-width:1100px) {
+000686|             body { padding-right:430px; }
+000687|             html[dir="rtl"] body { padding-right:20px; padding-left:430px; }
+000688|         }
+000689|         @media (max-width:768px) {
+000690|             .orbit-nav { grid-template-columns:repeat(2,minmax(120px,1fr)) !important; overflow:visible !important; }
+000691|             .orbit-chat-drawer, .orbit-chat-drawer.open { right:10px; left:10px; bottom:10px; width:auto; max-height:46vh; }
+000692|             html[dir="rtl"] .orbit-chat-drawer, html[dir="rtl"] .orbit-chat-drawer.open { right:10px; left:10px; }
+000693|             body { padding-bottom:48vh !important; }
+000694|         }
+000695| 
+000696|     
+000697|         /* KTECH Orbit 1.07 — simple floating chat bubble */
+000698|         .orbit-chat-fab {
+000699|             display:flex !important;
+000700|             position:fixed;
+000701|             right:18px;
+000702|             bottom:18px;
+000703|             z-index:901;
+000704|             width:58px;
+000705|             height:58px;
+000706|             border-radius:50%;
+000707|             padding:0;
+000708|             align-items:center;
+000709|             justify-content:center;
+000710|             font-size:1.45rem;
+000711|             background:var(--olive-dark);
+000712|             color:var(--yellow-main);
+000713|             border:3px solid var(--yellow-main);
+000714|             box-shadow:0 8px 24px rgba(0,0,0,.28);
+000715|             cursor:pointer;
+000716|         }
+000717|         .orbit-chat-close { display:block !important; }
+000718|         .orbit-chat-drawer {
+000719|             display:none !important;
+000720|             position:fixed;
+000721|             right:18px;
+000722|             bottom:88px;
+000723|             width:min(390px,calc(100vw - 36px));
+000724|             max-height:min(620px,calc(100vh - 120px));
+000725|             z-index:900;
+000726|             overflow:auto;
+000727|             background:#fff;
+000728|             border:3px solid var(--olive-dark);
+000729|             border-radius:18px;
+000730|             box-shadow:0 16px 45px rgba(0,0,0,.32);
+000731|             padding:14px;
+000732|         }
+000733|         .orbit-chat-drawer.open { display:block !important; }
+000734|         html[dir="rtl"] .orbit-chat-fab { right:auto; left:18px; }
+000735|         html[dir="rtl"] .orbit-chat-drawer { right:auto; left:18px; }
+000736|         @media (min-width:1100px) {
+000737|             body, html[dir="rtl"] body { padding-right:20px !important; padding-left:20px !important; }
+000738|         }
+000739|         @media (max-width:768px) {
+000740|             body { padding-bottom:90px !important; }
+000741|             .orbit-chat-fab { right:12px; bottom:12px; width:56px; height:56px; }
+000742|             html[dir="rtl"] .orbit-chat-fab { right:auto; left:12px; }
+000743|             .orbit-chat-drawer {
+000744|                 right:10px;
+000745|                 left:10px;
+000746|                 bottom:78px;
+000747|                 width:auto;
+000748|                 max-height:70vh;
+000749|             }
+000750|             html[dir="rtl"] .orbit-chat-drawer { right:10px; left:10px; }
+000751|         }
+000752| 
+000753|     
+000754|         /* Contact / feedback shown under the main KTECH Orbit title on every tab */
+000755|         .header-contact-strip {
+000756|             display:flex;
+000757|             align-items:center;
+000758|             gap:8px 12px;
+000759|             flex-wrap:wrap;
+000760|             margin-top:8px;
+000761|             font-size:.82rem;
+000762|             font-weight:700;
+000763|             color:var(--olive-medium);
+000764|         }
+000765|         .header-contact-email {
+000766|             color:var(--olive-dark);
+000767|             text-decoration:none;
+000768|             font-weight:900;
+000769|             background:var(--yellow-light);
+000770|             border:1.5px solid var(--olive-dark);
+000771|             border-radius:999px;
+000772|             padding:5px 10px;
+000773|             transition:.18s ease;
+000774|         }
+000775|         .header-contact-email:hover {
+000776|             background:var(--olive-dark);
+000777|             color:var(--yellow-main);
+000778|         }
+000779|         html[dir="rtl"] .header-contact-strip { justify-content:flex-start; }
+000780|         @media (max-width:600px) {
+000781|             .header-contact-strip {
+000782|                 font-size:.78rem;
+000783|                 gap:6px;
+000784|             }
+000785|             .header-contact-email {
+000786|                 padding:5px 9px;
+000787|                 max-width:100%;
+000788|                 overflow-wrap:anywhere;
+000789|             }
+000790|         }
+000791| 
+000792|         /* KTECH Orbit 1.07 — section cards matched to the reference image */
+000793|         .orbit-nav {
+000794|             display:grid !important;
+000795|             grid-template-columns:1fr !important;
+000796|             gap:18px !important;
+000797|             max-width:none !important;
+000798|             margin:0 0 26px !important;
+000799|             padding:0 !important;
+000800|             position:static !important;
+000801|             overflow:visible !important;
+000802|             border:0 !important;
+000803|             background:transparent !important;
+000804|             box-shadow:none !important;
+000805|             backdrop-filter:none !important;
+000806|             -webkit-backdrop-filter:none !important;
+000807|         }
+000808|         .orbit-tab-btn {
+000809|             width:100%;
+000810|             min-height:220px;
+000811|             padding:34px 44px 32px !important;
+000812|             display:flex !important;
+000813|             flex-direction:column !important;
+000814|             align-items:flex-start !important;
+000815|             justify-content:flex-start !important;
+000816|             gap:0 !important;
+000817|             text-align:left !important;
+000818|             border:4px solid var(--olive-dark) !important;
+000819|             border-radius:30px !important;
+000820|             background:#fff !important;
+000821|             color:var(--olive-dark) !important;
+000822|             box-shadow:0 10px 0 rgba(58,59,26,.14) !important;
+000823|             text-transform:none !important;
+000824|             letter-spacing:normal !important;
+000825|             transition:transform .18s ease, box-shadow .18s ease !important;
+000826|         }
+000827|         .orbit-tab-btn:hover {
+000828|             transform:translateY(-2px) !important;
+000829|             box-shadow:0 13px 0 rgba(58,59,26,.17) !important;
+000830|             background:#fff !important;
+000831|         }
+000832|         .orbit-tab-btn.active {
+000833|             background:#fff !important;
+000834|             color:var(--olive-dark) !important;
+000835|         }
+000836|         .orbit-tab-btn .tab-icon {
+000837|             display:block !important;
+000838|             font-size:2.9rem !important;
+000839|             line-height:1 !important;
+000840|             margin:0 0 34px !important;
+000841|         }
+000842|         .orbit-tab-title {
+000843|             display:block;
+000844|             font-size:clamp(1.55rem,3.2vw,2.2rem);
+000845|             line-height:1.08;
+000846|             font-weight:900;
+000847|             letter-spacing:1.7px;
+000848|             text-transform:uppercase;
+000849|             margin-bottom:14px;
+000850|         }
+000851|         .orbit-tab-bio {
+000852|             display:block;
+000853|             max-width:850px;
+000854|             color:var(--olive-medium);
+000855|             font-size:clamp(1rem,2.1vw,1.35rem);
+000856|             line-height:1.5;
+000857|             font-weight:800;
+000858|             letter-spacing:1.15px;
+000859|             text-transform:uppercase;
+000860|         }
+000861|         html[dir="rtl"] .orbit-tab-btn {
+000862|             text-align:right !important;
+000863|             align-items:flex-start !important;
+000864|         }
+000865|         html[dir="rtl"] .orbit-tab-title,
+000866|         html[dir="rtl"] .orbit-tab-bio { text-align:right !important; }
+000867|         @media (max-width:600px) {
+000868|             .orbit-nav { gap:14px !important; }
+000869|             .orbit-tab-btn {
+000870|                 min-height:190px;
+000871|                 padding:26px 24px 24px !important;
+000872|                 border-width:3px !important;
+000873|                 border-radius:24px !important;
+000874|             }
+000875|             .orbit-tab-btn .tab-icon {
+000876|                 font-size:2.45rem !important;
+000877|                 margin-bottom:26px !important;
+000878|             }
+000879|             .orbit-tab-title {
+000880|                 font-size:1.35rem;
+000881|                 letter-spacing:1.1px;
+000882|                 margin-bottom:10px;
+000883|             }
+000884|             .orbit-tab-bio {
+000885|                 font-size:.92rem;
+000886|                 letter-spacing:.65px;
+000887|                 line-height:1.45;
+000888|             }
+000889|         }
+000890| 
+000891|     
+000892|         /* KTECH Orbit 1.07 compact cards — same small footprint as 1.06 */
+000893|         .orbit-feature-grid { gap:10px !important; }

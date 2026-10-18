@@ -1,0 +1,28 @@
+000001| 
+000002| /* Orbit 1.33: mobile-only usability adjustments; desktop design unchanged */
+000003| @media (max-width: 700px) {
+000004|  html { -webkit-text-size-adjust:100%; }
+000005|  body { padding: 6px !important; overflow-x:hidden; }
+000006|  .container { width:100%; max-width:100%; padding:12px !important; border-width:2px; border-radius:14px; }
+000007|  img, video, canvas, svg { max-width:100%; }
+000008|  button, select, input, textarea { font-size:16px; }
+000009|  button, [role="button"] { touch-action:manipulation; }
+000010|  .orbit-nav { gap:7px !important; }
+000011|  .orbit-nav button, .orbit-tab-btn { min-height:44px; padding:9px 7px !important; }
+000012|  .orbit-floor-tabs, .orbit-floors-v2 { gap:6px !important; }
+000013|  .orbit-floor-tabs button, .orbit-floors-v2 button { min-height:44px; }
+000014|  .orbit-nav-v2-layout { min-width:0; }
+000015|  .orbit-navigation-v2, .orbit-nav-map, #orbitParkingPanel { max-width:100%; min-width:0; }
+000016|  .orbit-chat-log { max-height: min(43dvh,380px); overflow-y:auto; overscroll-behavior:contain; }
+000017|  .orbit-chat-row { min-width:0; }
+000018|  .orbit-chat-row input, .orbit-chat-row textarea { min-width:0; max-width:100%; }
+000019|  .orbit-map-v2-actionbar { gap:5px !important; }
+000020|  .orbit-map-v2-actionbar button { min-height:44px; }
+000021|  .orbit-parking-stats { display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)); }
+000022|  .orbit-parking-stat { min-width:0; }
+000023| }
+000024| @media (max-width: 390px) {
+000025|  .container { padding:8px !important; }
+000026|  .orbit-parking-stat { padding:7px 3px !important; }
+000027|  .orbit-nav button, .orbit-tab-btn { font-size:12px !important; }
+000028| }

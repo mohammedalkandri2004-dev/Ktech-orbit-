@@ -1,0 +1,39 @@
+000001| 
+000002| /* Orbit 1.35: unobstructed directions; preserve existing routing and visual identity */
+000003| @media (min-width: 1050px) {
+000004|   #mapView .orbit-nav-v2-map-wrap { overflow: visible; }
+000005|   #mapView #orbitDirectionsSheet:not([hidden]) {
+000006|     top: 12px; left: auto; right: 12px;
+000007|     width: min(278px, 29%); max-height: min(55vh, 290px);
+000008|     padding: 10px; border-radius: 13px;
+000009|     background: rgba(29,32,28,.94);
+000010|   }
+000011|   #mapView #orbitDirectionsSheet .orbit-nav-v2-route-top {gap:5px}
+000012|   #mapView #orbitDirectionsSheet .orbit-nav-v2-route-top strong {font-size:.86rem}
+000013|   #mapView #orbitDirectionsSheet #orbitRouteDescriptor {font-size:.77rem;line-height:1.35}
+000014|   #mapView #orbitDirectionsSheet .orbit-nav-v2-steps {max-height:85px}
+000015|   #mapView #orbitDirectionsSheet .orbit-nav-v2-step-actions {gap:4px}
+000016|   #mapView #orbitDirectionsSheet .orbit-nav-v2-step-actions button {font-size:.72rem;padding:6px}
+000017| }
+000018| @media (min-width:701px) and (max-width:1049px) {
+000019|   #mapView #orbitDirectionsSheet:not([hidden]) {
+000020|     left:auto;right:8px;top:8px;width:min(275px,34%);
+000021|     max-height:270px;padding:9px;
+000022|   }
+000023| }
+000024| @media (max-width:700px) {
+000025|   #mapView .orbit-nav-v2-map-wrap {position:relative}
+000026|   #mapView #orbitDirectionsSheet:not([hidden]) {
+000027|     position:sticky;bottom:8px;top:auto;left:auto;right:auto;
+000028|     width:calc(100% - 16px);max-height:205px;
+000029|     margin:-65px 8px 9px;z-index:42;
+000030|     padding:9px 10px;border-radius:14px;
+000031|     background:rgba(29,32,28,.97);
+000032|     box-shadow:0 6px 25px #0009;
+000033|   }
+000034|   #mapView #orbitDirectionsSheet.minimized:not([hidden]) {max-height:58px;overflow:hidden}
+000035|   #mapView #orbitDirectionsSheet .orbit-nav-v2-route-top strong {font-size:.86rem}
+000036|   #mapView #orbitDirectionsSheet #orbitRouteDescriptor {font-size:.78rem}
+000037|   #mapView #orbitDirectionsSheet .orbit-nav-v2-steps {max-height:66px}
+000038|   #mapView #orbitDirectionsSheet .orbit-nav-v2-step-actions button {min-height:38px}
+000039| }

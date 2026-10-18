@@ -1,0 +1,4 @@
+000659|         document.addEventListener("DOMContentLoaded", initOrbitDashboard);
+000660|     } else {
+000661|         initOrbitDashboard();
+000662|     }

@@ -1,0 +1,31 @@
+
+/* Orbit 1.34: original visual language, map-first controls */
+#mapView .orbit-nav-v2-map-wrap{position:relative;isolation:isolate}
+#mapView #orbitDirectionsSheet:not([hidden]){display:block;position:absolute;top:58px;left:12px;right:auto;width:min(385px,calc(100% - 24px));max-height:min(47vh,330px);overflow:auto;z-index:35;margin:0;background:rgba(29,32,28,.96);border:1px solid #d7ba38;border-radius:15px;box-shadow:0 12px 28px #0008;padding:11px;color:#fff;backdrop-filter:blur(9px)}
+#mapView #orbitDirectionsSheet.minimized #orbitRouteDescriptor,#mapView #orbitDirectionsSheet.minimized #orbitRouteSteps,#mapView #orbitDirectionsSheet.minimized .orbit-nav-v2-step-actions{display:none!important}
+#mapView #orbitDirectionsSheet .orbit-nav-v2-steps{max-height:118px;overflow:auto;margin:6px 0;padding-left:20px}
+#mapView #orbitDirectionsSheet .orbit-nav-v2-steps li:not(.current){display:none}
+#mapView #orbitDirectionsSheet button{min-height:34px}
+#mapView .orbit-route-top-actions{display:flex;gap:5px}
+#mapView .orbit-map-v2-actionbar,#mapView #orbitMapQuickLinks{display:none!important}
+#mapView .orbit-map-v2-key-row.orbit-key-action{cursor:pointer;border-radius:9px;transition:background .15s;min-height:40px}
+#mapView .orbit-map-v2-key-row.orbit-key-action:hover,#mapView .orbit-map-v2-key-row.orbit-key-action:focus-visible{background:#ffdd5330;outline:2px solid #f6c919;outline-offset:1px}
+#mapView .orbit-map-v2-key-row.orbit-key-action:after{content:'›';margin-left:auto;font-size:1.25rem;color:#edc331}
+#mapView .orbit-map-stage{position:relative}
+#mapView .orbit-key-picker:not([hidden]){position:absolute;top:12px;right:12px;z-index:48;width:min(290px,calc(100% - 24px));max-height:65%;overflow:auto;background:#292d29;color:white;border:1px solid #e5c541;border-radius:14px;padding:12px;box-shadow:0 12px 30px #0009}
+#mapView .orbit-key-picker-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+#mapView .orbit-key-picker-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+#mapView .orbit-key-picker-options button{background:#454941;color:white;border:1px solid #777;border-radius:8px;padding:9px 5px;min-height:40px;font-size:.8rem}
+#mapView .orbit-key-picker-head button{background:transparent;color:white;border:0;font-size:1.1rem}
+@media(max-width:700px){
+ #mapView .orbit-nav-v2-layout{display:flex;flex-direction:column}
+ #mapView .orbit-nav-v2-map-wrap{width:100%;min-width:0}
+ #mapView #orbitDirectionsSheet:not([hidden]){top:48px;left:7px;width:calc(100% - 14px);max-height:185px;padding:9px}
+ #mapView .orbit-map-stage{height:min(64vh,570px);min-height:340px;overflow:auto}
+ #mapView .orbit-map-v2-key{width:100%;max-width:none}
+ #mapView .orbit-map-v2-key-rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+ #mapView .orbit-map-v2-key-row{font-size:.75rem}
+ #mapView .orbit-nav-v2-form{gap:5px}
+ #mapView .orbit-nav-v2-settings{gap:6px}
+ #mapView .orbit-nav-v2-map-head{gap:4px}
+}
